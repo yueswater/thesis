@@ -1,0 +1,115 @@
+####################################
+# R / RStudio
+####################################
+
+# R history & session files
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+
+# RStudio project files
+.Rproj.user/
+
+# R CMD build / check
+.Rcheck/
+.Rbuildignore
+
+####################################
+# OS / Editor
+####################################
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# VS Code
+.vscode/
+
+####################################
+# Temporary / Cache
+####################################
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+
+# R cache
+.Rcache/
+.cache/
+
+####################################
+# Data (依你研究需求調整)
+####################################
+
+# 大型原始資料（通常不進 git）
+data/raw/
+data/tmp/
+data/cache/
+
+# 若你「完全不想 commit data」，用這行
+# data/
+
+# 若你「只想 commit processed data」，請保留：
+# !data/processed/
+
+####################################
+# Output / Generated Files
+####################################
+
+# Figures / tables (若是可再生)
+figures/
+plots/
+tables/
+
+# LaTeX / PDF build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.out
+*.run.xml
+*.toc
+*.synctex.gz
+
+####################################
+# Quarto / R Markdown
+####################################
+
+# Render cache
+_quarto/
+.knit_cache/
+.knitr_cache/
+
+# Intermediate markdown
+*.utf8.md
+*.utf8.tex
+
+####################################
+# Python (若未來混用)
+####################################
+
+__pycache__/
+*.pyc
+.venv/
+.env
+
+####################################
+# Misc
+####################################
+
+# Credentials / secrets
+*.key
+*.pem
+*.secret
+.env.*
