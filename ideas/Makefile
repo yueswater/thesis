@@ -7,11 +7,13 @@ VERIFY := verify_binary_model.py
 SECTIONS := $(wildcard sections/*.qmd)
 AUX := $(MAIN).aux $(MAIN).bbl $(MAIN).bcf $(MAIN).blg $(MAIN).fdb_latexmk $(MAIN).fls $(MAIN).log $(MAIN).out $(MAIN).run.xml $(MAIN).tex $(MAIN).toc $(MAIN).xdv $(MAIN).synctex.gz
 
-.PHONY: all pdf preview verify clean distclean
+.PHONY: all pdf preview verify clean distclean rebuild
 
 all: pdf
 
 pdf: $(PDF)
+
+rebuild: distclean pdf
 
 $(PDF): $(QMD) $(SECTIONS) _quarto.yml preamble.tex refs.bib
 	$(QUARTO) render $(QMD) --to pdf
