@@ -1,0 +1,99 @@
+# Literature {#sec-fu}
+
+## What the Current Model Delivers
+
+\citet{fu2006} is the closest benchmark. Relative to that paper, the
+present binary-type specification yields a sharper characterization of
+timing incentives under asymmetric information. In the LM subgame, the
+informed Labor type chooses effort first and Management responds after
+observing it. Because Management's best response depends only on the
+observed effort and the known prize $V$, off-path beliefs do not affect
+continuation play. This eliminates the usual scope for belief-based
+pooling support and implies that the LM subgame is uniquely separating.
+
+The binary structure also makes it possible to isolate two margins that
+are intertwined in the one-type benchmark: the mean private value $\mu$
+and the information range $\delta$. Timing incentives are therefore not
+governed by the comparison $\mu$ versus $V$ alone. Instead, the key
+object is the interval condition in @prp-exact-condition, which implies
+that only three timing profiles are feasible: both types move first,
+only the low type waits, or both types wait.
+
+## Relation to the Endogenous-Timing Literature
+
+The classic endogenous-timing literature implies that, in two-player
+asymmetric contests, the weak player tends to move first and the strong
+player follows. This logic originates in the broader endogenous-timing
+framework of \citet{hamilton1990} and underlies the contest results in
+\citet{fu2006}. More recent work qualifies that benchmark.
+\citet{hoffmann2012} show that, with a general contest success function
+and an endogenous prize, simultaneous play can re-emerge and leadership
+need not be pinned down by the favorite-underdog comparison alone.
+\citet{baikleelee2022} show that, in three-player Tullock contests,
+moderate asymmetries can make simultaneous early play the unique
+equilibrium, rather than a sequential pattern. In a more general
+sequential all-pay setting, \citet{dengfuwuzhu2021} establish a robust
+later-mover payoff advantage in richer multi-period timing
+architectures.
+
+Against that background, the present model contributes a tractable
+two-player benchmark in which timing remains endogenous but private
+information is concentrated on one side. The benefit of this restricted
+environment is that it yields closed-form type-by-type conditions for
+first- versus second-mover preferences, rather than only a qualitative
+ranking of leadership incentives.
+
+## Relation to the Asymmetric-Information and Signaling Literature
+
+The paper also sits in the broader literature on contests with private
+information. \citet{hurley1998}, \citet{warneryd2003}, and
+\citet{warneryd2012} study incomplete information in simultaneous
+contest environments and show how private or common-value uncertainty
+alters effort incentives. Within that literature, \citet{fu2006} is
+again the closest reference because informed effort itself becomes a
+signal. The present paper differs by showing that, under the binary
+specification, signaling through effort does not merely *allow*
+separation; it makes separation the unique equilibrium outcome in the
+informed-first subgame.
+
+Other papers add an explicit communication or signaling stage before the
+contest. \citet{fu2013} show that public messages can serve both as
+commitment and as signals under asymmetric information, while
+\citet{dentermorgansisak2022} show that costly pre-contest signals may
+reveal relative talent only for sufficiently strong types. By contrast,
+the current model does not rely on an extra communication technology.
+The only signal is the informed player's equilibrium effort itself.
+This keeps the mechanism close to \citet{fu2006} while delivering a
+stronger no-pooling result.
+
+## Relation to Newer Extensions
+
+Several newer papers show that the standard timing result can be
+reversed once richer strategic frictions are introduced.
+\citet{protopappas2023} studies how players may manipulate moves in
+sequential contests through institutional changes that reshape first-
+and second-mover incentives. \citet{protopappas2025} shows that, under
+uncertainty about future effort costs, even the strong player may choose
+to move first when information about those costs is asymmetric. In a
+conflict setting, \citet{dentersisak2015} show that incomplete
+information can weaken deterrence because a defender optimally
+underinvests when it faces uncertainty about the opponent's resolve.
+
+These papers are useful comparison points because they show that timing
+predictions are sensitive to what is privately known: prize valuations,
+future costs, strategic resolve, or institutional opportunities to
+manipulate the order of moves. The contribution here is to isolate the
+private-value channel and show that even a minimal binary information
+structure is enough to generate rich timing regions and a strict
+ordering of type-specific waiting incentives.
+
+## Main Takeaway
+
+The literature review suggests that this paper is best read as a
+theoretically sharp extension of \citet{fu2006}. Relative to the broader
+contest literature, its main value is not greater generality in player
+number or timing architecture, but sharper identification of when
+private information creates first-mover or second-mover incentives. The
+binary extension shows exactly how mean and dispersion jointly govern
+timing, why only the low type can be the marginal waiter, and why the
+informed-first subgame admits no pooling ambiguity.

@@ -1,0 +1,59 @@
+### Endogenous Timing {#sec-endogenous-timing}
+
+#### Management's Incentive
+
+::: {#prp-mgmt}
+#### Management's Timing Preference
+
+Management prefers moving first (Subgame ML) to moving second
+(Subgame LM) if and only if
+
+$$
+V^3\kappa^2 \geq 4V^2 - 4V\mu + \mu^2 + \delta^2.
+$$ {#eq-mgmt-cond}
+:::
+
+::: {.proof}
+This condition is exactly
+
+$$
+\E\!\left[U_M^{ML}\right] \geq \E\!\left[U_M^{S}\right],
+$$
+
+using @eq-eum-sim and @eq-eum-lm.
+:::
+
+#### Implications for Labor
+
+The previous section implies a clean partition of Labor's timing
+incentives.
+
+::: {#cor-labor-regions}
+#### Timing Regions for the Informed Player
+
+For the informed player, the timing logic is:
+
+1. both types prefer moving first when $R_\ell \leq 0$;
+2. only the low type prefers moving second when $R_\ell > 0 \geq R_H$;
+3. both types prefer moving second when $R_H > 0$.
+:::
+
+::: {#rem-fu-extension}
+#### Mean and Range
+
+Relative to \citet{fu2006}, the binary-distribution extension isolates two
+new mechanisms. First, the mean $\mu$ shifts both type values and the
+belief term $\kappa$. Second, the spread $\delta$ changes the gap
+between $u_\ell$ and $u_H$ and therefore the overlap between their
+first-mover intervals. Timing incentives are therefore jointly governed
+by the mean and the range, not by the mean comparison alone.
+:::
+
+::: {#rem-no-pooling-ambiguity}
+#### No Pooling Ambiguity
+
+Because the LM subgame is uniquely separating, timing choices in the
+endogenous game can be type-contingent without any pooling ambiguity.
+When @eq-mgmt-cond also holds, Management is willing to commit early;
+when it fails, Management prefers to wait for Labor's revealed type.
+:::

@@ -1,0 +1,24 @@
+## Welfare {#sec-welfare}
+
+Expected total welfare is
+
+$$
+\E[W] = \E[U_L] + \E[U_M].
+$$
+
+Therefore
+
+$$
+\E[W^{ML}] = \mu - V\kappa\nu + \frac{V^2\kappa^2}{2},
+$$ {#eq-ew-ml}
+
+$$
+\E[W^{S}] = V - \mu + \frac{\mu^2 + \delta^2}{2V}.
+$$ {#eq-ew-lm}
+
+where the superscript $S$ refers to the separating LM outcome.
+
+The sign of $\E[W^{ML}] - \E[W^{S}]$ depends jointly on
+$V$, $\mu$, and $\delta$. The binary extension therefore delivers a
+sharp characterization of timing incentives without forcing a unique
+welfare ranking across timing regimes.

@@ -1,0 +1,69 @@
+# Analysis {#sec-analysis}
+
+## Benchmarks {#sec-benchmarks}
+
+### Simultaneous Move
+
+Both players choose effort simultaneously. Substituting @eq-brl into
+Management's expected utility and taking expectations over the binary
+distribution yields
+
+$$
+\E[U_M] = V\sqrt{x_M}\,\kappa - x_M,
+\qquad
+\frac{\partial \E[U_M]}{\partial x_M}
+  = \frac{V\kappa}{2\sqrt{x_M}} - 1.
+$$
+
+Hence the simultaneous-move equilibrium is
+
+$$
+x_M^{\mathrm{sim}} = \frac{V^2\kappa^2}{4}, \qquad
+x_L^{\mathrm{sim}}(V_L)
+  = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-sim-efforts}
+
+Equilibrium payoffs are
+
+$$
+U_L^{\mathrm{sim}}(V_L)
+  = \left(\sqrt{V_L} - \frac{V\kappa}{2}\right)^2,
+$$ {#eq-ul-sim}
+
+$$
+U_M^{\mathrm{sim}}(V_L)
+  = \frac{V^2\kappa}{2\sqrt{V_L}} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-um-sim}
+
+and expected payoffs become
+
+$$
+\E\!\left[U_L^{\mathrm{sim}}\right]
+  = \mu - V\kappa\nu + \frac{V^2\kappa^2}{4},
+$$ {#eq-eul-sim}
+
+$$
+\E\!\left[U_M^{\mathrm{sim}}\right]
+  = \frac{V^2\kappa^2}{4}.
+$$ {#eq-eum-sim}
+
+### Management Moves First
+
+If Management commits before observing Labor's type, its problem is
+identical to the simultaneous benchmark. Therefore
+
+$$
+x_M^{ML} = \frac{V^2\kappa^2}{4}, \qquad
+x_L^{ML}(V_L)
+  = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-ml-efforts}
+
+Payoffs are again given by @eq-ul-sim through @eq-eum-sim.
+
+::: {#rem-ml}
+#### No Additional Information Gain
+
+Subgame ML coincides with the simultaneous benchmark because Management
+still cannot condition on Labor's private valuation. There is no extra
+informational benefit from moving first.
+:::

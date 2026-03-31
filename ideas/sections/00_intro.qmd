@@ -1,0 +1,82 @@
+# Intro {#sec-intro}
+
+This paper studies endogenous timing in a two-player Tullock contest
+with asymmetric information. Labor and Management compete over policy
+implementation, but only Labor privately observes how valuable victory
+is to itself. Before effort is chosen, the order of moves matters:
+moving first can serve as commitment, while moving second preserves
+flexibility and allows a player to respond to its rival's action. The
+central question is therefore simple but important: when one side has
+private information about its prize value, which side wants to move
+first, which side prefers to wait, and what kind of information is
+revealed in equilibrium?
+
+This question is relevant because many contest environments combine
+strategic timing with informational asymmetry. In labor conflict,
+electoral competition, lobbying, litigation, and rent-seeking more
+generally, one side often knows more about its own stake in victory than
+its rival does. That informational asymmetry affects effort incentives
+directly, but it also affects the value of commitment and the value of
+waiting. A player who moves early may reveal information through its
+action; a player who waits may exploit the option value of responding to
+observed behavior. Endogenous timing in contests is therefore not only a
+question of strategic commitment, but also a question of how information
+is transmitted through equilibrium play.
+
+The natural benchmark is \citet{fu2006}, who studies endogenous timing
+in a two-player contest with asymmetric information. The present paper
+keeps that environment deliberately simple, but replaces the
+one-dimensional informed type with a binary private-value structure. In
+particular, Labor's prize value is either high or low around mean $\mu$,
+with dispersion governed by $\delta$. This small modification turns out
+to be analytically useful. It allows the model to separate the role of
+the average private value from the role of information dispersion, and
+therefore makes it possible to characterize timing incentives at the
+type level rather than only at the aggregate level.
+
+The paper delivers three main results. First, the informed-first
+subgame admits a unique separating equilibrium. If Labor moves first and
+Management responds after observing Labor's effort, then Labor's
+equilibrium effort fully reveals whether its private value is high or
+low. The reason is structural: Management's continuation best response
+depends only on the observed effort and the known prize $V$, not on
+beliefs directly. Because beliefs cannot be used to punish deviations,
+pooling cannot be sustained in the informed-first subgame.
+
+Second, the binary structure yields a sharp characterization of timing
+incentives. For each Labor type, the gain from waiting can be written as
+an exact interval condition. This leads to a clean trichotomy: either
+both types prefer to move first, only the low type prefers to wait, or
+both types prefer to wait. The reverse pattern, in which only the high
+type wants to wait, cannot arise. The model therefore not only
+identifies when waiting is attractive, but also ranks which type has the
+stronger second-mover incentive.
+
+Third, mean and dispersion matter jointly. A comparison between the
+average informed value $\mu$ and Management's known value $V$ is not
+enough to determine timing. What matters is the interaction between $V$,
+the mean of Labor's private value, and the spread parameter $\delta$,
+which affects both beliefs and the distance between the two informed
+types. In this sense, the binary extension is not merely a discrete
+approximation to the original model; it changes what can be said sharply
+about timing regions.
+
+The contribution of the paper is therefore not greater generality in
+player number or timing architecture. Its contribution is analytical
+sharpness. Relative to \citet{fu2006}, the binary private-value
+structure makes it possible to derive exact type-by-type timing
+conditions, establish a strong no-pooling result in the informed-first
+subgame, and show precisely how the mean and spread of private values
+jointly determine equilibrium timing incentives.
+
+The remainder of the paper is organized as follows. Section @sec-fu
+reviews the related literature and clarifies the paper's contribution
+relative to \citet{fu2006} and subsequent work. Section @sec-setup
+introduces the environment and notation. Section @sec-benchmarks
+derives the simultaneous and Management-first benchmarks. Section
+@sec-lm analyzes the informed-first subgame and establishes uniqueness
+of separation. Section @sec-timing-incentives characterizes type-by-type
+first- versus second-mover incentives. Section @sec-endogenous-timing
+derives the implications for endogenous timing. Section @sec-welfare
+discusses welfare comparisons, and Section @sec-summary summarizes the
+main equilibrium objects.

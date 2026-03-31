@@ -1,0 +1,21 @@
+project:
+  type: default
+  render:
+    - main.qmd
+
+bibliography: refs.bib
+
+format:
+  pdf:
+    documentclass: article
+    classoption: 12pt
+    papersize: a4
+    pdf-engine: xelatex
+    cite-method: natbib
+    biblio-style: plainnat
+    include-in-header:
+      - preamble.tex
+    keep-tex: true
+    toc: true
+    number-sections: true
+    output-file: main.pdf
