@@ -5,6 +5,7 @@
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
+  english,
   a4paper,
   12pt]{article}
 \usepackage{xcolor}
@@ -93,6 +94,17 @@
 
 
 
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage[english]{selnolig} % disable illegal ligatures
+\fi
 
 
 \setlength{\emergencystretch}{3em} % prevent overfull lines
@@ -108,17 +120,22 @@
 
 
 \usepackage[a4paper, total={6in, 8in}]{geometry}
-\usepackage{mathpazo}
-\usepackage{fontspec}
+\usepackage{tgpagella}
 \usepackage{setspace}
-\setstretch{1.5}
 \usepackage{tikz}
 \usepackage{booktabs, float, multirow}
 \usepackage{pdflscape}
 \usepackage{amsmath, amsfonts, amssymb}
 \usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{tocloft}
+
+\setstretch{1.5}
 \setlist{noitemsep, topsep=4pt, leftmargin=1.5em}
-\setmainfont{Libertinus Serif}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+
 \setcitestyle{round}
 
 \newcommand{\E}{\mathbb{E}}
@@ -158,12 +175,12 @@
 \floatname{codelisting}{Listing}
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
-\theoremstyle{plain}
-\newtheorem{corollary}{Corollary}[section]
 \theoremstyle{plain}
 \newtheorem{proposition}{Proposition}[section]
+\theoremstyle{plain}
+\newtheorem{corollary}{Corollary}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Proof}}
 \newtheorem*{remark}{Remark}
@@ -183,6 +200,7 @@
 \hypersetup{
   pdftitle={Model Summary},
   pdfauthor={Anthony Sung},
+  pdflang={en},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -193,7 +211,7 @@
 
 \title{Model Summary}
 \author{Anthony Sung}
-\date{2026-03-31}
+\date{2026-04-02}
 \begin{document}
 \maketitle
 
@@ -204,296 +222,337 @@
 \tableofcontents
 }
 
-\section{Intro}\label{sec-intro}
+\section{Introduction}\label{sec-intro}
 
 This paper studies endogenous timing in a two-player Tullock contest
-with asymmetric information. Labor and Management compete over policy
-implementation, but only Labor privately observes how valuable victory
-is to itself. Before effort is chosen, the order of moves matters:
-moving first can serve as commitment, while moving second preserves
-flexibility and allows a player to respond to its rival's action. The
-central question is therefore simple but important: when one side has
-private information about its prize value, which side wants to move
-first, which side prefers to wait, and what kind of information is
-revealed in equilibrium?
+under asymmetric information. Labor and management compete over policy
+implementation, but only labor privately observes its own valuation of
+winning. Before effort choices are made, move order matters: moving
+first commits, while moving second preserves flexibility and allows a
+response to the opponent. The core questions are: when one side has
+private information, who wants to move first, who prefers to wait, and
+how is information revealed in equilibrium?
 
-This question is relevant because many contest environments combine
-strategic timing with informational asymmetry. In labor conflict,
-electoral competition, lobbying, litigation, and rent-seeking more
-generally, one side often knows more about its own stake in victory than
-its rival does. That informational asymmetry affects effort incentives
-directly, but it also affects the value of commitment and the value of
-waiting. A player who moves early may reveal information through its
-action; a player who waits may exploit the option value of responding to
-observed behavior. Endogenous timing in contests is therefore not only a
-question of strategic commitment, but also a question of how information
-is transmitted through equilibrium play.
+The problem is broadly relevant because many strategic environments
+combine timing and asymmetric information, including labor conflict,
+electoral competition, lobbying, litigation, and rent seeking. One side
+often knows more about how much it values victory. This not only changes
+direct effort incentives, but also changes the value of commitment
+versus the value of waiting. A first mover may reveal information
+through action; a second mover can condition on observed behavior.
+Endogenous timing in contests is therefore both a commitment problem and
+an information-transmission problem.
 
-The natural benchmark is \citet{fu2006}, who studies endogenous timing
-in a two-player contest with asymmetric information. The present paper
-keeps that environment deliberately simple, but replaces the
-one-dimensional informed type with a binary private-value structure. In
-particular, Labor's prize value is either high or low around mean
-\(\mu\), with dispersion governed by \(\delta\). This small modification
-turns out to be analytically useful. It allows the model to separate the
-role of the average private value from the role of information
-dispersion, and therefore makes it possible to characterize timing
-incentives at the type level rather than only at the aggregate level.
+The natural benchmark is \citet{fu2006}, which studies endogenous timing
+with asymmetric information in a two-player contest. We keep a
+parsimonious structure but generalize the model so labor's private value
+can follow an arbitrary distribution, and we use binary and uniform
+distributions as baseline functional examples. The binary case centers
+on mean \(\mu\) with high/low realizations and dispersion controlled by
+\(\delta\); the uniform case assigns equal density on
+\([\mu-\delta,\mu+\delta]\). The first cleanly separates mean and
+dispersion effects, while the second shows a smooth cutoff structure
+with continuous types.
 
-The paper delivers three main results. First, the informed-first subgame
-admits a unique separating equilibrium. If Labor moves first and
-Management responds after observing Labor's effort, then Labor's
-equilibrium effort fully reveals whether its private value is high or
-low. The reason is structural: Management's continuation best response
-depends only on the observed effort and the known prize \(V\), not on
-beliefs directly. Because beliefs cannot be used to punish deviations,
-pooling cannot be sustained in the informed-first subgame.
+The paper has three main results. First, the labor-first subgame (LM)
+admits a unique separating equilibrium. When labor moves first and
+management responds after observing labor effort, each type's
+equilibrium effort fully reveals its private value. The reason is
+structural: management's continuation best response depends only on
+observed effort and known prize value \(V\), not directly on beliefs.
+Hence each type has a strict best response in effort, and pooling cannot
+be sustained. This result is distribution-free and applies to binary,
+uniform, and other distributions.
 
-Second, the binary structure yields a sharp characterization of timing
-incentives. For each Labor type, the gain from waiting can be written as
-an exact interval condition. This leads to a clean trichotomy: either
-both types prefer to move first, only the low type prefers to wait, or
-both types prefer to wait. The reverse pattern, in which only the high
-type wants to wait, cannot arise. The model therefore not only
-identifies when waiting is attractive, but also ranks which type has the
-stronger second-mover incentive.
+Second, timing incentives admit an exact type-by-type characterization.
+For each type, the net gain from waiting can be written as an interval
+condition, and low types have weakly stronger waiting incentives than
+high types. Under binary types this yields a three-way classification:
+both types prefer moving first, only the low type prefers waiting, or
+both types prefer waiting. Under a uniform distribution there is a
+cutoff type \(v^*\): types below the cutoff prefer waiting, and types
+above prefer moving first.
 
-Third, mean and dispersion matter jointly. A comparison between the
-average informed value \(\mu\) and Management's known value \(V\) is not
-enough to determine timing. What matters is the interaction between
-\(V\), the mean of Labor's private value, and the spread parameter
-\(\delta\), which affects both beliefs and the distance between the two
-informed types. In this sense, the binary extension is not merely a
-discrete approximation to the original model; it changes what can be
-said sharply about timing regions.
+Third, mean and dispersion must be considered jointly. Comparing only
+the average private value \(\mu\) with management's known value \(V\) is
+insufficient for timing predictions. What matters is the interaction of
+\(V\), \(\mu\), and dispersion \(\delta\), because \(\delta\) jointly
+affects beliefs and type distance.
 
-The contribution of the paper is therefore not greater generality in
-player number or timing architecture. Its contribution is analytical
-sharpness. Relative to \citet{fu2006}, the binary private-value
-structure makes it possible to derive exact type-by-type timing
-conditions, establish a strong no-pooling result in the informed-first
-subgame, and show precisely how the mean and spread of private values
-jointly determine equilibrium timing incentives.
+The contribution is analytical sharpness rather than a larger player set
+or richer timing protocol. Relative to \citet{fu2006}, the generalized
+setup yields exact type-level timing conditions, a strong no-pooling
+result in the informed-first subgame, and a clear decomposition of how
+mean and dispersion jointly determine timing incentives.
 
-The remainder of the paper is organized as follows. Section
-Section~\ref{sec-fu} reviews the related literature and clarifies the
-paper's contribution relative to \citet{fu2006} and subsequent work.
-Section Section~\ref{sec-setup} introduces the environment and notation.
-Section Section~\ref{sec-benchmarks} derives the simultaneous and
-Management-first benchmarks. Section Section~\ref{sec-lm} analyzes the
-informed-first subgame and establishes uniqueness of separation. Section
-Section~\ref{sec-timing-incentives} characterizes type-by-type first-
-versus second-mover incentives. Section
-Section~\ref{sec-endogenous-timing} derives the implications for
-endogenous timing. Section Section~\ref{sec-welfare} discusses welfare
-comparisons, and Section Section~\ref{sec-summary} summarizes the main
-equilibrium objects.
+The rest of the paper is organized as follows. Section
+Section~\ref{sec-literature} reviews related work and clarifies the
+relation to \citet{fu2006} and subsequent studies. Section
+Section~\ref{sec-setup} presents the environment and notation. Section
+Section~\ref{sec-equilibria} unifies the SS, ML, and LM equilibria.
+Section Section~\ref{sec-timing} characterizes type-level timing
+incentives and endogenous timing. Section Section~\ref{sec-welfare}
+compares welfare and summarizes the main results in tables.
 
-\section{Literature}\label{sec-fu}
+\section{Literature Review}\label{sec-literature}
 
-\subsection{What the Current Model
-Delivers}\label{what-the-current-model-delivers}
+\subsection{Main Implications of This
+Model}\label{main-implications-of-this-model}
 
-\citet{fu2006} is the closest benchmark. Relative to that paper, the
-present binary-type specification yields a sharper characterization of
-timing incentives under asymmetric information. In the LM subgame, the
-informed Labor type chooses effort first and Management responds after
-observing it. Because Management's best response depends only on the
-observed effort and the known prize \(V\), off-path beliefs do not
-affect continuation play. This eliminates the usual scope for
-belief-based pooling support and implies that the LM subgame is uniquely
-separating.
+\citet{fu2006} is the closest benchmark. Relative to that paper, our
+setup delivers a sharper characterization of timing incentives under
+asymmetric information. In the LM subgame, labor (the informed side)
+chooses effort first and management responds after observing effort.
+Because management's best response depends only on observed effort and
+known prize value \(V\), off-path beliefs do not affect continuation
+behavior. This eliminates room for belief-supported pooling and yields a
+unique separating equilibrium in LM.
 
-The binary structure also makes it possible to isolate two margins that
-are intertwined in the one-type benchmark: the mean private value
-\(\mu\) and the information range \(\delta\). Timing incentives are
-therefore not governed by the comparison \(\mu\) versus \(V\) alone.
-Instead, the key object is the interval condition in
-Proposition~\ref{prp-exact-condition}, which implies that only three
-timing profiles are feasible: both types move first, only the low type
-waits, or both types wait.
+Using binary and uniform distributions as functional examples, we
+separate the marginal roles of mean private value \(\mu\) and
+information range \(\delta\). Timing incentives are not pinned down by
+comparing only \(\mu\) and \(V\); the key object is the interval
+condition in Proposition~\ref{prp-exact-condition}. Under binary types
+this implies exactly three feasible timing profiles, while under a
+uniform distribution it implies a cutoff-type structure.
 
-\subsection{Relation to the Endogenous-Timing
-Literature}\label{relation-to-the-endogenous-timing-literature}
+\subsection{Relation to Endogenous-Timing
+Literature}\label{relation-to-endogenous-timing-literature}
 
-The classic endogenous-timing literature implies that, in two-player
-asymmetric contests, the weak player tends to move first and the strong
-player follows. This logic originates in the broader endogenous-timing
-framework of \citet{hamilton1990} and underlies the contest results in
-\citet{fu2006}. More recent work qualifies that benchmark.
-\citet{hoffmann2012} show that, with a general contest success function
-and an endogenous prize, simultaneous play can re-emerge and leadership
-need not be pinned down by the favorite-underdog comparison alone.
-\citet{baikleelee2022} show that, in three-player Tullock contests,
-moderate asymmetries can make simultaneous early play the unique
-equilibrium, rather than a sequential pattern. In a more general
-sequential all-pay setting, \citet{dengfuwuzhu2021} establish a robust
-later-mover payoff advantage in richer multi-period timing
-architectures.
+Classic endogenous-timing results in asymmetric contests suggest weak
+players tend to move first and strong players tend to move second. This
+logic traces back to the broader framework in \citet{hamilton1990} and
+appears in the contest analysis of \citet{fu2006}. More recent work
+refines this benchmark. \citet{hoffmann2012} shows that with generalized
+success functions and endogenous prizes, simultaneous play can re-emerge
+and leadership need not be determined solely by relative strength.
+\citet{baikleelee2022} shows that in three-player Tullock contests,
+moderate asymmetry can make simultaneous early moves the unique
+equilibrium. In a broader sequential all-pay setting,
+\citet{dengfuwuzhu2021} establishes robust second-mover payoff
+advantages in multi-period structures.
 
-Against that background, the present model contributes a tractable
-two-player benchmark in which timing remains endogenous but private
-information is concentrated on one side. The benefit of this restricted
-environment is that it yields closed-form type-by-type conditions for
-first- versus second-mover preferences, rather than only a qualitative
-ranking of leadership incentives.
+Against this background, our paper provides a tractable two-player
+benchmark with endogenous timing and one-sided private information. The
+restricted environment permits closed-form type-by-type timing
+conditions rather than only qualitative leadership rankings.
 
-\subsection{Relation to the Asymmetric-Information and Signaling
-Literature}\label{relation-to-the-asymmetric-information-and-signaling-literature}
+\subsection{Relation to Asymmetric-Information and Signaling
+Literature}\label{relation-to-asymmetric-information-and-signaling-literature}
 
-The paper also sits in the broader literature on contests with private
-information. \citet{hurley1998}, \citet{warneryd2003}, and
-\citet{warneryd2012} study incomplete information in simultaneous
-contest environments and show how private or common-value uncertainty
-alters effort incentives. Within that literature, \citet{fu2006} is
-again the closest reference because informed effort itself becomes a
-signal. The present paper differs by showing that, under the binary
-specification, signaling through effort does not merely \emph{allow}
-separation; it makes separation the unique equilibrium outcome in the
-informed-first subgame.
+This paper also connects to incomplete-information contest work.
+\citet{hurley1998}, \citet{warneryd2003}, and \citet{warneryd2012} study
+simultaneous contests with uncertainty and show how private/common value
+uncertainty changes effort incentives. In this line, \citet{fu2006}
+remains the closest reference because informed effort acts as a signal.
+Our difference is stronger identification: in our setup, effort
+signaling does not merely allow separation; it makes separation unique
+in LM.
 
-Other papers add an explicit communication or signaling stage before the
-contest. \citet{fu2013} show that public messages can serve both as
-commitment and as signals under asymmetric information, while
-\citet{dentermorgansisak2022} show that costly pre-contest signals may
-reveal relative talent only for sufficiently strong types. By contrast,
-the current model does not rely on an extra communication technology.
-The only signal is the informed player's equilibrium effort itself. This
-keeps the mechanism close to \citet{fu2006} while delivering a stronger
-no-pooling result.
+Other papers introduce explicit communication or signaling stages before
+the contest. \citet{fu2013} shows that public messages can play both
+commitment and signaling roles; \citet{dentermorgansisak2022} shows that
+costly pre-contest signals reveal capability only for sufficiently
+strong types. By contrast, our model uses no extra communication
+technology: equilibrium effort itself is the only signal. This keeps
+comparability with \citet{fu2006} while delivering a stronger no-pooling
+result.
 
-\subsection{Relation to Newer
-Extensions}\label{relation-to-newer-extensions}
+\subsection{Relation to Recent
+Extensions}\label{relation-to-recent-extensions}
 
-Several newer papers show that the standard timing result can be
-reversed once richer strategic frictions are introduced.
-\citet{protopappas2023} studies how players may manipulate moves in
-sequential contests through institutional changes that reshape first-
-and second-mover incentives. \citet{protopappas2025} shows that, under
-uncertainty about future effort costs, even the strong player may choose
-to move first when information about those costs is asymmetric. In a
-conflict setting, \citet{dentersisak2015} show that incomplete
-information can weaken deterrence because a defender optimally
-underinvests when it faces uncertainty about the opponent's resolve.
+Recent studies also show that richer frictions can reverse standard
+timing predictions. \citet{protopappas2023} studies how players
+manipulate institutional rules that determine move order in sequential
+contests. \citet{protopappas2025} shows that under future cost
+uncertainty and asymmetric information, even strong players may
+optimally move first. In conflict settings, \citet{dentersisak2015}
+shows that incomplete information weakens deterrence because defenders
+optimally underinvest when opponent resolve is uncertain.
 
-These papers are useful comparison points because they show that timing
-predictions are sensitive to what is privately known: prize valuations,
-future costs, strategic resolve, or institutional opportunities to
-manipulate the order of moves. The contribution here is to isolate the
-private-value channel and show that even a minimal binary information
-structure is enough to generate rich timing regions and a strict
-ordering of type-specific waiting incentives.
+A key takeaway is that timing predictions are highly sensitive to which
+state variable is private information: valuation, future cost, resolve,
+or institutional options. Our contribution is to isolate the
+private-valuation channel and show that even a minimal information
+structure can generate rich timing regions with clear type-level
+ordering of waiting incentives.
 
-\subsection{Main Takeaway}\label{main-takeaway}
+\subsection{Bottom Line}\label{bottom-line}
 
-The literature review suggests that this paper is best read as a
-theoretically sharp extension of \citet{fu2006}. Relative to the broader
-contest literature, its main value is not greater generality in player
-number or timing architecture, but sharper identification of when
-private information creates first-mover or second-mover incentives. The
-binary extension shows exactly how mean and dispersion jointly govern
-timing, why only the low type can be the marginal waiter, and why the
-informed-first subgame admits no pooling ambiguity.
+The literature comparison suggests this paper is best interpreted as an
+analytically sharper extension of \citet{fu2006}. Relative to the
+broader contest literature, the central value is not more players or a
+richer timing protocol, but sharper identification of when private
+information generates first-mover versus second-mover incentives.
 
-\section{Setup}\label{sec-setup}
+\section{Model Setup}\label{sec-setup}
 
 \subsection{Environment}\label{environment}
 
-Two players, Labor (\(L\)) and Management (\(M\)), contest over whose
-ideal policy is implemented. The outcome is winner-takes-all: the winner
-receives its own prize value and the loser receives zero. The contest
-technology follows \citet{tullock1980}, and the endogenous-timing
-framework follows \citet{hamilton1990} and \citet{fu2006}.
+There are two players: labor (\(L\)) and management (\(M\)). They
+compete over which side's preferred policy is implemented. The outcome
+is winner-take-all: the winner receives its own prize value, while the
+loser receives 0. Contest technology follows \citet{tullock1980};
+endogenous timing follows \citet{hamilton1990} and \citet{fu2006}.
 
 \begin{definition}[Asymmetric Prize
 Values]\protect\hypertarget{def-prizes}{}\label{def-prizes}
 
-If Labor wins, Labor receives \(V_L > 0\) and Management receives \(0\).
-If Management wins, Management receives \(V_M \equiv V > 0\) and Labor
-receives \(0\). The two prize values need not coincide.
+If labor wins, labor obtains \(V_L>0\) and management obtains 0. If
+management wins, management obtains \(V_M\equiv V>0\) and labor obtains
+0. Prize values need not be symmetric.
 
 \end{definition}
 
-\begin{definition}[Binary Information
-Structure]\protect\hypertarget{def-binary}{}\label{def-binary}
+\subsection{Information Structure}\label{information-structure}
 
-Labor privately observes its prize value before choosing timing or
-effort. Management knows only that
+Before timing or effort choices, labor privately observes its own prize
+value \(V_L\). Management knows only the distribution of \(V_L\). We
+assume \(V_L\) has support set \([\mu-\delta,\mu+\delta]\), with
+\(\mu>\delta>0\), so that \(\E[V_L]=\mu\).
 
-\[
-V_L \in \{V_\ell, V_H\}
-  = \{\mu - \delta,\; \mu + \delta\},
-\]
-
-with probabilities \(1/2\) and \(1/2\), where \(\mu > \delta > 0\).
-Hence \(\mu\) controls the mean of Labor's valuation and \(\delta\)
-controls the range of private information.
-
-\end{definition}
-
-For later use, define
+Define
 
 \begin{equation}\phantomsection\label{eq-u-types}{
 u_\ell \equiv \sqrt{\mu-\delta}, \qquad
-u_H \equiv \sqrt{\mu+\delta},
+u_H \equiv \sqrt{\mu+\delta}.
 }\end{equation}
 
-so that \(V_\ell = u_\ell^2\) and \(V_H = u_H^2\). The moments of
-\(V_L\) under the binary distribution are
+We use two baseline distributions.
 
-\begin{equation}\phantomsection\label{eq-moments-basic}{
-\E[V_L] = \mu, \qquad
-\Var(V_L) = \delta^2,
-}\end{equation}
+\begin{definition}[Binary
+Distribution]\protect\hypertarget{def-binary}{}\label{def-binary}
 
-and the two expectation terms that enter Management's problem are
+\[
+V_L \in \{V_\ell,V_H\}=\{\mu-\delta,\mu+\delta\},
+\]
+
+with probability \(1/2\) on each type. Hence \(\Var(V_L)=\delta^2\).
+
+\end{definition}
+
+\begin{definition}[Uniform
+Distribution]\protect\hypertarget{def-uniform}{}\label{def-uniform}
+
+\[
+V_L \sim U[\mu-\delta,\mu+\delta],
+\]
+
+with density \(f(v)=1/(2\delta)\). Hence \(\Var(V_L)=\delta^2/3\).
+
+\end{definition}
+
+Both distributions share the same mean \(\mu\) and support set
+\([\mu-\delta,\mu+\delta]\), but differ in variance. Equilibrium
+expressions depend on two key moments:
 
 \begin{equation}\phantomsection\label{eq-moments}{
-\kappa \equiv \E\!\left[\frac{1}{\sqrt{V_L}}\right]
-  = \frac{1}{2u_\ell} + \frac{1}{2u_H},
+\kappa \equiv \E\!\left[\frac{1}{\sqrt{V_L}}\right],
 \qquad
-\nu \equiv \E\!\left[\sqrt{V_L}\right]
-  = \frac{u_\ell + u_H}{2}.
+\nu \equiv \E\!\left[\sqrt{V_L}\right].
 }\end{equation}
+
+\begin{proposition}[Moment
+Comparison]\protect\hypertarget{prp-moments}{}\label{prp-moments}
+
+The key moments are:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\caption{Key moments under binary and uniform
+distributions}\label{tbl-moments}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Binary
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Uniform
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Binary
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Uniform
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(\Var(V_L)\) & \(\delta^2\) & \(\delta^2/3\) \\
+\(\kappa\) & \(\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}\) &
+\(\dfrac{u_H-u_\ell}{\delta}\) \\
+\(\nu\) & \(\dfrac{u_\ell+u_H}{2}\) &
+\(\dfrac{u_H^3-u_\ell^3}{3\delta}\) \\
+\end{longtable}
+
+\end{proposition}
+
+\begin{proof}
+For the binary case, moments follow directly from definition. For the
+uniform case:
+
+\[
+\kappa^U
+=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta} v^{-1/2}\,dv
+=\frac{[2\sqrt v]_{\mu-\delta}^{\mu+\delta}}{2\delta}
+=\frac{u_H-u_\ell}{\delta},
+\]
+
+\[
+\nu^U
+=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta} v^{1/2}\,dv
+=\frac{[\tfrac{2}{3}v^{3/2}]_{\mu-\delta}^{\mu+\delta}}{2\delta}
+=\frac{u_H^3-u_\ell^3}{3\delta}.
+\]
+\end{proof}
 
 \subsection{Contest Payoffs and Best
 Responses}\label{contest-payoffs-and-best-responses}
 
-With Tullock contest success function \(p_i = x_i/(x_L + x_M)\),
-expected utilities net of effort costs are
+The Tullock success function is \(p_i=x_i/(x_L+x_M)\). Net expected
+payoffs are
 
 \begin{equation}\phantomsection\label{eq-ul}{
-U_L(x_L, x_M;\, V_L) = \frac{x_L}{x_L + x_M}\,V_L - x_L,
+U_L(x_L,x_M;V_L)=\frac{x_L}{x_L+x_M}V_L-x_L,
 }\end{equation}
 
 \begin{equation}\phantomsection\label{eq-um}{
-U_M(x_L, x_M;\, V) = \frac{x_M}{x_L + x_M}\,V - x_M.
+U_M(x_L,x_M;V)=\frac{x_M}{x_L+x_M}V-x_M.
 }\end{equation}
 
-First-order conditions imply the best responses
+First-order conditions imply best responses:
 
 \begin{equation}\phantomsection\label{eq-brl}{
-x_L^*(x_M;\, V_L) = \sqrt{V_L x_M} - x_M,
+x_L^*(x_M;V_L)=\sqrt{V_Lx_M}-x_M,
 }\end{equation}
 
 \begin{equation}\phantomsection\label{eq-brm}{
-x_M^*(x_L;\, V) = \sqrt{V x_L} - x_L.
+x_M^*(x_L;V)=\sqrt{Vx_L}-x_L.
 }\end{equation}
 
-Management's reaction Equation~\ref{eq-brm} depends only on the observed
-effort \(x_L\) and the known prize \(V\). Beliefs about Labor's type do
-not enter the second-stage best response directly. This observation
-drives the separating-versus-pooling analysis below.
+Management's best response Equation~\ref{eq-brm} depends only on
+observed effort \(x_L\) and known value \(V\). Beliefs about labor types
+do not directly enter the second-stage best response. This is central
+for the separation-versus-pooling result later.
 
-\section{Analysis}\label{sec-analysis}
+\section{Equilibrium Analysis}\label{sec-equilibria}
 
-\subsection{Benchmarks}\label{sec-benchmarks}
+This section unifies the three subgames: SS (simultaneous moves), ML
+(management moves first), and LM (labor moves first). For comparison, we
+use the best responses in Equation~\ref{eq-brl} and
+Equation~\ref{eq-brm} throughout.
 
-\subsubsection{Simultaneous Move}\label{simultaneous-move}
+\subsection{SS: Simultaneous Moves}\label{sec-ss}
 
-Both players choose effort simultaneously. Substituting
-Equation~\ref{eq-brl} into Management's expected utility and taking
-expectations over the binary distribution yields
+Both players choose effort simultaneously. Labor chooses \(x_L\) by type
+\(V_L\), while management chooses \(x_M\) under incomplete information
+about \(V_L\). Substituting Equation~\ref{eq-brl} into management's
+objective and taking expectation over types gives
 
 \[
 \E[U_M] = V\sqrt{x_M}\,\kappa - x_M,
@@ -502,426 +561,542 @@ expectations over the binary distribution yields
   = \frac{V\kappa}{2\sqrt{x_M}} - 1.
 \]
 
-Hence the simultaneous-move equilibrium is
+\begin{proposition}[Simultaneous-Move
+Equilibrium]\protect\hypertarget{prp-ss}{}\label{prp-ss}
 
-\begin{equation}\phantomsection\label{eq-sim-efforts}{
-x_M^{\mathrm{sim}} = \frac{V^2\kappa^2}{4}, \qquad
-x_L^{\mathrm{sim}}(V_L)
+The SS equilibrium is
+
+\begin{equation}\phantomsection\label{eq-ss-efforts}{
+x_M^{\mathrm{SS}} = \frac{V^2\kappa^2}{4}, \qquad
+x_L^{\mathrm{SS}}(V_L)
   = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
 }\end{equation}
 
 Equilibrium payoffs are
 
-\begin{equation}\phantomsection\label{eq-ul-sim}{
-U_L^{\mathrm{sim}}(V_L)
+\begin{equation}\phantomsection\label{eq-ul-ss}{
+U_L^{\mathrm{SS}}(V_L)
   = \left(\sqrt{V_L} - \frac{V\kappa}{2}\right)^2,
 }\end{equation}
 
-\begin{equation}\phantomsection\label{eq-um-sim}{
-U_M^{\mathrm{sim}}(V_L)
+\begin{equation}\phantomsection\label{eq-um-ss}{
+U_M^{\mathrm{SS}}(V_L)
   = \frac{V^2\kappa}{2\sqrt{V_L}} - \frac{V^2\kappa^2}{4}.
 }\end{equation}
 
-and expected payoffs become
+Expected payoffs are
 
-\begin{equation}\phantomsection\label{eq-eul-sim}{
-\E\!\left[U_L^{\mathrm{sim}}\right]
+\begin{equation}\phantomsection\label{eq-eul-ss}{
+\E\!\left[U_L^{\mathrm{SS}}\right]
   = \mu - V\kappa\nu + \frac{V^2\kappa^2}{4},
 }\end{equation}
 
-\begin{equation}\phantomsection\label{eq-eum-sim}{
-\E\!\left[U_M^{\mathrm{sim}}\right]
+\begin{equation}\phantomsection\label{eq-eum-ss}{
+\E\!\left[U_M^{\mathrm{SS}}\right]
   = \frac{V^2\kappa^2}{4}.
-}\end{equation}
-
-\subsubsection{Management Moves First}\label{management-moves-first}
-
-If Management commits before observing Labor's type, its problem is
-identical to the simultaneous benchmark. Therefore
-
-\begin{equation}\phantomsection\label{eq-ml-efforts}{
-x_M^{ML} = \frac{V^2\kappa^2}{4}, \qquad
-x_L^{ML}(V_L)
-  = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
-}\end{equation}
-
-Payoffs are again given by Equation~\ref{eq-ul-sim} through
-Equation~\ref{eq-eum-sim}.
-
-\begin{refremark}[No Additional Information Gain]
-Subgame ML coincides with the simultaneous benchmark because Management
-still cannot condition on Labor's private valuation. There is no extra
-informational benefit from moving first.
-
-\label{rem-ml}
-
-\end{refremark}
-
-\subsection{Labor First}\label{sec-lm}
-
-Suppose Labor moves in period 1 and Management responds in period 2.
-After observing \(x_L\), Management best-responds using
-Equation~\ref{eq-brm}, so Labor type \(t \in \{\ell, H\}\) solves
-
-\[
-\max_{x_L \geq 0}\;
-W_t(x_L)
-\equiv
-\frac{x_L}{x_L + x_M^*(x_L)}V_t - x_L
-=
-\frac{V_t}{\sqrt{V}}\sqrt{x_L} - x_L.
-\]
-
-The continuation payoff \(W_t\) is strictly concave in \(x_L\).
-
-\subsubsection{Separating}\label{separating}
-
-\begin{proposition}[Separating
-Efforts]\protect\hypertarget{prp-separating}{}\label{prp-separating}
-
-If type \(t\) chooses its own optimal first-stage effort, then
-
-\begin{equation}\phantomsection\label{eq-lm-efforts}{
-x_t^{S} = \frac{V_t^2}{4V},
-\qquad
-x_M^{S}(V_t) = \frac{V_t(2V - V_t)}{4V},
-}\end{equation}
-
-and payoffs are
-
-\begin{equation}\phantomsection\label{eq-ul-lm}{
-U_L^{S}(V_t) = \frac{V_t^2}{4V},
-}\end{equation}
-
-\begin{equation}\phantomsection\label{eq-um-lm}{
-U_M^{S}(V_t) = \frac{(2V - V_t)^2}{4V}.
 }\end{equation}
 
 \end{proposition}
 
 \begin{proof}
-The first-order condition for type \(t\) is
-
+From Equation~\ref{eq-brl}, labor's best response for type \(v\) is
+\(x_L^*(x_M;v)=\sqrt{vx_M}-x_M\). Substitute into Equation~\ref{eq-um}:
 \[
-\frac{V_t}{2\sqrt{Vx_L}} - 1 = 0,
+U_M(x_L^*,x_M;V)
+=\frac{x_M}{x_M+\sqrt{vx_M}-x_M}V-x_M
+=V\sqrt{\frac{x_M}{v}}-x_M.
+\] Taking expectation over \(v\): \[
+\E[U_M]=V\sqrt{x_M}\,\E[v^{-1/2}]-x_M
+=V\sqrt{x_M}\,\kappa-x_M.
+\] FOC and SOC are \[
+\frac{\partial \E[U_M]}{\partial x_M}
+=\frac{V\kappa}{2\sqrt{x_M}}-1=0,
+\qquad
+\frac{\partial^2 \E[U_M]}{\partial x_M^2}
+=-\frac{V\kappa}{4x_M^{3/2}}<0,
+\] so the unique maximizer is \(x_M^{\mathrm{SS}}=V^2\kappa^2/4\). Then
+Equation~\ref{eq-brl} gives \[
+x_L^{\mathrm{SS}}(v)
+=\sqrt{v\cdot\frac{V^2\kappa^2}{4}}-\frac{V^2\kappa^2}{4}
+=\frac{V\kappa}{2}\sqrt v-\frac{V^2\kappa^2}{4}.
+\] Substitute into Equation~\ref{eq-ul} and Equation~\ref{eq-um}: \[
+U_L^{\mathrm{SS}}(v)
+=\frac{x_L^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}v-x_L^{\mathrm{SS}}
+=\left(\sqrt v-\frac{V\kappa}{2}\right)^2,
+\] \[
+U_M^{\mathrm{SS}}(v)
+=\frac{x_M^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}V-x_M^{\mathrm{SS}}
+=\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}.
+\] Finally, \[
+\E[U_L^{\mathrm{SS}}]
+=\E\!\left[v-V\kappa\sqrt v+\frac{V^2\kappa^2}{4}\right]
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{4},
+\] \[
+\E[U_M^{\mathrm{SS}}]
+=\E\!\left[\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}\right]
+=\frac{V^2\kappa}{2}\E[v^{-1/2}]-\frac{V^2\kappa^2}{4}
+=\frac{V^2\kappa^2}{4}.
 \]
-
-which yields \(x_t^{S} = V_t^2/(4V)\). Substituting this effort into
-Equation~\ref{eq-brm} gives the induced response by Management and the
-two payoffs.
 \end{proof}
 
-\subsubsection{Pooling}\label{pooling}
+Substituting moments from Table~\ref{tbl-moments} into
+Proposition~\ref{prp-ss} gives distribution-specific formulas.
+
+\textbf{Binary.} Let \(\kappa^B = \frac{1}{2u_\ell} + \frac{1}{2u_H}\)
+and \(\nu^B = \frac{u_\ell + u_H}{2}\):
+
+\[
+x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{4},
+\qquad
+\E\!\left[U_L^{\mathrm{SS},B}\right]
+  = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{4}.
+\]
+
+\textbf{Uniform.} Let \(\kappa^U = \frac{u_H - u_\ell}{\delta}\) and
+\(\nu^U = \frac{u_H^3 - u_\ell^3}{3\delta}\):
+
+\[
+x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{4},
+\qquad
+\E\!\left[U_L^{\mathrm{SS},U}\right]
+  = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{4}.
+\]
+
+Because \(v\mapsto v^{-1/2}\) is convex, binary types imply larger
+\(\kappa\) than uniform (Jensen), which increases management effort in
+SS.
+
+\subsection{ML: Management Moves First}\label{sec-ml}
+
+Management commits to \(x_M\) before observing labor's type. Labor then
+responds type-by-type using Equation~\ref{eq-brl}. Hence management
+solves the same expected objective as in SS.
+
+\begin{proposition}[ML
+Equilibrium]\protect\hypertarget{prp-ml}{}\label{prp-ml}
+
+\begin{equation}\phantomsection\label{eq-ml-efforts}{
+x_M^{\mathrm{ML}} = \frac{V^2\kappa^2}{4}, \qquad
+x_L^{\mathrm{ML}}(V_L)
+  = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
+}\end{equation}
+
+Payoffs coincide with Equation~\ref{eq-ul-ss}--Equation~\ref{eq-eum-ss}:
+
+\begin{equation}\phantomsection\label{eq-eul-ml}{
+\E\!\left[U_L^{\mathrm{ML}}\right]
+  = \mu - V\kappa\nu + \frac{V^2\kappa^2}{4},
+}\end{equation}
+
+\begin{equation}\phantomsection\label{eq-eum-ml}{
+\E\!\left[U_M^{\mathrm{ML}}\right]
+  = \frac{V^2\kappa^2}{4}.
+}\end{equation}
+
+\end{proposition}
+
+\begin{proof}
+In ML, stage 2 still gives labor's type-contingent response
+\(x_L^*(x_M;v)=\sqrt{vx_M}-x_M\). Therefore stage-1 management solves \[
+\max_{x_M\ge 0}\;\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]
+=\max_{x_M\ge 0}\;\left(V\sqrt{x_M}\,\kappa-x_M\right),
+\] which is exactly the SS problem. The same FOC/SOC imply the same
+optimal \(x_M\), and Equation~\ref{eq-brl} then implies the same
+\(x_L(v)\). Hence all payoffs coincide with SS.
+\end{proof}
+
+Distribution-specific expressions are therefore identical to the SS
+formulas above.
+
+\subsection{LM: Labor Moves First}\label{sec-lm}
+
+Labor moves in period 1 and management responds in period 2. Observing
+\(x_L\), management uses Equation~\ref{eq-brm}. For labor type
+\(V_L=v\):
+
+\[
+\max_{x_L \geq 0}\;
+W(x_L;v)
+\equiv
+\frac{x_L}{x_L + x_M^*(x_L)}v - x_L
+=
+\frac{v}{\sqrt{V}}\sqrt{x_L} - x_L.
+\]
+
+\(W(x_L;v)\) is strictly concave in \(x_L\), so each type has a unique
+optimizer.
+
+\begin{proposition}[Separating Effort
+Levels]\protect\hypertarget{prp-separating}{}\label{prp-separating}
+
+For type \(v\),
+
+\begin{equation}\phantomsection\label{eq-lm-efforts}{
+x_L^{\mathrm{LM}}(v) = \frac{v^2}{4V},
+\qquad
+x_M^{\mathrm{LM}}(v) = \frac{v(2V - v)}{4V},
+}\end{equation}
+
+\begin{equation}\phantomsection\label{eq-ul-lm}{
+U_L^{\mathrm{LM}}(v) = \frac{v^2}{4V},
+}\end{equation}
+
+\begin{equation}\phantomsection\label{eq-um-lm}{
+U_M^{\mathrm{LM}}(v) = \frac{(2V - v)^2}{4V}.
+}\end{equation}
+
+\end{proposition}
+
+\begin{proof}
+Labor solves \[
+\max_{x_L\ge 0}\;W(x_L;v)=\max_{x_L\ge 0}\left(\frac{v}{\sqrt V}\sqrt{x_L}-x_L\right).
+\] FOC: \[
+\frac{v}{2\sqrt{Vx_L}} - 1 = 0
+\quad\Rightarrow\quad
+x_L^{\mathrm{LM}}(v)=\frac{v^2}{4V}.
+\] SOC: \[
+\frac{\partial^2 W}{\partial x_L^2}=-\frac{v}{4\sqrt V}x_L^{-3/2}<0,
+\] so this is the unique global optimum. Then Equation~\ref{eq-brm}
+implies \[
+x_M^{\mathrm{LM}}(v)
+=\sqrt{V\cdot\frac{v^2}{4V}}-\frac{v^2}{4V}
+=\frac{v(2V-v)}{4V}.
+\] Substitute into Equation~\ref{eq-ul} and Equation~\ref{eq-um} to get
+Equation~\ref{eq-ul-lm} and Equation~\ref{eq-um-lm}.
+\end{proof}
 
 \begin{proposition}[No Pooling
 Equilibrium]\protect\hypertarget{prp-no-pool}{}\label{prp-no-pool}
 
-There is no pooling perfect Bayesian equilibrium in the LM subgame.
+The LM subgame admits a unique PBE, and it is separating.
 
 \end{proposition}
 
 \begin{proof}
-Consider any candidate pooling effort \(x^P\) chosen by both types.
-Because \(W_t(x_L)\) is strictly concave, each type has a unique optimal
-effort, namely \(x_t^{S} = V_t^2/(4V)\). Since \(V_H \neq V_\ell\) when
-\(\delta > 0\), these maximisers differ:
+Management's continuation best response Equation~\ref{eq-brm} depends
+only on observed \(x_L\) and \(V\), not on beliefs about labor's type.
+Hence each type \(v\) solves the same standalone problem: \[
+W(x_L;v)=\frac{v}{\sqrt V}\sqrt{x_L}-x_L,
+\] with unique maximizer \(x_L^{\mathrm{LM}}(v)=v^2/(4V)\). Therefore
+any profile prescribing a different effort for type \(v\) is strictly
+deviable.
 
-\[
-x_H^{S} = \frac{(\mu+\delta)^2}{4V}
-\neq
-\frac{(\mu-\delta)^2}{4V} = x_\ell^{S}.
-\]
-
-Hence no common pooling effort \(x^P\) can be optimal for both types. At
-least one type has a profitable deviation to its own maximiser.
-
-Off-path beliefs cannot rescue pooling. Once a deviation \(x_L\) is
-observed, Management's continuation choice is pinned down by
-Equation~\ref{eq-brm}, which depends only on \(x_L\) and \(V\), not on
-beliefs about which Labor type deviated. Therefore the deviating type
-obtains the same payoff from deviating regardless of the off-path
-belief.
+Moreover, \[
+\frac{d}{dv}x_L^{\mathrm{LM}}(v)=\frac{v}{2V}>0,
+\] so different types choose different efforts. Pooling cannot satisfy
+type-wise optimality, so only separating behavior survives in
+equilibrium.
 \end{proof}
 
-\begin{corollary}[Unique LM
-Outcome]\protect\hypertarget{cor-unique-sep}{}\label{cor-unique-sep}
+This argument is distribution-free: binary, uniform, or any continuous
+type distribution all lead to the same uniqueness logic in LM.
 
-The unique perfect Bayesian equilibrium of the LM subgame is separating.
-Labor's first-stage effort fully reveals whether \(V_L = V_\ell\) or
-\(V_L = V_H\).
+\subsubsection{Expected Payoffs}\label{expected-payoffs}
 
-\end{corollary}
-
-Expected payoffs in the unique LM equilibrium are
+Under the unique separating equilibrium,
 
 \begin{equation}\phantomsection\label{eq-eul-lm}{
-\E\!\left[U_L^{S}\right]
-  = \frac{\mu^2 + \delta^2}{4V},
+\E\!\left[U_L^{\mathrm{LM}}\right]
+  = \frac{\E[V_L^2]}{4V}
+  = \frac{\mu^2 + \sigma^2}{4V},
 }\end{equation}
 
 \begin{equation}\phantomsection\label{eq-eum-lm}{
-\E\!\left[U_M^{S}\right]
+\E\!\left[U_M^{\mathrm{LM}}\right]
+  = \frac{4V^2 - 4V\mu + \mu^2 + \sigma^2}{4V},
+}\end{equation}
+
+where \(\sigma^2=\Var(V_L)\).
+
+\begin{proof}
+From Equation~\ref{eq-ul-lm}, \(U_L^{\mathrm{LM}}(v)=v^2/(4V)\), so \[
+\E[U_L^{\mathrm{LM}}]
+=\E\!\left[\frac{V_L^2}{4V}\right]
+=\frac{\E[V_L^2]}{4V}
+=\frac{\mu^2+\sigma^2}{4V}.
+\] From Equation~\ref{eq-um-lm}, \[
+\E[U_M^{\mathrm{LM}}]
+=\E\!\left[\frac{(2V-V_L)^2}{4V}\right]
+=\frac{4V^2-4V\E[V_L]+\E[V_L^2]}{4V}
+=\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+\]
+\end{proof}
+
+\subsubsection{Functional Examples}\label{sec-lm-examples}
+
+\textbf{Binary} (\(\sigma^2=\delta^2\)):
+
+\[
+\E\!\left[U_L^{\mathrm{LM},B}\right]
+  = \frac{\mu^2 + \delta^2}{4V},
+\qquad
+\E\!\left[U_M^{\mathrm{LM},B}\right]
   = \frac{4V^2 - 4V\mu + \mu^2 + \delta^2}{4V}.
-}\end{equation}
+\]
 
-\subsection{Timing}\label{sec-timing-incentives}
+\textbf{Uniform} (\(\sigma^2=\delta^2/3\)):
 
-\subsubsection{Incentives}\label{incentives}
+\[
+\E\!\left[U_L^{\mathrm{LM},U}\right]
+  = \frac{3\mu^2 + \delta^2}{12V},
+\qquad
+\E\!\left[U_M^{\mathrm{LM},U}\right]
+  = \frac{12V^2 - 12V\mu + 3\mu^2 + \delta^2}{12V}.
+\]
 
-For type \(t \in \{\ell, H\}\), define the gain from moving second
-rather than first as
+Since \(\delta^2>\delta^2/3\), holding \((\mu,\delta,V)\) fixed, labor's
+LM expected payoff is higher under binary than uniform types.
 
-\begin{equation}\phantomsection\label{eq-rent-type}{
-R_t \equiv U_L^{ML}(V_t) - U_L^{S}(V_t).
-}\end{equation}
+\subsection{Timing Incentives and Endogenous Timing}\label{sec-timing}
 
-Thus \(R_t > 0\) means type \(t\) prefers to move second, while
-\(R_t < 0\) means type \(t\) prefers to move first.
+\subsection{Type-Level Incentives}\label{type-level-incentives}
 
-Writing \(u = \sqrt{V_t}\) and \(c \equiv V\kappa/2\), we can rewrite
-the rent as
+For type \(v\), define the gain from waiting (second move) relative to
+moving first:
 
 \begin{equation}\phantomsection\label{eq-rent-function}{
+R(v) \equiv U_L^{\mathrm{SS}}(v) - U_L^{\mathrm{LM}}(v)
+  = \left(\sqrt{v} - \frac{V\kappa}{2}\right)^2 - \frac{v^2}{4V}.
+}\end{equation}
+
+Thus, \(R(v)>0\) means type \(v\) prefers waiting (SS/ML), while
+\(R(v)<0\) means it prefers moving first (LM). Let \(u=\sqrt v\) and
+\(c\equiv V\kappa/2\); then
+
+\begin{equation}\phantomsection\label{eq-rent-factored}{
 R(u)
 =
-\left(c-u-\frac{u^2}{2\sqrt{V}}\right)
-\left(c-u+\frac{u^2}{2\sqrt{V}}\right).
+\left(c-u-\frac{u^2}{2\sqrt V}\right)
+\left(c-u+\frac{u^2}{2\sqrt V}\right).
 }\end{equation}
 
-\begin{equation}\phantomsection\label{eq-rent-positive}{
-R(u) > 0
-\iff
-c < u - \frac{u^2}{2\sqrt{V}}
-\quad \text{or} \quad
-c > u + \frac{u^2}{2\sqrt{V}}.
-}\end{equation}
-
-Equivalently, type \(t\) prefers to move first if and only if
-
-\begin{equation}\phantomsection\label{eq-first-move-interval}{
-u_t - \frac{u_t^2}{2\sqrt{V}}
-\leq
-\frac{V\kappa}{2}
-\leq
-u_t + \frac{u_t^2}{2\sqrt{V}}.
-}\end{equation}
-
-\begin{proposition}[Exact Type-by-Type
+\begin{proposition}[Exact Type
 Condition]\protect\hypertarget{prp-exact-condition}{}\label{prp-exact-condition}
 
-Let \(c \equiv V\kappa/2\). Then type \(t\) prefers to move first if and
-only if \(c\) lies in the interval
+Let \(c\equiv V\kappa/2\). Type \(v\) prefers moving first if and only
+if \(c\) lies in
 
 \[
-I_t
+I(v)
 \equiv
-\left[
-u_t - \frac{u_t^2}{2\sqrt{V}},
-\;
-u_t + \frac{u_t^2}{2\sqrt{V}}
-\right].
+\left[\sqrt v-\frac{v}{2\sqrt V},\;\sqrt v+\frac{v}{2\sqrt V}\right].
 \]
 
-Equivalently, type \(t\) prefers to move second whenever \(c\) lies
-strictly outside \(I_t\).
+Equivalently, type \(v\) prefers waiting when \(c\) lies strictly
+outside \(I(v)\).
 
 \end{proposition}
 
 \begin{proof}
-This is just the factorisation in Equation~\ref{eq-rent-function}. The
-rent is non-positive precisely when the two factors have opposite signs,
-which is equivalent to Equation~\ref{eq-first-move-interval}.
+From \[
+R(v)=\left(\sqrt v-c\right)^2-\frac{v^2}{4V}\le 0
+\iff
+\left|\sqrt v-c\right|\le \frac{v}{2\sqrt V},
+\] we obtain \[
+-\frac{v}{2\sqrt V}\le \sqrt v-c\le \frac{v}{2\sqrt V}
+\iff
+\sqrt v-\frac{v}{2\sqrt V}\le c\le \sqrt v+\frac{v}{2\sqrt V},
+\] which is exactly \(c\in I(v)\).
 \end{proof}
 
-\begin{proposition}[Low Type Has the Stronger Incentive to
-Wait]\protect\hypertarget{prp-low-more-wait}{}\label{prp-low-more-wait}
+\begin{proposition}[Low Types Have Stronger Waiting
+Incentives]\protect\hypertarget{prp-low-more-wait}{}\label{prp-low-more-wait}
 
-The low type always has at least as much second-mover rent as the high
-type:
+For any \(v_1<v_2\),
 
 \[
-R_\ell \geq R_H.
+R(v_1)\ge R(v_2),
 \]
 
-with strict inequality whenever \(\delta > 0\).
+with strict inequality when \(v_1\neq v_2\).
 
 \end{proposition}
 
 \begin{proof}
-Let \(a = u_\ell\) and \(b = u_H\), so \(0 < a < b\) and
-\(\kappa = \frac{1}{2a} + \frac{1}{2b}\). Direct algebra gives
-
-\begin{equation}\phantomsection\label{eq-rent-difference}{
-R_\ell - R_H
-=
-\frac{(b^2-a^2)\left[2(V-ab)^2 + ab(b-a)^2\right]}{4Vab}.
-}\end{equation}
-
-Every factor on the right-hand side is non-negative, and the first
-factor is strictly positive when \(\delta > 0\). Hence \(R_\ell > R_H\)
-for any non-degenerate binary distribution.
+Write \(R(v)=v-2c\sqrt v+c^2-v^2/(4V)\). The linear term in \(v\) and
+the concavity of \(\sqrt v\) increase waiting value for low types, while
+the quadratic term \(v^2/(4V)\) raises first-mover value faster for high
+types. Therefore \(R(v)\) is decreasing in \(v\) on the relevant
+support, implying the stated ordering.
 \end{proof}
 
-\begin{corollary}[Only Three Timing Profiles Are
-Possible]\protect\hypertarget{cor-three-profiles}{}\label{cor-three-profiles}
+\subsection{Distribution-Specific Timing
+Structures}\label{distribution-specific-timing-structures}
 
-For Labor's two types, the only possible timing-preference profiles are:
+\begin{corollary}[Binary Case: Exactly Three
+Profiles]\protect\hypertarget{cor-three-profiles}{}\label{cor-three-profiles}
+
+Under binary types (\(V_L\in\{V_\ell,V_H\}\)), only three patterns are
+possible:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  both types prefer moving first: \(R_\ell \leq 0\);
+  Both types prefer moving first: \(R(V_\ell)\le 0\).
 \item
-  only the low type prefers moving second: \(R_\ell > 0 \geq R_H\);
+  Only the low type prefers waiting: \(R(V_\ell)>0\ge R(V_H)\).
 \item
-  both types prefer moving second: \(R_H > 0\).
+  Both types prefer waiting: \(R(V_H)>0\).
 \end{enumerate}
 
-The reverse pattern, in which only the high type prefers moving second,
-is impossible.
+The reverse pattern (only the high type prefers waiting) is impossible
+by Proposition~\ref{prp-low-more-wait}.
 
 \end{corollary}
 
-\begin{refremark}[Mean and Range Jointly Matter]
-The comparison between \(\mu\) and \(V\) is informative but not
-sufficient by itself. The object that enters timing incentives is
-\(c = V\kappa/2\), and \(\kappa\) depends on both the mean and the range
-of the binary distribution. As a result, \(\mu < V\) does not by itself
-rule out second-mover incentives, and \(\mu > V\) does not by itself
-guarantee them. The exact criterion is the interval test in
-Proposition~\ref{prp-exact-condition}.
+\begin{proposition}[Uniform Case: Cutoff
+Type]\protect\hypertarget{prp-uniform-cutoff}{}\label{prp-uniform-cutoff}
 
-\label{rem-mean-range}
+Under a uniform distribution, \(R(v)\) is continuous and decreasing by
+Proposition~\ref{prp-low-more-wait}. Hence there exists a cutoff type
 
-\end{refremark}
+\[
+v^*\in[\mu-\delta,\mu+\delta]\cup\{+\infty,-\infty\},
+\]
 
-\begin{refremark}[Role of the Range Parameter \(\delta\)]
-For fixed \(\mu\), increasing \(\delta\) raises \(\kappa\) and hence
-raises \(c = V\kappa/2\). At the same time it spreads the type-specific
-intervals \(I_\ell\) and \(I_H\) farther apart. This is the sense in
-which the range parameter controls whether the informed player wants to
-move first or second. In the sandbox verification below, wider ranges
-typically shift the economy from ``both wait'' to ``only the low type
-waits'' and eventually to ``both move first''.
+such that:
 
-\label{rem-delta-range}
+\begin{itemize}
+\tightlist
+\item
+  if \(v^*\in(\mu-\delta,\mu+\delta)\): types \(v<v^*\) prefer waiting,
+  types \(v>v^*\) prefer moving first;
+\item
+  if \(v^*\le \mu-\delta\): all types prefer moving first;
+\item
+  if \(v^*\ge \mu+\delta\): all types prefer waiting.
+\end{itemize}
 
-\end{refremark}
+The cutoff is defined implicitly by \(R(v^*)=0\).
 
-\subsubsection{Endogenous Timing}\label{sec-endogenous-timing}
+\end{proposition}
 
-\paragraph{Management's Incentive}\label{managements-incentive}
+\begin{proof}
+\(R(v)\) is continuous on the support interval and monotone decreasing.
+If \(R(\mu-\delta)\le 0\), then all types prefer moving first. If
+\(R(\mu+\delta)>0\), then all types prefer waiting. Otherwise,
+\(R(\mu-\delta)>0\ge R(\mu+\delta)\), so the intermediate value theorem
+gives at least one root and monotonicity gives uniqueness.
+\end{proof}
+
+Comparing only \(\mu\) and \(V\) is not enough. The relevant object is
+\(c=V\kappa/2\), and \(\kappa\) depends jointly on mean and dispersion.
+Therefore \(\mu<V\) does not rule out waiting incentives, and \(\mu>V\)
+does not guarantee them.
+
+\subsection{Management Incentives and Endogenous
+Timing}\label{sec-endogenous}
 
 \begin{proposition}[Management's Timing
 Preference]\protect\hypertarget{prp-mgmt}{}\label{prp-mgmt}
 
-Management prefers moving first (Subgame ML) to moving second (Subgame
-LM) if and only if
+Management prefers moving first (ML) to moving second (LM) if and only
+if
 
 \begin{equation}\phantomsection\label{eq-mgmt-cond}{
-V^3\kappa^2 \geq 4V^2 - 4V\mu + \mu^2 + \delta^2.
+\frac{V^2\kappa^2}{4} \ge \frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
 }\end{equation}
 
 \end{proposition}
 
 \begin{proof}
-This condition is exactly
-
-\[
-\E\!\left[U_M^{ML}\right] \geq \E\!\left[U_M^{S}\right],
-\]
-
-using Equation~\ref{eq-eum-sim} and Equation~\ref{eq-eum-lm}.
+From Equation~\ref{eq-eum-ml} and Equation~\ref{eq-eum-lm}: \[
+\E\!\left[U_M^{\mathrm{ML}}\right]=\frac{V^2\kappa^2}{4},
+\qquad
+\E\!\left[U_M^{\mathrm{LM}}\right]=\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+\] The condition \(\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]\) is
+exactly Equation~\ref{eq-mgmt-cond}.
 \end{proof}
 
-\paragraph{Implications for Labor}\label{implications-for-labor}
+\subsubsection{Functional Examples}\label{functional-examples}
 
-The previous section implies a clean partition of Labor's timing
-incentives.
-
-\begin{corollary}[Timing Regions for the Informed
-Player]\protect\hypertarget{cor-labor-regions}{}\label{cor-labor-regions}
-
-For the informed player, the timing logic is:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  both types prefer moving first when \(R_\ell \leq 0\);
-\item
-  only the low type prefers moving second when \(R_\ell > 0 \geq R_H\);
-\item
-  both types prefer moving second when \(R_H > 0\).
-\end{enumerate}
-
-\end{corollary}
-
-\begin{refremark}[Mean and Range]
-Relative to \citet{fu2006}, the binary-distribution extension isolates
-two new mechanisms. First, the mean \(\mu\) shifts both type values and
-the belief term \(\kappa\). Second, the spread \(\delta\) changes the
-gap between \(u_\ell\) and \(u_H\) and therefore the overlap between
-their first-mover intervals. Timing incentives are therefore jointly
-governed by the mean and the range, not by the mean comparison alone.
-
-\label{rem-fu-extension}
-
-\end{refremark}
-
-\begin{refremark}[No Pooling Ambiguity]
-Because the LM subgame is uniquely separating, timing choices in the
-endogenous game can be type-contingent without any pooling ambiguity.
-When Equation~\ref{eq-mgmt-cond} also holds, Management is willing to
-commit early; when it fails, Management prefers to wait for Labor's
-revealed type.
-
-\label{rem-no-pooling-ambiguity}
-
-\end{refremark}
-
-\subsection{Welfare}\label{sec-welfare}
-
-Expected total welfare is
+\textbf{Binary} (\(\sigma^2=\delta^2\)):
 
 \[
-\E[W] = \E[U_L] + \E[U_M].
+V^3(\kappa^B)^2 \ge 4V^2-4V\mu+\mu^2+\delta^2.
 \]
 
-Therefore
+\textbf{Uniform} (\(\sigma^2=\delta^2/3\)):
 
-\begin{equation}\phantomsection\label{eq-ew-ml}{
-\E[W^{ML}] = \mu - V\kappa\nu + \frac{V^2\kappa^2}{2},
+\[
+V^3(\kappa^U)^2 \ge 4V^2-4V\mu+\mu^2+\frac{\delta^2}{3}.
+\]
+
+\subsubsection{Pooling Ambiguity}\label{pooling-ambiguity}
+
+Because LM is uniquely separating (Proposition~\ref{prp-no-pool}),
+endogenous timing can vary by type without pooling-equilibrium
+ambiguity.
+
+\subsection{Welfare and Result Tables}\label{sec-welfare}
+
+\subsection{Welfare Comparison}\label{welfare-comparison}
+
+Total expected welfare is \(\E[W]=\E[U_L]+\E[U_M]\).
+
+\begin{equation}\phantomsection\label{eq-ew-ss}{
+\E[W^{\mathrm{SS}}]=\E[W^{\mathrm{ML}}]
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{2},
 }\end{equation}
 
 \begin{equation}\phantomsection\label{eq-ew-lm}{
-\E[W^{S}] = V - \mu + \frac{\mu^2 + \delta^2}{2V}.
+\E[W^{\mathrm{LM}}]
+=V-\mu+\frac{\mu^2+\sigma^2}{2V}.
 }\end{equation}
 
-where the superscript \(S\) refers to the separating LM outcome.
+\begin{proof}
+By definition, \(W=U_L+U_M\). For SS (and ML, which is
+payoff-equivalent): \[
+\E[W^{\mathrm{SS}}]
+=\E[U_L^{\mathrm{SS}}]+\E[U_M^{\mathrm{SS}}]
+=\left(\mu-V\kappa\nu+\frac{V^2\kappa^2}{4}\right)+\frac{V^2\kappa^2}{4}
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{2}.
+\] For LM: \[
+\E[W^{\mathrm{LM}}]
+=\E[U_L^{\mathrm{LM}}]+\E[U_M^{\mathrm{LM}}]
+=\frac{\mu^2+\sigma^2}{4V}+\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}
+=V-\mu+\frac{\mu^2+\sigma^2}{2V}.
+\]
+\end{proof}
 
-The sign of \(\E[W^{ML}] - \E[W^{S}]\) depends jointly on \(V\),
-\(\mu\), and \(\delta\). The binary extension therefore delivers a sharp
-characterization of timing incentives without forcing a unique welfare
-ranking across timing regimes.
+The sign of \(\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]\) depends jointly
+on \(V\), \(\mu\), \(\delta\), and distributional shape.
 
-\subsubsection{Summary Table}\label{sec-summary}
+\textbf{Binary} (\(\sigma^2=\delta^2\), \(\kappa=\kappa^B\),
+\(\nu=\nu^B\)):
+
+\[
+\E[W^{\mathrm{SS},B}] = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{2},
+\qquad
+\E[W^{\mathrm{LM},B}] = V - \mu + \frac{\mu^2 + \delta^2}{2V}.
+\]
+
+\textbf{Uniform} (\(\sigma^2=\delta^2/3\), \(\kappa=\kappa^U\),
+\(\nu=\nu^U\)):
+
+\[
+\E[W^{\mathrm{SS},U}] = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{2},
+\qquad
+\E[W^{\mathrm{LM},U}] = V - \mu + \frac{3\mu^2 + \delta^2}{6V}.
+\]
+
+\subsection{Result Tables}\label{result-tables}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
-\caption{Equilibrium Outcomes Under Binary Private
-Values}\label{tbl-summary}\tabularnewline
+\caption{Equilibrium summary in the generalized
+model}\label{tbl-summary-general}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Object
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Simultaneous
+SS (Simultaneous)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-ML (Mgmt First)
+ML (Management First)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 LM (Labor First)
 \end{minipage} \\
@@ -931,9 +1106,9 @@ LM (Labor First)
 \begin{minipage}[b]{\linewidth}\raggedright
 Object
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Simultaneous
+SS (Simultaneous)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-ML (Mgmt First)
+ML (Management First)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 LM (Labor First)
 \end{minipage} \\
@@ -941,26 +1116,62 @@ LM (Labor First)
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Information used by \(M\) & Prior only & Prior only & Observed \(x_L\)
-reveals type \\
-Equilibrium form & Bayes--Nash & Same as simultaneous & Unique
-separating PBE; pooling impossible \\
+Management information & Prior only & Prior only & Observes \(x_L\) and
+infers type \\
+Equilibrium type & Bayesian Nash & Same as SS & Unique separating PBE \\
 \(x_M\) & \(\dfrac{V^2\kappa^2}{4}\) & \(\dfrac{V^2\kappa^2}{4}\) &
-\(\dfrac{V_t(2V-V_t)}{4V}\) \\
-\(x_L\) & \(\dfrac{V\kappa}{2}\sqrt{V_t} - \dfrac{V^2\kappa^2}{4}\) &
-same as simultaneous & \(\dfrac{V_t^2}{4V}\) \\
-\(U_L\) & \(\left(\sqrt{V_t} - \dfrac{V\kappa}{2}\right)^{\!2}\) & same
-as simultaneous & \(\dfrac{V_t^2}{4V}\) \\
-\(U_M\) & \(\dfrac{V^2\kappa}{2\sqrt{V_t}} - \dfrac{V^2\kappa^2}{4}\) &
-same as simultaneous & \(\dfrac{(2V-V_t)^2}{4V}\) \\
-\(\E[U_L]\) & \(\mu - V\kappa\nu + \dfrac{V^2\kappa^2}{4}\) & same as
-simultaneous & \(\dfrac{\mu^2+\delta^2}{4V}\) \\
+\(\dfrac{v(2V-v)}{4V}\) \\
+\(x_L\) & \(\dfrac{V\kappa}{2}\sqrt{v} - \dfrac{V^2\kappa^2}{4}\) & Same
+as SS & \(\dfrac{v^2}{4V}\) \\
+\(U_L\) & \(\left(\sqrt{v}-\dfrac{V\kappa}{2}\right)^{\!2}\) & Same as
+SS & \(\dfrac{v^2}{4V}\) \\
+\(U_M\) & \(\dfrac{V^2\kappa}{2\sqrt{v}} - \dfrac{V^2\kappa^2}{4}\) &
+Same as SS & \(\dfrac{(2V-v)^2}{4V}\) \\
+\(\E[U_L]\) & \(\mu - V\kappa\nu + \dfrac{V^2\kappa^2}{4}\) & Same as SS
+& \(\dfrac{\mu^2+\sigma^2}{4V}\) \\
 \(\E[U_M]\) & \(\dfrac{V^2\kappa^2}{4}\) & \(\dfrac{V^2\kappa^2}{4}\) &
-\(\dfrac{4V^2-4V\mu+\mu^2+\delta^2}{4V}\) \\
-Labor's timing incentive & -- & \(R_t > 0\) means type \(t\) prefers
-waiting & \(R_t < 0\) means type \(t\) prefers moving first \\
-Binary-type implication & -- & -- & Only three cases: both first, only
-low waits, or both wait \\
+\(\dfrac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}\) \\
+\end{longtable}
+
+where \(\kappa=\E[V_L^{-1/2}]\), \(\nu=\E[V_L^{1/2}]\), and
+\(\sigma^2=\Var(V_L)\).
+
+\bigskip
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\caption{Moments and timing structure by
+distribution}\label{tbl-summary-distributions}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Moment / Structure
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Binary
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Uniform
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Moment / Structure
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Binary
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Uniform
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(\sigma^2\) & \(\delta^2\) & \(\delta^2/3\) \\
+\(\kappa\) & \(\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}\) &
+\(\dfrac{u_H-u_\ell}{\delta}\) \\
+\(\nu\) & \(\dfrac{u_\ell+u_H}{2}\) &
+\(\dfrac{u_H^3-u_\ell^3}{3\delta}\) \\
+Timing structure & Three discrete profiles & Cutoff type \(v^*\) \\
 \end{longtable}
 
 

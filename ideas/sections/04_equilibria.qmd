@@ -1,0 +1,302 @@
+# Equilibrium Analysis {#sec-equilibria}
+
+This section unifies the three subgames: SS (simultaneous moves), ML (management moves first), and LM (labor moves first). For comparison, we use the best responses in @eq-brl and @eq-brm throughout.
+
+## SS: Simultaneous Moves {#sec-ss}
+
+Both players choose effort simultaneously. Labor chooses $x_L$ by type $V_L$, while management chooses $x_M$ under incomplete information about $V_L$. Substituting @eq-brl into management's objective and taking expectation over types gives
+
+$$
+\E[U_M] = V\sqrt{x_M}\,\kappa - x_M,
+\qquad
+\frac{\partial \E[U_M]}{\partial x_M}
+  = \frac{V\kappa}{2\sqrt{x_M}} - 1.
+$$
+
+::: {#prp-ss}
+### Simultaneous-Move Equilibrium
+
+The SS equilibrium is
+
+$$
+x_M^{\mathrm{SS}} = \frac{V^2\kappa^2}{4}, \qquad
+x_L^{\mathrm{SS}}(V_L)
+  = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-ss-efforts}
+
+Equilibrium payoffs are
+
+$$
+U_L^{\mathrm{SS}}(V_L)
+  = \left(\sqrt{V_L} - \frac{V\kappa}{2}\right)^2,
+$$ {#eq-ul-ss}
+
+$$
+U_M^{\mathrm{SS}}(V_L)
+  = \frac{V^2\kappa}{2\sqrt{V_L}} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-um-ss}
+
+Expected payoffs are
+
+$$
+\E\!\left[U_L^{\mathrm{SS}}\right]
+  = \mu - V\kappa\nu + \frac{V^2\kappa^2}{4},
+$$ {#eq-eul-ss}
+
+$$
+\E\!\left[U_M^{\mathrm{SS}}\right]
+  = \frac{V^2\kappa^2}{4}.
+$$ {#eq-eum-ss}
+:::
+
+::: {.proof}
+From @eq-brl, labor's best response for type $v$ is $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$.
+Substitute into @eq-um:
+$$
+U_M(x_L^*,x_M;V)
+=\frac{x_M}{x_M+\sqrt{vx_M}-x_M}V-x_M
+=V\sqrt{\frac{x_M}{v}}-x_M.
+$$
+Taking expectation over $v$:
+$$
+\E[U_M]=V\sqrt{x_M}\,\E[v^{-1/2}]-x_M
+=V\sqrt{x_M}\,\kappa-x_M.
+$$
+FOC and SOC are
+$$
+\frac{\partial \E[U_M]}{\partial x_M}
+=\frac{V\kappa}{2\sqrt{x_M}}-1=0,
+\qquad
+\frac{\partial^2 \E[U_M]}{\partial x_M^2}
+=-\frac{V\kappa}{4x_M^{3/2}}<0,
+$$
+so the unique maximizer is $x_M^{\mathrm{SS}}=V^2\kappa^2/4$.
+Then @eq-brl gives
+$$
+x_L^{\mathrm{SS}}(v)
+=\sqrt{v\cdot\frac{V^2\kappa^2}{4}}-\frac{V^2\kappa^2}{4}
+=\frac{V\kappa}{2}\sqrt v-\frac{V^2\kappa^2}{4}.
+$$
+Substitute into @eq-ul and @eq-um:
+$$
+U_L^{\mathrm{SS}}(v)
+=\frac{x_L^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}v-x_L^{\mathrm{SS}}
+=\left(\sqrt v-\frac{V\kappa}{2}\right)^2,
+$$
+$$
+U_M^{\mathrm{SS}}(v)
+=\frac{x_M^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}V-x_M^{\mathrm{SS}}
+=\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}.
+$$
+Finally,
+$$
+\E[U_L^{\mathrm{SS}}]
+=\E\!\left[v-V\kappa\sqrt v+\frac{V^2\kappa^2}{4}\right]
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{4},
+$$
+$$
+\E[U_M^{\mathrm{SS}}]
+=\E\!\left[\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}\right]
+=\frac{V^2\kappa}{2}\E[v^{-1/2}]-\frac{V^2\kappa^2}{4}
+=\frac{V^2\kappa^2}{4}.
+$$
+:::
+
+Substituting moments from @tbl-moments into @prp-ss gives distribution-specific formulas.
+
+**Binary.** Let $\kappa^B = \frac{1}{2u_\ell} + \frac{1}{2u_H}$ and $\nu^B = \frac{u_\ell + u_H}{2}$:
+
+$$
+x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{4},
+\qquad
+\E\!\left[U_L^{\mathrm{SS},B}\right]
+  = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{4}.
+$$
+
+**Uniform.** Let $\kappa^U = \frac{u_H - u_\ell}{\delta}$ and $\nu^U = \frac{u_H^3 - u_\ell^3}{3\delta}$:
+
+$$
+x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{4},
+\qquad
+\E\!\left[U_L^{\mathrm{SS},U}\right]
+  = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{4}.
+$$
+
+Because $v\mapsto v^{-1/2}$ is convex, binary types imply larger $\kappa$ than uniform (Jensen), which increases management effort in SS.
+
+## ML: Management Moves First {#sec-ml}
+
+Management commits to $x_M$ before observing labor's type. Labor then responds type-by-type using @eq-brl. Hence management solves the same expected objective as in SS.
+
+::: {#prp-ml}
+### ML Equilibrium
+
+$$
+x_M^{\mathrm{ML}} = \frac{V^2\kappa^2}{4}, \qquad
+x_L^{\mathrm{ML}}(V_L)
+  = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-ml-efforts}
+
+Payoffs coincide with @eq-ul-ss--@eq-eum-ss:
+
+$$
+\E\!\left[U_L^{\mathrm{ML}}\right]
+  = \mu - V\kappa\nu + \frac{V^2\kappa^2}{4},
+$$ {#eq-eul-ml}
+
+$$
+\E\!\left[U_M^{\mathrm{ML}}\right]
+  = \frac{V^2\kappa^2}{4}.
+$$ {#eq-eum-ml}
+:::
+
+::: {.proof}
+In ML, stage 2 still gives labor's type-contingent response $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$. Therefore stage-1 management solves
+$$
+\max_{x_M\ge 0}\;\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]
+=\max_{x_M\ge 0}\;\left(V\sqrt{x_M}\,\kappa-x_M\right),
+$$
+which is exactly the SS problem. The same FOC/SOC imply the same optimal $x_M$, and @eq-brl then implies the same $x_L(v)$. Hence all payoffs coincide with SS.
+:::
+
+Distribution-specific expressions are therefore identical to the SS formulas above.
+
+## LM: Labor Moves First {#sec-lm}
+
+Labor moves in period 1 and management responds in period 2. Observing $x_L$, management uses @eq-brm. For labor type $V_L=v$:
+
+$$
+\max_{x_L \geq 0}\;
+W(x_L;v)
+\equiv
+\frac{x_L}{x_L + x_M^*(x_L)}v - x_L
+=
+\frac{v}{\sqrt{V}}\sqrt{x_L} - x_L.
+$$
+
+$W(x_L;v)$ is strictly concave in $x_L$, so each type has a unique optimizer.
+
+::: {#prp-separating}
+### Separating Effort Levels
+
+For type $v$,
+
+$$
+x_L^{\mathrm{LM}}(v) = \frac{v^2}{4V},
+\qquad
+x_M^{\mathrm{LM}}(v) = \frac{v(2V - v)}{4V},
+$$ {#eq-lm-efforts}
+
+$$
+U_L^{\mathrm{LM}}(v) = \frac{v^2}{4V},
+$$ {#eq-ul-lm}
+
+$$
+U_M^{\mathrm{LM}}(v) = \frac{(2V - v)^2}{4V}.
+$$ {#eq-um-lm}
+:::
+
+::: {.proof}
+Labor solves
+$$
+\max_{x_L\ge 0}\;W(x_L;v)=\max_{x_L\ge 0}\left(\frac{v}{\sqrt V}\sqrt{x_L}-x_L\right).
+$$
+FOC:
+$$
+\frac{v}{2\sqrt{Vx_L}} - 1 = 0
+\quad\Rightarrow\quad
+x_L^{\mathrm{LM}}(v)=\frac{v^2}{4V}.
+$$
+SOC:
+$$
+\frac{\partial^2 W}{\partial x_L^2}=-\frac{v}{4\sqrt V}x_L^{-3/2}<0,
+$$
+so this is the unique global optimum.
+Then @eq-brm implies
+$$
+x_M^{\mathrm{LM}}(v)
+=\sqrt{V\cdot\frac{v^2}{4V}}-\frac{v^2}{4V}
+=\frac{v(2V-v)}{4V}.
+$$
+Substitute into @eq-ul and @eq-um to get @eq-ul-lm and @eq-um-lm.
+:::
+
+::: {#prp-no-pool}
+### No Pooling Equilibrium
+
+The LM subgame admits a unique PBE, and it is separating.
+:::
+
+::: {.proof}
+Management's continuation best response @eq-brm depends only on observed $x_L$ and $V$, not on beliefs about labor's type. Hence each type $v$ solves the same standalone problem:
+$$
+W(x_L;v)=\frac{v}{\sqrt V}\sqrt{x_L}-x_L,
+$$
+with unique maximizer $x_L^{\mathrm{LM}}(v)=v^2/(4V)$. Therefore any profile prescribing a different effort for type $v$ is strictly deviable.
+
+Moreover,
+$$
+\frac{d}{dv}x_L^{\mathrm{LM}}(v)=\frac{v}{2V}>0,
+$$
+so different types choose different efforts. Pooling cannot satisfy type-wise optimality, so only separating behavior survives in equilibrium.
+:::
+
+This argument is distribution-free: binary, uniform, or any continuous type distribution all lead to the same uniqueness logic in LM.
+
+### Expected Payoffs
+
+Under the unique separating equilibrium,
+
+$$
+\E\!\left[U_L^{\mathrm{LM}}\right]
+  = \frac{\E[V_L^2]}{4V}
+  = \frac{\mu^2 + \sigma^2}{4V},
+$$ {#eq-eul-lm}
+
+$$
+\E\!\left[U_M^{\mathrm{LM}}\right]
+  = \frac{4V^2 - 4V\mu + \mu^2 + \sigma^2}{4V},
+$$ {#eq-eum-lm}
+
+where $\sigma^2=\Var(V_L)$.
+
+::: {.proof}
+From @eq-ul-lm, $U_L^{\mathrm{LM}}(v)=v^2/(4V)$, so
+$$
+\E[U_L^{\mathrm{LM}}]
+=\E\!\left[\frac{V_L^2}{4V}\right]
+=\frac{\E[V_L^2]}{4V}
+=\frac{\mu^2+\sigma^2}{4V}.
+$$
+From @eq-um-lm,
+$$
+\E[U_M^{\mathrm{LM}}]
+=\E\!\left[\frac{(2V-V_L)^2}{4V}\right]
+=\frac{4V^2-4V\E[V_L]+\E[V_L^2]}{4V}
+=\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+$$
+:::
+
+### Functional Examples {#sec-lm-examples}
+
+**Binary** ($\sigma^2=\delta^2$):
+
+$$
+\E\!\left[U_L^{\mathrm{LM},B}\right]
+  = \frac{\mu^2 + \delta^2}{4V},
+\qquad
+\E\!\left[U_M^{\mathrm{LM},B}\right]
+  = \frac{4V^2 - 4V\mu + \mu^2 + \delta^2}{4V}.
+$$
+
+**Uniform** ($\sigma^2=\delta^2/3$):
+
+$$
+\E\!\left[U_L^{\mathrm{LM},U}\right]
+  = \frac{3\mu^2 + \delta^2}{12V},
+\qquad
+\E\!\left[U_M^{\mathrm{LM},U}\right]
+  = \frac{12V^2 - 12V\mu + 3\mu^2 + \delta^2}{12V}.
+$$
+
+Since $\delta^2>\delta^2/3$, holding $(\mu,\delta,V)$ fixed, labor's LM expected payoff is higher under binary than uniform types.

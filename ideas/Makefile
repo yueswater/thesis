@@ -3,7 +3,7 @@ PYTHON := python3
 MAIN := main
 QMD := $(MAIN).qmd
 PDF := $(MAIN).pdf
-VERIFY := verify_binary_model.py
+VERIFY := verify_model_results.py
 SECTIONS := $(wildcard sections/*.qmd)
 AUX := $(MAIN).aux $(MAIN).bbl $(MAIN).bcf $(MAIN).blg $(MAIN).fdb_latexmk $(MAIN).fls $(MAIN).log $(MAIN).out $(MAIN).run.xml $(MAIN).tex $(MAIN).toc $(MAIN).xdv $(MAIN).synctex.gz
 

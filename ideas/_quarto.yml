@@ -4,6 +4,15 @@ project:
     - main.qmd
 
 bibliography: refs.bib
+lang: en
+reference-section-title: "References"
+
+crossref:
+  def-title: Definition
+  lem-title: Lemma
+  thm-title: Theorem
+  prp-title: Proposition
+  cor-title: Corollary
 
 format:
   pdf:

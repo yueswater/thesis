@@ -1,0 +1,108 @@
+# Model Setup {#sec-setup}
+
+## Environment
+
+There are two players: labor ($L$) and management ($M$). They compete over which side's preferred policy is implemented. The outcome is winner-take-all: the winner receives its own prize value, while the loser receives 0. Contest technology follows \citet{tullock1980}; endogenous timing follows \citet{hamilton1990} and \citet{fu2006}.
+
+::: {#def-prizes}
+## Asymmetric Prize Values
+
+If labor wins, labor obtains $V_L>0$ and management obtains 0. If management wins, management obtains $V_M\equiv V>0$ and labor obtains 0. Prize values need not be symmetric.
+:::
+
+## Information Structure
+
+Before timing or effort choices, labor privately observes its own prize value $V_L$. Management knows only the distribution of $V_L$. We assume $V_L$ has support set $[\mu-\delta,\mu+\delta]$, with $\mu>\delta>0$, so that $\E[V_L]=\mu$.
+
+Define
+
+$$
+u_\ell \equiv \sqrt{\mu-\delta}, \qquad
+u_H \equiv \sqrt{\mu+\delta}.
+$$ {#eq-u-types}
+
+We use two baseline distributions.
+
+::: {#def-binary}
+### Binary Distribution {#sec-distributions}
+
+$$
+V_L \in \{V_\ell,V_H\}=\{\mu-\delta,\mu+\delta\},
+$$
+
+with probability $1/2$ on each type. Hence $\Var(V_L)=\delta^2$.
+:::
+
+::: {#def-uniform}
+### Uniform Distribution
+
+$$
+V_L \sim U[\mu-\delta,\mu+\delta],
+$$
+
+with density $f(v)=1/(2\delta)$. Hence $\Var(V_L)=\delta^2/3$.
+:::
+
+Both distributions share the same mean $\mu$ and support set $[\mu-\delta,\mu+\delta]$, but differ in variance. Equilibrium expressions depend on two key moments:
+
+$$
+\kappa \equiv \E\!\left[\frac{1}{\sqrt{V_L}}\right],
+\qquad
+\nu \equiv \E\!\left[\sqrt{V_L}\right].
+$$ {#eq-moments}
+
+::: {#prp-moments}
+### Moment Comparison
+
+The key moments are:
+
+|  | Binary | Uniform |
+|---|---|---|
+| $\Var(V_L)$ | $\delta^2$ | $\delta^2/3$ |
+| $\kappa$ | $\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}$ | $\dfrac{u_H-u_\ell}{\delta}$ |
+| $\nu$ | $\dfrac{u_\ell+u_H}{2}$ | $\dfrac{u_H^3-u_\ell^3}{3\delta}$ |
+
+: Key moments under binary and uniform distributions {#tbl-moments}
+:::
+
+::: {.proof}
+For the binary case, moments follow directly from definition. For the uniform case:
+
+$$
+\kappa^U
+=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta} v^{-1/2}\,dv
+=\frac{[2\sqrt v]_{\mu-\delta}^{\mu+\delta}}{2\delta}
+=\frac{u_H-u_\ell}{\delta},
+$$
+
+$$
+\nu^U
+=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta} v^{1/2}\,dv
+=\frac{[\tfrac{2}{3}v^{3/2}]_{\mu-\delta}^{\mu+\delta}}{2\delta}
+=\frac{u_H^3-u_\ell^3}{3\delta}.
+$$
+:::
+
+## Contest Payoffs and Best Responses
+
+The Tullock success function is $p_i=x_i/(x_L+x_M)$. Net expected payoffs are
+
+$$
+U_L(x_L,x_M;V_L)=\frac{x_L}{x_L+x_M}V_L-x_L,
+$$ {#eq-ul}
+
+$$
+U_M(x_L,x_M;V)=\frac{x_M}{x_L+x_M}V-x_M.
+$$ {#eq-um}
+
+First-order conditions imply best responses:
+
+$$
+x_L^*(x_M;V_L)=\sqrt{V_Lx_M}-x_M,
+$$ {#eq-brl}
+
+$$
+x_M^*(x_L;V)=\sqrt{Vx_L}-x_L.
+$$ {#eq-brm}
+
+Management's best response @eq-brm depends only on observed effort $x_L$ and known value $V$. Beliefs about labor types do not directly enter the second-stage best response. This is central for the separation-versus-pooling result later.
