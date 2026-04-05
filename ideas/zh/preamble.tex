@@ -11,7 +11,13 @@
 \usepackage{titling}
 \usepackage{tocloft}
 
-\setmainfont{TeX Gyre Pagella}
+\setmainfont{texgyrepagella}[
+  Extension      = .otf,
+  UprightFont    = *-regular,
+  BoldFont       = *-bold,
+  ItalicFont     = *-italic,
+  BoldItalicFont = *-bolditalic,
+]
 \setCJKmainfont{cwTeXQMingZH-Medium.ttf}[Path=../fonts/]
 \setCJKsansfont{cwTeXQHeiZH-Bold.ttf}[Path=../fonts/]
 \setCJKfamilyfont{zhkai}{cwTeXQKaiZH-Medium.ttf}[Path=../fonts/]
