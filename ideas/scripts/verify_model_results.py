@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Numerically verify closed-form results in ideas/sections/*.qmd.
+"""Numerically verify closed-form results in ideas/en and ideas/zh.
 
 Coverage:
 1) Moment formulas (binary / uniform).

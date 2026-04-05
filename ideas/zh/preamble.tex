@@ -1,0 +1,39 @@
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{booktabs, float, multirow}
+\usepackage{pdflscape}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{tocloft}
+
+\setmainfont{TeX Gyre Pagella}
+\setCJKmainfont{cwTeXQMingZH-Medium.ttf}[Path=../fonts/]
+\setCJKsansfont{cwTeXQHeiZH-Bold.ttf}[Path=../fonts/]
+\setCJKfamilyfont{zhkai}{cwTeXQKaiZH-Medium.ttf}[Path=../fonts/]
+\setCJKfamilyfont{zhyuan}{cwTeXQYuanZH-Medium.ttf}[Path=../fonts/]
+\newcommand{\zhkai}{\CJKfamily{zhkai}}
+\newcommand{\zhyuan}{\CJKfamily{zhyuan}}
+\xeCJKsetup{PunctStyle=kaiming}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\setstretch{1.5}
+\setlist{noitemsep, topsep=4pt, leftmargin=1.5em}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+
+\pretitle{\begin{center}\LARGE\zhyuan}
+\posttitle{\par\end{center}\vskip 0.5em}
+\titleformat{\section}{\normalfont\Large\zhyuan}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\zhyuan}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\zhyuan}{\thesubsubsection}{1em}{}
+
+\setcitestyle{round}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}

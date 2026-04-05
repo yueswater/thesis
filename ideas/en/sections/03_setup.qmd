@@ -2,7 +2,7 @@
 
 ## Environment
 
-There are two players: labor ($L$) and management ($M$). They compete over which side's preferred policy is implemented. The outcome is winner-take-all: the winner receives its own prize value, while the loser receives 0. Contest technology follows \citet{tullock1980}; endogenous timing follows \citet{hamilton1990} and \citet{fu2006}.
+There are two players: labor ($L$) and management ($M$). They compete over which side's preferred policy is implemented. The outcome is winner-take-all: the winner receives its own prize value, while the loser receives 0. Contest technology follows @tullock1980; endogenous timing follows @hamilton1990 and @fu2006.
 
 ::: {#def-prizes}
 ## Asymmetric Prize Values
@@ -12,7 +12,7 @@ If labor wins, labor obtains $V_L>0$ and management obtains 0. If management win
 
 ## Information Structure
 
-Before timing or effort choices, labor privately observes its own prize value $V_L$. Management knows only the distribution of $V_L$. We assume $V_L$ has support set $[\mu-\delta,\mu+\delta]$, with $\mu>\delta>0$, so that $\E[V_L]=\mu$.
+Management knows only the distribution of $V_L$, not its realization. More importantly, at the timing stage labor also does not yet observe its realized prize value. Only after both players choose timing does labor privately observe $V_L$, and then the corresponding effort subgame is played. Hence the timing choice is necessarily based on ex ante expected payoffs. We assume $V_L$ has support set $[\mu-\delta,\mu+\delta]$, with $\mu>\delta>0$, so that $\E[V_L]=\mu$.
 
 Define
 
@@ -50,6 +50,16 @@ $$
 \qquad
 \nu \equiv \E\!\left[\sqrt{V_L}\right].
 $$ {#eq-moments}
+
+## Timeline
+
+The timing protocol follows the three-stage logic in @fu2006:
+
+1. Stage 0: labor and management simultaneously choose whether to act in period 1 or period 2.
+2. Stage 1: nature realizes $V_L$, and only labor observes its realized type.
+3. Stage 2: players choose effort in the induced institution SS, ML, or LM.
+
+Therefore, type-level payoff comparisons are defined after realization, but the actual timing choice is made ex ante.
 
 ::: {#prp-moments}
 ### Moment Comparison

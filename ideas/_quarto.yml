@@ -1,18 +1,10 @@
 project:
   type: default
   render:
-    - main.qmd
+    - en/main.qmd
+    - zh/main.qmd
 
 bibliography: refs.bib
-lang: en
-reference-section-title: "References"
-
-crossref:
-  def-title: Definition
-  lem-title: Lemma
-  thm-title: Theorem
-  prp-title: Proposition
-  cor-title: Corollary
 
 format:
   pdf:
@@ -22,9 +14,6 @@ format:
     pdf-engine: xelatex
     cite-method: natbib
     biblio-style: plainnat
-    include-in-header:
-      - preamble.tex
-    keep-tex: true
+    keep-tex: false
     toc: true
     number-sections: true
-    output-file: main.pdf

@@ -1,4 +1,4 @@
-## Welfare and Result Tables {#sec-welfare}
+# Welfare and Result Tables {#sec-welfare}
 
 ## Welfare Comparison
 

@@ -4,6 +4,7 @@ project:
     - summary.qmd
 
 lang: zh-TW
+bibliography: ../refs.bib
 
 format:
   pdf:
@@ -11,6 +12,8 @@ format:
     classoption: 12pt
     papersize: a4
     pdf-engine: xelatex
+    cite-method: natbib
+    biblio-style: plainnat
     include-in-header:
       - preamble.tex
     toc: false

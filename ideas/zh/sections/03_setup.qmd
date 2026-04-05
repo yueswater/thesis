@@ -1,0 +1,118 @@
+# 模型設定 {#sec-setup}
+
+## 環境
+
+模型中有兩位參與者：勞方（$L$）與資方（$M$）。雙方競爭其偏好政策是否被實施。此一結果具有贏者全拿的性質：勝方取得自身的獎酬價值，敗方則得到 0。競賽技術採 @tullock1980 的設定；內生時序則參照 @hamilton1990 與 @fu2006。
+
+::: {#def-prizes}
+## 不對稱的獎酬價值
+
+若勞方獲勝，勞方得到 $V_L>0$，資方得到 0。若資方獲勝，資方得到 $V_M\equiv V>0$，勞方得到 0。故雙方獎酬價值不必對稱。
+:::
+
+## 資訊結構
+
+資方僅知曉 $V_L$ 的分配，而不知道其實現值。更重要的是，在第一階段選擇時序時，勞方也尚未觀察到自身的 realized value；待雙方的時序選擇完成後，勞方才私下觀察到 $V_L$，之後再進入對應的投入子賽局。因此，第一階段的時序選擇必須建立在 ex ante expected payoff 之上。我們假設 $V_L$ 的支持集為 $[\mu-\delta,\mu+\delta]$，其中 $\mu>\delta>0$，因此 $\E[V_L]=\mu$。
+
+令
+
+$$
+u_\ell \equiv \sqrt{\mu-\delta}, \qquad
+u_H \equiv \sqrt{\mu+\delta}.
+$$ {#eq-u-types}
+
+本文使用兩個基準分配。
+
+::: {#def-binary}
+### 二點分配 {#sec-distributions}
+
+$$
+V_L \in \{V_\ell,V_H\}=\{\mu-\delta,\mu+\delta\},
+$$
+
+且兩個型別各以機率 $1/2$ 發生，因此 $\Var(V_L)=\delta^2$。
+:::
+
+::: {#def-uniform}
+### 均勻分配
+
+$$
+V_L \sim U[\mu-\delta,\mu+\delta],
+$$
+
+其密度函數為 $f(v)=1/(2\delta)$，因此 $\Var(V_L)=\delta^2/3$。
+:::
+
+這兩個分配具有相同的平均數 $\mu$ 與支持集 $[\mu-\delta,\mu+\delta]$，但變異數不同。均衡表達式將依賴以下兩個關鍵動差：
+
+$$
+\kappa \equiv \E\!\left[\frac{1}{\sqrt{V_L}}\right],
+\qquad
+\nu \equiv \E\!\left[\sqrt{V_L}\right].
+$$ {#eq-moments}
+
+## 時序
+
+本文沿用 @fu2006 的三階段邏輯：
+
+1. 第一階段：勞方與資方同時選擇於第 1 期或第 2 期行動。
+2. 第二階段：自然決定 $V_L$，且只有勞方觀察到其 realized type。
+3. 第三階段：雙方依第一階段所決定之制度，於 SS、ML 或 LM 子賽局中選擇投入。
+
+因此，型別層級的報酬比較雖然可以在 realization 之後定義，但第一階段真正的制度選擇仍是事前的期望報酬比較。
+
+::: {#prp-moments}
+### 動差比較
+
+關鍵動差如下：
+
+|  | 二點分配 | 均勻分配 |
+|---|---|---|
+| $\Var(V_L)$ | $\delta^2$ | $\delta^2/3$ |
+| $\kappa$ | $\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}$ | $\dfrac{u_H-u_\ell}{\delta}$ |
+| $\nu$ | $\dfrac{u_\ell+u_H}{2}$ | $\dfrac{u_H^3-u_\ell^3}{3\delta}$ |
+
+: 二點分配與均勻分配下的關鍵動差 {#tbl-moments}
+:::
+
+::: {.proof}
+二點分配下之動差可直接由定義得到。均勻分配下：
+
+$$
+\kappa^U
+=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta} v^{-1/2}\,dv
+=\frac{[2\sqrt v]_{\mu-\delta}^{\mu+\delta}}{2\delta}
+=\frac{u_H-u_\ell}{\delta},
+$$
+
+$$
+\nu^U
+=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta} v^{1/2}\,dv
+=\frac{[\tfrac{2}{3}v^{3/2}]_{\mu-\delta}^{\mu+\delta}}{2\delta}
+=\frac{u_H^3-u_\ell^3}{3\delta}.
+$$
+:::
+
+## 競賽報酬與最佳反應
+
+Tullock 成功函數為 $p_i=x_i/(x_L+x_M)$。扣除成本後之期望報酬為
+
+$$
+U_L(x_L,x_M;V_L)=\frac{x_L}{x_L+x_M}V_L-x_L,
+$$ {#eq-ul}
+
+$$
+U_M(x_L,x_M;V)=\frac{x_M}{x_L+x_M}V-x_M.
+$$ {#eq-um}
+
+一階條件給出下列最佳反應函數：
+
+$$
+x_L^*(x_M;V_L)=\sqrt{V_Lx_M}-x_M,
+$$ {#eq-brl}
+
+$$
+x_M^*(x_L;V)=\sqrt{Vx_L}-x_L.
+$$ {#eq-brm}
+
+資方的最佳反應 @eq-brm 只依賴觀察到的投入 $x_L$ 與已知價值 $V$。勞方型別的信念不會直接進入第二階段的最佳反應。這一點對於後續的分離與混同分析至關重要。

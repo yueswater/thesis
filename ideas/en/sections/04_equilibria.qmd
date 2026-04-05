@@ -222,7 +222,7 @@ Substitute into @eq-ul and @eq-um to get @eq-ul-lm and @eq-um-lm.
 :::
 
 ::: {#prp-no-pool}
-### No Pooling Equilibrium
+### No Pooling Equilibrium and Incentive Constraints
 
 The LM subgame admits a unique PBE, and it is separating.
 :::
@@ -243,7 +243,75 @@ so different types choose different efforts. Pooling cannot satisfy type-wise op
 
 This argument is distribution-free: binary, uniform, or any continuous type distribution all lead to the same uniqueness logic in LM.
 
-### Expected Payoffs
+**Global Incentive Compatibility.**
+
+The no-pooling result can be stated as a strict global IC property. Fix any true type
+$v$ and any alternative type report $s\neq v$. If labor mimics type $s$, it chooses
+$x_L=s^2/(4V)$ and management responds according to @eq-brm. The resulting payoff is
+
+$$
+\widetilde U(v,s)
+=\frac{v}{\sqrt V}\sqrt{\frac{s^2}{4V}}-\frac{s^2}{4V}
+=\frac{2vs-s^2}{4V}.
+$$
+
+Truth-telling gives
+
+$$
+U(v,v)=\frac{v^2}{4V}.
+$$
+
+Hence the gain from truthfully revealing type rather than mimicking $s$ is
+
+$$
+U(v,v)-\widetilde U(v,s)
+=\frac{v^2-2vs+s^2}{4V}
+=\frac{(v-s)^2}{4V}>0
+\qquad\text{for all } s\neq v.
+$$
+
+Thus every type strictly prefers its own separating action to any deviation that imitates
+another type. This is stronger than a local IC condition and rules out pooling and
+semi-separating behavior in one step.
+
+**Binary-Type Incentive Constraints (Explicit Check).**
+
+To make separation fully explicit, consider binary types
+$V_L\in\{V_\ell,V_H\}$ with $V_H>V_\ell>0$.
+Under the separating candidate, type $t\in\{V_\ell,V_H\}$ chooses
+$x_t=t^2/(4V)$.
+
+If type $t$ mimics type $s$, management observes $x_s$ and responds by
+@eq-brm. Type-$t$ payoff from this deviation is
+
+$$
+\widetilde U_t(s)
+=\frac{t}{\sqrt V}\sqrt{x_s}-x_s
+=\frac{ts}{2V}-\frac{s^2}{4V}.
+$$
+
+Truthful payoff is $U_t(t)=t^2/(4V)$. Therefore
+
+$$
+IC_H:\quad
+U_H(H)-\widetilde U_H(\ell)
+=\frac{V_H^2}{4V}
+-\left(\frac{V_HV_\ell}{2V}-\frac{V_\ell^2}{4V}\right)
+=\frac{(V_H-V_\ell)^2}{4V}>0,
+$$
+
+$$
+IC_L:\quad
+U_L(\ell)-\widetilde U_L(H)
+=\frac{V_\ell^2}{4V}
+-\left(\frac{V_\ell V_H}{2V}-\frac{V_H^2}{4V}\right)
+=\frac{(V_H-V_\ell)^2}{4V}>0.
+$$
+
+Both IC constraints hold strictly, so neither type wants to mimic the
+other. This is the binary counterpart of the global IC formula above.
+
+**Expected Payoffs.**
 
 Under the unique separating equilibrium,
 

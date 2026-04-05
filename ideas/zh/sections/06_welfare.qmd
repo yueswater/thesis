@@ -1,0 +1,78 @@
+# 福利比較與結果整理 {#sec-welfare}
+
+## 福利比較
+
+總期望福利定義為 $\E[W]=\E[U_L]+\E[U_M]$。
+
+$$
+\E[W^{\mathrm{SS}}]=\E[W^{\mathrm{ML}}]
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{2},
+$$ {#eq-ew-ss}
+
+$$
+\E[W^{\mathrm{LM}}]
+=V-\mu+\frac{\mu^2+\sigma^2}{2V}.
+$$ {#eq-ew-lm}
+
+::: {.proof}
+依定義，$W=U_L+U_M$。對 SS（以及與其報酬等價的 ML）而言，
+$$
+\E[W^{\mathrm{SS}}]
+=\E[U_L^{\mathrm{SS}}]+\E[U_M^{\mathrm{SS}}]
+=\left(\mu-V\kappa\nu+\frac{V^2\kappa^2}{4}\right)+\frac{V^2\kappa^2}{4}
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{2}.
+$$
+對 LM 而言，
+$$
+\E[W^{\mathrm{LM}}]
+=\E[U_L^{\mathrm{LM}}]+\E[U_M^{\mathrm{LM}}]
+=\frac{\mu^2+\sigma^2}{4V}+\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}
+=V-\mu+\frac{\mu^2+\sigma^2}{2V}.
+$$
+:::
+
+$\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]$ 的符號，取決於 $V$、$\mu$、$\delta$ 與分配形狀的共同作用。
+
+**二點分配**（$\sigma^2=\delta^2$、$\kappa=\kappa^B$、$\nu=\nu^B$）：
+
+$$
+\E[W^{\mathrm{SS},B}] = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{2},
+\qquad
+\E[W^{\mathrm{LM},B}] = V - \mu + \frac{\mu^2 + \delta^2}{2V}.
+$$
+
+**均勻分配**（$\sigma^2=\delta^2/3$、$\kappa=\kappa^U$、$\nu=\nu^U$）：
+
+$$
+\E[W^{\mathrm{SS},U}] = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{2},
+\qquad
+\E[W^{\mathrm{LM},U}] = V - \mu + \frac{3\mu^2 + \delta^2}{6V}.
+$$
+
+## 結果表
+
+| 項目 | SS（同時行動） | ML（資方先動） | LM（勞方先動） |
+|---|---|---|---|
+| 資方資訊 | 僅知先驗分配 | 僅知先驗分配 | 觀察 $x_L$ 並推知型別 |
+| 均衡性質 | Bayesian Nash | 與 SS 相同 | 唯一分離型 PBE |
+| $x_M$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{v(2V-v)}{4V}$ |
+| $x_L$ | $\dfrac{V\kappa}{2}\sqrt{v} - \dfrac{V^2\kappa^2}{4}$ | 與 SS 相同 | $\dfrac{v^2}{4V}$ |
+| $U_L$ | $\left(\sqrt{v}-\dfrac{V\kappa}{2}\right)^{\!2}$ | 與 SS 相同 | $\dfrac{v^2}{4V}$ |
+| $U_M$ | $\dfrac{V^2\kappa}{2\sqrt{v}} - \dfrac{V^2\kappa^2}{4}$ | 與 SS 相同 | $\dfrac{(2V-v)^2}{4V}$ |
+| $\E[U_L]$ | $\mu - V\kappa\nu + \dfrac{V^2\kappa^2}{4}$ | 與 SS 相同 | $\dfrac{\mu^2+\sigma^2}{4V}$ |
+| $\E[U_M]$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}$ |
+
+: 一般化模型下之均衡摘要 {#tbl-summary-general}
+
+其中 $\kappa=\E[V_L^{-1/2}]$、$\nu=\E[V_L^{1/2}]$，且 $\sigma^2=\Var(V_L)$。
+
+\bigskip
+
+| 動差 / 結構 | 二點分配 | 均勻分配 |
+|---|---|---|
+| $\sigma^2$ | $\delta^2$ | $\delta^2/3$ |
+| $\kappa$ | $\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}$ | $\dfrac{u_H-u_\ell}{\delta}$ |
+| $\nu$ | $\dfrac{u_\ell+u_H}{2}$ | $\dfrac{u_H^3-u_\ell^3}{3\delta}$ |
+| 時序結構 | 三種離散型態 | 臨界型別 $v^*$ |
+
+: 不同分配下之動差與時序結構 {#tbl-summary-distributions}

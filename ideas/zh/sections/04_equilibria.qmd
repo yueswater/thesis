@@ -1,0 +1,361 @@
+# 均衡分析 {#sec-equilibria}
+
+本節統一分析三個子賽局：SS（同時行動）、ML（資方先動）與 LM（勞方先動）。為利比較，以下均以 @eq-brl 與 @eq-brm 的最佳反應函數為基礎。
+
+## SS：同時行動 {#sec-ss}
+
+在 SS 中，雙方同時選擇投入。勞方依其型別 $V_L$ 選擇 $x_L$，而資方在不知道 $V_L$ 實現值的情況下選擇 $x_M$。將 @eq-brl 代入資方目標函數並對型別取期望，可得
+
+$$
+\E[U_M] = V\sqrt{x_M}\,\kappa - x_M,
+\qquad
+\frac{\partial \E[U_M]}{\partial x_M}
+  = \frac{V\kappa}{2\sqrt{x_M}} - 1.
+$$
+
+::: {#prp-ss}
+### 同時行動均衡
+
+SS 均衡為
+
+$$
+x_M^{\mathrm{SS}} = \frac{V^2\kappa^2}{4}, \qquad
+x_L^{\mathrm{SS}}(V_L)
+  = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-ss-efforts}
+
+均衡報酬為
+
+$$
+U_L^{\mathrm{SS}}(V_L)
+  = \left(\sqrt{V_L} - \frac{V\kappa}{2}\right)^2,
+$$ {#eq-ul-ss}
+
+$$
+U_M^{\mathrm{SS}}(V_L)
+  = \frac{V^2\kappa}{2\sqrt{V_L}} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-um-ss}
+
+期望報酬為
+
+$$
+\E\!\left[U_L^{\mathrm{SS}}\right]
+  = \mu - V\kappa\nu + \frac{V^2\kappa^2}{4},
+$$ {#eq-eul-ss}
+
+$$
+\E\!\left[U_M^{\mathrm{SS}}\right]
+  = \frac{V^2\kappa^2}{4}.
+$$ {#eq-eum-ss}
+:::
+
+::: {.proof}
+由 @eq-brl，型別 $v$ 的勞方最佳反應為 $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$。代入 @eq-um 得
+$$
+U_M(x_L^*,x_M;V)
+=\frac{x_M}{x_M+\sqrt{vx_M}-x_M}V-x_M
+=V\sqrt{\frac{x_M}{v}}-x_M.
+$$
+對 $v$ 取期望得
+$$
+\E[U_M]=V\sqrt{x_M}\,\E[v^{-1/2}]-x_M
+=V\sqrt{x_M}\,\kappa-x_M.
+$$
+一階與二階條件為
+$$
+\frac{\partial \E[U_M]}{\partial x_M}
+=\frac{V\kappa}{2\sqrt{x_M}}-1=0,
+\qquad
+\frac{\partial^2 \E[U_M]}{\partial x_M^2}
+=-\frac{V\kappa}{4x_M^{3/2}}<0,
+$$
+故唯一極大值為 $x_M^{\mathrm{SS}}=V^2\kappa^2/4$。再由 @eq-brl 得
+$$
+x_L^{\mathrm{SS}}(v)
+=\sqrt{v\cdot\frac{V^2\kappa^2}{4}}-\frac{V^2\kappa^2}{4}
+=\frac{V\kappa}{2}\sqrt v-\frac{V^2\kappa^2}{4}.
+$$
+代回 @eq-ul 與 @eq-um 可得
+$$
+U_L^{\mathrm{SS}}(v)
+=\frac{x_L^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}v-x_L^{\mathrm{SS}}
+=\left(\sqrt v-\frac{V\kappa}{2}\right)^2,
+$$
+$$
+U_M^{\mathrm{SS}}(v)
+=\frac{x_M^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}V-x_M^{\mathrm{SS}}
+=\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}.
+$$
+最後，
+$$
+\E[U_L^{\mathrm{SS}}]
+=\E\!\left[v-V\kappa\sqrt v+\frac{V^2\kappa^2}{4}\right]
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{4},
+$$
+$$
+\E[U_M^{\mathrm{SS}}]
+=\E\!\left[\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}\right]
+=\frac{V^2\kappa}{2}\E[v^{-1/2}]-\frac{V^2\kappa^2}{4}
+=\frac{V^2\kappa^2}{4}.
+$$
+:::
+
+將 @tbl-moments 中之動差代入 @prp-ss，即可得到各分配下的具體公式。
+
+**二點分配。** 令 $\kappa^B = \frac{1}{2u_\ell} + \frac{1}{2u_H}$ 與 $\nu^B = \frac{u_\ell + u_H}{2}$，則
+
+$$
+x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{4},
+\qquad
+\E\!\left[U_L^{\mathrm{SS},B}\right]
+  = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{4}.
+$$
+
+**均勻分配。** 令 $\kappa^U = \frac{u_H - u_\ell}{\delta}$ 與 $\nu^U = \frac{u_H^3 - u_\ell^3}{3\delta}$，則
+
+$$
+x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{4},
+\qquad
+\E\!\left[U_L^{\mathrm{SS},U}\right]
+  = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{4}.
+$$
+
+由於 $v\mapsto v^{-1/2}$ 為凸函數，二點分配下的 $\kappa$ 會大於均勻分配（由 Jensen 不等式），進而提高 SS 中資方的投入。
+
+## ML：資方先動 {#sec-ml}
+
+在 ML 中，資方於觀察勞方型別之前先承諾 $x_M$，之後勞方依型別使用 @eq-brl 回應。因此資方求解的期望目標函數與 SS 完全相同。
+
+::: {#prp-ml}
+### ML 均衡
+
+$$
+x_M^{\mathrm{ML}} = \frac{V^2\kappa^2}{4}, \qquad
+x_L^{\mathrm{ML}}(V_L)
+  = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-ml-efforts}
+
+其報酬與 @eq-ul-ss--@eq-eum-ss 相同：
+
+$$
+\E\!\left[U_L^{\mathrm{ML}}\right]
+  = \mu - V\kappa\nu + \frac{V^2\kappa^2}{4},
+$$ {#eq-eul-ml}
+
+$$
+\E\!\left[U_M^{\mathrm{ML}}\right]
+  = \frac{V^2\kappa^2}{4}.
+$$ {#eq-eum-ml}
+:::
+
+::: {.proof}
+在 ML 中，第二階段仍由勞方採用型別條件式最佳反應 $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$。因此第一階段資方解的是
+$$
+\max_{x_M\ge 0}\;\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]
+=\max_{x_M\ge 0}\;\left(V\sqrt{x_M}\,\kappa-x_M\right),
+$$
+這正是 SS 中的問題。故一階與二階條件給出相同的最適 $x_M$，再由 @eq-brl 得到相同的 $x_L(v)$，因此所有報酬皆與 SS 相同。
+:::
+
+故各分配下的具體公式亦與 SS 相同。
+
+## LM：勞方先動 {#sec-lm}
+
+在 LM 中，勞方於第一期先行投入，資方於第二期觀察後再用 @eq-brm 回應。對於型別為 $V_L=v$ 的勞方，其問題為
+
+$$
+\max_{x_L \geq 0}\;
+W(x_L;v)
+\equiv
+\frac{x_L}{x_L + x_M^*(x_L)}v - x_L
+=
+\frac{v}{\sqrt{V}}\sqrt{x_L} - x_L.
+$$
+
+$W(x_L;v)$ 對 $x_L$ 嚴格凹，因此每一型別皆有唯一最適解。
+
+::: {#prp-separating}
+### 分離型投入水準
+
+對任一型別 $v$，
+
+$$
+x_L^{\mathrm{LM}}(v) = \frac{v^2}{4V},
+\qquad
+x_M^{\mathrm{LM}}(v) = \frac{v(2V - v)}{4V},
+$$ {#eq-lm-efforts}
+
+$$
+U_L^{\mathrm{LM}}(v) = \frac{v^2}{4V},
+$$ {#eq-ul-lm}
+
+$$
+U_M^{\mathrm{LM}}(v) = \frac{(2V - v)^2}{4V}.
+$$ {#eq-um-lm}
+:::
+
+::: {.proof}
+勞方求解
+$$
+\max_{x_L\ge 0}\;W(x_L;v)=\max_{x_L\ge 0}\left(\frac{v}{\sqrt V}\sqrt{x_L}-x_L\right).
+$$
+一階條件為
+$$
+\frac{v}{2\sqrt{Vx_L}} - 1 = 0
+\quad\Rightarrow\quad
+x_L^{\mathrm{LM}}(v)=\frac{v^2}{4V}.
+$$
+二階條件為
+$$
+\frac{\partial^2 W}{\partial x_L^2}=-\frac{v}{4\sqrt V}x_L^{-3/2}<0,
+$$
+故此為唯一全域最適解。再由 @eq-brm 可得
+$$
+x_M^{\mathrm{LM}}(v)
+=\sqrt{V\cdot\frac{v^2}{4V}}-\frac{v^2}{4V}
+=\frac{v(2V-v)}{4V}.
+$$
+代回 @eq-ul 與 @eq-um 即得 @eq-ul-lm 與 @eq-um-lm。
+:::
+
+::: {#prp-no-pool}
+### 無混同均衡與誘因相容限制
+
+LM 子賽局存在唯一的完美貝葉斯均衡，且該均衡為分離均衡。
+:::
+
+::: {.proof}
+資方的續局最佳反應 @eq-brm 只依賴觀察到的 $x_L$ 與 $V$，而不依賴對勞方型別的信念。因此每一個型別 $v$ 都是在解同一個獨立問題：
+$$
+W(x_L;v)=\frac{v}{\sqrt V}\sqrt{x_L}-x_L,
+$$
+其唯一極大解為 $x_L^{\mathrm{LM}}(v)=v^2/(4V)$。故任何要求型別 $v$ 採取不同投入的策略組合，都會遭到嚴格偏離。
+
+此外，
+$$
+\frac{d}{dv}x_L^{\mathrm{LM}}(v)=\frac{v}{2V}>0,
+$$
+故不同型別會選擇不同投入。混同策略無法滿足型別別最適性，因此在均衡中僅有分離行為得以存續。
+:::
+
+此一論證不依賴特定分配形式：無論是二點分配、均勻分配，或任何連續型別分配，LM 中的唯一性邏輯皆成立。
+
+**全域誘因相容。**
+
+無混同結果亦可表述為嚴格的全域誘因相容性。固定真實型別 $v$ 與任意替代型別報告 $s\neq v$。若勞方模仿型別 $s$，其投入將為 $x_L=s^2/(4V)$，而資方依 @eq-brm 回應。此時報酬為
+
+$$
+\widetilde U(v,s)
+=\frac{v}{\sqrt V}\sqrt{\frac{s^2}{4V}}-\frac{s^2}{4V}
+=\frac{2vs-s^2}{4V}.
+$$
+
+誠實揭露型別時之報酬為
+
+$$
+U(v,v)=\frac{v^2}{4V}.
+$$
+
+因此，誠實揭露相對於模仿 $s$ 的報酬增益為
+
+$$
+U(v,v)-\widetilde U(v,s)
+=\frac{v^2-2vs+s^2}{4V}
+=\frac{(v-s)^2}{4V}>0
+\qquad\text{for all } s\neq v.
+$$
+
+故每一個型別都會嚴格偏好自己的分離行動，而不會模仿其他型別。此結果比局部 IC 更強，並可一步排除 pooling 與 semi-separating 行為。
+
+**二點型別下的誘因限制明確檢驗。**
+
+為使分離條件更為明確，考慮二點型別
+$V_L\in\{V_\ell,V_H\}$，其中 $V_H>V_\ell>0$。
+在候選分離均衡下，型別 $t\in\{V_\ell,V_H\}$ 的投入為
+$x_t=t^2/(4V)$。
+
+若型別 $t$ 模仿型別 $s$，資方觀察到 $x_s$ 後依 @eq-brm 回應。型別 $t$ 偏離後的報酬為
+
+$$
+\widetilde U_t(s)
+=\frac{t}{\sqrt V}\sqrt{x_s}-x_s
+=\frac{ts}{2V}-\frac{s^2}{4V}.
+$$
+
+誠實行動之報酬為 $U_t(t)=t^2/(4V)$。因此
+
+$$
+IC_H:\quad
+U_H(H)-\widetilde U_H(\ell)
+=\frac{V_H^2}{4V}
+-\left(\frac{V_HV_\ell}{2V}-\frac{V_\ell^2}{4V}\right)
+=\frac{(V_H-V_\ell)^2}{4V}>0,
+$$
+
+$$
+IC_L:\quad
+U_L(\ell)-\widetilde U_L(H)
+=\frac{V_\ell^2}{4V}
+-\left(\frac{V_\ell V_H}{2V}-\frac{V_H^2}{4V}\right)
+=\frac{(V_H-V_\ell)^2}{4V}>0.
+$$
+
+兩條誘因限制皆嚴格成立，因此高型別與低型別皆不會模仿對方。這正是上面全域 IC 結果在二點分配下的對應版本。
+
+**期望報酬。**
+
+在唯一分離均衡下，
+
+$$
+\E\!\left[U_L^{\mathrm{LM}}\right]
+  = \frac{\E[V_L^2]}{4V}
+  = \frac{\mu^2 + \sigma^2}{4V},
+$$ {#eq-eul-lm}
+
+$$
+\E\!\left[U_M^{\mathrm{LM}}\right]
+  = \frac{4V^2 - 4V\mu + \mu^2 + \sigma^2}{4V},
+$$ {#eq-eum-lm}
+
+其中 $\sigma^2=\Var(V_L)$。
+
+::: {.proof}
+由 @eq-ul-lm，$U_L^{\mathrm{LM}}(v)=v^2/(4V)$，因此
+$$
+\E[U_L^{\mathrm{LM}}]
+=\E\!\left[\frac{V_L^2}{4V}\right]
+=\frac{\E[V_L^2]}{4V}
+=\frac{\mu^2+\sigma^2}{4V}.
+$$
+由 @eq-um-lm，
+$$
+\E[U_M^{\mathrm{LM}}]
+=\E\!\left[\frac{(2V-V_L)^2}{4V}\right]
+=\frac{4V^2-4V\E[V_L]+\E[V_L^2]}{4V}
+=\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+$$
+:::
+
+### 函數化範例 {#sec-lm-examples}
+
+**二點分配**（$\sigma^2=\delta^2$）：
+
+$$
+\E\!\left[U_L^{\mathrm{LM},B}\right]
+  = \frac{\mu^2 + \delta^2}{4V},
+\qquad
+\E\!\left[U_M^{\mathrm{LM},B}\right]
+  = \frac{4V^2 - 4V\mu + \mu^2 + \delta^2}{4V}.
+$$
+
+**均勻分配**（$\sigma^2=\delta^2/3$）：
+
+$$
+\E\!\left[U_L^{\mathrm{LM},U}\right]
+  = \frac{3\mu^2 + \delta^2}{12V},
+\qquad
+\E\!\left[U_M^{\mathrm{LM},U}\right]
+  = \frac{12V^2 - 12V\mu + 3\mu^2 + \delta^2}{12V}.
+$$
+
+由於 $\delta^2>\delta^2/3$，在固定 $(\mu,\delta,V)$ 下，勞方於 LM 中的期望報酬在二點分配下高於均勻分配。

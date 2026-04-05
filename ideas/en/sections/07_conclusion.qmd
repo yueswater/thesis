@@ -1,0 +1,19 @@
+# Conclusion {#sec-conclusion}
+
+This paper revisits endogenous timing under asymmetric information while preserving the Fu (2006) logic of ex ante timing choice. The key modeling feature is that labor's private information affects labor's own value of winning, but does not directly enter management's continuation best response. That change looks narrow, but it drives the main conclusions.
+
+First, the LM subgame admits a unique separating equilibrium. Once management observes labor effort, its best response depends only on that effort and common knowledge parameters, not on posterior beliefs about labor's type. Pooling and semi-separating outcomes are therefore not sustainable in this model. The separating result is not a heuristic claim; it is supported by strict incentive compatibility.
+
+Second, timing must be evaluated through ex ante expected payoffs. Labor does not know its realized type at stage 0, so the relevant comparison is $\E[U_L^{\mathrm{LM}}]$ versus $\E[U_L^{\mathrm{SS}}]$, not a type-contingent timing choice made after realization. The type-level waiting-gain function $R(v)$ remains useful, but only as an ex post decomposition of that ex ante gap.
+
+Third, the difference from @fu2006 is not whether timing is chosen ex ante. The difference is the economic nature of private information. Fu's informed-first subgame generates pooling, semi-separating, and continuation-equilibrium selection issues because the follower's best response is affected by posterior beliefs. Here that signaling-belief-response channel is shut down. As a result, whether the informed player prefers to move first is no longer directionally fixed; it becomes a parameter- and distribution-dependent comparison of ex ante expected payoffs.
+
+Fourth, mean and dispersion must be analyzed jointly. Comparing only average private value $\mu$ with the common-value benchmark $V$ is not enough to predict timing outcomes. Dispersion and distributional shape also shift stage-0 incentives. This is why binary and uniform specifications can produce distinct but interpretable timing patterns.
+
+Methodologically, the paper provides a cleaner informed-first benchmark than Fu (2006): LM has no pooling ambiguity, so the stage-0 timing matrix is built from unique continuation payoffs. Economically, the paper shows that "the informed player prefers to move second" is not a universal proposition under asymmetric information. It depends on whether private information changes the opponent's continuation response.
+
+## Plain-Language Interpretation
+
+In plain terms, the paper asks Fu's question again under a different information structure. In Fu, when the informed player moves first, the opponent watches that move, forms beliefs about the hidden type, and then reacts differently depending on those beliefs. That is why the informed-first case can get tangled up in pooling versus separating. In this paper, management does not really care which type labor is in; it cares about the effort it sees. So labor's early move can reveal type, but it does not create an extra belief-based pooling problem.
+
+That changes the final message. The result is not "the informed player always wants to wait," and it is not "the informed player always wants to move first." The right question is: before labor knows which type it will be, is early commitment better on average than waiting and keeping flexibility? That is why the analysis must return to ex ante expected payoffs.

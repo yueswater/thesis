@@ -1,3 +1,6 @@
 .quarto/
 **/*.quarto_ipynb
 .DS_Store
+
+/prompt/
+/literatures/Endogenous Timing of Contest with Asymmetric Information.pdf

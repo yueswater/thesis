@@ -1,0 +1,272 @@
+# 時序誘因與內生時序 {#sec-timing}
+
+## 第一階段的期望報酬矩陣
+
+依循 @fu2006 的內生時序設定，令雙方在第一階段各自選擇
+F（於第 1 期行動）或 S（於第 2 期行動）。
+此一選擇會產生四種時序組合：
+
+|  | 資方：F | 資方：S |
+|---|---|---|
+| 勞方：F | SS | LM |
+| 勞方：S | ML | SS |
+
+利用第 @sec-equilibria 節的結果，可得第一階段之期望報酬矩陣為
+
+|  | 資方：F | 資方：S |
+|---|---|---|
+| 勞方：F | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ | $(\E[U_L^{\mathrm{LM}}],\E[U_M^{\mathrm{LM}}])$ |
+| 勞方：S | $(\E[U_L^{\mathrm{ML}}],\E[U_M^{\mathrm{ML}}])$ | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ |
+
+且由 @eq-eul-ml--@eq-eum-ml 可知
+
+$$
+\E[U_L^{\mathrm{ML}}]=\E[U_L^{\mathrm{SS}}],
+\qquad
+\E[U_M^{\mathrm{ML}}]=\E[U_M^{\mathrm{SS}}].
+$$
+
+定義兩個關鍵差額：
+
+$$
+\Delta_L
+\equiv
+\E[U_L^{\mathrm{LM}}]-\E[U_L^{\mathrm{SS}}],
+\qquad
+\Delta_M
+\equiv
+\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{LM}}].
+$$
+
+::: {#prp-stage1-br}
+### 第一階段的最佳反應
+
+在第一階段的時序賽局中，勞方與資方都尚未觀察到勞方的 realized type，因此雙方都以期望報酬進行比較：
+
+1. 勞方真正需要比較的是資方選擇 S 時：
+$$
+\text{BR}_L(S)=
+\begin{cases}
+\{F\}, & \Delta_L>0,\\
+\{F,S\}, & \Delta_L=0,\\
+\{S\}, & \Delta_L<0.
+\end{cases}
+$$
+
+2. 資方真正需要比較的是勞方選擇 F 時：
+$$
+\text{BR}_M(F)=
+\begin{cases}
+\{F\}, & \Delta_M>0,\\
+\{F,S\}, & \Delta_M=0,\\
+\{S\}, & \Delta_M<0.
+\end{cases}
+$$
+
+3. 在另一條對角線上，雙方皆僅面對 SS 與 ML 的比較，因此在期望報酬上為弱無異。
+:::
+
+::: {.proof}
+由上述報酬矩陣可知：
+
+- 若資方選 S，勞方比較的是 $\E[U_L^{\mathrm{LM}}]$（選 F）與 $\E[U_L^{\mathrm{SS}}]$（選 S），故差額為 $\Delta_L$。
+- 若資方選 F，勞方比較的是 SS 與 ML，而兩者相等。
+- 若勞方選 F，資方比較的是 SS 與 LM，故差額為 $\Delta_M$。
+- 若勞方選 S，資方比較的是 ML 與 SS，而兩者相等。
+
+因此可直接得到上述最佳反應對應。
+:::
+
+此一期望報酬矩陣正是後續參數區域作圖的基礎物件：只要在參數網格上計算
+$\Delta_L$ 與 $\Delta_M$，即可標示各區域中雙方偏好的時序選擇。
+
+::: {#prp-stage1-ne}
+### 純策略時序均衡
+
+第一階段時序賽局的純策略 Nash 均衡為：
+
+1. $(S,F)$ 永遠成立。
+2. $(F,F)$ 當且僅當 $\Delta_M\ge 0$。
+3. $(S,S)$ 當且僅當 $\Delta_L\le 0$。
+4. $(F,S)$ 當且僅當 $\Delta_L\ge 0$ 且 $\Delta_M\le 0$。
+:::
+
+::: {.proof}
+逐格檢視報酬矩陣即可。
+
+- 在 $(S,F)$ 處，勞方比較 ML 與 SS、資方比較 ML 與 SS；雙方皆無異，因此 $(S,F)$ 永遠是 Nash 均衡。
+- 在 $(F,F)$ 處，勞方仍無異，而資方偏好 F 勝於 S 的條件恰為 $\E[U_M^{\mathrm{SS}}]\ge \E[U_M^{\mathrm{LM}}]$，亦即 $\Delta_M\ge 0$。
+- 在 $(S,S)$ 處，資方無異，而勞方偏好 S 勝於 F 的條件恰為 $\E[U_L^{\mathrm{SS}}]\ge \E[U_L^{\mathrm{LM}}]$，亦即 $\Delta_L\le 0$。
+- 在 $(F,S)$ 處，勞方偏好 F 勝於 S 的條件為 $\Delta_L\ge 0$；資方偏好 S 勝於 F 的條件為 $\E[U_M^{\mathrm{LM}}]\ge \E[U_M^{\mathrm{SS}}]$，亦即 $\Delta_M\le 0$。
+
+故命題成立。
+:::
+
+這是最接近 Fu 的 stage-0 normal-form 分析的寫法。不同之處在於：Fu 的 informed-first 制度下存在多個續局均衡，因此 stage-0 矩陣元素會依 pooling 或 separating 的選擇而變動；本文 LM 的續局賽局則具有唯一分離均衡，因此每一個矩陣元素都由唯一的續局報酬所決定。
+
+![在固定 $V=1$ 下，二點分配於 $(\mu,\delta)$ 平面上所對應之 $(\Delta_L,\Delta_M)$ 符號區域。](../figures/binary_timing_regions.png){#fig-timing-regions-zh width=85%}
+
+## 型別層級的事後分解
+
+雖然第一階段的制度選擇是以 ex ante expected payoff 為基礎，但型別層級的報酬差仍可用來分解勞方的事前誘因。對任一 realized type $v$，定義等待（後動）相對於先動的利益為
+
+$$
+R(v) \equiv U_L^{\mathrm{SS}}(v) - U_L^{\mathrm{LM}}(v)
+  = \left(\sqrt{v} - \frac{V\kappa}{2}\right)^2 - \frac{v^2}{4V}.
+$$ {#eq-rent-function}
+
+因此，若 $R(v)>0$，表示當 realized type 為 $v$ 時，勞方事後會偏好等待（SS/ML）；若 $R(v)<0$，則表示該型別事後會偏好先動（LM）。
+
+::: {#prp-ex-ante-decomp}
+### Ex Ante 差額的型別分解
+
+勞方第一階段的事前比較可寫為
+
+$$
+\E[U_L^{\mathrm{SS}}]-\E[U_L^{\mathrm{LM}}]
+=
+\E[R(V_L)]
+=
+-\Delta_L.
+$$
+
+因此，$R(v)$ 並不代表第一階段的型別條件式策略，而是用來分解勞方 ex ante timing choice 的 realized-type payoff gap。
+:::
+
+::: {.proof}
+由 $R(v)\equiv U_L^{\mathrm{SS}}(v)-U_L^{\mathrm{LM}}(v)$，直接對 $V_L$ 取期望可得
+$$
+\E[R(V_L)]
+=
+\E[U_L^{\mathrm{SS}}]-\E[U_L^{\mathrm{LM}}]
+=
+-\Delta_L.
+$$
+:::
+
+不另行引入額外符號時，其等價分解式為
+
+$$
+R(v)
+=
+\left(\frac{V\kappa}{2}-\sqrt{v}-\frac{v}{2\sqrt V}\right)
+\left(\frac{V\kappa}{2}-\sqrt{v}+\frac{v}{2\sqrt V}\right).
+$$ {#eq-rent-factored}
+
+::: {#prp-exact-condition}
+### 精確的型別條件
+
+realized type $v$ 事後偏好先動，當且僅當
+
+$$
+\frac{V\kappa}{2}
+\in
+\left[\sqrt v-\frac{v}{2\sqrt V},\;\sqrt v+\frac{v}{2\sqrt V}\right].
+$$
+
+等價地，若 $V\kappa/2$ 落在該區間之外，則該型別事後偏好等待。
+:::
+
+::: {.proof}
+由
+$$
+R(v)=\left(\sqrt v-\frac{V\kappa}{2}\right)^2-\frac{v^2}{4V}\le 0
+\iff
+\left|\sqrt v-\frac{V\kappa}{2}\right|\le \frac{v}{2\sqrt V},
+$$
+可得
+$$
+\sqrt v-\frac{v}{2\sqrt V}
+\le
+\frac{V\kappa}{2}
+\le
+\sqrt v+\frac{v}{2\sqrt V}.
+$$
+:::
+
+![在校準值 $(\mu,\delta,V)=(1.2,0.4,1)$ 下，勞方於 SS 與 LM 兩種制度中的型別別期望報酬比較。](../figures/labor_payoff_comparison.png){#fig-labor-payoff-zh width=85%}
+
+## 各分配下的時序結構
+
+### 二點分配
+
+在二點型別 $V_L\in\{V_\ell,V_H\}$ 下，只需直接比較
+$R(V_\ell)$ 與 $R(V_H)$。符號組合
+$(\operatorname{sgn}R(V_\ell),\operatorname{sgn}R(V_H))$
+即可決定兩種 realized types 事後分別偏好先動或後動。
+
+### 均勻分配
+
+若 $V_L\sim U[\mu-\delta,\mu+\delta]$，則事後等待區域為
+
+$$
+\mathcal W
+\equiv
+\{v\in[\mu-\delta,\mu+\delta]:R(v)>0\},
+$$
+
+事後先動區域則為 $\mathcal F\equiv\{v:R(v)<0\}$。由於 $R(v)$ 為連續函數，故 $\mathcal W$ 與 $\mathcal F$ 的分界點可由 $R(v)=0$ 的根來刻畫。在基準校準下，這通常呈現單一臨界值結構，但以根的表述最為一般。
+
+## 混同均衡分析
+
+在本文三種制度中，真正需要做 pooling analysis 的其實只有 LM。原因很簡單：只有在 LM 中，知情的勞方先動，而不知情的資方在觀察到勞方投入後再作反應，因此才存在「先動行為是否構成訊號」這個問題。相對地，SS 是同時行動的 Bayesian Nash 環境，ML 則是資方先動、勞方後動；兩者都不是 Fu (2006) 意義下由知情者向不知情者傳訊的 signaling subgame，因此不存在同樣意義下的 pooling 或 separating 問題。
+
+在 @fu2006 中，當知情者先動時，可能出現 separating、pooling 與 semi-separating 等結果，其原因在於後動者的續局報酬會受到 posterior beliefs 的影響。在本文模型中，該機制並不存在。
+
+當資方觀察到勞方投入 $x_L$ 時，其最佳反應恒為
+
+$$
+x_M^*(x_L)=\sqrt{Vx_L}-x_L,
+$$
+
+該反應只依賴觀察到的投入與共同已知的參數 $V$。勞方型別的後驗信念不會進入資方的續局最適化問題。因此：
+
+1. favorable beliefs 無法支撐 pooling，因為信念不會改變後動者的行動；
+2. 基於相同理由，semi-separating 亦無法被支撐；
+3. LM 中唯一的均衡結果即為第 @sec-lm 節所刻畫之分離均衡。
+
+因此，對本文而言，正確的表述不只是「有檢查 pooling」，而是更強：相較於 @fu2006，本文的模型結構直接關閉了支撐 informed-first 子賽局中 pooling 的「訊號—信念」通道。
+
+## 資方的時序誘因與內生時序 {#sec-endogenous}
+
+::: {#prp-mgmt}
+### 資方的時序偏好
+
+資方偏好先動（ML）而非後動（LM），當且僅當
+
+$$
+\frac{V^2\kappa^2}{4} \ge \frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+$$ {#eq-mgmt-cond}
+:::
+
+::: {.proof}
+由 @eq-eum-ml 與 @eq-eum-lm 得
+$$
+\E\!\left[U_M^{\mathrm{ML}}\right]=\frac{V^2\kappa^2}{4},
+\qquad
+\E\!\left[U_M^{\mathrm{LM}}\right]=\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+$$
+故條件 $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ 即為 @eq-mgmt-cond。
+:::
+
+### 函數化範例
+
+**二點分配**（$\sigma^2=\delta^2$）：
+
+$$
+V^3(\kappa^B)^2 \ge 4V^2-4V\mu+\mu^2+\delta^2.
+$$
+
+**均勻分配**（$\sigma^2=\delta^2/3$）：
+
+$$
+V^3(\kappa^U)^2 \ge 4V^2-4V\mu+\mu^2+\frac{\delta^2}{3}.
+$$
+
+### 關於 pooling 的歧義
+
+由於 LM 已被證明為唯一分離均衡（見 @prp-no-pool），故第一階段的 ex ante timing choice 可以建立在唯一的續局期望報酬之上，而不會再出現 pooling 均衡選擇所帶來的歧義。換言之，本文第一階段的矩陣比較並不是在多個 LM 續局均衡之間做 selection，而是直接比較唯一續局所誘導出的期望報酬。
+
+### 白話解釋
+
+如果把第一階段想成「先決定制度、之後才知道自己會落在哪一種型別」，那麼勞方在一開始問的其實不是「高型別會不會想先動」，而是「平均來看，先承諾比較划算，還是保留彈性比較划算」。本文的答案是：這件事不能只靠「知情者通常想後動」這種直覺來判斷，必須回到 $\E[U_L^{\mathrm{LM}}]$ 與 $\E[U_L^{\mathrm{SS}}]$ 的比較。又因為 LM 中不存在 pooling，這個比較不會被不同續局均衡的選擇干擾，所以整個時序分析會比 @fu2006 更乾淨。

@@ -1,0 +1,26 @@
+---
+title: "模型摘要"
+author: "Anthony Sung"
+date: today
+lang: zh-TW
+reference-section-title: "參考文獻"
+crossref:
+  def-title: 定義
+  lem-title: 引理
+  thm-title: 定理
+  prp-title: 命題
+  cor-title: 推論
+format:
+  pdf:
+    include-in-header:
+      - preamble.tex
+    output-file: main.pdf
+---
+
+{{< include sections/01_intro.qmd >}}
+{{< include sections/02_literature.qmd >}}
+{{< include sections/03_setup.qmd >}}
+{{< include sections/04_equilibria.qmd >}}
+{{< include sections/05_timing.qmd >}}
+{{< include sections/06_welfare.qmd >}}
+{{< include sections/07_conclusion.qmd >}}
