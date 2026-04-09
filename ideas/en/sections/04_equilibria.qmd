@@ -232,7 +232,7 @@ Management's continuation best response @eq-brm depends only on observed $x_L$ a
 $$
 W(x_L;v)=\frac{v}{\sqrt V}\sqrt{x_L}-x_L,
 $$
-with unique maximizer $x_L^{\mathrm{LM}}(v)=v^2/(4V)$. Therefore any profile prescribing a different effort for type $v$ is strictly deviable.
+with unique maximizer $x_L^{\mathrm{LM}}(v)=v^2/(4V)$. Therefore, if a profile prescribes $x_L \neq v^2/(4V)$ for type $v$, then type $v$ strictly prefers to deviate to $v^2/(4V)$.
 
 Moreover,
 $$

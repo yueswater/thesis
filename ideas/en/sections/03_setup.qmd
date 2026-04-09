@@ -5,7 +5,7 @@
 There are two players: labor ($L$) and management ($M$). They compete over which side's preferred policy is implemented. The outcome is winner-take-all: the winner receives its own prize value, while the loser receives 0. Contest technology follows @tullock1980; endogenous timing follows @hamilton1990 and @fu2006.
 
 ::: {#def-prizes}
-## Asymmetric Prize Values
+### Asymmetric Prize Values
 
 If labor wins, labor obtains $V_L>0$ and management obtains 0. If management wins, management obtains $V_M\equiv V>0$ and labor obtains 0. Prize values need not be symmetric.
 :::

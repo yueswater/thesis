@@ -31,7 +31,16 @@ $$
 $$
 :::
 
-The sign of $\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]$ depends jointly on $V$, $\mu$, $\delta$, and distributional shape.
+The sign of $\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]$ depends jointly on $V$, $\mu$, $\delta$, and distributional shape, and bears no fixed relationship to the equilibrium conditions in Section @sec-timing. To see this, note that
+
+$$
+\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]
+= \Delta_M - \Delta_L
+= \bigl(\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{LM}}]\bigr)
+- \bigl(\E[U_L^{\mathrm{LM}}]-\E[U_L^{\mathrm{SS}}]\bigr).
+$$
+
+Consequently, even in the parameter region where $\Delta_L < 0$ (so that ML is the unique sequential equilibrium), if $|\Delta_M|$ is large enough relative to $|\Delta_L|$ to make $\Delta_M - \Delta_L < 0$, total welfare under LM exceeds that under SS/ML. Conversely, when $\Delta_L \ge 0$ and $\Delta_M \le 0$ (both ML and LM are equilibria), the inequality $\Delta_M - \Delta_L \le 0$ holds throughout this region, so LM weakly dominates in total welfare; yet ML is always a Nash equilibrium, so coordination on the welfare-inferior ML outcome remains possible. A potential conflict between equilibrium institution selection and welfare maximization therefore exists: individual timing incentives do not guarantee convergence to the welfare-superior regime, and this represents a notable comparative-statics observation of the model.
 
 **Binary** ($\sigma^2=\delta^2$, $\kappa=\kappa^B$, $\nu=\nu^B$):
 
