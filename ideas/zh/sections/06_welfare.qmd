@@ -2,70 +2,82 @@
 
 ## 福利比較
 
+<!-- MODIFIED: E[W^SS] 更新為修正後的 BNE；E[W^ML] 現在與 E[W^SS] 不同 -->
 總期望福利定義為 $\E[W]=\E[U_L]+\E[U_M]$。
 
 $$
-\E[W^{\mathrm{SS}}]=\E[W^{\mathrm{ML}}]
-=\mu-V\kappa\nu+\frac{V^2\kappa^2}{2},
+\E[W^{\mathrm{SS}}]
+=\mu - \frac{2V\kappa\nu}{1+V\lambda} + \frac{V^2\kappa^2}{(1+V\lambda)^2}
+ + \frac{V^3\kappa^2\lambda}{(1+V\lambda)^2},
 $$ {#eq-ew-ss}
+
+$$
+\E[W^{\mathrm{ML}}]
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{2},
+$$ {#eq-ew-ml}
 
 $$
 \E[W^{\mathrm{LM}}]
 =V-\mu+\frac{\mu^2+\sigma^2}{2V}.
 $$ {#eq-ew-lm}
-*（證明見附錄 [-@sec-appendix]。）*
 
-$\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]$ 的符號，取決於 $V$、$\mu$、$\delta$ 與分配形狀的共同作用，且與第 @sec-timing 節的均衡條件並無固定關係。注意到
+::: {.proof}
+見附錄 [-@sec-proof-welfare]。
+:::
 
-$$
-\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]
-= \Delta_M - \Delta_L
-= \left(\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{LM}}]\right)
-- \left(\E[U_L^{\mathrm{LM}}]-\E[U_L^{\mathrm{SS}}]\right).
-$$
+$\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]$ 的符號，取決於 $V$、$\mu$、$\delta$ 與分配形狀的共同作用，且與第 @sec-timing 節的均衡條件並無固定關係。由於修正後的 SS 與 ML 不再相同，三種制度的福利比較現在完全獨立。
 
-因此，即使在 $\Delta_L < 0$ 的參數區域，亦即 ML 為唯一循序均衡，若 $|\Delta_M|$ 相對於 $|\Delta_L|$ 夠大而使 $\Delta_M - \Delta_L < 0$，則 LM 的總福利仍可能高於 SS/ML。反之，若 $\Delta_L \ge 0$ 且 $\Delta_M \le 0$，亦即 ML 與 LM 同時為均衡，則 $\Delta_M - \Delta_L \le 0$ 在此區域恆成立，故 LM 在總福利上弱優於 SS/ML；然而 ML 始終是 Nash 均衡，因此仍可能協調至福利較低的 ML 結果。這表示均衡制度選擇與社會福利最大化之間可能存在衝突：個別玩家的時序誘因，不保證引導至福利最高的制度。
-
-**二點分配**（$\sigma^2=\delta^2$、$\kappa=\kappa^B$、$\nu=\nu^B$）：
+**二點分配**（$\sigma^2=\delta^2$，動差 $\kappa^B,\nu^B,\lambda^B$ 見 @tbl-moments）：
 
 $$
-\E[W^{\mathrm{SS},B}] = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{2},
+\E[W^{\mathrm{SS},B}] = \mu - \frac{2V\kappa^B\nu^B}{1+V\lambda^B} + \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2} + \frac{V^3(\kappa^B)^2\lambda^B}{(1+V\lambda^B)^2},
+$$
+
+$$
+\E[W^{\mathrm{ML},B}] = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{2},
 \qquad
 \E[W^{\mathrm{LM},B}] = V - \mu + \frac{\mu^2 + \delta^2}{2V}.
 $$
 
-**均勻分配**（$\sigma^2=\delta^2/3$、$\kappa=\kappa^U$、$\nu=\nu^U$）：
+**均勻分配**（$\sigma^2=\delta^2/3$，動差 $\kappa^U,\nu^U,\lambda^U$ 見 @tbl-moments）：
 
 $$
-\E[W^{\mathrm{SS},U}] = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{2},
+\E[W^{\mathrm{SS},U}] = \mu - \frac{2V\kappa^U\nu^U}{1+V\lambda^U} + \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2} + \frac{V^3(\kappa^U)^2\lambda^U}{(1+V\lambda^U)^2},
+$$
+
+$$
+\E[W^{\mathrm{ML},U}] = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{2},
 \qquad
 \E[W^{\mathrm{LM},U}] = V - \mu + \frac{3\mu^2 + \delta^2}{6V}.
 $$
 
 ## 結果表
 
+<!-- MODIFIED: SS 欄更新為修正後的 BNE；ML 與 SS 現有各自報酬 -->
 | 項目 | SS（同時行動） | ML（資方先動） | LM（勞方先動） |
 |---|---|---|---|
 | 資方資訊 | 僅知先驗分配 | 僅知先驗分配 | 觀察 $x_L$ 並推知型別 |
-| 均衡性質 | Bayesian Nash | 與 SS 相同 | 唯一分離型 PBE |
-| $x_M$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{v(2V-v)}{4V}$ |
-| $x_L$ | $\dfrac{V\kappa}{2}\sqrt{v} - \dfrac{V^2\kappa^2}{4}$ | 與 SS 相同 | $\dfrac{v^2}{4V}$ |
-| $U_L$ | $\left(\sqrt{v}-\dfrac{V\kappa}{2}\right)^{\!2}$ | 與 SS 相同 | $\dfrac{v^2}{4V}$ |
-| $U_M$ | $\dfrac{V^2\kappa}{2\sqrt{v}} - \dfrac{V^2\kappa^2}{4}$ | 與 SS 相同 | $\dfrac{(2V-v)^2}{4V}$ |
-| $\E[U_L]$ | $\mu - V\kappa\nu + \dfrac{V^2\kappa^2}{4}$ | 與 SS 相同 | $\dfrac{\mu^2+\sigma^2}{4V}$ |
-| $\E[U_M]$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}$ |
+| 均衡性質 | Bayesian Nash | Stackelberg（M 先動） | 唯一分離型 PBE |
+| $x_M$ | $\dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{v(2V-v)}{4V}$ |
+| $x_L$ | $\dfrac{V\kappa\sqrt{v}}{1+V\lambda} - \dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\dfrac{V\kappa}{2}\sqrt{v} - \dfrac{V^2\kappa^2}{4}$ | $\dfrac{v^2}{4V}$ |
+| $U_L$ | $\left(\sqrt{v}-\dfrac{V\kappa}{1+V\lambda}\right)^{\!2}$ | $\left(\sqrt{v}-\dfrac{V\kappa}{2}\right)^{\!2}$ | $\dfrac{v^2}{4V}$ |
+| $U_M$ | $\dfrac{V^2\kappa}{(1+V\lambda)\sqrt{v}} - \dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\dfrac{V^2\kappa}{2\sqrt{v}} - \dfrac{V^2\kappa^2}{4}$ | $\dfrac{(2V-v)^2}{4V}$ |
+| $\E[U_L]$ | $\mu - \dfrac{2V\kappa\nu}{1+V\lambda} + \dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\mu - V\kappa\nu + \dfrac{V^2\kappa^2}{4}$ | $\dfrac{\mu^2+\sigma^2}{4V}$ |
+| $\E[U_M]$ | $\dfrac{V^3\kappa^2\lambda}{(1+V\lambda)^2}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{(2V-\mu)^2+\sigma^2}{4V}$ |
 
 : 一般化模型下之均衡摘要 {#tbl-summary-general}
 
-其中 $\kappa=\E[V_L^{-1/2}]$、$\nu=\E[V_L^{1/2}]$，且 $\sigma^2=\Var(V_L)$。
+其中 $\kappa=\E[V_L^{-1/2}]$、$\nu=\E[V_L^{1/2}]$、$\lambda=\E[V_L^{-1}]$，且 $\sigma^2=\Var(V_L)$。
 
 \bigskip
 
+<!-- MODIFIED: 新增 λ 列 -->
 | 動差 / 結構 | 二點分配 | 均勻分配 |
 |---|---|---|
 | $\sigma^2$ | $\delta^2$ | $\delta^2/3$ |
 | $\kappa$ | $\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}$ | $\dfrac{u_H-u_\ell}{\delta}$ |
 | $\nu$ | $\dfrac{u_\ell+u_H}{2}$ | $\dfrac{u_H^3-u_\ell^3}{3\delta}$ |
+| $\lambda$ | $\dfrac{1}{2u_\ell^2}+\dfrac{1}{2u_H^2}$ | $\dfrac{\ln(u_H/u_\ell)}{\delta}$ |
 | 時序結構 | 三種離散型態 | 臨界型別 $v^*$ |
 
 : 不同分配下之動差與時序結構 {#tbl-summary-distributions}

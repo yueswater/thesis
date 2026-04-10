@@ -43,13 +43,17 @@ $$
 with density $f(v)=1/(2\delta)$. Hence $\Var(V_L)=\delta^2/3$.
 :::
 
-Both distributions share the same mean $\mu$ and support set $[\mu-\delta,\mu+\delta]$, but differ in variance. Equilibrium expressions depend on two moments:
+Both distributions share the same mean $\mu$ and support set $[\mu-\delta,\mu+\delta]$, but differ in variance. Equilibrium expressions depend on three moments:
 
 $$
 \kappa \equiv \E\!\left[\frac{1}{\sqrt{V_L}}\right],
 \qquad
-\nu \equiv \E\!\left[\sqrt{V_L}\right].
+\nu \equiv \E\!\left[\sqrt{V_L}\right],
+\qquad
+\lambda \equiv \E\!\left[\frac{1}{V_L}\right].
 $$ {#eq-moments}
+
+<!-- MODIFIED: added λ moment -->
 
 ## Timeline
 
@@ -66,16 +70,20 @@ Type-level payoff comparisons are defined after realization, but the timing choi
 
 The key moments are:
 
+<!-- MODIFIED: added λ row -->
 |  | Binary | Uniform |
 |---|---|---|
 | $\Var(V_L)$ | $\delta^2$ | $\delta^2/3$ |
 | $\kappa$ | $\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}$ | $\dfrac{u_H-u_\ell}{\delta}$ |
 | $\nu$ | $\dfrac{u_\ell+u_H}{2}$ | $\dfrac{u_H^3-u_\ell^3}{3\delta}$ |
+| $\lambda$ | $\dfrac{1}{2u_\ell^2}+\dfrac{1}{2u_H^2}$ | $\dfrac{\ln(u_H/u_\ell)}{\delta}$ |
 
 : Key moments under binary and uniform distributions {#tbl-moments}
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-moments].
+:::
 
 ## Contest Payoffs and Best Responses
 

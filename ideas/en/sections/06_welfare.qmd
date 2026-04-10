@@ -2,70 +2,82 @@
 
 ## Welfare Comparison
 
+<!-- MODIFIED: E[W^SS] updated for corrected SS equilibrium; E[W^ML] is now distinct from E[W^SS] -->
 Total expected welfare is $\E[W]=\E[U_L]+\E[U_M]$.
 
 $$
-\E[W^{\mathrm{SS}}]=\E[W^{\mathrm{ML}}]
-=\mu-V\kappa\nu+\frac{V^2\kappa^2}{2},
+\E[W^{\mathrm{SS}}]
+=\mu - \frac{2V\kappa\nu}{1+V\lambda} + \frac{V^2\kappa^2}{(1+V\lambda)^2}
+ + \frac{V^3\kappa^2\lambda}{(1+V\lambda)^2},
 $$ {#eq-ew-ss}
+
+$$
+\E[W^{\mathrm{ML}}]
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{2},
+$$ {#eq-ew-ml}
 
 $$
 \E[W^{\mathrm{LM}}]
 =V-\mu+\frac{\mu^2+\sigma^2}{2V}.
 $$ {#eq-ew-lm}
-*（Proof: Appendix [-@sec-appendix].）*
 
-The sign of $\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]$ depends jointly on $V$, $\mu$, $\delta$, and distributional shape, and bears no fixed relationship to the equilibrium conditions in Section @sec-timing. Note that
+::: {.proof}
+See Appendix [-@sec-proof-welfare].
+:::
 
-$$
-\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]
-= \Delta_M - \Delta_L
-= \bigl(\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{LM}}]\bigr)
-- \bigl(\E[U_L^{\mathrm{LM}}]-\E[U_L^{\mathrm{SS}}]\bigr).
-$$
+The sign of $\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]$ depends jointly on $V$, $\mu$, $\delta$, and distributional shape, and bears no fixed relationship to the equilibrium conditions in Section @sec-timing. Because SS and ML no longer coincide, welfare comparisons across all three regimes are now fully distinct.
 
-Consequently, even in the parameter region where $\Delta_L < 0$, so that ML is the unique sequential equilibrium, LM can still yield higher total welfare than SS/ML if $|\Delta_M|$ is large enough relative to $|\Delta_L|$ to make $\Delta_M - \Delta_L < 0$. Conversely, when $\Delta_L \ge 0$ and $\Delta_M \le 0$, so that both ML and LM are equilibria, the inequality $\Delta_M - \Delta_L \le 0$ holds throughout the region, and LM weakly dominates in total welfare. Yet ML is always a Nash equilibrium, so coordination on the welfare-inferior ML outcome remains possible. Equilibrium timing selection and welfare maximization can therefore conflict: individual timing incentives do not guarantee the welfare-superior regime.
-
-**Binary** ($\sigma^2=\delta^2$, $\kappa=\kappa^B$, $\nu=\nu^B$):
+**Binary** ($\sigma^2=\delta^2$, moments $\kappa^B,\nu^B,\lambda^B$ from @tbl-moments):
 
 $$
-\E[W^{\mathrm{SS},B}] = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{2},
+\E[W^{\mathrm{SS},B}] = \mu - \frac{2V\kappa^B\nu^B}{1+V\lambda^B} + \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2} + \frac{V^3(\kappa^B)^2\lambda^B}{(1+V\lambda^B)^2},
+$$
+
+$$
+\E[W^{\mathrm{ML},B}] = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{2},
 \qquad
 \E[W^{\mathrm{LM},B}] = V - \mu + \frac{\mu^2 + \delta^2}{2V}.
 $$
 
-**Uniform** ($\sigma^2=\delta^2/3$, $\kappa=\kappa^U$, $\nu=\nu^U$):
+**Uniform** ($\sigma^2=\delta^2/3$, moments $\kappa^U,\nu^U,\lambda^U$ from @tbl-moments):
 
 $$
-\E[W^{\mathrm{SS},U}] = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{2},
+\E[W^{\mathrm{SS},U}] = \mu - \frac{2V\kappa^U\nu^U}{1+V\lambda^U} + \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2} + \frac{V^3(\kappa^U)^2\lambda^U}{(1+V\lambda^U)^2},
+$$
+
+$$
+\E[W^{\mathrm{ML},U}] = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{2},
 \qquad
 \E[W^{\mathrm{LM},U}] = V - \mu + \frac{3\mu^2 + \delta^2}{6V}.
 $$
 
 ## Result Tables
 
+<!-- MODIFIED: SS column updated to corrected BNE; ML now has distinct payoffs from SS -->
 | Object | SS (Simultaneous) | ML (Management First) | LM (Labor First) |
 |---|---|---|---|
 | Management information | Prior only | Prior only | Observes $x_L$ and infers type |
-| Equilibrium type | Bayesian Nash | Same as SS | Unique separating PBE |
-| $x_M$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{v(2V-v)}{4V}$ |
-| $x_L$ | $\dfrac{V\kappa}{2}\sqrt{v} - \dfrac{V^2\kappa^2}{4}$ | Same as SS | $\dfrac{v^2}{4V}$ |
-| $U_L$ | $\left(\sqrt{v}-\dfrac{V\kappa}{2}\right)^{\!2}$ | Same as SS | $\dfrac{v^2}{4V}$ |
-| $U_M$ | $\dfrac{V^2\kappa}{2\sqrt{v}} - \dfrac{V^2\kappa^2}{4}$ | Same as SS | $\dfrac{(2V-v)^2}{4V}$ |
-| $\E[U_L]$ | $\mu - V\kappa\nu + \dfrac{V^2\kappa^2}{4}$ | Same as SS | $\dfrac{\mu^2+\sigma^2}{4V}$ |
-| $\E[U_M]$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}$ |
+| Equilibrium type | Bayesian Nash | Stackelberg (M leads) | Unique separating PBE |
+| $x_M$ | $\dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{v(2V-v)}{4V}$ |
+| $x_L$ | $\dfrac{V\kappa\sqrt{v}}{1+V\lambda} - \dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\dfrac{V\kappa}{2}\sqrt{v} - \dfrac{V^2\kappa^2}{4}$ | $\dfrac{v^2}{4V}$ |
+| $U_L$ | $\left(\sqrt{v}-\dfrac{V\kappa}{1+V\lambda}\right)^{\!2}$ | $\left(\sqrt{v}-\dfrac{V\kappa}{2}\right)^{\!2}$ | $\dfrac{v^2}{4V}$ |
+| $U_M$ | $\dfrac{V^2\kappa}{(1+V\lambda)\sqrt{v}} - \dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\dfrac{V^2\kappa}{2\sqrt{v}} - \dfrac{V^2\kappa^2}{4}$ | $\dfrac{(2V-v)^2}{4V}$ |
+| $\E[U_L]$ | $\mu - \dfrac{2V\kappa\nu}{1+V\lambda} + \dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\mu - V\kappa\nu + \dfrac{V^2\kappa^2}{4}$ | $\dfrac{\mu^2+\sigma^2}{4V}$ |
+| $\E[U_M]$ | $\dfrac{V^3\kappa^2\lambda}{(1+V\lambda)^2}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{(2V-\mu)^2+\sigma^2}{4V}$ |
 
 : Equilibrium summary in the generalized model {#tbl-summary-general}
 
-where $\kappa=\E[V_L^{-1/2}]$, $\nu=\E[V_L^{1/2}]$, and $\sigma^2=\Var(V_L)$.
+where $\kappa=\E[V_L^{-1/2}]$, $\nu=\E[V_L^{1/2}]$, $\lambda=\E[V_L^{-1}]$, and $\sigma^2=\Var(V_L)$.
 
 \bigskip
 
+<!-- MODIFIED: added λ row -->
 | Moment / Structure | Binary | Uniform |
 |---|---|---|
 | $\sigma^2$ | $\delta^2$ | $\delta^2/3$ |
 | $\kappa$ | $\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}$ | $\dfrac{u_H-u_\ell}{\delta}$ |
 | $\nu$ | $\dfrac{u_\ell+u_H}{2}$ | $\dfrac{u_H^3-u_\ell^3}{3\delta}$ |
+| $\lambda$ | $\dfrac{1}{2u_\ell^2}+\dfrac{1}{2u_H^2}$ | $\dfrac{\ln(u_H/u_\ell)}{\delta}$ |
 | Timing structure | Three discrete profiles | Cutoff type $v^*$ |
 
 : Moments and timing structure by distribution {#tbl-summary-distributions}

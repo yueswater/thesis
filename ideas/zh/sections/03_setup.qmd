@@ -43,13 +43,17 @@ $$
 其密度函數為 $f(v)=1/(2\delta)$，因此 $\Var(V_L)=\delta^2/3$。
 :::
 
-這兩個分配具有相同的平均數 $\mu$ 與支持集 $[\mu-\delta,\mu+\delta]$，但變異數不同。均衡表達式依賴下列兩個動差：
+這兩個分配具有相同的平均數 $\mu$ 與支持集 $[\mu-\delta,\mu+\delta]$，但變異數不同。均衡表達式依賴下列三個動差：
 
 $$
 \kappa \equiv \E\!\left[\frac{1}{\sqrt{V_L}}\right],
 \qquad
-\nu \equiv \E\!\left[\sqrt{V_L}\right].
+\nu \equiv \E\!\left[\sqrt{V_L}\right],
+\qquad
+\lambda \equiv \E\!\left[\frac{1}{V_L}\right].
 $$ {#eq-moments}
+
+<!-- MODIFIED: 新增 λ 動差 -->
 
 ## 時序
 
@@ -64,6 +68,7 @@ $$ {#eq-moments}
 ::: {#prp-moments}
 ### 動差比較
 
+<!-- MODIFIED: 新增 λ 列 -->
 關鍵動差如下：
 
 |  | 二點分配 | 均勻分配 |
@@ -71,11 +76,14 @@ $$ {#eq-moments}
 | $\Var(V_L)$ | $\delta^2$ | $\delta^2/3$ |
 | $\kappa$ | $\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}$ | $\dfrac{u_H-u_\ell}{\delta}$ |
 | $\nu$ | $\dfrac{u_\ell+u_H}{2}$ | $\dfrac{u_H^3-u_\ell^3}{3\delta}$ |
+| $\lambda$ | $\dfrac{1}{2u_\ell^2}+\dfrac{1}{2u_H^2}$ | $\dfrac{\ln(u_H/u_\ell)}{\delta}$ |
 
 : 二點分配與均勻分配下的關鍵動差 {#tbl-moments}
 :::
 
-*（證明見附錄 [-@sec-appendix]。）*
+::: {.proof}
+見附錄 [-@sec-proof-moments]。
+:::
 
 ## 競賽報酬與最佳反應
 

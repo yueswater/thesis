@@ -1,13 +1,24 @@
-# Appendix: Proofs {#sec-appendix}
+---
+appendix: true
+---
 
-## Proof of Proposition [-@prp-moments]
+```{=latex}
+\appendix
+```
 
+# Appendix: Proofs {#sec-appendix .appendix}
+
+## Proof of Proposition [-@prp-moments] {#sec-proof-moments}
+
+<!-- MODIFIED: added λ computations -->
 For the binary distribution, the moments follow directly from the definition:
 
 $$
 \kappa^B=\frac{1}{2u_\ell}+\frac{1}{2u_H},
 \qquad
-\nu^B=\frac{u_\ell+u_H}{2}.
+\nu^B=\frac{u_\ell+u_H}{2},
+\qquad
+\lambda^B=\frac{1}{2u_\ell^2}+\frac{1}{2u_H^2}.
 $$
 
 For the uniform distribution, let the density be
@@ -32,6 +43,17 @@ $$
 =\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta}v^{1/2}\,dv
 =\frac{1}{2\delta}\cdot\left[\frac{2}{3}v^{3/2}\right]_{\mu-\delta}^{\mu+\delta}
 =\frac{u_H^3-u_\ell^3}{3\delta}.
+$$
+
+For $\lambda^U$, observe that $v\mapsto v^{-1}$ is integrable on the compact set $(0,\infty)\supset[\mu-\delta,\mu+\delta]$:
+
+$$
+\lambda^U
+=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta}v^{-1}\,dv
+=\frac{1}{2\delta}\cdot\bigl[\ln v\bigr]_{\mu-\delta}^{\mu+\delta}
+=\frac{\ln(\mu+\delta)-\ln(\mu-\delta)}{2\delta}
+=\frac{\ln(u_H^2/u_\ell^2)}{2\delta}
+=\frac{\ln(u_H/u_\ell)}{\delta}.
 $$
 
 To compare $\kappa^B$ and $\kappa^U$, note first that $v\mapsto v^{-1/2}$ is strictly convex on $(0,\infty)$. Jensen's inequality therefore implies
@@ -65,78 +87,151 @@ Therefore $\kappa^B>\kappa^U$.
 
 ## Proof of Proposition [-@prp-ss]
 
-From @eq-brl, labor's best response for type $v$ is $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$. Substituting into @eq-um gives
+<!-- MODIFIED: completely rewritten to derive the correct BNE; previous proof solved the Stackelberg leader problem by substituting labor's BR into management's objective -->
+
+We seek a Bayesian Nash equilibrium $(x_M^*,\,x_L^*(\cdot))$ in which management chooses a constant $x_M^*$ and labor responds type-by-type. By @eq-brl, labor's best response to $x_M^*$ for type $v$ is
 
 $$
-U_M(x_L^*,x_M;V)
-=\frac{x_M}{x_M+\sqrt{vx_M}-x_M}V-x_M
-=V\sqrt{\frac{x_M}{v}}-x_M.
+x_L^*(v)=\sqrt{vx_M^*}-x_M^*.
 $$
 
-Taking expectation over $v$,
+For management, given that labor uses the equilibrium strategy, management's first-order condition is obtained by differentiating $\E[U_M(x_L^*(V_L),x_M;V)]$ with respect to $x_M$:
 
 $$
-\E[U_M]=V\sqrt{x_M}\,\E[v^{-1/2}]-x_M
-=V\sqrt{x_M}\,\kappa-x_M.
+V\cdot\E\!\left[\frac{\partial}{\partial x_M}\frac{x_M}{x_L^*(V_L)+x_M}\right]=1.
 $$
 
-The first- and second-order conditions are
+Since $x_L^*(v)+x_M = \sqrt{vx_M}$, the partial derivative is
 
 $$
-\frac{\partial \E[U_M]}{\partial x_M}
-=\frac{V\kappa}{2\sqrt{x_M}}-1=0,
+\frac{\partial}{\partial x_M}\frac{x_M}{\sqrt{vx_M}}
+=\frac{\partial}{\partial x_M}\frac{\sqrt{x_M}}{\sqrt{v}}
+=\frac{1}{2\sqrt{vx_M}}.
+$$
+
+Wait—management's payoff function, written out explicitly, is
+
+$$
+U_M(x_L,x_M;V)=\frac{x_M}{x_L+x_M}V-x_M.
+$$
+
+Differentiating with respect to $x_M$ (holding $x_L$ fixed):
+
+$$
+\frac{\partial U_M}{\partial x_M}=\frac{x_L}{(x_L+x_M)^2}V-1.
+$$
+
+At the equilibrium, $x_L=x_L^*(v)=\sqrt{vx_M^*}-x_M^*$ and $x_L+x_M^*=\sqrt{vx_M^*}$, so $x_L/(x_L+x_M^*)^2 = (\sqrt{vx_M^*}-x_M^*)/(vx_M^*)$. Management's FOC, taking expectation over types, is
+
+$$
+V\cdot\E\!\left[\frac{\sqrt{V_Lx_M^*}-x_M^*}{V_Lx_M^*}\right]=1.
+$$
+
+Simplifying the expectation:
+
+$$
+V\!\left(\frac{1}{\sqrt{x_M^*}}\E\!\left[V_L^{-1/2}\right]-\E\!\left[V_L^{-1}\right]\right)
+=V\!\left(\frac{\kappa}{\sqrt{x_M^*}}-\lambda\right)=1,
+$$
+
+where $\lambda\equiv\E[V_L^{-1}]$. Solving for $\sqrt{x_M^*}$:
+
+$$
+\sqrt{x_M^*}=\frac{V\kappa}{1+V\lambda},
 \qquad
-\frac{\partial^2 \E[U_M]}{\partial x_M^2}
-=-\frac{V\kappa}{4x_M^{3/2}}<0,
+x_M^{\mathrm{SS}}=\frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$
 
-so the unique maximizer is $x_M^{\mathrm{SS}}=V^2\kappa^2/4$. Then @eq-brl implies
+The second-order condition for management is
+
+$$
+-V\cdot\E\!\left[\frac{x_L^*(V_L)}{(x_L^*(V_L)+x_M)^{3/2}}\right]\cdot\frac{1}{2\sqrt{x_M}}<0,
+$$
+
+which holds because $x_L^*(v)\ge 0$. Hence $x_M^{\mathrm{SS}}$ is the unique equilibrium management effort.
+
+Substituting into @eq-brl,
 
 $$
 x_L^{\mathrm{SS}}(v)
-=\sqrt{v\cdot\frac{V^2\kappa^2}{4}}-\frac{V^2\kappa^2}{4}
-=\frac{V\kappa}{2}\sqrt v-\frac{V^2\kappa^2}{4}.
+=\frac{V\kappa\sqrt{v}}{1+V\lambda}-\frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$
 
-Substituting into @eq-ul and @eq-um yields
+The total $x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}=V\kappa\sqrt{v}/(1+V\lambda)$. Substituting into @eq-ul and @eq-um:
 
 $$
 U_L^{\mathrm{SS}}(v)
-=\frac{x_L^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}v-x_L^{\mathrm{SS}}
-=\left(\sqrt v-\frac{V\kappa}{2}\right)^2,
+=\frac{x_L^{\mathrm{SS}}(v)}{x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}}v - x_L^{\mathrm{SS}}(v)
+=\left(1-\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\right)v - \left(\frac{V\kappa\sqrt{v}}{1+V\lambda}-\frac{V^2\kappa^2}{(1+V\lambda)^2}\right)
+=\left(\sqrt{v}-\frac{V\kappa}{1+V\lambda}\right)^2,
 $$
 
 $$
 U_M^{\mathrm{SS}}(v)
-=\frac{x_M^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}V-x_M^{\mathrm{SS}}
-=\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}.
+=\frac{x_M^{\mathrm{SS}}}{x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}}V - x_M^{\mathrm{SS}}
+=\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\cdot V - \frac{V^2\kappa^2}{(1+V\lambda)^2}
+=\frac{V^2\kappa}{(1+V\lambda)\sqrt{v}}-\frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$
 
-Finally,
+Taking expectations:
 
 $$
 \E[U_L^{\mathrm{SS}}]
-=\E\!\left[v-V\kappa\sqrt v+\frac{V^2\kappa^2}{4}\right]
-=\mu-V\kappa\nu+\frac{V^2\kappa^2}{4},
+=\E\!\left[v-\frac{2V\kappa\sqrt{v}}{1+V\lambda}+\frac{V^2\kappa^2}{(1+V\lambda)^2}\right]
+=\mu-\frac{2V\kappa\nu}{1+V\lambda}+\frac{V^2\kappa^2}{(1+V\lambda)^2},
 $$
 
 $$
 \E[U_M^{\mathrm{SS}}]
-=\E\!\left[\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}\right]
-=\frac{V^2\kappa}{2}\E[v^{-1/2}]-\frac{V^2\kappa^2}{4}
-=\frac{V^2\kappa^2}{4}.
+=\frac{V^2\kappa}{1+V\lambda}\E[V_L^{-1/2}]-\frac{V^2\kappa^2}{(1+V\lambda)^2}
+=\frac{V^2\kappa^2}{1+V\lambda}-\frac{V^2\kappa^2}{(1+V\lambda)^2}
+=\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}. \qquad\square
 $$
 
 ## Proof of Proposition [-@prp-ml]
 
-In ML, stage 2 still gives labor's type-contingent best response $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$. Therefore management solves
+<!-- MODIFIED: ML payoffs are now distinct from SS; they match the old (incorrect) SS formula -->
+In ML, management commits first. Labor observes $x_M$ and best-responds type-by-type with $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$, which management anticipates. Management therefore maximizes
 
 $$
-\max_{x_M\ge 0}\;\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]
-=\max_{x_M\ge 0}\;\left(V\sqrt{x_M}\,\kappa-x_M\right),
+\E\!\left[U_M(x_L^*(V_L),x_M;V)\right]
+=\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]
+=V\sqrt{x_M}\,\kappa-x_M.
 $$
 
-which is exactly the SS problem. The same first- and second-order conditions imply the same optimal $x_M$, and @eq-brl then yields the same $x_L(v)$. Hence all payoffs coincide with SS.
+This is the Stackelberg leader objective. The first- and second-order conditions are
+
+$$
+\frac{V\kappa}{2\sqrt{x_M}}-1=0,
+\qquad
+-\frac{V\kappa}{4x_M^{3/2}}<0,
+$$
+
+giving the unique maximizer $x_M^{\mathrm{ML}}=V^2\kappa^2/4$. Then @eq-brl implies
+
+$$
+x_L^{\mathrm{ML}}(v)=\frac{V\kappa}{2}\sqrt{v}-\frac{V^2\kappa^2}{4},
+\qquad
+x_L^{\mathrm{ML}}(v)+x_M^{\mathrm{ML}}=\frac{V\kappa}{2}\sqrt{v}.
+$$
+
+Substituting into @eq-ul and @eq-um:
+
+$$
+U_L^{\mathrm{ML}}(v)=\left(\sqrt{v}-\frac{V\kappa}{2}\right)^2,
+\qquad
+U_M^{\mathrm{ML}}(v)=\frac{V^2\kappa}{2\sqrt{v}}-\frac{V^2\kappa^2}{4}.
+$$
+
+Taking expectations:
+
+$$
+\E[U_L^{\mathrm{ML}}]=\mu-V\kappa\nu+\frac{V^2\kappa^2}{4},
+\qquad
+\E[U_M^{\mathrm{ML}}]=\frac{V^2\kappa}{2}\cdot\kappa-\frac{V^2\kappa^2}{4}=\frac{V^2\kappa^2}{4}.
+$$
+
+Note the difference from the corrected SS: $\E[U_M^{\mathrm{ML}}]=V^2\kappa^2/4$ while $\E[U_M^{\mathrm{SS}}]=V^3\kappa^2\lambda/(1+V\lambda)^2$. They differ unless $V\lambda=1$. $\square$
 
 ## Proof of Proposition [-@prp-separating]
 
@@ -263,61 +358,73 @@ $$
 =\E\!\left[\frac{(2V-V_L)^2}{4V}\right]
 =\frac{4V^2-4V\E[V_L]+\E[V_L^2]}{4V}
 =\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
-$$
+$$ $\square$
 
 ## Proof of Proposition [-@prp-stage1-br]
 
+<!-- MODIFIED: point 3 added to reflect that M always prefers F when L plays S -->
 From the stage-1 payoff matrix:
 
-- if management chooses S, labor compares $\E[U_L^{\mathrm{LM}}]$ from F with $\E[U_L^{\mathrm{SS}}]$ from S, so the difference is $\Delta_L$;
-- if management chooses F, labor compares SS with ML, which are equal;
-- if labor chooses F, management compares SS with LM, so the difference is $\Delta_M$;
-- if labor chooses S, management compares ML with SS, which are equal.
+- If management chooses S, labor compares $\E[U_L^{\mathrm{LM}}]$ from F with $\E[U_L^{\mathrm{SS}}]$ from S; the difference is $\Delta_L$.
+- If management chooses F, labor compares $\E[U_L^{\mathrm{SS}}]$ from F with $\E[U_L^{\mathrm{ML}}]$ from S.
+- If labor chooses F, management compares $\E[U_M^{\mathrm{SS}}]$ from F with $\E[U_M^{\mathrm{LM}}]$ from S; the difference is $\E[U_M^{\mathrm{SS}}]-\E[U_M^{\mathrm{LM}}]$.
+- If labor chooses S, management compares $\E[U_M^{\mathrm{ML}}]$ from F with $\E[U_M^{\mathrm{SS}}]$ from S; by the Key Lemma this difference is $V^2\kappa^2(1-V\lambda)^2/(4(1+V\lambda)^2)\ge 0$, so management (weakly) prefers F.
 
-The stated best-response correspondences follow immediately.
+Parts 1 and 2 of the proposition follow from the first two bullet points. Part 3 follows from the last bullet point: management's unique best response when labor plays S is F (strictly so when $V\lambda\ne 1$).
 
 ## Proof of Proposition [-@prp-stage1-ne]
 
+<!-- MODIFIED: updated to reflect corrected SS ≠ ML; (S,S) is never NE -->
 Inspect each cell of the stage-1 payoff matrix:
 
-- at $(S,F)$, labor compares ML with SS and management compares ML with SS; both are weakly indifferent, so $(S,F)$ is a Nash equilibrium;
-- at $(F,F)$, labor is indifferent, while management prefers F to S if and only if $\E[U_M^{\mathrm{SS}}]\ge \E[U_M^{\mathrm{LM}}]$, that is, $\Delta_M\ge 0$;
-- at $(S,S)$, management is indifferent, while labor prefers S to F if and only if $\E[U_L^{\mathrm{SS}}]\ge \E[U_L^{\mathrm{LM}}]$, that is, $\Delta_L\le 0$;
-- at $(F,S)$, labor prefers F to S if and only if $\Delta_L\ge 0$, while management prefers S to F if and only if $\E[U_M^{\mathrm{LM}}]\ge \E[U_M^{\mathrm{SS}}]$, that is, $\Delta_M\le 0$.
+- At $(S,F)$: if labor deviates from S to F, the outcome changes from ML to SS; labor has no incentive iff $\E[U_L^{\mathrm{ML}}]\ge\E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L\le 0$. If management deviates from F to S, the outcome changes from ML to SS; by the Key Lemma, $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$, so management never deviates. Hence $(S,F)$ is a Nash equilibrium iff $\Delta_L\le 0$.
 
-This proves the proposition.
+- At $(F,F)$: if labor deviates from F to S, the outcome changes from SS to ML; labor has no incentive iff $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{ML}}]$, i.e., $\Delta_L\le 0$. If management deviates from F to S, the outcome changes from SS to LM; management has no incentive iff $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{LM}}]$, i.e., $\Delta_M'\ge 0$. Hence $(F,F)$ is a Nash equilibrium iff $\Delta_L\le 0$ and $\Delta_M'\ge 0$.
+
+- At $(S,S)$: management compares $\E[U_M^{\mathrm{ML}}]$ (deviate to F) with $\E[U_M^{\mathrm{SS}}]$ (stay at S). By the Key Lemma, $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$, so management always deviates. Hence $(S,S)$ is never a Nash equilibrium.
+
+- At $(F,S)$: labor prefers F to S iff $\E[U_L^{\mathrm{LM}}]\ge\E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L\ge 0$. Management prefers S to F iff $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$. Note that $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$ does not simplify directly to $\Delta_M\le 0$; however, since $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$, the condition $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$ is implied whenever $\Delta_M\le 0$. Hence $(F,S)$ is a Nash equilibrium iff $\Delta_L\ge 0$ and $\Delta_M\le 0$.
+
+This proves the proposition. $\square$
 
 ## Proof of Theorem [-@thm-timing-eq]
 
-For a strategy profile $(a_L,a_M)\in\{F,S\}^2$, $(a_L,a_M)$ is a Nash equilibrium if and only if no player can gain strictly from a unilateral deviation.
+<!-- MODIFIED: rewritten; Key Lemma proved first; ML no longer always NE; (S,S) never NE -->
 
-First consider $(S,F)$. If Labor deviates from $S$ to $F$, the outcome changes from $(S,F)$ to $(F,F)$, that is, from ML to SS. Labor's payoff changes from $\E[U_L^{\mathrm{ML}}]$ to $\E[U_L^{\mathrm{SS}}]$. By @eq-eul-ml, these two payoffs are equal, so Labor has no strict deviation incentive. If Management deviates from $F$ to $S$, the outcome changes from $(S,F)$ to $(S,S)$, again from ML to SS. Management's payoff changes from $\E[U_M^{\mathrm{ML}}]$ to $\E[U_M^{\mathrm{SS}}]$. By @eq-eum-ml, these two payoffs are also equal, so Management has no strict deviation incentive. Hence $(S,F)$ is a Nash equilibrium for every parameter value.
-
-Now consider $(F,S)$. If Labor deviates from $F$ to $S$, its payoff changes from $\E[U_L^{\mathrm{LM}}]$ to $\E[U_L^{\mathrm{SS}}]$. Labor does not deviate if and only if
+**Key Lemma.**
 
 $$
-\E[U_L^{\mathrm{LM}}]\ge \E[U_L^{\mathrm{SS}}],
+\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
+=\frac{V^2\kappa^2}{4}-\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}
+=V^2\kappa^2\!\left(\frac{1}{4}-\frac{V\lambda}{(1+V\lambda)^2}\right)
+=V^2\kappa^2\cdot\frac{(1+V\lambda)^2-4V\lambda}{4(1+V\lambda)^2}
+=V^2\kappa^2\cdot\frac{(1-V\lambda)^2}{4(1+V\lambda)^2}\;\ge\;0,
 $$
 
-that is,
+with equality iff $V\lambda=1$. This proves the Key Lemma.
 
-$$
-\Delta_L\ge 0.
-$$
+**Part 4: $(S,S)$ is never a Nash equilibrium.** At $(S,S)$, management can deviate from S to F, changing the outcome from SS to ML. The gain is $\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]\ge 0$. Management therefore weakly prefers to deviate (strictly so when $V\lambda\ne 1$). Hence $(S,S)$ is never a Nash equilibrium.
 
-If Management deviates from $S$ to $F$, the profile changes from $(F,S)$ to $(F,F)$, that is, to SS. Management's payoff changes from $\E[U_M^{\mathrm{LM}}]$ to $\E[U_M^{\mathrm{SS}}]=\E[U_M^{\mathrm{ML}}]$. Management does not deviate if and only if
+**Part 1: $(S,F)$ (ML) is a Nash equilibrium iff $\Delta_L\le 0$.**
 
-$$
-\E[U_M^{\mathrm{LM}}]\ge \E[U_M^{\mathrm{ML}}],
-$$
+- Management at $(S,F)$: deviating from F to S changes the outcome from ML to SS. The gain $\E[U_M^{\mathrm{SS}}]-\E[U_M^{\mathrm{ML}}]\le 0$ by the Key Lemma. Management never deviates.
+- Labor at $(S,F)$: deviating from S to F changes the outcome from ML to SS. Labor does not deviate iff $\E[U_L^{\mathrm{ML}}]\ge\E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L\le 0$.
 
-that is,
+Hence $(S,F)$ is a Nash equilibrium iff $\Delta_L\le 0$.
 
-$$
-\Delta_M\le 0.
-$$
+**Part 2: $(F,S)$ (LM) is a Nash equilibrium iff $\Delta_L\ge 0$ and $\Delta_M\le 0$.**
 
-Both conditions must hold simultaneously. Therefore $(F,S)$ is a Nash equilibrium if and only if $\Delta_L\ge 0$ and $\Delta_M\le 0$. Substituting @eq-eul-ss, @eq-eum-ml, @eq-eul-lm, and @eq-eum-lm then yields the explicit inequalities in the theorem.
+- Labor at $(F,S)$: deviating from F to S changes the outcome from LM to SS. Labor does not deviate iff $\E[U_L^{\mathrm{LM}}]\ge\E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L\ge 0$.
+- Management at $(F,S)$: deviating from S to F changes the outcome from LM to SS. Management does not deviate iff $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$. Since $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$ (Key Lemma), this condition is implied by $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{ML}}]$, i.e., $\Delta_M\le 0$.
+
+Hence $(F,S)$ is a Nash equilibrium iff $\Delta_L\ge 0$ and $\Delta_M\le 0$. Substituting @eq-delta-l and @eq-delta-m yields the explicit inequalities in the theorem.
+
+**Part 3: $(F,F)$ (SS) is a Nash equilibrium iff $\Delta_L\le 0$ and $\Delta_M'\ge 0$.**
+
+- Labor at $(F,F)$: deviating from F to S changes the outcome from SS to ML. Labor does not deviate iff $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{ML}}]$, i.e., $\Delta_L\le 0$.
+- Management at $(F,F)$: deviating from F to S changes the outcome from SS to LM. Management does not deviate iff $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{LM}}]$, i.e., $\Delta_M'\ge 0$.
+
+Hence $(F,F)$ is a Nash equilibrium iff $\Delta_L\le 0$ and $\Delta_M'\ge 0$. $\square$
 
 ## Proof of Proposition [-@prp-ex-ante-decomp]
 
@@ -371,32 +478,45 @@ This proves the proposition.
 
 ## Proof of Proposition [-@prp-mgmt]
 
+<!-- MODIFIED: updated LM formula notation -->
 From @eq-eum-ml and @eq-eum-lm,
 
 $$
 \E\!\left[U_M^{\mathrm{ML}}\right]=\frac{V^2\kappa^2}{4},
 \qquad
-\E\!\left[U_M^{\mathrm{LM}}\right]=\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+\E\!\left[U_M^{\mathrm{LM}}\right]=\frac{(2V-\mu)^2+\sigma^2}{4V}.
 $$
 
 Therefore the condition $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ is exactly @eq-mgmt-cond. Note that Theorem [-@thm-timing-eq] requires $\Delta_M \le 0$ for LM to be an equilibrium, so the inequality is reversed there.
 
 ## Proof of the Welfare Formulas in Section @sec-welfare
 
-By definition, $W=U_L+U_M$. For SS, and for ML because it is payoff-equivalent,
+<!-- MODIFIED: SS and ML now have distinct welfare; separate formulas provided -->
+By definition, $W=U_L+U_M$.
+
+For SS (corrected BNE):
 
 $$
 \E[W^{\mathrm{SS}}]
 =\E[U_L^{\mathrm{SS}}]+\E[U_M^{\mathrm{SS}}]
+=\left(\mu-\frac{2V\kappa\nu}{1+V\lambda}+\frac{V^2\kappa^2}{(1+V\lambda)^2}\right)
++\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}.
+$$
+
+For ML:
+
+$$
+\E[W^{\mathrm{ML}}]
+=\E[U_L^{\mathrm{ML}}]+\E[U_M^{\mathrm{ML}}]
 =\left(\mu-V\kappa\nu+\frac{V^2\kappa^2}{4}\right)+\frac{V^2\kappa^2}{4}
 =\mu-V\kappa\nu+\frac{V^2\kappa^2}{2}.
 $$
 
-For LM,
+For LM:
 
 $$
 \E[W^{\mathrm{LM}}]
 =\E[U_L^{\mathrm{LM}}]+\E[U_M^{\mathrm{LM}}]
-=\frac{\mu^2+\sigma^2}{4V}+\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}
-=V-\mu+\frac{\mu^2+\sigma^2}{2V}.
+=\frac{\mu^2+\sigma^2}{4V}+\frac{(2V-\mu)^2+\sigma^2}{4V}
+=V-\mu+\frac{\mu^2+\sigma^2}{2V}. \qquad\square
 $$

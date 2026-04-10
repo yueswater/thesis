@@ -4,78 +4,96 @@
 
 ## SS：同時行動 {#sec-ss}
 
-在 SS 中，雙方同時選擇投入。勞方依型別 $V_L$ 選擇 $x_L$，資方在不知道 $V_L$ 實現值時選擇 $x_M$。將 @eq-brl 代入資方目標函數，並對型別取期望，可得
+<!-- MODIFIED: 修正 BNE 推導；原本將勞方 BR 代入資方目標函數最大化，實為 Stackelberg 領先者問題（即 ML），而非 BNE -->
+
+在 SS 中，雙方同時選擇投入。在貝葉斯均衡中，每一方都在對方均衡策略給定下最優化。勞方的均衡策略為逐型別最佳反應 $x_L(v)=\sqrt{vx_M}-x_M$（見 @eq-brl）。資方的一階條件——在勞方均衡策略給定下——為
 
 $$
-\E[U_M] = V\sqrt{x_M}\,\kappa - x_M,
-\qquad
-\frac{\partial \E[U_M]}{\partial x_M}
-  = \frac{V\kappa}{2\sqrt{x_M}} - 1.
+V\cdot\E\!\left[\frac{x_L(V_L)}{(x_L(V_L)+x_M)^2}\right] = 1.
 $$
+
+代入 $x_L(v)+x_M = \sqrt{vx_M}$，可得
+
+$$
+V\cdot\E\!\left[\frac{\sqrt{V_Lx_M}-x_M}{V_Lx_M}\right]
+= V\!\left(\frac{\kappa}{\sqrt{x_M}}-\lambda\right) = 1,
+$$
+
+其中 $\lambda\equiv\E[V_L^{-1}]$。解 $\sqrt{x_M}$ 即得均衡。
 
 ::: {#prp-ss}
 ### 同時行動均衡
 
-SS 均衡為
+<!-- MODIFIED: 修正 SS 均衡公式 -->
+SS 的貝葉斯均衡為
 
 $$
-x_M^{\mathrm{SS}} = \frac{V^2\kappa^2}{4}, \qquad
+x_M^{\mathrm{SS}} = \frac{V^2\kappa^2}{(1+V\lambda)^2}, \qquad
 x_L^{\mathrm{SS}}(V_L)
-  = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
+  = \frac{V\kappa\sqrt{V_L}}{1+V\lambda} - \frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$ {#eq-ss-efforts}
 
 均衡報酬為
 
 $$
 U_L^{\mathrm{SS}}(V_L)
-  = \left(\sqrt{V_L} - \frac{V\kappa}{2}\right)^2,
+  = \left(\sqrt{V_L} - \frac{V\kappa}{1+V\lambda}\right)^2,
 $$ {#eq-ul-ss}
 
 $$
 U_M^{\mathrm{SS}}(V_L)
-  = \frac{V^2\kappa}{2\sqrt{V_L}} - \frac{V^2\kappa^2}{4}.
+  = \frac{V^2\kappa}{(1+V\lambda)\sqrt{V_L}} - \frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$ {#eq-um-ss}
 
 期望報酬為
 
 $$
 \E\!\left[U_L^{\mathrm{SS}}\right]
-  = \mu - V\kappa\nu + \frac{V^2\kappa^2}{4},
+  = \mu - \frac{2V\kappa\nu}{1+V\lambda} + \frac{V^2\kappa^2}{(1+V\lambda)^2},
 $$ {#eq-eul-ss}
 
 $$
 \E\!\left[U_M^{\mathrm{SS}}\right]
-  = \frac{V^2\kappa^2}{4}.
+  = \frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}.
 $$ {#eq-eum-ss}
 :::
 
-*（證明見附錄 [-@sec-appendix]。）*
+::: {.proof}
+見附錄 [-@sec-proof-ss]。
+:::
 
 將 @tbl-moments 的動差代入 @prp-ss，即可得到各分配下的具體公式。
 
-**二點分配。** 令 $\kappa^B = \frac{1}{2u_\ell} + \frac{1}{2u_H}$ 與 $\nu^B = \frac{u_\ell + u_H}{2}$，則
+**二點分配。** 令 $\kappa^B$、$\nu^B$、$\lambda^B$ 為 @tbl-moments 中的動差，則
 
 $$
-x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{4},
+x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2},
 \qquad
 \E\!\left[U_L^{\mathrm{SS},B}\right]
-  = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{4}.
+  = \mu - \frac{2V\kappa^B\nu^B}{1+V\lambda^B} + \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2}.
 $$
 
-**均勻分配。** 令 $\kappa^U = \frac{u_H - u_\ell}{\delta}$ 與 $\nu^U = \frac{u_H^3 - u_\ell^3}{3\delta}$，則
+**均勻分配。** 令 $\kappa^U$、$\nu^U$、$\lambda^U$ 為 @tbl-moments 中的動差，則
 
 $$
-x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{4},
+x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2},
 \qquad
 \E\!\left[U_L^{\mathrm{SS},U}\right]
-  = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{4}.
+  = \mu - \frac{2V\kappa^U\nu^U}{1+V\lambda^U} + \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2}.
 $$
 
-由於 $v\mapsto v^{-1/2}$ 為凸函數，二點分配下的 $\kappa$ 大於均勻分配。這會提高 SS 中資方的投入。
+由於 $v\mapsto v^{-1/2}$ 為凸函數，二點分配下的 $\kappa$ 大於均勻分配。
 
 ## ML：資方先動 {#sec-ml}
 
-在 ML 中，資方於觀察勞方型別前先承諾 $x_M$，之後勞方依型別用 @eq-brl 回應。因此，資方求解的期望目標函數與 SS 相同。
+<!-- MODIFIED: ML 報酬現在與 SS 不同；ML 求解 Stackelberg 領先者問題，而非 BNE 問題 -->
+
+在 ML 中，資方先承諾 $x_M$，之後勞方依型別用 @eq-brl 回應。資方事先預期到勞方的反應 $x_L(v)=\sqrt{vx_M}-x_M$，從而最大化
+
+$$
+\max_{x_M\ge 0}\;\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]
+=\max_{x_M\ge 0}\;\bigl(V\sqrt{x_M}\,\kappa-x_M\bigr).
+$$
 
 ::: {#prp-ml}
 ### ML 均衡
@@ -86,7 +104,19 @@ x_L^{\mathrm{ML}}(V_L)
   = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
 $$ {#eq-ml-efforts}
 
-其報酬與 @eq-ul-ss--@eq-eum-ss 相同：
+逐型別報酬為
+
+$$
+U_L^{\mathrm{ML}}(V_L)
+  = \left(\sqrt{V_L} - \frac{V\kappa}{2}\right)^2,
+$$ {#eq-ul-ml-type}
+
+$$
+U_M^{\mathrm{ML}}(V_L)
+  = \frac{V^2\kappa}{2\sqrt{V_L}} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-um-ml-type}
+
+期望報酬為
 
 $$
 \E\!\left[U_L^{\mathrm{ML}}\right]
@@ -99,9 +129,11 @@ $$
 $$ {#eq-eum-ml}
 :::
 
-*（證明見附錄 [-@sec-appendix]。）*
+::: {.proof}
+見附錄 [-@sec-proof-ml]。
+:::
 
-各分配下的具體公式亦與 SS 相同。
+注意 $\E[U_M^{\mathrm{ML}}]=V^2\kappa^2/4$，而 $\E[U_M^{\mathrm{SS}}]=V^3\kappa^2\lambda/(1+V\lambda)^2$；兩者僅在 $V\lambda=1$ 時相等。Stackelberg 先動地位使資方能設定比同時行動更高的承諾投入量，從而獲得弱更高的期望報酬。
 
 ## LM：勞方先動 {#sec-lm}
 
@@ -138,7 +170,9 @@ U_M^{\mathrm{LM}}(v) = \frac{(2V - v)^2}{4V}.
 $$ {#eq-um-lm}
 :::
 
-*（證明見附錄 [-@sec-appendix]。）*
+::: {.proof}
+見附錄 [-@sec-proof-separating]。
+:::
 
 ::: {#prp-no-pool}
 ### 無混同均衡與誘因相容限制
@@ -146,7 +180,9 @@ $$ {#eq-um-lm}
 LM 子賽局存在唯一的完美貝葉斯均衡，且該均衡為分離均衡。
 :::
 
-*（證明見附錄 [-@sec-appendix]。）*
+::: {.proof}
+見附錄 [-@sec-proof-no-pool]。
+:::
 
 此一論證不依賴特定分配形式。二點分配、均勻分配與任意連續型別分配，都有相同的唯一性邏輯。
 
@@ -230,7 +266,9 @@ $$ {#eq-eum-lm}
 
 其中 $\sigma^2=\Var(V_L)$。
 
-*（證明見附錄 [-@sec-appendix]。）*
+::: {.proof}
+見附錄 [-@sec-proof-lm-payoff]。
+:::
 
 ### 函數化範例 {#sec-lm-examples}
 

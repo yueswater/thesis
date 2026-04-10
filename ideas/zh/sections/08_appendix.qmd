@@ -1,13 +1,24 @@
-# 附錄：證明 {#sec-appendix}
+---
+appendix: true
+---
 
-## 命題 [-@prp-moments] 的證明
+```{=latex}
+\appendix
+```
 
+# 附錄：證明 {#sec-appendix .appendix}
+
+## 命題 [-@prp-moments] 的證明 {#sec-proof-moments}
+
+<!-- MODIFIED: 新增 λ 計算 -->
 二點分配下的動差可由定義直接計算：
 
 $$
 \kappa^B=\frac{1}{2u_\ell}+\frac{1}{2u_H},
 \qquad
-\nu^B=\frac{u_\ell+u_H}{2}.
+\nu^B=\frac{u_\ell+u_H}{2},
+\qquad
+\lambda^B=\frac{1}{2u_\ell^2}+\frac{1}{2u_H^2}.
 $$
 
 對均勻分配，設其密度為
@@ -32,6 +43,16 @@ $$
 =\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta}v^{1/2}\,dv
 =\frac{1}{2\delta}\cdot\left[\frac{2}{3}v^{3/2}\right]_{\mu-\delta}^{\mu+\delta}
 =\frac{u_H^3-u_\ell^3}{3\delta}.
+$$
+
+對 $\lambda^U$，$v\mapsto v^{-1}$ 在緊緻集 $[\mu-\delta,\mu+\delta]\subset(0,\infty)$ 上可積：
+
+$$
+\lambda^U
+=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta}v^{-1}\,dv
+=\frac{1}{2\delta}\cdot\bigl[\ln v\bigr]_{\mu-\delta}^{\mu+\delta}
+=\frac{\ln(\mu+\delta)-\ln(\mu-\delta)}{2\delta}
+=\frac{\ln(u_H/u_\ell)}{\delta}.
 $$
 
 最後比較 $\kappa^B$ 與 $\kappa^U$。由於 $v\mapsto v^{-1/2}$ 在 $(0,\infty)$ 上嚴格凸，Jensen 不等式給出
@@ -63,82 +84,119 @@ $$
 
 因此 $\kappa^B>\kappa^U$。
 
-## 命題 [-@prp-ss] 的證明
+## 命題 [-@prp-ss] 的證明 {#sec-proof-ss}
 
-由 @eq-brl，型別 $v$ 的勞方最佳反應為 $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$。代入 @eq-um 得
+<!-- MODIFIED: 完整改寫，推導正確的 BNE；舊版本將勞方 BR 代入資方目標函數最大化，實際上解的是 Stackelberg 領先者問題（ML），而非 BNE -->
 
-$$
-U_M(x_L^*,x_M;V)
-=\frac{x_M}{x_M+\sqrt{vx_M}-x_M}V-x_M
-=V\sqrt{\frac{x_M}{v}}-x_M.
-$$
-
-對 $v$ 取期望得
+我們求貝葉斯均衡 $(x_M^*,\,x_L^*(\cdot))$，其中資方選常數 $x_M^*$，勞方逐型別最佳反應。由 @eq-brl，型別 $v$ 的最佳反應為
 
 $$
-\E[U_M]=V\sqrt{x_M}\,\E[v^{-1/2}]-x_M
-=V\sqrt{x_M}\,\kappa-x_M.
+x_L^*(v)=\sqrt{vx_M^*}-x_M^*.
 $$
 
-一階與二階條件為
+對資方而言，在勞方均衡策略給定下，對 $x_M$ 微分 $\E[U_M(x_L^*(V_L),x_M;V)]$，所得一階條件為
 
 $$
-\frac{\partial \E[U_M]}{\partial x_M}
-=\frac{V\kappa}{2\sqrt{x_M}}-1=0,
+V\cdot\E\!\left[\frac{x_L^*(V_L)}{(x_L^*(V_L)+x_M)^2}\right]=1.
+$$
+
+由於 $x_L^*(v)+x_M=\sqrt{vx_M}$，代入得
+
+$$
+V\cdot\E\!\left[\frac{\sqrt{V_Lx_M}-x_M}{V_Lx_M}\right]
+= V\!\left(\frac{\kappa}{\sqrt{x_M}}-\lambda\right)=1,
+$$
+
+其中 $\lambda\equiv\E[V_L^{-1}]$。解 $\sqrt{x_M}$ 得
+
+$$
+\sqrt{x_M^*}=\frac{V\kappa}{1+V\lambda},
 \qquad
-\frac{\partial^2 \E[U_M]}{\partial x_M^2}
-=-\frac{V\kappa}{4x_M^{3/2}}<0,
+x_M^{\mathrm{SS}}=\frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$
 
-故唯一極大值為 $x_M^{\mathrm{SS}}=V^2\kappa^2/4$。再由 @eq-brl 得
+二階條件可驗證為負，故此為唯一極大值。再由 @eq-brl 得
 
 $$
 x_L^{\mathrm{SS}}(v)
-=\sqrt{v\cdot\frac{V^2\kappa^2}{4}}-\frac{V^2\kappa^2}{4}
-=\frac{V\kappa}{2}\sqrt v-\frac{V^2\kappa^2}{4}.
+=\frac{V\kappa\sqrt{v}}{1+V\lambda}-\frac{V^2\kappa^2}{(1+V\lambda)^2},
+\qquad
+x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}=\frac{V\kappa\sqrt{v}}{1+V\lambda}.
 $$
 
 代回 @eq-ul 與 @eq-um 可得
 
 $$
 U_L^{\mathrm{SS}}(v)
-=\frac{x_L^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}v-x_L^{\mathrm{SS}}
-=\left(\sqrt v-\frac{V\kappa}{2}\right)^2,
+=\left(1-\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\right)v - x_L^{\mathrm{SS}}(v)
+=\left(\sqrt{v}-\frac{V\kappa}{1+V\lambda}\right)^2,
 $$
 
 $$
 U_M^{\mathrm{SS}}(v)
-=\frac{x_M^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}V-x_M^{\mathrm{SS}}
-=\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}.
+=\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\cdot V-\frac{V^2\kappa^2}{(1+V\lambda)^2}
+=\frac{V^2\kappa}{(1+V\lambda)\sqrt{v}}-\frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$
 
-最後，
+最後取期望：
 
 $$
 \E[U_L^{\mathrm{SS}}]
-=\E\!\left[v-V\kappa\sqrt v+\frac{V^2\kappa^2}{4}\right]
-=\mu-V\kappa\nu+\frac{V^2\kappa^2}{4},
+=\mu-\frac{2V\kappa\nu}{1+V\lambda}+\frac{V^2\kappa^2}{(1+V\lambda)^2},
 $$
 
 $$
 \E[U_M^{\mathrm{SS}}]
-=\E\!\left[\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}\right]
-=\frac{V^2\kappa}{2}\E[v^{-1/2}]-\frac{V^2\kappa^2}{4}
-=\frac{V^2\kappa^2}{4}.
+=\frac{V^2\kappa}{1+V\lambda}\cdot\kappa-\frac{V^2\kappa^2}{(1+V\lambda)^2}
+=\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}. \qquad\square
 $$
 
-## 命題 [-@prp-ml] 的證明
+## 命題 [-@prp-ml] 的證明 {#sec-proof-ml}
 
-在 ML 中，第二階段仍由勞方採用型別條件式最佳反應 $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$。因此第一階段資方解的是
+<!-- MODIFIED: ML 報酬現與 SS 不同；ML 解的是 Stackelberg 領先者問題 -->
+在 ML 中，資方先承諾。勞方觀察 $x_M$ 後逐型別最佳反應，資方事先預期到 $x_L(v)=\sqrt{vx_M}-x_M$，因此最大化
 
 $$
-\max_{x_M\ge 0}\;\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]
-=\max_{x_M\ge 0}\;\left(V\sqrt{x_M}\,\kappa-x_M\right),
+\E\!\left[U_M(x_L^*(V_L),x_M;V)\right]
+=\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]
+=V\sqrt{x_M}\,\kappa-x_M.
 $$
 
-這正是 SS 中的問題。故一階與二階條件給出相同的最適 $x_M$，再由 @eq-brl 得到相同的 $x_L(v)$，因此所有報酬皆與 SS 相同。
+這是 Stackelberg 領先者的目標函數。一階與二階條件為
 
-## 命題 [-@prp-separating] 的證明
+$$
+\frac{V\kappa}{2\sqrt{x_M}}-1=0,
+\qquad
+-\frac{V\kappa}{4x_M^{3/2}}<0,
+$$
+
+給出唯一極大值 $x_M^{\mathrm{ML}}=V^2\kappa^2/4$。再由 @eq-brl 得
+
+$$
+x_L^{\mathrm{ML}}(v)=\frac{V\kappa}{2}\sqrt{v}-\frac{V^2\kappa^2}{4},
+\qquad
+x_L^{\mathrm{ML}}(v)+x_M^{\mathrm{ML}}=\frac{V\kappa}{2}\sqrt{v}.
+$$
+
+代回 @eq-ul 與 @eq-um 可得
+
+$$
+U_L^{\mathrm{ML}}(v)=\left(\sqrt{v}-\frac{V\kappa}{2}\right)^2,
+\qquad
+U_M^{\mathrm{ML}}(v)=\frac{V^2\kappa}{2\sqrt{v}}-\frac{V^2\kappa^2}{4}.
+$$
+
+取期望得
+
+$$
+\E[U_L^{\mathrm{ML}}]=\mu-V\kappa\nu+\frac{V^2\kappa^2}{4},
+\qquad
+\E[U_M^{\mathrm{ML}}]=\frac{V^2\kappa^2}{4}.
+$$
+
+注意 $\E[U_M^{\mathrm{ML}}]=V^2\kappa^2/4$，而 $\E[U_M^{\mathrm{SS}}]=V^3\kappa^2\lambda/(1+V\lambda)^2$；兩者僅在 $V\lambda=1$ 時相等。$\square$
+
+## 命題 [-@prp-separating] 的證明 {#sec-proof-separating}
 
 勞方求解
 
@@ -170,7 +228,7 @@ $$
 
 代回 @eq-ul 與 @eq-um 即得 @eq-ul-lm 與 @eq-um-lm。
 
-## 命題 [-@prp-no-pool] 的證明
+## 命題 [-@prp-no-pool] 的證明 {#sec-proof-no-pool}
 
 分兩步證明。
 
@@ -245,7 +303,7 @@ $$
 
 又因資方的續局最佳反應只依賴觀察到的投入與參數 $V$，不依賴後驗信念，故信念無法改變上述偏離誘因。於是，PBE 中不存在混同均衡或半分離均衡行為，也不存在使 pooling 可行的參數區域。LM 子賽局的唯一完美貝葉斯均衡，必為分離均衡。
 
-## LM 期望報酬公式的證明
+## LM 期望報酬公式的證明 {#sec-proof-lm-payoff}
 
 由 @eq-ul-lm，$U_L^{\mathrm{LM}}(v)=v^2/(4V)$，因此
 
@@ -263,63 +321,69 @@ $$
 =\E\!\left[\frac{(2V-V_L)^2}{4V}\right]
 =\frac{4V^2-4V\E[V_L]+\E[V_L^2]}{4V}
 =\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
-$$
+$$ $\square$
 
-## 命題 [-@prp-stage1-br] 的證明
+## 命題 [-@prp-stage1-br] 的證明 {#sec-proof-stage1-br}
 
+<!-- MODIFIED: 新增第 3 點，反映資方在勞方選 S 時恒選 F -->
 由第一階段的報酬矩陣可知：
 
 - 若資方選 S，勞方比較的是 $\E[U_L^{\mathrm{LM}}]$（選 F）與 $\E[U_L^{\mathrm{SS}}]$（選 S），故差額為 $\Delta_L$。
-- 若資方選 F，勞方比較的是 SS 與 ML，而兩者相等。
-- 若勞方選 F，資方比較的是 SS 與 LM，故差額為 $\Delta_M$。
-- 若勞方選 S，資方比較的是 ML 與 SS，而兩者相等。
+- 若資方選 F，勞方比較的是 $\E[U_L^{\mathrm{SS}}]$（選 F）與 $\E[U_L^{\mathrm{ML}}]$（選 S）。
+- 若勞方選 F，資方比較的是 $\E[U_M^{\mathrm{SS}}]$（選 F）與 $\E[U_M^{\mathrm{LM}}]$（選 S）。
+- 若勞方選 S，資方比較的是 $\E[U_M^{\mathrm{ML}}]$（選 F）與 $\E[U_M^{\mathrm{SS}}]$（選 S）；由關鍵引理，此差額 $V^2\kappa^2(1-V\lambda)^2/(4(1+V\lambda)^2)\ge 0$，資方（弱）偏好選 F。
 
-因此可直接得到命題中的最佳反應對應。
+命題第 1、2 點由前兩項推得；第 3 點由最後一項推得。
 
-## 命題 [-@prp-stage1-ne] 的證明
+## 命題 [-@prp-stage1-ne] 的證明 {#sec-proof-stage1-ne}
 
-逐格檢視第一階段報酬矩陣即可：
+<!-- MODIFIED: 更新以反映修正後的 SS ≠ ML；(S,S) 永遠不是 Nash 均衡 -->
+逐格檢視第一階段報酬矩陣：
 
-- 在 $(S,F)$ 處，勞方比較 ML 與 SS、資方比較 ML 與 SS；雙方皆弱無異，因此 $(S,F)$ 為 Nash 均衡。
-- 在 $(F,F)$ 處，勞方仍無異，而資方偏好 F 勝於 S 的條件為 $\E[U_M^{\mathrm{SS}}]\ge \E[U_M^{\mathrm{LM}}]$，亦即 $\Delta_M\ge 0$。
-- 在 $(S,S)$ 處，資方無異，而勞方偏好 S 勝於 F 的條件為 $\E[U_L^{\mathrm{SS}}]\ge \E[U_L^{\mathrm{LM}}]$，亦即 $\Delta_L\le 0$。
-- 在 $(F,S)$ 處，勞方偏好 F 勝於 S 的條件為 $\Delta_L\ge 0$；資方偏好 S 勝於 F 的條件為 $\E[U_M^{\mathrm{LM}}]\ge \E[U_M^{\mathrm{SS}}]$，亦即 $\Delta_M\le 0$。
+- 在 $(S,F)$ 處：若勞方偏離至 F，結果由 ML 變為 SS；勞方不偏離之條件為 $\E[U_L^{\mathrm{ML}}]\ge\E[U_L^{\mathrm{SS}}]$，即 $\Delta_L\le 0$。若資方偏離至 S，結果由 ML 變為 SS；由關鍵引理 $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$，資方不偏離。故 $(S,F)$ 為均衡若且唯若 $\Delta_L\le 0$。
+- 在 $(F,F)$ 處：若勞方偏離至 S，結果由 SS 變為 ML；勞方不偏離之條件為 $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{ML}}]$，即 $\Delta_L\le 0$。若資方偏離至 S，結果由 SS 變為 LM；資方不偏離之條件為 $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{LM}}]$，即 $\Delta_M'\ge 0$。故 $(F,F)$ 為均衡若且唯若 $\Delta_L\le 0$ 且 $\Delta_M'\ge 0$。
+- 在 $(S,S)$ 處：資方偏離至 F，結果由 SS 變為 ML，利得 $\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]\ge 0$（關鍵引理）。資方恒有偏離誘因，故 $(S,S)$ 永遠不是 Nash 均衡。
+- 在 $(F,S)$ 處：勞方偏好 F 之條件為 $\Delta_L\ge 0$；資方偏好 S 之條件為 $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$，此由 $\Delta_M\le 0$ 所蘊含。故 $(F,S)$ 為均衡若且唯若 $\Delta_L\ge 0$ 且 $\Delta_M\le 0$。
 
-故命題成立。
+命題得證。$\square$
 
-## 定理 [-@thm-timing-eq] 的證明
+## 定理 [-@thm-timing-eq] 的證明 {#sec-proof-timing-eq}
 
-對策略組合 $(a_L,a_M)\in\{F,S\}^2$，$(a_L,a_M)$ 為 Nash 均衡，當且僅當對每位玩家而言，單邊偏離皆不嚴格有利。
+<!-- MODIFIED: 完整改寫；證明關鍵引理；ML 不再恆為均衡；(S,S) 永不為均衡 -->
 
-先證 $(S,F)$。若勞方由 $S$ 偏離至 $F$，結果由 $(S,F)$ 變為 $(F,F)$，即由 ML 變為 SS。勞方的報酬由 $\E[U_L^{\mathrm{ML}}]$ 變為 $\E[U_L^{\mathrm{SS}}]$。由 @eq-eul-ml 可知兩者相等，故勞方不存在嚴格偏離誘因。若資方由 $F$ 偏離至 $S$，結果由 $(S,F)$ 變為 $(S,S)$，即由 ML 變為 SS。資方的報酬由 $\E[U_M^{\mathrm{ML}}]$ 變為 $\E[U_M^{\mathrm{SS}}]$。由 @eq-eum-ml 可知兩者相等，故資方亦不存在嚴格偏離誘因。故 $(S,F)$ 對所有參數值恆為 Nash 均衡。
-
-再證 $(F,S)$ 的充要條件。若勞方由 $F$ 偏離至 $S$，報酬由 $\E[U_L^{\mathrm{LM}}]$ 變為 $\E[U_L^{\mathrm{SS}}]$。勞方不偏離之充要條件為
-
-$$
-\E[U_L^{\mathrm{LM}}]\ge \E[U_L^{\mathrm{SS}}],
-$$
-
-亦即
+**關鍵引理。**
 
 $$
-\Delta_L\ge 0.
+\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
+=\frac{V^2\kappa^2}{4}-\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}
+=V^2\kappa^2\cdot\frac{(1+V\lambda)^2-4V\lambda}{4(1+V\lambda)^2}
+=V^2\kappa^2\cdot\frac{(1-V\lambda)^2}{4(1+V\lambda)^2}\;\ge\;0,
 $$
 
-若資方由 $S$ 偏離至 $F$，策略組合由 $(F,S)$ 變為 $(F,F)$，即 SS。資方的報酬由 $\E[U_M^{\mathrm{LM}}]$ 變為 $\E[U_M^{\mathrm{SS}}]=\E[U_M^{\mathrm{ML}}]$。資方不偏離之充要條件為
+等號當且僅當 $V\lambda=1$。
 
-$$
-\E[U_M^{\mathrm{LM}}]\ge \E[U_M^{\mathrm{ML}}],
-$$
+**第 4 部分：$(S,S)$ 永遠不是 Nash 均衡。** 由關鍵引理，資方在 $(S,S)$ 時偏離至 F（使結果由 SS 變為 ML）的利得非負，因此 $(S,S)$ 永遠不是 Nash 均衡。
 
-亦即
+**第 1 部分：$(S,F)$（ML）若且唯若 $\Delta_L\le 0$。**
 
-$$
-\Delta_M\le 0.
-$$
+- 資方在 $(S,F)$ 偏離至 S，結果由 ML 變為 SS，利得 $\E[U_M^{\mathrm{SS}}]-\E[U_M^{\mathrm{ML}}]\le 0$（關鍵引理），故資方不偏離。
+- 勞方在 $(S,F)$ 偏離至 F，結果由 ML 變為 SS；勞方不偏離之充要條件為 $\E[U_L^{\mathrm{ML}}]\ge\E[U_L^{\mathrm{SS}}]$，即 $\Delta_L\le 0$。
 
-兩條件必須同時成立。故 $(F,S)$ 為 Nash 均衡，若且唯若 $\Delta_L\ge 0$ 且 $\Delta_M\le 0$。最後，將 @eq-eul-ss、@eq-eum-ml、@eq-eul-lm 與 @eq-eum-lm 代入，即得定理中的顯式不等式。
+**第 2 部分：$(F,S)$（LM）若且唯若 $\Delta_L\ge 0$ 且 $\Delta_M\le 0$。**
 
-## 命題 [-@prp-ex-ante-decomp] 的證明
+- 勞方在 $(F,S)$ 偏離至 S，結果由 LM 變為 SS；勞方不偏離之充要條件為 $\E[U_L^{\mathrm{LM}}]\ge\E[U_L^{\mathrm{SS}}]$，即 $\Delta_L\ge 0$。
+- 資方在 $(F,S)$ 偏離至 F，結果由 LM 變為 SS；資方不偏離之條件為 $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$，此由 $\Delta_M\le 0$ 蘊含。
+
+兩條件同時成立時，$(F,S)$ 為 Nash 均衡。代入 @eq-delta-l 與 @eq-delta-m 即得定理中的顯式不等式。
+
+**第 3 部分：$(F,F)$（SS）若且唯若 $\Delta_L\le 0$ 且 $\Delta_M'\ge 0$。**
+
+- 勞方在 $(F,F)$ 偏離至 S，結果由 SS 變為 ML；勞方不偏離之充要條件為 $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{ML}}]$，即 $\Delta_L\le 0$。
+- 資方在 $(F,F)$ 偏離至 S，結果由 SS 變為 LM；資方不偏離之充要條件為 $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{LM}}]$，即 $\Delta_M'\ge 0$。
+
+故 $(F,F)$ 為 Nash 均衡若且唯若兩條件同時成立。$\square$
+
+## 命題 [-@prp-ex-ante-decomp] 的證明 {#sec-proof-decomp}
 
 由 $R(v)\equiv U_L^{\mathrm{SS}}(v)-U_L^{\mathrm{LM}}(v)$，直接對 $V_L$ 取期望可得
 
@@ -333,8 +397,9 @@ $$
 
 故命題成立。
 
-## 命題 [-@prp-exact-condition] 的證明
+## 命題 [-@prp-exact-condition] 的證明 {#sec-proof-exact}
 
+<!-- MODIFIED: 條件更新為使用修正後的 SS -->
 型別 $v$ 事後偏好先動，當且僅當
 
 $$
@@ -346,13 +411,13 @@ $$
 $$
 R(v)\leq 0
 \iff
-\left(\sqrt{v}-\frac{V\kappa}{2}\right)^2\leq\frac{v^2}{4V}.
+\left(\sqrt{v}-\frac{V\kappa}{1+V\lambda}\right)^2\leq\frac{v^2}{4V}.
 $$
 
-因 $v>0$，故右端的平方根 $\frac{v}{2\sqrt V}$ 嚴格為正，所以下列絕對值不等式為等價條件：
+因 $v>0$，故右端的平方根 $\frac{v}{2\sqrt V}$ 嚴格為正，下列絕對值不等式為等價條件：
 
 $$
-\left|\sqrt{v}-\frac{V\kappa}{2}\right|
+\left|\sqrt{v}-\frac{V\kappa}{1+V\lambda}\right|
 \leq
 \frac{v}{2\sqrt{V}}.
 $$
@@ -362,41 +427,54 @@ $$
 $$
 \sqrt{v}-\frac{v}{2\sqrt{V}}
 \leq
-\frac{V\kappa}{2}
+\frac{V\kappa}{1+V\lambda}
 \leq
 \sqrt{v}+\frac{v}{2\sqrt{V}}.
 $$
 
 故命題成立。
 
-## 命題 [-@prp-mgmt] 的證明
+## 命題 [-@prp-mgmt] 的證明 {#sec-proof-mgmt}
 
+<!-- MODIFIED: LM 公式改用新記號 -->
 由 @eq-eum-ml 與 @eq-eum-lm 得
 
 $$
 \E\!\left[U_M^{\mathrm{ML}}\right]=\frac{V^2\kappa^2}{4},
 \qquad
-\E\!\left[U_M^{\mathrm{LM}}\right]=\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+\E\!\left[U_M^{\mathrm{LM}}\right]=\frac{(2V-\mu)^2+\sigma^2}{4V}.
 $$
 
 故條件 $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ 即為 @eq-mgmt-cond。注意定理 [-@thm-timing-eq] 中 LM 均衡的成立需要 $\Delta_M \le 0$，即此不等式方向反轉。
 
-## 第 @sec-welfare 節福利公式的證明
+## 第 @sec-welfare 節福利公式的證明 {#sec-proof-welfare}
 
-依定義，$W=U_L+U_M$。對 SS（以及與其報酬等價的 ML）而言，
+<!-- MODIFIED: SS 與 ML 的福利現在各自獨立 -->
+依定義，$W=U_L+U_M$。
+
+對 SS（修正後的 BNE）：
 
 $$
 \E[W^{\mathrm{SS}}]
 =\E[U_L^{\mathrm{SS}}]+\E[U_M^{\mathrm{SS}}]
+=\left(\mu-\frac{2V\kappa\nu}{1+V\lambda}+\frac{V^2\kappa^2}{(1+V\lambda)^2}\right)
++\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}.
+$$
+
+對 ML：
+
+$$
+\E[W^{\mathrm{ML}}]
+=\E[U_L^{\mathrm{ML}}]+\E[U_M^{\mathrm{ML}}]
 =\left(\mu-V\kappa\nu+\frac{V^2\kappa^2}{4}\right)+\frac{V^2\kappa^2}{4}
 =\mu-V\kappa\nu+\frac{V^2\kappa^2}{2}.
 $$
 
-對 LM 而言，
+對 LM：
 
 $$
 \E[W^{\mathrm{LM}}]
 =\E[U_L^{\mathrm{LM}}]+\E[U_M^{\mathrm{LM}}]
-=\frac{\mu^2+\sigma^2}{4V}+\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}
-=V-\mu+\frac{\mu^2+\sigma^2}{2V}.
+=\frac{\mu^2+\sigma^2}{4V}+\frac{(2V-\mu)^2+\sigma^2}{4V}
+=V-\mu+\frac{\mu^2+\sigma^2}{2V}. \qquad\square
 $$

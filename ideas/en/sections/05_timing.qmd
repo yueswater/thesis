@@ -9,6 +9,7 @@ Following the endogenous-timing setup in @fu2006, let each player choose F (move
 | Labor: F | SS | LM |
 | Labor: S | ML | SS |
 
+<!-- MODIFIED: SS ≠ ML after correction; payoff matrix entries and Δ definitions updated -->
 Using the results in Section @sec-equilibria, the expected-payoff matrix is
 
 |  | Management: F | Management: S |
@@ -16,29 +17,46 @@ Using the results in Section @sec-equilibria, the expected-payoff matrix is
 | Labor: F | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ | $(\E[U_L^{\mathrm{LM}}],\E[U_M^{\mathrm{LM}}])$ |
 | Labor: S | $(\E[U_L^{\mathrm{ML}}],\E[U_M^{\mathrm{ML}}])$ | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ |
 
-and @eq-eul-ml--@eq-eum-ml imply
+Because the corrected SS equilibrium differs from ML (see Section @sec-ml), the four matrix entries are generically distinct. In particular,
 
 $$
-\E[U_L^{\mathrm{ML}}]=\E[U_L^{\mathrm{SS}}],
-\qquad
-\E[U_M^{\mathrm{ML}}]=\E[U_M^{\mathrm{SS}}].
+\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
+= V^2\kappa^2\cdot\frac{(1-V\lambda)^2}{4(1+V\lambda)^2}
+\;\ge\; 0,
 $$
+
+with equality only when $V\lambda=1$.
 
 Define two key differences:
 
 $$
 \Delta_L
 \equiv
-\E[U_L^{\mathrm{LM}}]-\E[U_L^{\mathrm{SS}}],
-\qquad
+\E[U_L^{\mathrm{LM}}]-\E[U_L^{\mathrm{SS}}]
+=
+\frac{\mu^2+\sigma^2}{4V} - \mu + \frac{2V\kappa\nu}{1+V\lambda} - \frac{V^2\kappa^2}{(1+V\lambda)^2},
+$$ {#eq-delta-l}
+
+$$
 \Delta_M
 \equiv
-\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{LM}}].
+\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{LM}}]
+=
+\frac{V^2\kappa^2}{4} - \frac{(2V-\mu)^2+\sigma^2}{4V}.
+$$ {#eq-delta-m}
+
 $$
+\Delta_M'
+\equiv
+\E[U_M^{\mathrm{SS}}]-\E[U_M^{\mathrm{LM}}]
+=
+\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2} - \frac{(2V-\mu)^2+\sigma^2}{4V}.
+$$ {#eq-delta-m-prime}
 
 ::: {#prp-stage1-br}
 ### Stage-1 Best Responses
 
+<!-- MODIFIED: removed incorrect point 3; SS ≠ ML after correction -->
 In the stage-1 timing game, labor and management choose before labor observes the realized type. Both comparisons are therefore ex ante expected-payoff comparisons:
 
 1. Labor's best response when management chooses S is
@@ -55,51 +73,76 @@ $$
 $$
 \text{BR}_M(F)=
 \begin{cases}
-\{F\}, & \Delta_M>0,\\
-\{F,S\}, & \Delta_M=0,\\
-\{S\}, & \Delta_M<0.
+\{F\}, & \Delta_M'>0,\\
+\{F,S\}, & \Delta_M'=0,\\
+\{S\}, & \Delta_M'<0.
 \end{cases}
 $$
 
-3. Along the other diagonal, both players are weakly indifferent because SS and ML coincide in expectations.
+3. Management's best response when labor chooses S is always $\{F\}$, because
+$$
+\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
+= V^2\kappa^2\cdot\frac{(1-V\lambda)^2}{4(1+V\lambda)^2}
+\ge 0.
+$$
+Management strictly prefers to lead (play F) rather than match labor in simultaneous play, except at the knife-edge $V\lambda=1$.
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-stage1-br].
+:::
 
 This matrix is the basis for the parameter-region plots. Compute $\Delta_L$ and $\Delta_M$ over the grid, then mark the regions in which each player prefers one timing choice over the other.
 
 ::: {#prp-stage1-ne}
 ### Pure-Strategy Timing Equilibria
 
+<!-- MODIFIED: updated NE conditions after SS correction; (S,S) is never NE -->
 The pure-strategy Nash equilibria of the stage-1 timing game are:
 
-1. $(S,F)$ always.
-2. $(F,F)$ if and only if $\Delta_M\ge 0$.
-3. $(S,S)$ if and only if $\Delta_L\le 0$.
+1. $(S,F)$ if and only if $\Delta_L\le 0$.
+2. $(F,F)$ if and only if $\Delta_L\le 0$ and $\Delta_M'\ge 0$.
+3. $(S,S)$: never a Nash equilibrium.
 4. $(F,S)$ if and only if $\Delta_L\ge 0$ and $\Delta_M\le 0$.
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-stage1-ne].
+:::
 
 ::: {#thm-timing-eq}
 ### Main Theorem: Endogenous Timing Equilibrium
 
+<!-- MODIFIED: completely rewritten; ML is no longer always NE; (S,S) is never NE -->
 The pure-strategy Nash equilibria of the stage-0 timing game are fully characterized by the signs of $\Delta_L$ and $\Delta_M$:
 
-1. **ML** ($(S,F)$, Management leads): always a pure-strategy Nash equilibrium.
+**Key Lemma.** Management always weakly prefers to lead rather than match labor in simultaneous play:
+$$
+\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
+= V^2\kappa^2\cdot\frac{(1-V\lambda)^2}{4(1+V\lambda)^2}
+\;\ge\; 0,
+$$
+with equality only at $V\lambda=1$. Consequently, $(S,S)$ is never a Nash equilibrium.
+
+1. **ML** ($(S,F)$, Management leads): a pure-strategy Nash equilibrium if and only if $\Delta_L \le 0$.
+
 2. **LM** ($(F,S)$, Labor leads): a pure-strategy Nash equilibrium if and only if $\Delta_L \ge 0$ and $\Delta_M \le 0$, i.e.,
 $$
-\frac{\mu^2+\sigma^2}{4V} \ge \mu - V\kappa\nu + \frac{V^2\kappa^2}{4}
+\frac{\mu^2+\sigma^2}{4V} \ge \mu - \frac{2V\kappa\nu}{1+V\lambda} + \frac{V^2\kappa^2}{(1+V\lambda)^2}
 \quad \text{and} \quad
-\frac{V^2\kappa^2}{4} \le \frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+\frac{V^2\kappa^2}{4} \le \frac{(2V-\mu)^2+\sigma^2}{4V}.
 $$
 
-When $\Delta_L < 0$, ML is the unique equilibrium delivering a sequential outcome. When $\Delta_L \ge 0$ and $\Delta_M \le 0$, both ML and LM are equilibria; in that region, the informed party (Labor) can move first in equilibrium, a configuration absent from the symmetric benchmark of @fu2006.
+3. **SS** ($(F,F)$, Simultaneous): a pure-strategy Nash equilibrium if and only if $\Delta_L \le 0$ and $\Delta_M' \ge 0$.
+
+4. **(S,S)**: never a Nash equilibrium (management strictly prefers to deviate to F by the Key Lemma).
+
+When $\Delta_L < 0$ and $\Delta_M' < 0$, ML is the unique equilibrium. When $\Delta_L \ge 0$ and $\Delta_M \le 0$, both ML and LM fail to be equilibria, so LM is the equilibrium outcome. When $\Delta_L < 0$ and $\Delta_M' \ge 0$, both ML and SS are equilibria.
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
-
-*Remark (Economic interpretation).* ML always remains an equilibrium because SS and ML induce the same continuation payoffs. LM arises only when Labor prefers to move first and Management prefers to move second.
+::: {.proof}
+See Appendix [-@sec-proof-timing-eq].
+:::
 
 ![Binary-type timing regions in the $(\mu,\delta)$ plane for the sign pattern of $(\Delta_L,\Delta_M)$ with $V=1$.](../figures/binary_timing_regions.png){#fig-timing-regions-en width=85%}
 
@@ -107,9 +150,10 @@ When $\Delta_L < 0$, ML is the unique equilibrium delivering a sequential outcom
 
 Although the timing choice is made ex ante, realized-type payoff comparisons still provide a decomposition of labor's incentives. For type $v$, define the gain from waiting (moving second) relative to moving first:
 
+<!-- MODIFIED: R(v) updated to use corrected SS payoff -->
 $$
 R(v) \equiv U_L^{\mathrm{SS}}(v) - U_L^{\mathrm{LM}}(v)
-  = \left(\sqrt{v} - \frac{V\kappa}{2}\right)^2 - \frac{v^2}{4V}.
+  = \left(\sqrt{v} - \frac{V\kappa}{1+V\lambda}\right)^2 - \frac{v^2}{4V}.
 $$ {#eq-rent-function}
 
 Thus, $R(v)>0$ means that after realizing type $v$, labor would prefer waiting (SS/ML), while $R(v)<0$ means that type would ex post prefer moving first (LM).
@@ -130,15 +174,18 @@ $$
 Hence $R(v)$ should not be read as a type-contingent timing strategy in stage 0. It is an ex post decomposition of the realized-type payoff gap underlying labor's ex ante timing choice.
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-decomp].
+:::
 
+<!-- MODIFIED: factorization and exact condition updated for corrected SS -->
 An equivalent factorization is
 
 $$
 R(v)
 =
-\left(\frac{V\kappa}{2}-\sqrt{v}-\frac{v}{2\sqrt V}\right)
-\left(\frac{V\kappa}{2}-\sqrt{v}+\frac{v}{2\sqrt V}\right).
+\left(\frac{V\kappa}{1+V\lambda}-\sqrt{v}-\frac{v}{2\sqrt V}\right)
+\left(\frac{V\kappa}{1+V\lambda}-\sqrt{v}+\frac{v}{2\sqrt V}\right).
 $$ {#eq-rent-factored}
 
 ::: {#prp-exact-condition}
@@ -147,15 +194,17 @@ $$ {#eq-rent-factored}
 Realized type $v$ ex post prefers moving first if and only if
 
 $$
-\frac{V\kappa}{2}
+\frac{V\kappa}{1+V\lambda}
 \in
 \left[\sqrt v-\frac{v}{2\sqrt V},\;\sqrt v+\frac{v}{2\sqrt V}\right].
 $$
 
-Equivalently, that realized type prefers waiting when $V\kappa/2$ lies strictly outside that interval.
+Equivalently, that realized type prefers waiting when $V\kappa/(1+V\lambda)$ lies strictly outside that interval.
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-exact].
+:::
 
 ![Labor's expected payoff under SS and LM as a function of type $v$ for the calibration $(\mu,\delta,V)=(1.2,0.4,1)$.](../figures/labor_payoff_comparison.png){#fig-labor-payoff-en width=85%}
 
@@ -166,7 +215,7 @@ Equivalently, that realized type prefers waiting when $V\kappa/2$ lies strictly 
 For binary types $V_L\in\{V_\ell,V_H\}$, evaluate $R(V_\ell)$ and $R(V_H)$ directly. The sign pair $(\operatorname{sgn}R(V_\ell),\operatorname{sgn}R(V_H))$ yields four configurations:
 
 - $(-,-)$: Both types ex post prefer moving first. Since $\E[R(V_L)]=-\Delta_L<0$, this implies $\Delta_L>0$, favoring existence of $(F,S)$ or $(F,F)$ equilibria.
-- $(+,+)$: Both types ex post prefer moving second. Since $\E[R(V_L)]=-\Delta_L>0$, this implies $\Delta_L<0$, favoring $(S,F)$ or $(S,S)$ outcomes.
+- $(+,+)$: Both types ex post prefer moving second. Since $\E[R(V_L)]=-\Delta_L>0$, this implies $\Delta_L<0$, favoring the $(S,F)$ equilibrium (ML), or additionally $(F,F)$ (SS) when $\Delta_M'\ge 0$.
 - $(+,-)$: The low type prefers moving second and the high type prefers moving first. $\Delta_L = -\frac{1}{2}(R(V_\ell)+R(V_H))$, and its sign depends on the probability-weighted average.
 - $(-,+)$: The low type prefers moving first and the high type prefers moving second. The sign of $\Delta_L$ is determined by the probability-weighted average of $R(V_\ell)$ and $R(V_H)$.
 
@@ -207,27 +256,30 @@ So the relevant claim is stronger than "pooling was checked." Relative to @fu200
 ::: {#prp-mgmt}
 ### Management's Timing Preference
 
+<!-- MODIFIED: Δ_M formula updated to use new notation -->
 Management prefers to move first (ML) rather than move second (LM), that is, $\Delta_M \ge 0$, if and only if
 
 $$
-\frac{V^2\kappa^2}{4} \ge \frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+\frac{V^2\kappa^2}{4} \ge \frac{(2V-\mu)^2+\sigma^2}{4V}.
 $$ {#eq-mgmt-cond}
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-mgmt].
+:::
 
 ### Functional Examples
 
 **Binary** ($\sigma^2=\delta^2$):
 
 $$
-V^3(\kappa^B)^2 \ge 4V^2-4V\mu+\mu^2+\delta^2.
+V^3(\kappa^B)^2 \ge (2V-\mu)^2+\delta^2.
 $$
 
 **Uniform** ($\sigma^2=\delta^2/3$):
 
 $$
-V^3(\kappa^U)^2 \ge 4V^2-4V\mu+\mu^2+\frac{\delta^2}{3}.
+V^3(\kappa^U)^2 \ge (2V-\mu)^2+\frac{\delta^2}{3}.
 $$
 
 ### Pooling Ambiguity

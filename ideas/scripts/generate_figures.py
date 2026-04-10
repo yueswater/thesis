@@ -26,6 +26,8 @@ DPI = 600
 V = 1.0
 
 
+# MODIFIED: added binary_lambda; updated e_ul_ss, e_um_ss to use corrected BNE formulas
+
 def binary_kappa(mu: float, delta: float) -> float:
     v_low = mu - delta
     v_high = mu + delta
@@ -38,15 +40,36 @@ def binary_nu(mu: float, delta: float) -> float:
     return 0.5 * (math.sqrt(v_low) + math.sqrt(v_high))
 
 
+def binary_lambda(mu: float, delta: float) -> float:
+    v_low = mu - delta
+    v_high = mu + delta
+    return 0.5 / v_low + 0.5 / v_high
+
+
 def e_ul_ss(mu: float, delta: float, V: float) -> float:
     kappa = binary_kappa(mu, delta)
     nu = binary_nu(mu, delta)
-    return mu - V * kappa * nu + (V * V * kappa * kappa) / 4.0
+    lam = binary_lambda(mu, delta)
+    denom = 1.0 + V * lam
+    return mu - 2.0 * V * kappa * nu / denom + (V * kappa) ** 2 / denom**2
 
 
 def e_um_ss(mu: float, delta: float, V: float) -> float:
     kappa = binary_kappa(mu, delta)
-    return (V * V * kappa * kappa) / 4.0
+    lam = binary_lambda(mu, delta)
+    denom = 1.0 + V * lam
+    return V**3 * kappa**2 * lam / denom**2
+
+
+def e_ul_ml(mu: float, delta: float, V: float) -> float:
+    kappa = binary_kappa(mu, delta)
+    nu = binary_nu(mu, delta)
+    return mu - V * kappa * nu + (V * kappa) ** 2 / 4.0
+
+
+def e_um_ml(mu: float, delta: float, V: float) -> float:
+    kappa = binary_kappa(mu, delta)
+    return (V * kappa) ** 2 / 4.0
 
 
 def e_ul_lm(mu: float, delta: float, V: float) -> float:
@@ -54,12 +77,16 @@ def e_ul_lm(mu: float, delta: float, V: float) -> float:
 
 
 def e_um_lm(mu: float, delta: float, V: float) -> float:
-    return (4.0 * V * V - 4.0 * V * mu + mu * mu + delta * delta) / (4.0 * V)
+    two_v_minus_mu = 2.0 * V - mu
+    return (two_v_minus_mu * two_v_minus_mu + delta * delta) / (4.0 * V)
 
 
+# MODIFIED: updated to use corrected SS BNE payoff
 def labor_ss_payoff(v: np.ndarray, mu: float, delta: float, V: float) -> np.ndarray:
     kappa = binary_kappa(mu, delta)
-    return (np.sqrt(v) - V * kappa / 2.0) ** 2
+    lam = binary_lambda(mu, delta)
+    c = V * kappa / (1.0 + V * lam)
+    return (np.sqrt(v) - c) ** 2
 
 
 def labor_lm_payoff(v: np.ndarray, V: float) -> np.ndarray:
@@ -97,8 +124,9 @@ def plot_timing_regions() -> None:
         for j, mu in enumerate(mu_vals):
             if delta >= mu:
                 continue
+            # MODIFIED: delta_l uses corrected SS BNE; delta_m uses ML (not SS)
             delta_l = e_ul_lm(mu, delta, V) - e_ul_ss(mu, delta, V)
-            delta_m = e_um_ss(mu, delta, V) - e_um_lm(mu, delta, V)
+            delta_m = e_um_ml(mu, delta, V) - e_um_lm(mu, delta, V)
             if delta_l >= 0 and delta_m >= 0:
                 grid[i, j] = 0
             elif delta_l >= 0 and delta_m < 0:

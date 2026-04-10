@@ -4,78 +4,96 @@ This section studies the three subgames jointly: SS (simultaneous moves), ML (ma
 
 ## SS: Simultaneous Moves {#sec-ss}
 
-Both players choose effort simultaneously. Labor chooses $x_L$ by type $V_L$, while management chooses $x_M$ under incomplete information about $V_L$. Substituting @eq-brl into management's objective and taking expectation over types gives
+<!-- MODIFIED: corrected BNE derivation; old code incorrectly substituted labor's BR into management's objective, which computes the Stackelberg leader problem (= ML), not the BNE -->
+
+Both players choose effort simultaneously. Labor chooses $x_L$ by type $V_L$, while management chooses $x_M$ under incomplete information about $V_L$. In a Bayesian Nash equilibrium, each player optimizes given the other's equilibrium strategy. Labor's equilibrium strategy is the type-by-type best response $x_L(v) = \sqrt{vx_M} - x_M$ from @eq-brl. Management's first-order condition, taking labor's equilibrium strategy as given, is
 
 $$
-\E[U_M] = V\sqrt{x_M}\,\kappa - x_M,
-\qquad
-\frac{\partial \E[U_M]}{\partial x_M}
-  = \frac{V\kappa}{2\sqrt{x_M}} - 1.
+V\cdot\E\!\left[\frac{x_L(V_L)}{(x_L(V_L)+x_M)^2}\right] = 1.
 $$
+
+Substituting $x_L(v)+x_M = \sqrt{vx_M}$ gives
+
+$$
+V\cdot\E\!\left[\frac{\sqrt{V_Lx_M}-x_M}{V_Lx_M}\right]
+= V\!\left(\frac{\kappa}{\sqrt{x_M}}-\lambda\right) = 1,
+$$
+
+where $\lambda\equiv\E[V_L^{-1}]$. Solving for $\sqrt{x_M}$ yields the equilibrium.
 
 ::: {#prp-ss}
 ### Simultaneous-Move Equilibrium
 
-The SS equilibrium is
+<!-- MODIFIED: corrected SS equilibrium formulas -->
+The SS Bayesian Nash equilibrium is
 
 $$
-x_M^{\mathrm{SS}} = \frac{V^2\kappa^2}{4}, \qquad
+x_M^{\mathrm{SS}} = \frac{V^2\kappa^2}{(1+V\lambda)^2}, \qquad
 x_L^{\mathrm{SS}}(V_L)
-  = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
+  = \frac{V\kappa\sqrt{V_L}}{1+V\lambda} - \frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$ {#eq-ss-efforts}
 
 Equilibrium payoffs are
 
 $$
 U_L^{\mathrm{SS}}(V_L)
-  = \left(\sqrt{V_L} - \frac{V\kappa}{2}\right)^2,
+  = \left(\sqrt{V_L} - \frac{V\kappa}{1+V\lambda}\right)^2,
 $$ {#eq-ul-ss}
 
 $$
 U_M^{\mathrm{SS}}(V_L)
-  = \frac{V^2\kappa}{2\sqrt{V_L}} - \frac{V^2\kappa^2}{4}.
+  = \frac{V^2\kappa}{(1+V\lambda)\sqrt{V_L}} - \frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$ {#eq-um-ss}
 
 Expected payoffs are
 
 $$
 \E\!\left[U_L^{\mathrm{SS}}\right]
-  = \mu - V\kappa\nu + \frac{V^2\kappa^2}{4},
+  = \mu - \frac{2V\kappa\nu}{1+V\lambda} + \frac{V^2\kappa^2}{(1+V\lambda)^2},
 $$ {#eq-eul-ss}
 
 $$
 \E\!\left[U_M^{\mathrm{SS}}\right]
-  = \frac{V^2\kappa^2}{4}.
+  = \frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}.
 $$ {#eq-eum-ss}
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-ss].
+:::
 
 Substituting moments from @tbl-moments into @prp-ss gives distribution-specific formulas.
 
-**Binary.** Let $\kappa^B = \frac{1}{2u_\ell} + \frac{1}{2u_H}$ and $\nu^B = \frac{u_\ell + u_H}{2}$:
+**Binary.** Let $\kappa^B$, $\nu^B$, $\lambda^B$ be the binary-distribution moments from @tbl-moments:
 
 $$
-x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{4},
+x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2},
 \qquad
 \E\!\left[U_L^{\mathrm{SS},B}\right]
-  = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{4}.
+  = \mu - \frac{2V\kappa^B\nu^B}{1+V\lambda^B} + \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2}.
 $$
 
-**Uniform.** Let $\kappa^U = \frac{u_H - u_\ell}{\delta}$ and $\nu^U = \frac{u_H^3 - u_\ell^3}{3\delta}$:
+**Uniform.** Let $\kappa^U$, $\nu^U$, $\lambda^U$ be the uniform-distribution moments from @tbl-moments:
 
 $$
-x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{4},
+x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2},
 \qquad
 \E\!\left[U_L^{\mathrm{SS},U}\right]
-  = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{4}.
+  = \mu - \frac{2V\kappa^U\nu^U}{1+V\lambda^U} + \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2}.
 $$
 
-Because $v\mapsto v^{-1/2}$ is convex, the binary distribution yields a larger $\kappa$ than the uniform distribution. That increases management effort in SS.
+Because $v\mapsto v^{-1/2}$ is convex, the binary distribution yields a larger $\kappa$ than the uniform distribution.
 
 ## ML: Management Moves First {#sec-ml}
 
-Management commits to $x_M$ before observing labor's type. Labor then responds type by type using @eq-brl. Hence management solves the same expected objective as in SS.
+<!-- MODIFIED: ML payoffs are now distinct from SS; ML solves the Stackelberg leader problem, not the BNE problem -->
+
+Management commits to $x_M$ before observing labor's type. Labor then responds type by type using @eq-brl, so management can anticipate $x_L(v)=\sqrt{vx_M}-x_M$ and maximize
+
+$$
+\max_{x_M\ge 0}\;\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]
+=\max_{x_M\ge 0}\;\bigl(V\sqrt{x_M}\,\kappa-x_M\bigr).
+$$
 
 ::: {#prp-ml}
 ### ML Equilibrium
@@ -86,7 +104,19 @@ x_L^{\mathrm{ML}}(V_L)
   = \frac{V\kappa}{2}\sqrt{V_L} - \frac{V^2\kappa^2}{4}.
 $$ {#eq-ml-efforts}
 
-Payoffs coincide with @eq-ul-ss--@eq-eum-ss:
+Type-level payoffs are
+
+$$
+U_L^{\mathrm{ML}}(V_L)
+  = \left(\sqrt{V_L} - \frac{V\kappa}{2}\right)^2,
+$$ {#eq-ul-ml-type}
+
+$$
+U_M^{\mathrm{ML}}(V_L)
+  = \frac{V^2\kappa}{2\sqrt{V_L}} - \frac{V^2\kappa^2}{4}.
+$$ {#eq-um-ml-type}
+
+Expected payoffs are
 
 $$
 \E\!\left[U_L^{\mathrm{ML}}\right]
@@ -99,9 +129,11 @@ $$
 $$ {#eq-eum-ml}
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-ml].
+:::
 
-Distribution-specific expressions are therefore identical to the SS formulas above.
+Note that $\E[U_M^{\mathrm{ML}}]=V^2\kappa^2/4$ whereas $\E[U_M^{\mathrm{SS}}]=V^3\kappa^2\lambda/(1+V\lambda)^2$; these are equal only in the knife-edge case $V\lambda=1$. The Stackelberg leader position allows management to set a higher commitment level than in simultaneous play, yielding a weakly higher payoff.
 
 ## LM: Labor Moves First {#sec-lm}
 
@@ -138,7 +170,9 @@ U_M^{\mathrm{LM}}(v) = \frac{(2V - v)^2}{4V}.
 $$ {#eq-um-lm}
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-separating].
+:::
 
 ::: {#prp-no-pool}
 ### No Pooling Equilibrium and Incentive Constraints
@@ -146,7 +180,9 @@ $$ {#eq-um-lm}
 The LM subgame admits a unique PBE, and it is separating.
 :::
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-no-pool].
+:::
 
 This argument is distribution-free: binary, uniform, or any continuous type distribution all lead to the same uniqueness logic in LM.
 
@@ -236,7 +272,9 @@ $$ {#eq-eum-lm}
 
 where $\sigma^2=\Var(V_L)$.
 
-*（Proof: Appendix [-@sec-appendix].）*
+::: {.proof}
+See Appendix [-@sec-proof-lm-payoff].
+:::
 
 ### Functional Examples {#sec-lm-examples}
 
