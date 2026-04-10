@@ -2,7 +2,7 @@
 
 ## Environment
 
-There are two players: labor ($L$) and management ($M$). They compete over which side's preferred policy is implemented. The outcome is winner-take-all: the winner receives its own prize value, while the loser receives 0. Contest technology follows @tullock1980; endogenous timing follows @hamilton1990 and @fu2006.
+There are two players: labor ($L$) and management ($M$). They compete over which side's preferred policy is implemented. The outcome is winner-take-all: the winner receives its own prize value, while the loser receives 0. Contest technology follows @tullock1980. Endogenous timing follows @hamilton1990 and @fu2006.
 
 ::: {#def-prizes}
 ### Asymmetric Prize Values
@@ -12,7 +12,7 @@ If labor wins, labor obtains $V_L>0$ and management obtains 0. If management win
 
 ## Information Structure
 
-Management knows only the distribution of $V_L$, not its realization. More importantly, at the timing stage labor also does not yet observe its realized prize value. Only after both players choose timing does labor privately observe $V_L$, and then the corresponding effort subgame is played. Hence the timing choice is necessarily based on ex ante expected payoffs. We assume $V_L$ has support set $[\mu-\delta,\mu+\delta]$, with $\mu>\delta>0$, so that $\E[V_L]=\mu$.
+Management knows only the distribution of $V_L$, not its realization. At the timing stage, labor also does not yet observe its realized prize value. Only after both players choose timing does labor privately observe $V_L$, and then the corresponding effort subgame is played. Hence the timing choice must be based on ex ante expected payoffs. We assume $V_L$ has support set $[\mu-\delta,\mu+\delta]$, with $\mu>\delta>0$, so that $\E[V_L]=\mu$.
 
 Define
 
@@ -43,7 +43,7 @@ $$
 with density $f(v)=1/(2\delta)$. Hence $\Var(V_L)=\delta^2/3$.
 :::
 
-Both distributions share the same mean $\mu$ and support set $[\mu-\delta,\mu+\delta]$, but differ in variance. Equilibrium expressions depend on two key moments:
+Both distributions share the same mean $\mu$ and support set $[\mu-\delta,\mu+\delta]$, but differ in variance. Equilibrium expressions depend on two moments:
 
 $$
 \kappa \equiv \E\!\left[\frac{1}{\sqrt{V_L}}\right],
@@ -59,7 +59,7 @@ The timing protocol follows the three-stage logic in @fu2006:
 2. Stage 1: nature realizes $V_L$, and only labor observes its realized type.
 3. Stage 2: players choose effort in the induced institution SS, ML, or LM.
 
-Therefore, type-level payoff comparisons are defined after realization, but the actual timing choice is made ex ante.
+Type-level payoff comparisons are defined after realization, but the timing choice itself is made ex ante.
 
 ::: {#prp-moments}
 ### Moment Comparison
@@ -75,23 +75,7 @@ The key moments are:
 : Key moments under binary and uniform distributions {#tbl-moments}
 :::
 
-::: {.proof}
-For the binary case, moments follow directly from definition. For the uniform case:
-
-$$
-\kappa^U
-=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta} v^{-1/2}\,dv
-=\frac{[2\sqrt v]_{\mu-\delta}^{\mu+\delta}}{2\delta}
-=\frac{u_H-u_\ell}{\delta},
-$$
-
-$$
-\nu^U
-=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta} v^{1/2}\,dv
-=\frac{[\tfrac{2}{3}v^{3/2}]_{\mu-\delta}^{\mu+\delta}}{2\delta}
-=\frac{u_H^3-u_\ell^3}{3\delta}.
-$$
-:::
+*（Proof: Appendix [-@sec-appendix].）*
 
 ## Contest Payoffs and Best Responses
 
@@ -115,4 +99,4 @@ $$
 x_M^*(x_L;V)=\sqrt{Vx_L}-x_L.
 $$ {#eq-brm}
 
-Management's best response @eq-brm depends only on observed effort $x_L$ and known value $V$. Beliefs about labor types do not directly enter the second-stage best response. This is central for the separation-versus-pooling result later.
+Management's best response @eq-brm depends only on observed effort $x_L$ and known value $V$. Beliefs about labor types do not directly enter the second-stage best response. This is central for the later separation-versus-pooling result.

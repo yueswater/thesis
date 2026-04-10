@@ -1,0 +1,402 @@
+# 附錄：證明 {#sec-appendix}
+
+## 命題 [-@prp-moments] 的證明
+
+二點分配下的動差可由定義直接計算：
+
+$$
+\kappa^B=\frac{1}{2u_\ell}+\frac{1}{2u_H},
+\qquad
+\nu^B=\frac{u_\ell+u_H}{2}.
+$$
+
+對均勻分配，設其密度為
+
+$$
+f(v)=\frac{1}{2\delta}\mathbf{1}_{[\mu-\delta,\mu+\delta]}(v).
+$$
+
+由於 $[\mu-\delta,\mu+\delta]\subset(0,\infty)$ 為緊緻集，且 $v\mapsto v^{-1/2}$ 在其上連續，故 $v^{-1/2}$ 為 Lebesgue 可積。令 $u=\sqrt v$，則此為 $C^1$ 微分同胚，且 $dv=2u\,du$。因此
+
+$$
+\kappa^U
+=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta}v^{-1/2}\,dv
+=\frac{1}{2\delta}\cdot\bigl[2\sqrt v\bigr]_{\mu-\delta}^{\mu+\delta}
+=\frac{u_H-u_\ell}{\delta}.
+$$
+
+同理，$v\mapsto v^{1/2}$ 亦為 Lebesgue 可積，故
+
+$$
+\nu^U
+=\frac{1}{2\delta}\int_{\mu-\delta}^{\mu+\delta}v^{1/2}\,dv
+=\frac{1}{2\delta}\cdot\left[\frac{2}{3}v^{3/2}\right]_{\mu-\delta}^{\mu+\delta}
+=\frac{u_H^3-u_\ell^3}{3\delta}.
+$$
+
+最後比較 $\kappa^B$ 與 $\kappa^U$。由於 $v\mapsto v^{-1/2}$ 在 $(0,\infty)$ 上嚴格凸，Jensen 不等式給出
+
+$$
+\kappa^B=\E_{\mathrm{binary}}[V_L^{-1/2}]
+>
+\left(\E_{\mathrm{binary}}[V_L]\right)^{-1/2}
+=\mu^{-1/2}.
+$$
+
+此外，由 $u_H^2-u_\ell^2=2\delta$ 可得
+
+$$
+\kappa^U=\frac{u_H-u_\ell}{\delta}=\frac{2}{u_H+u_\ell},
+\qquad
+\kappa^B=\frac{1}{2u_\ell}+\frac{1}{2u_H}
+=\frac{u_H+u_\ell}{2u_\ell u_H}.
+$$
+
+故
+
+$$
+\kappa^B-\kappa^U
+=\frac{(u_H+u_\ell)^2-4u_\ell u_H}{2u_\ell u_H(u_H+u_\ell)}
+=\frac{(u_H-u_\ell)^2}{2u_\ell u_H(u_H+u_\ell)}
+>0.
+$$
+
+因此 $\kappa^B>\kappa^U$。
+
+## 命題 [-@prp-ss] 的證明
+
+由 @eq-brl，型別 $v$ 的勞方最佳反應為 $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$。代入 @eq-um 得
+
+$$
+U_M(x_L^*,x_M;V)
+=\frac{x_M}{x_M+\sqrt{vx_M}-x_M}V-x_M
+=V\sqrt{\frac{x_M}{v}}-x_M.
+$$
+
+對 $v$ 取期望得
+
+$$
+\E[U_M]=V\sqrt{x_M}\,\E[v^{-1/2}]-x_M
+=V\sqrt{x_M}\,\kappa-x_M.
+$$
+
+一階與二階條件為
+
+$$
+\frac{\partial \E[U_M]}{\partial x_M}
+=\frac{V\kappa}{2\sqrt{x_M}}-1=0,
+\qquad
+\frac{\partial^2 \E[U_M]}{\partial x_M^2}
+=-\frac{V\kappa}{4x_M^{3/2}}<0,
+$$
+
+故唯一極大值為 $x_M^{\mathrm{SS}}=V^2\kappa^2/4$。再由 @eq-brl 得
+
+$$
+x_L^{\mathrm{SS}}(v)
+=\sqrt{v\cdot\frac{V^2\kappa^2}{4}}-\frac{V^2\kappa^2}{4}
+=\frac{V\kappa}{2}\sqrt v-\frac{V^2\kappa^2}{4}.
+$$
+
+代回 @eq-ul 與 @eq-um 可得
+
+$$
+U_L^{\mathrm{SS}}(v)
+=\frac{x_L^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}v-x_L^{\mathrm{SS}}
+=\left(\sqrt v-\frac{V\kappa}{2}\right)^2,
+$$
+
+$$
+U_M^{\mathrm{SS}}(v)
+=\frac{x_M^{\mathrm{SS}}}{x_L^{\mathrm{SS}}+x_M^{\mathrm{SS}}}V-x_M^{\mathrm{SS}}
+=\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}.
+$$
+
+最後，
+
+$$
+\E[U_L^{\mathrm{SS}}]
+=\E\!\left[v-V\kappa\sqrt v+\frac{V^2\kappa^2}{4}\right]
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{4},
+$$
+
+$$
+\E[U_M^{\mathrm{SS}}]
+=\E\!\left[\frac{V^2\kappa}{2\sqrt v}-\frac{V^2\kappa^2}{4}\right]
+=\frac{V^2\kappa}{2}\E[v^{-1/2}]-\frac{V^2\kappa^2}{4}
+=\frac{V^2\kappa^2}{4}.
+$$
+
+## 命題 [-@prp-ml] 的證明
+
+在 ML 中，第二階段仍由勞方採用型別條件式最佳反應 $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$。因此第一階段資方解的是
+
+$$
+\max_{x_M\ge 0}\;\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]
+=\max_{x_M\ge 0}\;\left(V\sqrt{x_M}\,\kappa-x_M\right),
+$$
+
+這正是 SS 中的問題。故一階與二階條件給出相同的最適 $x_M$，再由 @eq-brl 得到相同的 $x_L(v)$，因此所有報酬皆與 SS 相同。
+
+## 命題 [-@prp-separating] 的證明
+
+勞方求解
+
+$$
+\max_{x_L\ge 0}\;W(x_L;v)=\max_{x_L\ge 0}\left(\frac{v}{\sqrt V}\sqrt{x_L}-x_L\right).
+$$
+
+一階條件為
+
+$$
+\frac{v}{2\sqrt{Vx_L}} - 1 = 0
+\quad\Rightarrow\quad
+x_L^{\mathrm{LM}}(v)=\frac{v^2}{4V}.
+$$
+
+二階條件為
+
+$$
+\frac{\partial^2 W}{\partial x_L^2}=-\frac{v}{4\sqrt V}x_L^{-3/2}<0,
+$$
+
+故此為唯一全域最適解。再由 @eq-brm 可得
+
+$$
+x_M^{\mathrm{LM}}(v)
+=\sqrt{V\cdot\frac{v^2}{4V}}-\frac{v^2}{4V}
+=\frac{v(2V-v)}{4V}.
+$$
+
+代回 @eq-ul 與 @eq-um 即得 @eq-ul-lm 與 @eq-um-lm。
+
+## 命題 [-@prp-no-pool] 的證明
+
+分兩步證明。
+
+第一步，證明型別與均衡投入的一一對應。定義
+
+$$
+\phi:[\mu-\delta,\mu+\delta]\to\mathbb{R},
+\qquad
+\phi(v)=\frac{v^2}{4V}.
+$$
+
+由於 $\mu>\delta>0$，支持集 $[\mu-\delta,\mu+\delta]$ 完全位於 $(0,\infty)$。因此對任意 $v$ 於支持集內，
+
+$$
+\phi'(v)=\frac{v}{2V}>0.
+$$
+
+故 $\phi$ 在支持集上嚴格遞增，從而為單射。亦即，若 $v\neq v'$，則
+
+$$
+\phi(v)\neq \phi(v').
+$$
+
+因此，不同型別無法在最適投入上混同；任何要求兩個不同型別採取相同投入的候選策略，都無法與 $\phi$ 的單射性相容。
+
+第二步，證明 truthful 策略滿足全域嚴格誘因相容。固定任意真實型別 $v$ 與任意 $s\neq v$。若型別 $v$ 採取型別 $s$ 的投入
+
+$$
+x_L=\frac{s^2}{4V},
+$$
+
+則資方依 @eq-brm 回應後，型別 $v$ 的報酬為
+
+$$
+\tilde{U}(v,s)
+=\frac{v}{\sqrt{V}}\cdot\frac{s}{2\sqrt{V}}-\frac{s^2}{4V}
+=\frac{2vs-s^2}{4V}.
+$$
+
+若誠實揭露，則報酬為
+
+$$
+U(v,v)=\frac{v^2}{4V}.
+$$
+
+兩者差額為
+
+$$
+U(v,v)-\tilde{U}(v,s)
+=\frac{v^2-2vs+s^2}{4V}
+=\frac{(v-s)^2}{4V}>0
+\qquad\forall s\neq v.
+$$
+
+此差額為正定二次型，對所有 $s\neq v$ 皆嚴格為正。故任何要求型別 $v$ 採取 $s^2/(4V)$（其中 $s\neq v$）的策略，都被 truthful 策略嚴格支配。
+
+在二點型別特例下，上式即對應正文的 `IC_H` 與 `IC_L`。這兩條限制同時成立，是候選分離均衡可行的必要且充分條件。必要性來自分離均衡必須排除雙向模仿。充分性則來自，在 @eq-brm 給定的續局最佳反應下，只要兩條 IC 同時成立，兩型別各自選擇自己的行動即為最佳反應。
+
+若令
+
+$$
+D(v,s)\equiv U(v,v)-\tilde U(v,s)=\frac{(v-s)^2}{4V},
+$$
+
+則對固定 $s$ 而言，$D(v,s)$ 僅在 $v=s$ 時取零，且
+
+$$
+\frac{\partial D(v,s)}{\partial v}=\frac{v-s}{2V}
+$$
+
+在 $v=s$ 處變號。這提供了單交叉性的表述。不過，本文不需額外依賴單交叉性。原因是 $D(v,s)>0$ 對所有 $s\neq v$ 皆成立，已直接給出更強的全域嚴格誘因相容。
+
+又因資方的續局最佳反應只依賴觀察到的投入與參數 $V$，不依賴後驗信念，故信念無法改變上述偏離誘因。於是，PBE 中不存在混同均衡或半分離均衡行為，也不存在使 pooling 可行的參數區域。LM 子賽局的唯一完美貝葉斯均衡，必為分離均衡。
+
+## LM 期望報酬公式的證明
+
+由 @eq-ul-lm，$U_L^{\mathrm{LM}}(v)=v^2/(4V)$，因此
+
+$$
+\E[U_L^{\mathrm{LM}}]
+=\E\!\left[\frac{V_L^2}{4V}\right]
+=\frac{\E[V_L^2]}{4V}
+=\frac{\mu^2+\sigma^2}{4V}.
+$$
+
+由 @eq-um-lm，
+
+$$
+\E[U_M^{\mathrm{LM}}]
+=\E\!\left[\frac{(2V-V_L)^2}{4V}\right]
+=\frac{4V^2-4V\E[V_L]+\E[V_L^2]}{4V}
+=\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+$$
+
+## 命題 [-@prp-stage1-br] 的證明
+
+由第一階段的報酬矩陣可知：
+
+- 若資方選 S，勞方比較的是 $\E[U_L^{\mathrm{LM}}]$（選 F）與 $\E[U_L^{\mathrm{SS}}]$（選 S），故差額為 $\Delta_L$。
+- 若資方選 F，勞方比較的是 SS 與 ML，而兩者相等。
+- 若勞方選 F，資方比較的是 SS 與 LM，故差額為 $\Delta_M$。
+- 若勞方選 S，資方比較的是 ML 與 SS，而兩者相等。
+
+因此可直接得到命題中的最佳反應對應。
+
+## 命題 [-@prp-stage1-ne] 的證明
+
+逐格檢視第一階段報酬矩陣即可：
+
+- 在 $(S,F)$ 處，勞方比較 ML 與 SS、資方比較 ML 與 SS；雙方皆弱無異，因此 $(S,F)$ 為 Nash 均衡。
+- 在 $(F,F)$ 處，勞方仍無異，而資方偏好 F 勝於 S 的條件為 $\E[U_M^{\mathrm{SS}}]\ge \E[U_M^{\mathrm{LM}}]$，亦即 $\Delta_M\ge 0$。
+- 在 $(S,S)$ 處，資方無異，而勞方偏好 S 勝於 F 的條件為 $\E[U_L^{\mathrm{SS}}]\ge \E[U_L^{\mathrm{LM}}]$，亦即 $\Delta_L\le 0$。
+- 在 $(F,S)$ 處，勞方偏好 F 勝於 S 的條件為 $\Delta_L\ge 0$；資方偏好 S 勝於 F 的條件為 $\E[U_M^{\mathrm{LM}}]\ge \E[U_M^{\mathrm{SS}}]$，亦即 $\Delta_M\le 0$。
+
+故命題成立。
+
+## 定理 [-@thm-timing-eq] 的證明
+
+對策略組合 $(a_L,a_M)\in\{F,S\}^2$，$(a_L,a_M)$ 為 Nash 均衡，當且僅當對每位玩家而言，單邊偏離皆不嚴格有利。
+
+先證 $(S,F)$。若勞方由 $S$ 偏離至 $F$，結果由 $(S,F)$ 變為 $(F,F)$，即由 ML 變為 SS。勞方的報酬由 $\E[U_L^{\mathrm{ML}}]$ 變為 $\E[U_L^{\mathrm{SS}}]$。由 @eq-eul-ml 可知兩者相等，故勞方不存在嚴格偏離誘因。若資方由 $F$ 偏離至 $S$，結果由 $(S,F)$ 變為 $(S,S)$，即由 ML 變為 SS。資方的報酬由 $\E[U_M^{\mathrm{ML}}]$ 變為 $\E[U_M^{\mathrm{SS}}]$。由 @eq-eum-ml 可知兩者相等，故資方亦不存在嚴格偏離誘因。故 $(S,F)$ 對所有參數值恆為 Nash 均衡。
+
+再證 $(F,S)$ 的充要條件。若勞方由 $F$ 偏離至 $S$，報酬由 $\E[U_L^{\mathrm{LM}}]$ 變為 $\E[U_L^{\mathrm{SS}}]$。勞方不偏離之充要條件為
+
+$$
+\E[U_L^{\mathrm{LM}}]\ge \E[U_L^{\mathrm{SS}}],
+$$
+
+亦即
+
+$$
+\Delta_L\ge 0.
+$$
+
+若資方由 $S$ 偏離至 $F$，策略組合由 $(F,S)$ 變為 $(F,F)$，即 SS。資方的報酬由 $\E[U_M^{\mathrm{LM}}]$ 變為 $\E[U_M^{\mathrm{SS}}]=\E[U_M^{\mathrm{ML}}]$。資方不偏離之充要條件為
+
+$$
+\E[U_M^{\mathrm{LM}}]\ge \E[U_M^{\mathrm{ML}}],
+$$
+
+亦即
+
+$$
+\Delta_M\le 0.
+$$
+
+兩條件必須同時成立。故 $(F,S)$ 為 Nash 均衡，若且唯若 $\Delta_L\ge 0$ 且 $\Delta_M\le 0$。最後，將 @eq-eul-ss、@eq-eum-ml、@eq-eul-lm 與 @eq-eum-lm 代入，即得定理中的顯式不等式。
+
+## 命題 [-@prp-ex-ante-decomp] 的證明
+
+由 $R(v)\equiv U_L^{\mathrm{SS}}(v)-U_L^{\mathrm{LM}}(v)$，直接對 $V_L$ 取期望可得
+
+$$
+\E[R(V_L)]
+=
+\E[U_L^{\mathrm{SS}}]-\E[U_L^{\mathrm{LM}}]
+=
+-\Delta_L.
+$$
+
+故命題成立。
+
+## 命題 [-@prp-exact-condition] 的證明
+
+型別 $v$ 事後偏好先動，當且僅當
+
+$$
+R(v)\le 0.
+$$
+
+由定義，
+
+$$
+R(v)\leq 0
+\iff
+\left(\sqrt{v}-\frac{V\kappa}{2}\right)^2\leq\frac{v^2}{4V}.
+$$
+
+因 $v>0$，故右端的平方根 $\frac{v}{2\sqrt V}$ 嚴格為正，所以下列絕對值不等式為等價條件：
+
+$$
+\left|\sqrt{v}-\frac{V\kappa}{2}\right|
+\leq
+\frac{v}{2\sqrt{V}}.
+$$
+
+展開絕對值不等式，即得雙邊條件
+
+$$
+\sqrt{v}-\frac{v}{2\sqrt{V}}
+\leq
+\frac{V\kappa}{2}
+\leq
+\sqrt{v}+\frac{v}{2\sqrt{V}}.
+$$
+
+故命題成立。
+
+## 命題 [-@prp-mgmt] 的證明
+
+由 @eq-eum-ml 與 @eq-eum-lm 得
+
+$$
+\E\!\left[U_M^{\mathrm{ML}}\right]=\frac{V^2\kappa^2}{4},
+\qquad
+\E\!\left[U_M^{\mathrm{LM}}\right]=\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
+$$
+
+故條件 $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ 即為 @eq-mgmt-cond。注意定理 [-@thm-timing-eq] 中 LM 均衡的成立需要 $\Delta_M \le 0$，即此不等式方向反轉。
+
+## 第 @sec-welfare 節福利公式的證明
+
+依定義，$W=U_L+U_M$。對 SS（以及與其報酬等價的 ML）而言，
+
+$$
+\E[W^{\mathrm{SS}}]
+=\E[U_L^{\mathrm{SS}}]+\E[U_M^{\mathrm{SS}}]
+=\left(\mu-V\kappa\nu+\frac{V^2\kappa^2}{4}\right)+\frac{V^2\kappa^2}{4}
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{2}.
+$$
+
+對 LM 而言，
+
+$$
+\E[W^{\mathrm{LM}}]
+=\E[U_L^{\mathrm{LM}}]+\E[U_M^{\mathrm{LM}}]
+=\frac{\mu^2+\sigma^2}{4V}+\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}
+=V-\mu+\frac{\mu^2+\sigma^2}{2V}.
+$$

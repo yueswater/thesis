@@ -2,16 +2,14 @@
 
 ## Stage-1 Expected-Payoff Matrix
 
-Following the endogenous-timing setup in @fu2006, let each player choose
-F (move in period 1) or S (move in period 2).
-This generates four timing profiles in stage 1:
+Following the endogenous-timing setup in @fu2006, let each player choose F (move in period 1) or S (move in period 2). This generates four timing profiles:
 
 |  | Management: F | Management: S |
 |---|---|---|
 | Labor: F | SS | LM |
 | Labor: S | ML | SS |
 
-Using Section @sec-equilibria results, the expected-payoff matrix is
+Using the results in Section @sec-equilibria, the expected-payoff matrix is
 
 |  | Management: F | Management: S |
 |---|---|---|
@@ -41,9 +39,9 @@ $$
 ::: {#prp-stage1-br}
 ### Stage-1 Best Responses
 
-In the stage-1 timing game, labor and management choose before labor observes the realized type, so both comparisons are ex ante expected-payoff comparisons:
+In the stage-1 timing game, labor and management choose before labor observes the realized type. Both comparisons are therefore ex ante expected-payoff comparisons:
 
-1. Labor's strict comparison is against management playing S:
+1. Labor's best response when management chooses S is
 $$
 \text{BR}_L(S)=
 \begin{cases}
@@ -53,7 +51,7 @@ $$
 \end{cases}
 $$
 
-2. Management's strict comparison is against labor playing F:
+2. Management's best response when labor chooses F is
 $$
 \text{BR}_M(F)=
 \begin{cases}
@@ -63,22 +61,12 @@ $$
 \end{cases}
 $$
 
-3. Along the other diagonal cells, both players are weakly indifferent because SS and ML coincide in expectations.
+3. Along the other diagonal, both players are weakly indifferent because SS and ML coincide in expectations.
 :::
 
-::: {.proof}
-From the matrix above:
+*（Proof: Appendix [-@sec-appendix].）*
 
-- If management chooses S, labor compares $\E[U_L^{\mathrm{LM}}]$ (choose F) with $\E[U_L^{\mathrm{SS}}]$ (choose S), yielding $\Delta_L$.
-- If management chooses F, labor compares SS with ML, which are equal.
-- If labor chooses F, management compares SS with LM, yielding $\Delta_M$.
-- If labor chooses S, management compares ML with SS, which are equal.
-
-Hence the best-response correspondences follow immediately.
-:::
-
-This matrix is the object to use for your parameter-region plots: compute
-$\Delta_L$ and $\Delta_M$ over grids, then mark regions where each is positive/negative.
+This matrix is the basis for the parameter-region plots. Compute $\Delta_L$ and $\Delta_M$ over the grid, then mark the regions in which each player prefers one timing choice over the other.
 
 ::: {#prp-stage1-ne}
 ### Pure-Strategy Timing Equilibria
@@ -91,21 +79,12 @@ The pure-strategy Nash equilibria of the stage-1 timing game are:
 4. $(F,S)$ if and only if $\Delta_L\ge 0$ and $\Delta_M\le 0$.
 :::
 
-::: {.proof}
-Read each cell from the payoff matrix.
-
-- At $(S,F)$, labor compares ML with SS and management compares ML with SS; both are indifferent, so $(S,F)$ is always a Nash equilibrium.
-- At $(F,F)$, labor is again indifferent, while management prefers F to S exactly when $\E[U_M^{\mathrm{SS}}]\ge \E[U_M^{\mathrm{LM}}]$, i.e. $\Delta_M\ge 0$.
-- At $(S,S)$, management is indifferent, while labor prefers S to F exactly when $\E[U_L^{\mathrm{SS}}]\ge \E[U_L^{\mathrm{LM}}]$, i.e. $\Delta_L\le 0$.
-- At $(F,S)$, labor prefers F to S when $\Delta_L\ge 0$, while management prefers S to F when $\E[U_M^{\mathrm{LM}}]\ge \E[U_M^{\mathrm{SS}}]$, i.e. $\Delta_M\le 0$.
-
-These are exactly the stated conditions.
-:::
+*（Proof: Appendix [-@sec-appendix].）*
 
 ::: {#thm-timing-eq}
 ### Main Theorem: Endogenous Timing Equilibrium
 
-The pure-strategy Nash equilibria of the Stage-0 timing game are fully characterized by the signs of $\Delta_L$ and $\Delta_M$:
+The pure-strategy Nash equilibria of the stage-0 timing game are fully characterized by the signs of $\Delta_L$ and $\Delta_M$:
 
 1. **ML** ($(S,F)$, Management leads): always a pure-strategy Nash equilibrium.
 2. **LM** ($(F,S)$, Labor leads): a pure-strategy Nash equilibrium if and only if $\Delta_L \ge 0$ and $\Delta_M \le 0$, i.e.,
@@ -115,29 +94,18 @@ $$
 \frac{V^2\kappa^2}{4} \le \frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
 $$
 
-When $\Delta_L < 0$, ML is the unique equilibrium delivering a sequential outcome. When $\Delta_L \ge 0$ and $\Delta_M \le 0$, both ML and LM are equilibria; in particular, the informed party (Labor) can move first in equilibrium, a configuration absent from the symmetric benchmark of @fu2006.
+When $\Delta_L < 0$, ML is the unique equilibrium delivering a sequential outcome. When $\Delta_L \ge 0$ and $\Delta_M \le 0$, both ML and LM are equilibria; in that region, the informed party (Labor) can move first in equilibrium, a configuration absent from the symmetric benchmark of @fu2006.
 :::
 
-::: {.proof}
-**ML is always a Nash equilibrium.** At $(S,F)$, a deviation by Labor from S to F changes the outcome from ML to SS; since $\E[U_L^{\mathrm{ML}}] = \E[U_L^{\mathrm{SS}}]$, Labor is indifferent and has no strict incentive to deviate. A deviation by Management from F to S likewise changes the outcome from ML to SS; since $\E[U_M^{\mathrm{ML}}] = \E[U_M^{\mathrm{SS}}]$, Management is also indifferent. Hence $(S,F)$ is a Nash equilibrium for all parameter values.
+*（Proof: Appendix [-@sec-appendix].）*
 
-**LM is a Nash equilibrium if and only if $\Delta_L \ge 0$ and $\Delta_M \le 0$.** At $(F,S)$:
-
-- A deviation by Labor from F to S changes the outcome from LM to SS. Labor does not deviate if and only if $\E[U_L^{\mathrm{LM}}] \ge \E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L \ge 0$.
-- A deviation by Management from S to F changes the profile from $(F,S)$ to $(F,F)$, i.e., SS. Since $\E[U_M^{\mathrm{SS}}] = \E[U_M^{\mathrm{ML}}]$, Management does not deviate if and only if $\E[U_M^{\mathrm{LM}}] \ge \E[U_M^{\mathrm{SS}}] = \E[U_M^{\mathrm{ML}}]$, i.e., $\Delta_M \le 0$.
-
-Both conditions must hold simultaneously. Substituting the equilibrium payoff expressions from Section @sec-equilibria yields the explicit inequalities in item 2.
-:::
-
-*Remark (Economic interpretation).* Think of a firm deciding whether to announce its effort budget before or after the union sets its mobilization level. Management always has the option of committing first and letting the union respond—this is always a Nash equilibrium because neither party has a strict reason to deviate once commitment is expected. The interesting question is when the union (labor) would willingly go first instead.
-
-$\Delta_L \ge 0$ says labor's expected payoff is at least as high under LM as under SS: the union willingly commits first—even though doing so reveals its private productivity—because in this parameter region the expected return from leading is no worse than waiting. $\Delta_M \le 0$ says management, knowing the union will lead, would rather stay back and tailor its response to whatever it observes than rush to commit upfront. When both conditions hold, each side is choosing its best response to the other's intended timing—and neither wants to deviate. When $\Delta_L < 0$, the union always prefers to wait rather than expose itself first, so management leads by default.
+*Remark (Economic interpretation).* ML always remains an equilibrium because SS and ML induce the same continuation payoffs. LM arises only when Labor prefers to move first and Management prefers to move second.
 
 ![Binary-type timing regions in the $(\mu,\delta)$ plane for the sign pattern of $(\Delta_L,\Delta_M)$ with $V=1$.](../figures/binary_timing_regions.png){#fig-timing-regions-en width=85%}
 
 ## Ex Post Type-Level Decomposition
 
-Although the timing choice is made ex ante, realized-type payoff comparisons still provide a useful decomposition of labor's incentives. For type $v$, define the gain from waiting (second move) relative to moving first:
+Although the timing choice is made ex ante, realized-type payoff comparisons still provide a decomposition of labor's incentives. For type $v$, define the gain from waiting (moving second) relative to moving first:
 
 $$
 R(v) \equiv U_L^{\mathrm{SS}}(v) - U_L^{\mathrm{LM}}(v)
@@ -162,18 +130,9 @@ $$
 Hence $R(v)$ should not be read as a type-contingent timing strategy in stage 0. It is an ex post decomposition of the realized-type payoff gap underlying labor's ex ante timing choice.
 :::
 
-::: {.proof}
-Starting from $R(v)\equiv U_L^{\mathrm{SS}}(v)-U_L^{\mathrm{LM}}(v)$, take expectation over $V_L$ to obtain
-$$
-\E[R(V_L)]
-=
-\E[U_L^{\mathrm{SS}}]-\E[U_L^{\mathrm{LM}}]
-=
--\Delta_L.
-$$
-:::
+*（Proof: Appendix [-@sec-appendix].）*
 
-Equivalent factorization (without introducing extra notation) is
+An equivalent factorization is
 
 $$
 R(v)
@@ -193,26 +152,10 @@ $$
 \left[\sqrt v-\frac{v}{2\sqrt V},\;\sqrt v+\frac{v}{2\sqrt V}\right].
 $$
 
-Equivalently, that realized type prefers waiting when $V\kappa/2$ lies strictly outside
-that interval.
+Equivalently, that realized type prefers waiting when $V\kappa/2$ lies strictly outside that interval.
 :::
 
-::: {.proof}
-From
-$$
-R(v)=\left(\sqrt v-\frac{V\kappa}{2}\right)^2-\frac{v^2}{4V}\le 0
-\iff
-\left|\sqrt v-\frac{V\kappa}{2}\right|\le \frac{v}{2\sqrt V},
-$$
-we obtain
-$$
-\sqrt v-\frac{v}{2\sqrt V}
-\le
-\frac{V\kappa}{2}
-\le
-\sqrt v+\frac{v}{2\sqrt V}.
-$$
-:::
+*（Proof: Appendix [-@sec-appendix].）*
 
 ![Labor's expected payoff under SS and LM as a function of type $v$ for the calibration $(\mu,\delta,V)=(1.2,0.4,1)$.](../figures/labor_payoff_comparison.png){#fig-labor-payoff-en width=85%}
 
@@ -220,16 +163,16 @@ $$
 
 ### Binary Case
 
-For binary types $V_L\in\{V_\ell,V_H\}$, evaluate $R(V_\ell)$ and $R(V_H)$ directly. The sign pair $(\operatorname{sgn}R(V_\ell),\operatorname{sgn}R(V_H))$ yields four configurations with the following timing implications:
+For binary types $V_L\in\{V_\ell,V_H\}$, evaluate $R(V_\ell)$ and $R(V_H)$ directly. The sign pair $(\operatorname{sgn}R(V_\ell),\operatorname{sgn}R(V_H))$ yields four configurations:
 
 - $(-,-)$: Both types ex post prefer moving first. Since $\E[R(V_L)]=-\Delta_L<0$, this implies $\Delta_L>0$, favoring existence of $(F,S)$ or $(F,F)$ equilibria.
-- $(+,+)$: Both types ex post prefer waiting. Since $\E[R(V_L)]=-\Delta_L>0$, this implies $\Delta_L<0$, favoring $(S,F)$ or $(S,S)$ outcomes.
-- $(+,-)$: The low type prefers waiting and the high type prefers moving first. $\Delta_L = -\frac{1}{2}(R(V_\ell)+R(V_H))$ and its sign depends on the probability-weighted average.
-- $(-,+)$: The low type prefers moving first and the high type prefers waiting. The sign of $\Delta_L$ is determined by the probability-weighted average of $R(V_\ell)$ and $R(V_H)$.
+- $(+,+)$: Both types ex post prefer moving second. Since $\E[R(V_L)]=-\Delta_L>0$, this implies $\Delta_L<0$, favoring $(S,F)$ or $(S,S)$ outcomes.
+- $(+,-)$: The low type prefers moving second and the high type prefers moving first. $\Delta_L = -\frac{1}{2}(R(V_\ell)+R(V_H))$, and its sign depends on the probability-weighted average.
+- $(-,+)$: The low type prefers moving first and the high type prefers moving second. The sign of $\Delta_L$ is determined by the probability-weighted average of $R(V_\ell)$ and $R(V_H)$.
 
 ### Uniform Case
 
-For $V_L\sim U[\mu-\delta,\mu+\delta]$, the ex post waiting region is
+For $V_L\sim U[\mu-\delta,\mu+\delta]$, the ex post second-move region is
 
 $$
 \mathcal W
@@ -237,15 +180,13 @@ $$
 \{v\in[\mu-\delta,\mu+\delta]:R(v)>0\},
 $$
 
-and the ex post first-move region is $\mathcal F\equiv\{v:R(v)<0\}$. Since $R(v)$ is continuous, boundaries between $\mathcal W$ and $\mathcal F$ are roots of $R(v)=0$. A non-trivial interior cutoff $v^*\in(\mu-\delta,\mu+\delta)$ exists when $R(\mu-\delta)$ and $R(\mu+\delta)$ have opposite signs; when both endpoints share the same sign, no interior root exists and all types prefer first or second move uniformly.
+and the ex post first-move region is $\mathcal F\equiv\{v:R(v)<0\}$. Since $R(v)$ is continuous, the boundary between $\mathcal W$ and $\mathcal F$ is characterized by roots of $R(v)=0$ within the support. When $R(\mu-\delta)$ and $R(\mu+\delta)$ have opposite signs, an interior cutoff $v^*\in(\mu-\delta,\mu+\delta)$ must exist. When both endpoints share the same sign, no interior root may exist, so all types prefer the same move order ex post.
 
 ## Pooling Analysis
 
-Among the three timing regimes, LM is the only one that genuinely requires a pooling analysis. The reason is structural: only in LM does the informed player move first and the uninformed player respond after observing that action, so only LM creates a signaling problem in the Fu (2006) sense. By contrast, SS is a simultaneous-move Bayesian Nash environment, and ML has management move first while labor responds second. Neither SS nor ML is an informed-first signaling subgame, so pooling versus separation is not the relevant classification there.
+Among the three timing regimes, only LM requires a pooling analysis. Only in LM does the informed player move first and the uninformed player respond after observing that action, so only LM creates a signaling problem in the sense of Fu (2006). By contrast, SS is a simultaneous-move Bayesian Nash environment, and ML has Management move first while Labor responds second. Neither SS nor ML is an informed-first signaling subgame, so pooling versus separation is not the relevant classification there.
 
-Fu (2006) obtains separating, pooling, and semi-separating outcomes when the informed
-player moves first because the follower's continuation payoff depends on posterior beliefs
-about the hidden type. In the present model, that mechanism is absent.
+In @fu2006, separating, pooling, and semi-separating outcomes can arise when the informed player moves first because the follower's continuation payoff depends on posterior beliefs about the hidden type. That mechanism is absent here.
 
 When management observes labor effort $x_L$, its best response is always
 
@@ -253,40 +194,27 @@ $$
 x_M^*(x_L)=\sqrt{Vx_L}-x_L,
 $$
 
-which depends only on observed effort and the common-value parameter $V$. Posterior
-beliefs about labor's type do not enter the continuation optimization problem. Therefore:
+which depends only on observed effort and the common-value parameter $V$. Posterior beliefs about labor's type do not enter the continuation optimization problem. Therefore:
 
-1. pooling cannot be sustained by favorable beliefs, because beliefs never change the
-follower's action;
-2. semi-separating cannot be sustained for the same reason;
-3. the only equilibrium outcome in LM is the unique separating profile characterized in
-Section @sec-lm.
+1. favorable beliefs cannot sustain pooling, because beliefs never change the follower's action;
+2. semi-separating outcomes cannot be sustained for the same reason;
+3. the only equilibrium outcome in LM is the unique separating profile characterized in Section @sec-lm.
 
-So the correct statement for this paper is not merely "we checked pooling." It is stronger:
-relative to Fu (2006), the model structure shuts down the signaling-belief channel that
-supports pooling in the informed-first subgame.
+So the relevant claim is stronger than "pooling was checked." Relative to @fu2006, the model structure shuts down the signaling-belief channel that supports pooling in the informed-first subgame.
 
 ## Management Incentives and Endogenous Timing {#sec-endogenous}
 
 ::: {#prp-mgmt}
 ### Management's Timing Preference
 
-Management prefers moving first (ML) to moving second (LM) if and only if $\Delta_M \ge 0$, i.e.,
+Management prefers to move first (ML) rather than move second (LM), that is, $\Delta_M \ge 0$, if and only if
 
 $$
 \frac{V^2\kappa^2}{4} \ge \frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
 $$ {#eq-mgmt-cond}
 :::
 
-::: {.proof}
-From @eq-eum-ml and @eq-eum-lm:
-$$
-\E\!\left[U_M^{\mathrm{ML}}\right]=\frac{V^2\kappa^2}{4},
-\qquad
-\E\!\left[U_M^{\mathrm{LM}}\right]=\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
-$$
-The condition $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ is exactly @eq-mgmt-cond. Note that Theorem [-@thm-timing-eq] requires $\Delta_M \le 0$ for LM to be an equilibrium, which is the reverse of this inequality.
-:::
+*（Proof: Appendix [-@sec-appendix].）*
 
 ### Functional Examples
 
@@ -304,6 +232,6 @@ $$
 
 ### Pooling Ambiguity
 
-Because LM is uniquely separating (@prp-no-pool), the ex ante timing game is pinned down by unique continuation payoffs and does not inherit pooling-equilibrium ambiguity from the informed-first subgame. Put differently, the stage-0 payoff matrix is not selecting among multiple LM continuation equilibria; it is built from a unique continuation payoff profile.
+Because LM is uniquely separating (@prp-no-pool), the ex ante timing game can be built on unique continuation payoffs. It does not inherit ambiguity from alternative LM pooling equilibria. The stage-0 payoff matrix is therefore not selecting among multiple LM continuation equilibria; it is comparing the payoffs induced by a unique continuation profile.
 
-The stage-0 timing choice is fundamentally a comparison of ex ante expected payoffs made before labor observes its realized type. The relevant comparison is therefore $\E[U_L^{\mathrm{LM}}]$ versus $\E[U_L^{\mathrm{SS}}]$, not the conditional payoff of any particular type under each regime. Relative to @fu2006, the absence of pooling ambiguity in LM means this ex ante comparison rests on uniquely determined matrix entries, yielding a cleaner timing analysis than in the symmetric benchmark.
+The stage-0 timing choice is made before labor observes its realized type. The relevant comparison is therefore $\E[U_L^{\mathrm{LM}}]$ versus $\E[U_L^{\mathrm{SS}}]$, not the conditional payoff of any particular type under each regime. Relative to @fu2006, the absence of pooling ambiguity in LM means this ex ante comparison rests on uniquely determined matrix entries.

@@ -24,3 +24,4 @@ format:
 {{< include sections/05_timing.qmd >}}
 {{< include sections/06_welfare.qmd >}}
 {{< include sections/07_conclusion.qmd >}}
+{{< include sections/08_appendix.qmd >}}
