@@ -8,7 +8,7 @@ appendix: true
 
 # 附錄：證明 {#sec-appendix .appendix}
 
-## 命題 [-@prp-moments] 的證明 {#sec-proof-moments}
+## @prp-moments 的證明 {#sec-proof-moments}
 
 <!-- MODIFIED: 新增 λ 計算 -->
 二點分配下的動差可由定義直接計算：
@@ -84,7 +84,7 @@ $$
 
 因此 $\kappa^B>\kappa^U$。
 
-## 命題 [-@prp-ss] 的證明 {#sec-proof-ss}
+## @prp-ss 的證明 {#sec-proof-ss}
 
 <!-- MODIFIED: 完整改寫，推導正確的 BNE；舊版本將勞方 BR 代入資方目標函數最大化，實際上解的是 Stackelberg 領先者問題（ML），而非 BNE -->
 
@@ -151,7 +151,7 @@ $$
 =\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}. \qquad\square
 $$
 
-## 命題 [-@prp-ml] 的證明 {#sec-proof-ml}
+## @prp-ml 的證明 {#sec-proof-ml}
 
 <!-- MODIFIED: ML 報酬現與 SS 不同；ML 解的是 Stackelberg 領先者問題 -->
 在 ML 中，資方先承諾。勞方觀察 $x_M$ 後逐型別最佳反應，資方事先預期到 $x_L(v)=\sqrt{vx_M}-x_M$，因此最大化
@@ -196,7 +196,7 @@ $$
 
 注意 $\E[U_M^{\mathrm{ML}}]=V^2\kappa^2/4$，而 $\E[U_M^{\mathrm{SS}}]=V^3\kappa^2\lambda/(1+V\lambda)^2$；兩者僅在 $V\lambda=1$ 時相等。$\square$
 
-## 命題 [-@prp-separating] 的證明 {#sec-proof-separating}
+## @prp-separating 的證明 {#sec-proof-separating}
 
 勞方求解
 
@@ -228,7 +228,7 @@ $$
 
 代回 @eq-ul 與 @eq-um 即得 @eq-ul-lm 與 @eq-um-lm。
 
-## 命題 [-@prp-no-pool] 的證明 {#sec-proof-no-pool}
+## @prp-no-pool 的證明 {#sec-proof-no-pool}
 
 分兩步證明。
 
@@ -285,7 +285,7 @@ $$
 
 此差額為正定二次型，對所有 $s\neq v$ 皆嚴格為正。故任何要求型別 $v$ 採取 $s^2/(4V)$（其中 $s\neq v$）的策略，都被 truthful 策略嚴格支配。
 
-在二點型別特例下，上式即對應正文的 `IC_H` 與 `IC_L`。這兩條限制同時成立，是候選分離均衡可行的必要且充分條件。必要性來自分離均衡必須排除雙向模仿。充分性則來自，在 @eq-brm 給定的續局最佳反應下，只要兩條 IC 同時成立，兩型別各自選擇自己的行動即為最佳反應。
+在二點型別特例下，上式即對應正文的 $\text{IC}_{H}$ 與 $\text{IC}_{L}$。這兩條限制同時成立，是候選分離均衡可行的必要且充分條件。必要性來自分離均衡必須排除雙向模仿。充分性則來自，在 @eq-brm 給定的續局最佳反應下，只要兩條 IC 同時成立，兩型別各自選擇自己的行動即為最佳反應。
 
 若令
 
@@ -323,67 +323,33 @@ $$
 =\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
 $$ $\square$
 
-## 命題 [-@prp-stage1-br] 的證明 {#sec-proof-stage1-br}
+## @prp-stage1-br 的證明 {#sec-proof-stage1-br}
 
-<!-- MODIFIED: 新增第 3 點，反映資方在勞方選 S 時恒選 F -->
 由第一階段的報酬矩陣可知：
 
-- 若資方選 S，勞方比較的是 $\E[U_L^{\mathrm{LM}}]$（選 F）與 $\E[U_L^{\mathrm{SS}}]$（選 S），故差額為 $\Delta_L$。
-- 若資方選 F，勞方比較的是 $\E[U_L^{\mathrm{SS}}]$（選 F）與 $\E[U_L^{\mathrm{ML}}]$（選 S）。
-- 若勞方選 F，資方比較的是 $\E[U_M^{\mathrm{SS}}]$（選 F）與 $\E[U_M^{\mathrm{LM}}]$（選 S）。
-- 若勞方選 S，資方比較的是 $\E[U_M^{\mathrm{ML}}]$（選 F）與 $\E[U_M^{\mathrm{SS}}]$（選 S）；由關鍵引理，此差額 $V^2\kappa^2(1-V\lambda)^2/(4(1+V\lambda)^2)\ge 0$，資方（弱）偏好選 F。
+- 若資方選 F，勞方比較的是 $\E[U_L^{\mathrm{ML}}]$（選 S）與 $\E[U_L^{\mathrm{SS}}]$（選 F），故差額為 $\Delta_L^{\mathrm{ML}}$。
+- 若資方選 S，勞方比較的是 $\E[U_L^{\mathrm{LM}}]$（選 F）與 $\E[U_L^{\mathrm{SS}}]$（選 S），故差額為 $\Delta_L^{\mathrm{LM}}$。
+- 若勞方選 F，資方比較的是 $\E[U_M^{\mathrm{SS}}]$（選 F）與 $\E[U_M^{\mathrm{LM}}]$（選 S），故差額為 $\Delta_M^{\mathrm{SS}}$。
+- 若勞方選 S，資方比較的是 $\E[U_M^{\mathrm{ML}}]$（選 F）與 $\E[U_M^{\mathrm{SS}}]$（選 S），故差額為 $\Delta_M^{\mathrm{ML}}=V^2\kappa^2(1-V\lambda)^2/(4(1+V\lambda)^2)\ge 0$。
 
-命題第 1、2 點由前兩項推得；第 3 點由最後一項推得。
+命題中的四個最佳反應直接由上述四個比較推出。尤其 $\Delta_M^{\mathrm{ML}}=0$ 當且僅當 $V\lambda=1$，因此資方在勞方選 S 時於一般情形下唯一最佳反應為 F，在臨界情形下則對 F 與 S 無差異。
 
-## 命題 [-@prp-stage1-ne] 的證明 {#sec-proof-stage1-ne}
+## @prp-stage1-ne 的證明 {#sec-proof-stage1-ne}
 
-<!-- MODIFIED: 更新以反映修正後的 SS ≠ ML；(S,S) 永遠不是 Nash 均衡 -->
 逐格檢視第一階段報酬矩陣：
 
-- 在 $(S,F)$ 處：若勞方偏離至 F，結果由 ML 變為 SS；勞方不偏離之條件為 $\E[U_L^{\mathrm{ML}}]\ge\E[U_L^{\mathrm{SS}}]$，即 $\Delta_L\le 0$。若資方偏離至 S，結果由 ML 變為 SS；由關鍵引理 $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$，資方不偏離。故 $(S,F)$ 為均衡若且唯若 $\Delta_L\le 0$。
-- 在 $(F,F)$ 處：若勞方偏離至 S，結果由 SS 變為 ML；勞方不偏離之條件為 $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{ML}}]$，即 $\Delta_L\le 0$。若資方偏離至 S，結果由 SS 變為 LM；資方不偏離之條件為 $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{LM}}]$，即 $\Delta_M'\ge 0$。故 $(F,F)$ 為均衡若且唯若 $\Delta_L\le 0$ 且 $\Delta_M'\ge 0$。
-- 在 $(S,S)$ 處：資方偏離至 F，結果由 SS 變為 ML，利得 $\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]\ge 0$（關鍵引理）。資方恒有偏離誘因，故 $(S,S)$ 永遠不是 Nash 均衡。
-- 在 $(F,S)$ 處：勞方偏好 F 之條件為 $\Delta_L\ge 0$；資方偏好 S 之條件為 $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$，此由 $\Delta_M\le 0$ 所蘊含。故 $(F,S)$ 為均衡若且唯若 $\Delta_L\ge 0$ 且 $\Delta_M\le 0$。
+- 在 $(S,F)$ 處：勞方不偏離至 F 的條件為 $\E[U_L^{\mathrm{ML}}]\ge\E[U_L^{\mathrm{SS}}]$，即 $\Delta_L^{\mathrm{ML}}\ge0$；資方不偏離至 S 的條件為 $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$，即 $\Delta_M^{\mathrm{ML}}\ge0$。由 @eq-delta-m-ml，後者恆成立，故 $(S,F)$ 為均衡若且唯若 $\Delta_L^{\mathrm{ML}}\ge0$。
+- 在 $(F,F)$ 處：勞方不偏離至 S 的條件為 $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{ML}}]$，即 $\Delta_L^{\mathrm{ML}}\le0$；資方不偏離至 S 的條件為 $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{LM}}]$，即 $\Delta_M^{\mathrm{SS}}\ge0$。故 $(F,F)$ 為均衡若且唯若 $\Delta_L^{\mathrm{ML}}\le0$ 且 $\Delta_M^{\mathrm{SS}}\ge0$。
+- 在 $(F,S)$ 處：勞方不偏離至 S 的條件為 $\E[U_L^{\mathrm{LM}}]\ge\E[U_L^{\mathrm{SS}}]$，即 $\Delta_L^{\mathrm{LM}}\ge0$；資方不偏離至 F 的條件為 $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$，即 $\Delta_M^{\mathrm{SS}}\le0$。故 $(F,S)$ 為均衡若且唯若 $\Delta_L^{\mathrm{LM}}\ge0$ 且 $\Delta_M^{\mathrm{SS}}\le0$。
+- 在 $(S,S)$ 處：勞方不偏離至 F 的條件為 $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{LM}}]$，即 $\Delta_L^{\mathrm{LM}}\le0$；資方不偏離至 F 的條件為 $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{ML}}]$，即 $\Delta_M^{\mathrm{ML}}\le0$。由 @eq-delta-m-ml，$\Delta_M^{\mathrm{ML}}\le0$ 等價於 $\Delta_M^{\mathrm{ML}}=0$，亦即 $V\lambda=1$。故 $(S,S)$ 為均衡若且唯若 $\Delta_L^{\mathrm{LM}}\le0$ 且 $V\lambda=1$。
 
 命題得證。$\square$
 
-## 定理 [-@thm-timing-eq] 的證明 {#sec-proof-timing-eq}
+## @thm-timing-eq 的證明 {#sec-proof-timing-eq}
 
-<!-- MODIFIED: 完整改寫；證明關鍵引理；ML 不再恆為均衡；(S,S) 永不為均衡 -->
+定理直接由 @prp-stage1-ne 得出。四個格子的單邊偏離條件分別給出 ML、立即 SS、LM 與延後 SS 的充要條件；而 @eq-delta-m-ml 顯示 $\Delta_M^{\mathrm{ML}}\ge0$，且 $\Delta_M^{\mathrm{ML}}=0$ 當且僅當 $V\lambda=1$。因此，在一般情形 $V\lambda\ne1$ 下，延後同時行動 $(S,S)$ 無法成為純策略 Nash 均衡；在臨界情形 $V\lambda=1$ 下，$(S,S)$ 還需滿足勞方條件 $\Delta_L^{\mathrm{LM}}\le0$。$\square$
 
-**關鍵引理。**
-
-$$
-\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
-=\frac{V^2\kappa^2}{4}-\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}
-=V^2\kappa^2\cdot\frac{(1+V\lambda)^2-4V\lambda}{4(1+V\lambda)^2}
-=V^2\kappa^2\cdot\frac{(1-V\lambda)^2}{4(1+V\lambda)^2}\;\ge\;0,
-$$
-
-等號當且僅當 $V\lambda=1$。
-
-**第 4 部分：$(S,S)$ 永遠不是 Nash 均衡。** 由關鍵引理，資方在 $(S,S)$ 時偏離至 F（使結果由 SS 變為 ML）的利得非負，因此 $(S,S)$ 永遠不是 Nash 均衡。
-
-**第 1 部分：$(S,F)$（ML）若且唯若 $\Delta_L\le 0$。**
-
-- 資方在 $(S,F)$ 偏離至 S，結果由 ML 變為 SS，利得 $\E[U_M^{\mathrm{SS}}]-\E[U_M^{\mathrm{ML}}]\le 0$（關鍵引理），故資方不偏離。
-- 勞方在 $(S,F)$ 偏離至 F，結果由 ML 變為 SS；勞方不偏離之充要條件為 $\E[U_L^{\mathrm{ML}}]\ge\E[U_L^{\mathrm{SS}}]$，即 $\Delta_L\le 0$。
-
-**第 2 部分：$(F,S)$（LM）若且唯若 $\Delta_L\ge 0$ 且 $\Delta_M\le 0$。**
-
-- 勞方在 $(F,S)$ 偏離至 S，結果由 LM 變為 SS；勞方不偏離之充要條件為 $\E[U_L^{\mathrm{LM}}]\ge\E[U_L^{\mathrm{SS}}]$，即 $\Delta_L\ge 0$。
-- 資方在 $(F,S)$ 偏離至 F，結果由 LM 變為 SS；資方不偏離之條件為 $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$，此由 $\Delta_M\le 0$ 蘊含。
-
-兩條件同時成立時，$(F,S)$ 為 Nash 均衡。代入 @eq-delta-l 與 @eq-delta-m 即得定理中的顯式不等式。
-
-**第 3 部分：$(F,F)$（SS）若且唯若 $\Delta_L\le 0$ 且 $\Delta_M'\ge 0$。**
-
-- 勞方在 $(F,F)$ 偏離至 S，結果由 SS 變為 ML；勞方不偏離之充要條件為 $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{ML}}]$，即 $\Delta_L\le 0$。
-- 資方在 $(F,F)$ 偏離至 S，結果由 SS 變為 LM；資方不偏離之充要條件為 $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{LM}}]$，即 $\Delta_M'\ge 0$。
-
-故 $(F,F)$ 為 Nash 均衡若且唯若兩條件同時成立。$\square$
-
-## 命題 [-@prp-ex-ante-decomp] 的證明 {#sec-proof-decomp}
+## @prp-ex-ante-decomp 的證明 {#sec-proof-decomp}
 
 由 $R(v)\equiv U_L^{\mathrm{SS}}(v)-U_L^{\mathrm{LM}}(v)$，直接對 $V_L$ 取期望可得
 
@@ -392,12 +358,12 @@ $$
 =
 \E[U_L^{\mathrm{SS}}]-\E[U_L^{\mathrm{LM}}]
 =
--\Delta_L.
+-\Delta_L^{\mathrm{LM}}.
 $$
 
 故命題成立。
 
-## 命題 [-@prp-exact-condition] 的證明 {#sec-proof-exact}
+## @prp-exact-condition 的證明 {#sec-proof-exact}
 
 <!-- MODIFIED: 條件更新為使用修正後的 SS -->
 型別 $v$ 事後偏好先動，當且僅當
@@ -434,7 +400,7 @@ $$
 
 故命題成立。
 
-## 命題 [-@prp-mgmt] 的證明 {#sec-proof-mgmt}
+## @prp-mgmt 的證明 {#sec-proof-mgmt}
 
 <!-- MODIFIED: LM 公式改用新記號 -->
 由 @eq-eum-ml 與 @eq-eum-lm 得
@@ -445,7 +411,7 @@ $$
 \E\!\left[U_M^{\mathrm{LM}}\right]=\frac{(2V-\mu)^2+\sigma^2}{4V}.
 $$
 
-故條件 $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ 即為 @eq-mgmt-cond。注意定理 [-@thm-timing-eq] 中 LM 均衡的成立需要 $\Delta_M \le 0$，即此不等式方向反轉。
+故條件 $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ 即為 @eq-mgmt-cond。此處的 $\Delta_M$ 是資方在 ML 與 LM 之間的直接偏好差額；它不同於 @thm-timing-eq 中 LM 均衡所需的單邊偏離條件 $\Delta_M^{\mathrm{SS}}\le0$。
 
 ## 第 @sec-welfare 節福利公式的證明 {#sec-proof-welfare}
 

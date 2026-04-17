@@ -59,7 +59,7 @@ $$ {#eq-eum-ss}
 :::
 
 ::: {.proof}
-見附錄 [-@sec-proof-ss]。
+見 @sec-proof-ss。
 :::
 
 將 @tbl-moments 的動差代入 @prp-ss，即可得到各分配下的具體公式。
@@ -130,7 +130,7 @@ $$ {#eq-eum-ml}
 :::
 
 ::: {.proof}
-見附錄 [-@sec-proof-ml]。
+見 @sec-proof-ml。
 :::
 
 注意 $\E[U_M^{\mathrm{ML}}]=V^2\kappa^2/4$，而 $\E[U_M^{\mathrm{SS}}]=V^3\kappa^2\lambda/(1+V\lambda)^2$；兩者僅在 $V\lambda=1$ 時相等。Stackelberg 先動地位使資方能設定比同時行動更高的承諾投入量，從而獲得弱更高的期望報酬。
@@ -171,7 +171,7 @@ $$ {#eq-um-lm}
 :::
 
 ::: {.proof}
-見附錄 [-@sec-proof-separating]。
+見 @sec-proof-separating。
 :::
 
 ::: {#prp-no-pool}
@@ -181,12 +181,12 @@ LM 子賽局存在唯一的完美貝葉斯均衡，且該均衡為分離均衡�
 :::
 
 ::: {.proof}
-見附錄 [-@sec-proof-no-pool]。
+見 @sec-proof-no-pool。
 :::
 
 此一論證不依賴特定分配形式。二點分配、均勻分配與任意連續型別分配，都有相同的唯一性邏輯。
 
-**全域誘因相容。**
+**全域誘因相容（incentive compatibility, IC）。**
 
 無混同結果亦可表述為嚴格的全域誘因相容性。固定真實型別 $v$ 與任意替代型別報告 $s\neq v$。若勞方模仿型別 $s$，其投入將為 $x_L=s^2/(4V)$，而資方依 @eq-brm 回應。此時報酬為
 
@@ -228,7 +228,7 @@ $$
 誠實行動之報酬為 $U_t(t)=t^2/(4V)$。因此
 
 $$
-IC_H:\quad
+\text{IC}_{H}:\quad
 U_H(H)-\widetilde U_H(\ell)
 =\frac{V_H^2}{4V}
 -\left(\frac{V_HV_\ell}{2V}-\frac{V_\ell^2}{4V}\right)
@@ -236,16 +236,16 @@ U_H(H)-\widetilde U_H(\ell)
 $$
 
  $$
- IC_L:\quad
+ \text{IC}_{L}:\quad
  U_L(\ell)-\widetilde U_L(H)
  =\frac{V_\ell^2}{4V}
  -\left(\frac{V_\ell V_H}{2V}-\frac{V_H^2}{4V}\right)
  =\frac{(V_H-V_\ell)^2}{4V}>0.
  $$
 
-在二點型別下，`IC_H` 與 `IC_L` 同時成立，是候選分離均衡可行的必要且充分條件。必要性來自任一分離均衡都必須排除高型別模仿低型別與低型別模仿高型別。充分性則來自，在 @eq-brm 給定的續局最佳反應下，若兩條 IC 同時成立，則兩型別各自選擇自身行動即為最佳反應。
+在二點型別下，$\text{IC}_{H}$ 與 $\text{IC}_{L}$ 同時成立，是候選分離均衡可行的必要且充分條件。必要性來自任一分離均衡都必須排除高型別模仿低型別與低型別模仿高型別。充分性則來自，在 @eq-brm 給定的續局最佳反應下，若兩條 IC 同時成立，則兩型別各自選擇自身行動即為最佳反應。
 
-由於此處 `IC_H` 與 `IC_L` 皆嚴格為正，故分離均衡對所有 $V_H>V_\ell>0$ 與 $V>0$ 都可行。這正是上面全域 IC 結果在二點分配下的對應版本。
+由於此處 $\text{IC}_{H}$ 與 $\text{IC}_{L}$ 皆嚴格為正，故分離均衡對所有 $V_H>V_\ell>0$ 與 $V>0$ 都可行。這正是上面全域 IC 結果在二點分配下的對應版本。
 
 若以單交叉性觀點表述，模仿差額對型別只會在真實型別與模仿型別重合時穿越零一次。不過，本文不需依賴單交叉性推論，因全域 IC 已直接給出嚴格正值。因此，本文模型下不存在 pooling 可行的參數區域。
 
@@ -267,7 +267,7 @@ $$ {#eq-eum-lm}
 其中 $\sigma^2=\Var(V_L)$。
 
 ::: {.proof}
-見附錄 [-@sec-proof-lm-payoff]。
+見 @sec-proof-lm-payoff。
 :::
 
 ### 函數化範例 {#sec-lm-examples}

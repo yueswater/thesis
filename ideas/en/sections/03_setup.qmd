@@ -82,7 +82,7 @@ The key moments are:
 :::
 
 ::: {.proof}
-See Appendix [-@sec-proof-moments].
+See @sec-proof-moments.
 :::
 
 ## Contest Payoffs and Best Responses

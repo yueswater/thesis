@@ -82,7 +82,7 @@ $$ {#eq-moments}
 :::
 
 ::: {.proof}
-見附錄 [-@sec-proof-moments]。
+見 @sec-proof-moments。
 :::
 
 ## 競賽報酬與最佳反應

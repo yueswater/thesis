@@ -54,23 +54,26 @@ $$
 | 勞方：F | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ | $(\E[U_L^{\mathrm{LM}}],\E[U_M^{\mathrm{LM}}])$ |
 | 勞方：S | $(\E[U_L^{\mathrm{ML}}],\E[U_M^{\mathrm{ML}}])$ | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ |
 
-其中，SS 與 ML 的期望報酬相同，故第一階段的關鍵差額可整理為
+其中，SS 與 ML 在修正後的均衡中一般不同，因此第一階段 Nash 條件需直接對應到各格的單邊偏離。令
 $$
-\Delta_L\equiv \E[U_L^{\mathrm{LM}}]-\E[U_L^{\mathrm{SS}}],
+\Delta_L^{\mathrm{ML}}\equiv \E[U_L^{\mathrm{ML}}]-\E[U_L^{\mathrm{SS}}],
 \qquad
+\Delta_L^{\mathrm{LM}}\equiv \E[U_L^{\mathrm{LM}}]-\E[U_L^{\mathrm{SS}}],
+$$
+並令
+$$
+\Delta_M^{\mathrm{ML}}\equiv \E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}],
+\qquad
+\Delta_M^{\mathrm{SS}}\equiv \E[U_M^{\mathrm{SS}}]-\E[U_M^{\mathrm{LM}}].
+$$
+此處 $\Delta_M^{\mathrm{ML}}=V^2\kappa^2(1-V\lambda)^2/[4(1+V\lambda)^2]\ge0$，且等號當且僅當 $V\lambda=1$。後續圖像為了呈現資方在 ML 與 LM 之間的直接偏好，另使用
+$$
 \Delta_M\equiv \E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{LM}}].
 $$
-此一表示法可直接用來判讀純策略時序均衡，亦可作為參數區域圖的基礎。
 
-本文的主要定理表明：ML（資方先動）對所有參數值恆為純策略 Nash 均衡；LM（勞方先動）成立為純策略 Nash 均衡，若且唯若 $\Delta_L \ge 0$ 且 $\Delta_M \le 0$，亦即
-$$
-\frac{\mu^2+\sigma^2}{4V} \ge \mu - V\kappa\nu + \frac{V^2\kappa^2}{4}
-\quad \text{且} \quad
-\frac{V^2\kappa^2}{4} \le \frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
-$$
-當 $\Delta_L < 0$ 時，LM 不成立，ML 為唯一循序賽局均衡結果，與 @fu2006 的方向一致；當 $\Delta_L \ge 0$ 且 $\Delta_M \le 0$ 時，ML 與 LM 同時成立，知情者先動成為可能，反映不對稱 prize values 在 @fu2006 對稱設定下所不存在的現象。
+本文的主要定理表明：ML（資方先動）為純策略 Nash 均衡若且唯若 $\Delta_L^{\mathrm{ML}}\ge0$；立即同時行動 SS 為均衡若且唯若 $\Delta_L^{\mathrm{ML}}\le0$ 且 $\Delta_M^{\mathrm{SS}}\ge0$；LM（勞方先動）為均衡若且唯若 $\Delta_L^{\mathrm{LM}}\ge0$ 且 $\Delta_M^{\mathrm{SS}}\le0$；延後同時行動 $(S,S)$ 只可能在 $V\lambda=1$ 且 $\Delta_L^{\mathrm{LM}}\le0$ 的臨界情形下成為均衡。因此，知情者先動是否成為均衡現象，取決於勞方與資方在相關單邊偏離上的期望報酬比較，而非單一平均型別或單一時序偏好差額。
 
-![在固定 $V=1$ 下，二點分配於 $(\mu,\delta)$ 平面上所對應之 $(\Delta_L,\Delta_M)$ 符號區域。](../figures/binary_timing_regions.png){width=82%}
+![在固定 $V=1$ 下，二點分配於 $(\mu,\delta)$ 平面上所對應之 $(\Delta_L^{\mathrm{LM}},\Delta_M)$ 符號區域。](../figures/binary_timing_regions.png){width=82%}
 
 # 型別別時序誘因與圖像結果
 

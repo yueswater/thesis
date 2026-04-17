@@ -8,7 +8,7 @@ appendix: true
 
 # Appendix: Proofs {#sec-appendix .appendix}
 
-## Proof of Proposition [-@prp-moments] {#sec-proof-moments}
+## Proof of @prp-moments {#sec-proof-moments}
 
 <!-- MODIFIED: added λ computations -->
 For the binary distribution, the moments follow directly from the definition:
@@ -85,7 +85,7 @@ $$
 
 Therefore $\kappa^B>\kappa^U$.
 
-## Proof of Proposition [-@prp-ss]
+## Proof of @prp-ss {#sec-proof-ss}
 
 <!-- MODIFIED: completely rewritten to derive the correct BNE; previous proof solved the Stackelberg leader problem by substituting labor's BR into management's objective -->
 
@@ -188,7 +188,7 @@ $$
 =\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}. \qquad\square
 $$
 
-## Proof of Proposition [-@prp-ml]
+## Proof of @prp-ml {#sec-proof-ml}
 
 <!-- MODIFIED: ML payoffs are now distinct from SS; they match the old (incorrect) SS formula -->
 In ML, management commits first. Labor observes $x_M$ and best-responds type-by-type with $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$, which management anticipates. Management therefore maximizes
@@ -233,7 +233,7 @@ $$
 
 Note the difference from the corrected SS: $\E[U_M^{\mathrm{ML}}]=V^2\kappa^2/4$ while $\E[U_M^{\mathrm{SS}}]=V^3\kappa^2\lambda/(1+V\lambda)^2$. They differ unless $V\lambda=1$. $\square$
 
-## Proof of Proposition [-@prp-separating]
+## Proof of @prp-separating {#sec-proof-separating}
 
 Labor solves
 
@@ -265,7 +265,7 @@ $$
 
 Substituting into @eq-ul and @eq-um yields @eq-ul-lm and @eq-um-lm.
 
-## Proof of Proposition [-@prp-no-pool]
+## Proof of @prp-no-pool {#sec-proof-no-pool}
 
 The proof has two steps.
 
@@ -322,7 +322,7 @@ $$
 
 This difference is a positive-definite quadratic form and is strictly positive for every $s\neq v$. Hence any strategy that asks type $v$ to choose $s^2/(4V)$ with $s\neq v$ is strictly dominated by truthful play.
 
-In the binary-type special case, this condition corresponds exactly to the main-text constraints `IC_H` and `IC_L`. Those two constraints jointly are necessary and sufficient for the separating candidate to be feasible. Necessity follows because a separating equilibrium must rule out imitation in both directions. Sufficiency follows because, given the continuation best response in @eq-brm, once both IC constraints hold, each type optimally chooses its own action.
+In the binary-type special case, this condition corresponds exactly to the main-text constraints $\text{IC}_{H}$ and $\text{IC}_{L}$. Those two constraints jointly are necessary and sufficient for the separating candidate to be feasible. Necessity follows because a separating equilibrium must rule out imitation in both directions. Sufficiency follows because, given the continuation best response in @eq-brm, once both IC constraints hold, each type optimally chooses its own action.
 
 Let
 
@@ -340,7 +340,7 @@ changes sign at that point. This gives the single-crossing representation. But n
 
 Because management's continuation best response depends only on observed effort and the parameter $V$, not on posterior beliefs, beliefs cannot overturn this deviation argument. Therefore no pooling or semi-separating behavior can arise in PBE, and there is no parameter region in which pooling is feasible. The LM subgame admits a unique PBE, and it is separating.
 
-## Proof of the LM Expected-Payoff Formulas
+## Proof of the LM Expected-Payoff Formulas {#sec-proof-lm-payoff}
 
 From @eq-ul-lm, $U_L^{\mathrm{LM}}(v)=v^2/(4V)$, so
 
@@ -360,73 +360,36 @@ $$
 =\frac{4V^2-4V\mu+\mu^2+\sigma^2}{4V}.
 $$ $\square$
 
-## Proof of Proposition [-@prp-stage1-br]
+## Proof of @prp-stage1-br {#sec-proof-stage1-br}
 
-<!-- MODIFIED: point 3 added to reflect that M always prefers F when L plays S -->
 From the stage-1 payoff matrix:
 
-- If management chooses S, labor compares $\E[U_L^{\mathrm{LM}}]$ from F with $\E[U_L^{\mathrm{SS}}]$ from S; the difference is $\Delta_L$.
-- If management chooses F, labor compares $\E[U_L^{\mathrm{SS}}]$ from F with $\E[U_L^{\mathrm{ML}}]$ from S.
-- If labor chooses F, management compares $\E[U_M^{\mathrm{SS}}]$ from F with $\E[U_M^{\mathrm{LM}}]$ from S; the difference is $\E[U_M^{\mathrm{SS}}]-\E[U_M^{\mathrm{LM}}]$.
-- If labor chooses S, management compares $\E[U_M^{\mathrm{ML}}]$ from F with $\E[U_M^{\mathrm{SS}}]$ from S; by the Key Lemma this difference is $V^2\kappa^2(1-V\lambda)^2/(4(1+V\lambda)^2)\ge 0$, so management (weakly) prefers F.
+- If management chooses F, labor compares $\E[U_L^{\mathrm{ML}}]$ from S with $\E[U_L^{\mathrm{SS}}]$ from F; the difference is $\Delta_L^{\mathrm{ML}}$.
+- If management chooses S, labor compares $\E[U_L^{\mathrm{LM}}]$ from F with $\E[U_L^{\mathrm{SS}}]$ from S; the difference is $\Delta_L^{\mathrm{LM}}$.
+- If labor chooses F, management compares $\E[U_M^{\mathrm{SS}}]$ from F with $\E[U_M^{\mathrm{LM}}]$ from S; the difference is $\Delta_M^{\mathrm{SS}}$.
+- If labor chooses S, management compares $\E[U_M^{\mathrm{ML}}]$ from F with $\E[U_M^{\mathrm{SS}}]$ from S; the difference is $\Delta_M^{\mathrm{ML}}=V^2\kappa^2(1-V\lambda)^2/(4(1+V\lambda)^2)\ge 0$.
 
-Parts 1 and 2 of the proposition follow from the first two bullet points. Part 3 follows from the last bullet point: management's unique best response when labor plays S is F (strictly so when $V\lambda\ne 1$).
+The four best responses in the proposition follow directly from these four comparisons. In particular, $\Delta_M^{\mathrm{ML}}=0$ if and only if $V\lambda=1$, so management's unique best response when labor chooses S is F in the generic case and management is indifferent between F and S on the knife-edge.
 
-## Proof of Proposition [-@prp-stage1-ne]
+## Proof of @prp-stage1-ne {#sec-proof-stage1-ne}
 
-<!-- MODIFIED: updated to reflect corrected SS ≠ ML; (S,S) is never NE -->
 Inspect each cell of the stage-1 payoff matrix:
 
-- At $(S,F)$: if labor deviates from S to F, the outcome changes from ML to SS; labor has no incentive iff $\E[U_L^{\mathrm{ML}}]\ge\E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L\le 0$. If management deviates from F to S, the outcome changes from ML to SS; by the Key Lemma, $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$, so management never deviates. Hence $(S,F)$ is a Nash equilibrium iff $\Delta_L\le 0$.
+- At $(S,F)$: labor has no incentive to deviate to F iff $\E[U_L^{\mathrm{ML}}]\ge\E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L^{\mathrm{ML}}\ge0$. Management has no incentive to deviate to S iff $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$, i.e., $\Delta_M^{\mathrm{ML}}\ge0$. By @eq-delta-m-ml, the latter condition always holds, so $(S,F)$ is a Nash equilibrium iff $\Delta_L^{\mathrm{ML}}\ge0$.
 
-- At $(F,F)$: if labor deviates from F to S, the outcome changes from SS to ML; labor has no incentive iff $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{ML}}]$, i.e., $\Delta_L\le 0$. If management deviates from F to S, the outcome changes from SS to LM; management has no incentive iff $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{LM}}]$, i.e., $\Delta_M'\ge 0$. Hence $(F,F)$ is a Nash equilibrium iff $\Delta_L\le 0$ and $\Delta_M'\ge 0$.
+- At $(F,F)$: labor has no incentive to deviate to S iff $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{ML}}]$, i.e., $\Delta_L^{\mathrm{ML}}\le0$. Management has no incentive to deviate to S iff $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{LM}}]$, i.e., $\Delta_M^{\mathrm{SS}}\ge0$. Hence $(F,F)$ is a Nash equilibrium iff $\Delta_L^{\mathrm{ML}}\le0$ and $\Delta_M^{\mathrm{SS}}\ge0$.
 
-- At $(S,S)$: management compares $\E[U_M^{\mathrm{ML}}]$ (deviate to F) with $\E[U_M^{\mathrm{SS}}]$ (stay at S). By the Key Lemma, $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$, so management always deviates. Hence $(S,S)$ is never a Nash equilibrium.
+- At $(F,S)$: labor has no incentive to deviate to S iff $\E[U_L^{\mathrm{LM}}]\ge\E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L^{\mathrm{LM}}\ge0$. Management has no incentive to deviate to F iff $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$, i.e., $\Delta_M^{\mathrm{SS}}\le0$. Hence $(F,S)$ is a Nash equilibrium iff $\Delta_L^{\mathrm{LM}}\ge0$ and $\Delta_M^{\mathrm{SS}}\le0$.
 
-- At $(F,S)$: labor prefers F to S iff $\E[U_L^{\mathrm{LM}}]\ge\E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L\ge 0$. Management prefers S to F iff $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$. Note that $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$ does not simplify directly to $\Delta_M\le 0$; however, since $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$, the condition $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$ is implied whenever $\Delta_M\le 0$. Hence $(F,S)$ is a Nash equilibrium iff $\Delta_L\ge 0$ and $\Delta_M\le 0$.
+- At $(S,S)$: labor has no incentive to deviate to F iff $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{LM}}]$, i.e., $\Delta_L^{\mathrm{LM}}\le0$. Management has no incentive to deviate to F iff $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{ML}}]$, i.e., $\Delta_M^{\mathrm{ML}}\le0$. By @eq-delta-m-ml, $\Delta_M^{\mathrm{ML}}\le0$ is equivalent to $\Delta_M^{\mathrm{ML}}=0$, or $V\lambda=1$. Hence $(S,S)$ is a Nash equilibrium iff $\Delta_L^{\mathrm{LM}}\le0$ and $V\lambda=1$.
 
 This proves the proposition. $\square$
 
-## Proof of Theorem [-@thm-timing-eq]
+## Proof of @thm-timing-eq {#sec-proof-timing-eq}
 
-<!-- MODIFIED: rewritten; Key Lemma proved first; ML no longer always NE; (S,S) never NE -->
+The theorem follows directly from Proposition @prp-stage1-ne. The one-deviation conditions in the four cells give the necessary and sufficient conditions for ML, immediate SS, LM, and delayed SS. Equation @eq-delta-m-ml gives $\Delta_M^{\mathrm{ML}}\ge0$, with $\Delta_M^{\mathrm{ML}}=0$ if and only if $V\lambda=1$. Therefore delayed simultaneous play $(S,S)$ cannot be a pure-strategy Nash equilibrium in the generic case $V\lambda\ne1$; on the knife-edge $V\lambda=1$, it also requires the labor condition $\Delta_L^{\mathrm{LM}}\le0$. $\square$
 
-**Key Lemma.**
-
-$$
-\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
-=\frac{V^2\kappa^2}{4}-\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}
-=V^2\kappa^2\!\left(\frac{1}{4}-\frac{V\lambda}{(1+V\lambda)^2}\right)
-=V^2\kappa^2\cdot\frac{(1+V\lambda)^2-4V\lambda}{4(1+V\lambda)^2}
-=V^2\kappa^2\cdot\frac{(1-V\lambda)^2}{4(1+V\lambda)^2}\;\ge\;0,
-$$
-
-with equality iff $V\lambda=1$. This proves the Key Lemma.
-
-**Part 4: $(S,S)$ is never a Nash equilibrium.** At $(S,S)$, management can deviate from S to F, changing the outcome from SS to ML. The gain is $\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]\ge 0$. Management therefore weakly prefers to deviate (strictly so when $V\lambda\ne 1$). Hence $(S,S)$ is never a Nash equilibrium.
-
-**Part 1: $(S,F)$ (ML) is a Nash equilibrium iff $\Delta_L\le 0$.**
-
-- Management at $(S,F)$: deviating from F to S changes the outcome from ML to SS. The gain $\E[U_M^{\mathrm{SS}}]-\E[U_M^{\mathrm{ML}}]\le 0$ by the Key Lemma. Management never deviates.
-- Labor at $(S,F)$: deviating from S to F changes the outcome from ML to SS. Labor does not deviate iff $\E[U_L^{\mathrm{ML}}]\ge\E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L\le 0$.
-
-Hence $(S,F)$ is a Nash equilibrium iff $\Delta_L\le 0$.
-
-**Part 2: $(F,S)$ (LM) is a Nash equilibrium iff $\Delta_L\ge 0$ and $\Delta_M\le 0$.**
-
-- Labor at $(F,S)$: deviating from F to S changes the outcome from LM to SS. Labor does not deviate iff $\E[U_L^{\mathrm{LM}}]\ge\E[U_L^{\mathrm{SS}}]$, i.e., $\Delta_L\ge 0$.
-- Management at $(F,S)$: deviating from S to F changes the outcome from LM to SS. Management does not deviate iff $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{SS}}]$. Since $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{SS}}]$ (Key Lemma), this condition is implied by $\E[U_M^{\mathrm{LM}}]\ge\E[U_M^{\mathrm{ML}}]$, i.e., $\Delta_M\le 0$.
-
-Hence $(F,S)$ is a Nash equilibrium iff $\Delta_L\ge 0$ and $\Delta_M\le 0$. Substituting @eq-delta-l and @eq-delta-m yields the explicit inequalities in the theorem.
-
-**Part 3: $(F,F)$ (SS) is a Nash equilibrium iff $\Delta_L\le 0$ and $\Delta_M'\ge 0$.**
-
-- Labor at $(F,F)$: deviating from F to S changes the outcome from SS to ML. Labor does not deviate iff $\E[U_L^{\mathrm{SS}}]\ge\E[U_L^{\mathrm{ML}}]$, i.e., $\Delta_L\le 0$.
-- Management at $(F,F)$: deviating from F to S changes the outcome from SS to LM. Management does not deviate iff $\E[U_M^{\mathrm{SS}}]\ge\E[U_M^{\mathrm{LM}}]$, i.e., $\Delta_M'\ge 0$.
-
-Hence $(F,F)$ is a Nash equilibrium iff $\Delta_L\le 0$ and $\Delta_M'\ge 0$. $\square$
-
-## Proof of Proposition [-@prp-ex-ante-decomp]
+## Proof of @prp-ex-ante-decomp {#sec-proof-decomp}
 
 Starting from $R(v)\equiv U_L^{\mathrm{SS}}(v)-U_L^{\mathrm{LM}}(v)$ and taking expectation over $V_L$,
 
@@ -435,12 +398,12 @@ $$
 =
 \E[U_L^{\mathrm{SS}}]-\E[U_L^{\mathrm{LM}}]
 =
--\Delta_L.
+-\Delta_L^{\mathrm{LM}}.
 $$
 
 This proves the proposition.
 
-## Proof of Proposition [-@prp-exact-condition]
+## Proof of @prp-exact-condition {#sec-proof-exact}
 
 Type $v$ ex post prefers to move first if and only if
 
@@ -476,7 +439,7 @@ $$
 
 This proves the proposition.
 
-## Proof of Proposition [-@prp-mgmt]
+## Proof of @prp-mgmt {#sec-proof-mgmt}
 
 <!-- MODIFIED: updated LM formula notation -->
 From @eq-eum-ml and @eq-eum-lm,
@@ -487,9 +450,9 @@ $$
 \E\!\left[U_M^{\mathrm{LM}}\right]=\frac{(2V-\mu)^2+\sigma^2}{4V}.
 $$
 
-Therefore the condition $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ is exactly @eq-mgmt-cond. Note that Theorem [-@thm-timing-eq] requires $\Delta_M \le 0$ for LM to be an equilibrium, so the inequality is reversed there.
+Therefore the condition $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ is exactly @eq-mgmt-cond. Here $\Delta_M$ is management's direct ML-versus-LM preference gap; it is distinct from the one-deviation condition $\Delta_M^{\mathrm{SS}}\le0$ required for LM in Theorem @thm-timing-eq.
 
-## Proof of the Welfare Formulas in Section @sec-welfare
+## Proof of the Welfare Formulas in Section @sec-welfare {#sec-proof-welfare}
 
 <!-- MODIFIED: SS and ML now have distinct welfare; separate formulas provided -->
 By definition, $W=U_L+U_M$.

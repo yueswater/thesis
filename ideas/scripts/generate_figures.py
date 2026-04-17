@@ -124,14 +124,13 @@ def plot_timing_regions() -> None:
         for j, mu in enumerate(mu_vals):
             if delta >= mu:
                 continue
-            # MODIFIED: delta_l uses corrected SS BNE; delta_m uses ML (not SS)
-            delta_l = e_ul_lm(mu, delta, V) - e_ul_ss(mu, delta, V)
+            b_l = e_ul_lm(mu, delta, V) - e_ul_ss(mu, delta, V)
             delta_m = e_um_ml(mu, delta, V) - e_um_lm(mu, delta, V)
-            if delta_l >= 0 and delta_m >= 0:
+            if b_l >= 0 and delta_m >= 0:
                 grid[i, j] = 0
-            elif delta_l >= 0 and delta_m < 0:
+            elif b_l >= 0 and delta_m < 0:
                 grid[i, j] = 1
-            elif delta_l < 0 and delta_m >= 0:
+            elif b_l < 0 and delta_m >= 0:
                 grid[i, j] = 2
             else:
                 grid[i, j] = 3
@@ -145,10 +144,10 @@ def plot_timing_regions() -> None:
     style_axes(ax, r"Mean private value $\mu$", r"Dispersion $\delta$")
 
     legend_items = [
-        Patch(facecolor="#d9f0a3", label=r"$\Delta_L \geq 0,\ \Delta_M \geq 0$"),
-        Patch(facecolor="#addd8e", label=r"$\Delta_L \geq 0,\ \Delta_M < 0$"),
-        Patch(facecolor="#78c679", label=r"$\Delta_L < 0,\ \Delta_M \geq 0$"),
-        Patch(facecolor="#31a354", label=r"$\Delta_L < 0,\ \Delta_M < 0$"),
+        Patch(facecolor="#d9f0a3", label=r"$\Delta_L^{\mathrm{LM}} \geq 0,\ \Delta_M \geq 0$"),
+        Patch(facecolor="#addd8e", label=r"$\Delta_L^{\mathrm{LM}} \geq 0,\ \Delta_M < 0$"),
+        Patch(facecolor="#78c679", label=r"$\Delta_L^{\mathrm{LM}} < 0,\ \Delta_M \geq 0$"),
+        Patch(facecolor="#31a354", label=r"$\Delta_L^{\mathrm{LM}} < 0,\ \Delta_M < 0$"),
     ]
     ax.legend(handles=legend_items, frameon=False, fontsize=8, loc="upper right")
     ax.text(1.62, 1.62, r"$\delta=\mu$", fontsize=8, rotation=35, color="#444444")
