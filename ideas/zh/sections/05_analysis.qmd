@@ -1,0 +1,385 @@
+# 時序選擇與福利 {#sec-timing}
+
+## 第一階段的期望報酬矩陣
+
+依循 @fu2006 的內生時序設定，令雙方在第一階段各自選擇 F（於第 1 期行動）或 S（於第 2 期行動）。此一選擇會產生四種時序組合：
+
+|  | 資方：F | 資方：S |
+|---|---|---|
+| 勞方：F | SS | LM |
+| 勞方：S | ML | SS |
+
+利用第 @sec-equilibria 節的結果，可得第一階段的期望報酬矩陣：
+
+|  | 資方：F | 資方：S |
+|---|---|---|
+| 勞方：F | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ | $(\E[U_L^{\mathrm{LM}}],\E[U_M^{\mathrm{LM}}])$ |
+| 勞方：S | $(\E[U_L^{\mathrm{ML}}],\E[U_M^{\mathrm{ML}}])$ | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ |
+
+修正後的 SS 均衡與 ML 不同，因此矩陣四格的報酬在一般情形下皆互異。特別地，資方在 ML 與 SS 之間的差額如下；此差額非負，且等號當且僅當 $V\lambda=1$：
+
+$$
+\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
+= V^2\kappa^2\cdot\frac{(1-V\lambda)^2}{4(1+V\lambda)^2}
+\;\ge\; 0,
+$$
+
+為使 Nash 條件直接對應到單邊偏離，以下定義四個差額。勞方的兩個差額分別比較 ML 與 SS、LM 與 SS；資方的兩個差額分別比較 ML 與 SS、SS 與 LM：
+
+$$
+\Delta_L^{\mathrm{ML}}
+\equiv
+\E[U_L^{\mathrm{ML}}]-\E[U_L^{\mathrm{SS}}]
+=
+-V\kappa\nu+\frac{2V\kappa\nu}{1+V\lambda}
++\frac{V^2\kappa^2}{4}
+-\frac{V^2\kappa^2}{(1+V\lambda)^2},
+$$ {#eq-delta-l-ml}
+
+$$
+\Delta_L^{\mathrm{LM}}
+\equiv
+\E[U_L^{\mathrm{LM}}]-\E[U_L^{\mathrm{SS}}]
+=
+\frac{\mu^2+\sigma^2}{4V} - \mu + \frac{2V\kappa\nu}{1+V\lambda} - \frac{V^2\kappa^2}{(1+V\lambda)^2},
+$$ {#eq-delta-l-lm}
+
+$$
+\Delta_M^{\mathrm{ML}}
+\equiv
+\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
+=
+\frac{V^2\kappa^2}{4}
+-\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}
+=
+V^2\kappa^2\cdot\frac{(1-V\lambda)^2}{4(1+V\lambda)^2}
+\ge 0,
+$$ {#eq-delta-m-ml}
+
+$$
+\Delta_M^{\mathrm{SS}}
+\equiv
+\E[U_M^{\mathrm{SS}}]-\E[U_M^{\mathrm{LM}}]
+=
+\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2} - \frac{(2V-\mu)^2+\sigma^2}{4V}.
+$$ {#eq-delta-m-ss}
+
+後文討論資方在 ML 與 LM 之間的直接時序偏好時，另使用
+
+$$
+\Delta_M
+\equiv
+\E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{LM}}]
+=
+\frac{V^2\kappa^2}{4} - \frac{(2V-\mu)^2+\sigma^2}{4V}.
+$$ {#eq-delta-m}
+
+::: {#prp-stage1-br}
+### 第一階段的最佳反應
+
+在第一階段的時序賽局中，勞方與資方都尚未觀察到勞方的 realized type，因此雙方都以期望報酬比較：
+
+1. 勞方在資方選擇 F 時的最佳反應為：
+$$
+\text{BR}_L(F)=
+\begin{cases}
+\{S\}, & \Delta_L^{\mathrm{ML}}>0,\\
+\{F,S\}, & \Delta_L^{\mathrm{ML}}=0,\\
+\{F\}, & \Delta_L^{\mathrm{ML}}<0.
+\end{cases}
+$$
+
+2. 勞方在資方選擇 S 時的最佳反應為：
+$$
+\text{BR}_L(S)=
+\begin{cases}
+\{F\}, & \Delta_L^{\mathrm{LM}}>0,\\
+\{F,S\}, & \Delta_L^{\mathrm{LM}}=0,\\
+\{S\}, & \Delta_L^{\mathrm{LM}}<0.
+\end{cases}
+$$
+
+3. 資方在勞方選擇 F 時的最佳反應為：
+$$
+\text{BR}_M(F)=
+\begin{cases}
+\{F\}, & \Delta_M^{\mathrm{SS}}>0,\\
+\{F,S\}, & \Delta_M^{\mathrm{SS}}=0,\\
+\{S\}, & \Delta_M^{\mathrm{SS}}<0.
+\end{cases}
+$$
+
+4. 資方在勞方選擇 S 時的最佳反應為：
+$$
+\text{BR}_M(S)=
+\begin{cases}
+\{F\}, & \Delta_M^{\mathrm{ML}}>0,\\
+\{F,S\}, & \Delta_M^{\mathrm{ML}}=0.
+\end{cases}
+$$
+由 @eq-delta-m-ml 可知 $\Delta_M^{\mathrm{ML}}\ge0$，且 $\Delta_M^{\mathrm{ML}}=0$ 當且僅當 $V\lambda=1$。因此，除 $V\lambda=1$ 的臨界情形外，資方在勞方後動時嚴格偏好先動。
+:::
+
+::: {.proof}
+見 @sec-proof-stage1-br。
+:::
+
+此一期望報酬矩陣是後續參數區域作圖的基礎。若目標是刻畫第一階段 Nash 均衡，應計算 $\Delta_L^{\mathrm{ML}}$、$\Delta_L^{\mathrm{LM}}$、$\Delta_M^{\mathrm{ML}}$ 與 $\Delta_M^{\mathrm{SS}}$；若目標是呈現勞方 LM 相對 SS 的誘因以及資方 ML 相對 LM 的直接偏好，則可分別使用 $\Delta_L^{\mathrm{LM}}$ 與 $\Delta_M$。
+
+::: {#prp-stage1-ne}
+### 純策略時序均衡
+
+第一階段時序賽局的純策略 Nash 均衡為：
+
+1. $(S,F)$ 當且僅當 $\Delta_L^{\mathrm{ML}}\ge 0$。
+2. $(F,F)$ 當且僅當 $\Delta_L^{\mathrm{ML}}\le 0$ 且 $\Delta_M^{\mathrm{SS}}\ge 0$。
+3. $(F,S)$ 當且僅當 $\Delta_L^{\mathrm{LM}}\ge 0$ 且 $\Delta_M^{\mathrm{SS}}\le 0$。
+4. $(S,S)$ 當且僅當 $\Delta_L^{\mathrm{LM}}\le 0$ 且 $\Delta_M^{\mathrm{ML}}=0$，亦即 $\Delta_L^{\mathrm{LM}}\le 0$ 且 $V\lambda=1$。
+:::
+
+::: {.proof}
+見 @sec-proof-stage1-ne。
+:::
+
+::: {#thm-timing-eq}
+### 主定理：內生時序均衡
+
+第一階段時序賽局的純策略 Nash 均衡由四個單邊偏離差額完全刻畫。具體而言：
+
+1. **ML**（$(S,F)$，資方先動）為純策略 Nash 均衡，若且唯若 $\Delta_L^{\mathrm{ML}}\ge0$。此條件表示，給定資方選擇 F，勞方選擇 S 所得到的 ML 報酬至少不低於偏離至 F 後得到的 SS 報酬；資方方面，$\Delta_M^{\mathrm{ML}}\ge0$ 由 @eq-delta-m-ml 恆成立，因此資方不會從 F 偏離至 S。
+
+2. **SS**（$(F,F)$，立即同時行動）為純策略 Nash 均衡，若且唯若 $\Delta_L^{\mathrm{ML}}\le0$ 且 $\Delta_M^{\mathrm{SS}}\ge0$。第一個條件表示勞方不願從 F 偏離至 S 而把結果改為 ML；第二個條件表示資方不願從 F 偏離至 S 而把結果改為 LM。
+
+3. **LM**（$(F,S)$，勞方先動）為純策略 Nash 均衡，若且唯若 $\Delta_L^{\mathrm{LM}}\ge0$ 且 $\Delta_M^{\mathrm{SS}}\le0$。其中 $\Delta_L^{\mathrm{LM}}\ge0$ 表示勞方在資方選擇 S 時偏好先動 F，而 $\Delta_M^{\mathrm{SS}}\le0$ 表示資方在勞方選擇 F 時偏好後動 S，不會偏離至立即同時行動 SS。
+
+4. **延後 SS**（$(S,S)$，延後同時行動）為純策略 Nash 均衡，若且唯若 $\Delta_L^{\mathrm{LM}}\le0$ 且 $\Delta_M^{\mathrm{ML}}=0$。第一個條件使勞方不願從 S 偏離至 F；第二個條件使資方不會因偏離至 F 而嚴格提高報酬。由 @eq-delta-m-ml 可知 $\Delta_M^{\mathrm{ML}}=0$ 當且僅當 $V\lambda=1$，故此均衡只可能出現在該臨界情形。
+
+因此，在一般情形 $V\lambda\ne1$ 下，$(S,S)$ 不是純策略 Nash 均衡；所有純策略均衡只能出現在 ML、LM 與立即同時行動 SS 之間。邊界上可能存在多重均衡，上述弱不等式已包含這些情形。
+:::
+
+::: {.proof}
+見 @sec-proof-timing-eq。
+:::
+
+![在固定 $V=1$ 下，二點分配於 $(\mu,\delta)$ 平面上所對應之 $(\Delta_L^{\mathrm{LM}},\Delta_M)$ 符號區域。](../figures/binary_timing_regions.png){#fig-timing-regions-zh width=85%}
+
+## 型別層級的事後分解
+
+雖然第一階段的制度選擇以 ex ante expected payoff 為基礎，型別層級的報酬差仍可用來分解勞方的事前誘因。對任一 realized type $v$，定義等待（後動）相對於先動的利益為
+
+$$
+R(v) \equiv U_L^{\mathrm{SS}}(v) - U_L^{\mathrm{LM}}(v)
+  = \left(\sqrt{v} - \frac{V\kappa}{1+V\lambda}\right)^2 - \frac{v^2}{4V}.
+$$ {#eq-rent-function}
+
+因此，若 $R(v)>0$，表示當 realized type 為 $v$ 時，勞方事後會偏好等待（SS/ML）；若 $R(v)<0$，則表示該型別事後會偏好先動（LM）。
+
+::: {#prp-ex-ante-decomp}
+### Ex Ante 差額的型別分解
+
+勞方第一階段的事前比較可寫為
+
+$$
+\E[U_L^{\mathrm{SS}}]-\E[U_L^{\mathrm{LM}}]
+=
+\E[R(V_L)]
+=
+-\Delta_L^{\mathrm{LM}}.
+$$
+
+因此，$R(v)$ 並不代表第一階段的型別條件式策略，而是用來分解勞方 ex ante timing choice 的 realized-type payoff gap。
+:::
+
+::: {.proof}
+見 @sec-proof-decomp。
+:::
+
+不另行引入額外符號時，其等價分解式為
+
+$$
+R(v)
+=
+\left(\frac{V\kappa}{1+V\lambda}-\sqrt{v}-\frac{v}{2\sqrt V}\right)
+\left(\frac{V\kappa}{1+V\lambda}-\sqrt{v}+\frac{v}{2\sqrt V}\right).
+$$ {#eq-rent-factored}
+
+::: {#prp-exact-condition}
+### 精確的型別條件
+
+realized type $v$ 事後偏好先動，當且僅當
+
+$$
+\frac{V\kappa}{1+V\lambda}
+\in
+\left[\sqrt v-\frac{v}{2\sqrt V},\;\sqrt v+\frac{v}{2\sqrt V}\right].
+$$
+
+等價地，若 $V\kappa/(1+V\lambda)$ 落在該區間之外，則該型別事後偏好後動。
+:::
+
+::: {.proof}
+見 @sec-proof-exact。
+:::
+
+![在校準值 $(\mu,\delta,V)=(1.2,0.4,1)$ 下，勞方於 SS 與 LM 兩種制度中的型別別期望報酬比較。](../figures/labor_payoff_comparison.png){#fig-labor-payoff-zh width=85%}
+
+## 各分配下的時序結構
+
+### 二點分配
+
+在二點型別 $V_L\in\{V_\ell,V_H\}$ 下，直接比較 $R(V_\ell)$ 與 $R(V_H)$，即可刻畫所有可能的時序結構。符號組合 $(\operatorname{sgn}R(V_\ell),\operatorname{sgn}R(V_H))$ 有以下四種情形：
+
+- $(-,-)$：兩種型別事後均偏好先動。$\E[R(V_L)] = -\Delta_L^{\mathrm{LM}} < 0$，故 $\Delta_L^{\mathrm{LM}} > 0$，表示勞方在資方選擇 S 時偏好選 F。
+- $(+,+)$：兩種型別事後均偏好後動。$\E[R(V_L)] = -\Delta_L^{\mathrm{LM}} > 0$，故 $\Delta_L^{\mathrm{LM}} < 0$，表示勞方在資方選擇 S 時偏好選 S。
+- $(+,-)$：低型別偏好後動、高型別偏好先動。$\Delta_L^{\mathrm{LM}} = -\frac{1}{2}(R(V_\ell)+R(V_H))$，其符號取決於機率加權平均。
+- $(-,+)$：低型別偏好先動、高型別偏好後動。$\Delta_L^{\mathrm{LM}}$ 的符號由 $R(V_\ell)$ 與 $R(V_H)$ 的機率加權平均決定。
+
+### 均勻分配
+
+若 $V_L\sim U[\mu-\delta,\mu+\delta]$，則事後後動區域為
+
+$$
+\mathcal W
+\equiv
+\{v\in[\mu-\delta,\mu+\delta]:R(v)>0\},
+$$
+
+事後先動區域則為 $\mathcal F\equiv\{v:R(v)<0\}$。由於 $R(v)$ 連續，$\mathcal W$ 與 $\mathcal F$ 的分界點由 $R(v)=0$ 在支持集內的根刻畫。當 $R(\mu-\delta)$ 與 $R(\mu+\delta)$ 符號相反時，支持集內必有根，即存在臨界值 $v^*\in(\mu-\delta,\mu+\delta)$。當兩者同號時，支持集內可能無根，對應全部型別均偏好先動或均偏好後動。
+
+## 混同均衡分析
+
+在三種制度中，只有 LM 需要分析混同均衡。只有在 LM 中，知情的勞方先動，不知情的資方在觀察到勞方投入後再回應，因此才有「先動行為是否構成訊號」的問題。相對地，SS 是同時行動的 Bayesian Nash 環境，ML 則是資方先動、勞方後動。兩者都不是 Fu (2006) 意義下由知情者向不知情者傳訊的 signaling subgame，因此不存在同樣意義下的混同均衡或分離均衡問題。
+
+在 @fu2006 中，知情者先動時可能出現分離均衡、混同均衡與半分離均衡。原因在於後動者的續局報酬會受到 posterior beliefs 的影響。本文模型中沒有這個機制。
+
+當資方觀察到勞方投入 $x_L$ 時，其最佳反應恒為
+
+$$
+x_M^*(x_L)=\sqrt{Vx_L}-x_L,
+$$
+
+該反應只依賴觀察到的投入與共同已知的參數 $V$。勞方型別的後驗信念不會進入資方的續局最適化問題。因此：
+
+1. favorable beliefs 無法支撐混同均衡，因為信念不會改變後動者的行動；
+2. 基於相同理由，半分離均衡亦無法被支撐；
+3. LM 中唯一的均衡結果，即為第 @sec-lm 節所刻畫的分離均衡。
+
+因此，本文的重點不只是「檢查過 pooling」。較強的結論是：相較於 @fu2006，本文的模型結構直接關閉了支撐 informed-first 子賽局中混同均衡的「訊號—信念」通道。
+
+## 資方的時序誘因與內生時序 {#sec-endogenous}
+
+::: {#prp-mgmt}
+### 資方的時序偏好
+
+資方偏好先動（ML）而非後動（LM）——即 $\Delta_M \ge 0$——若且唯若以下條件成立：
+
+$$
+\frac{V^2\kappa^2}{4} \ge \frac{(2V-\mu)^2+\sigma^2}{4V}.
+$$ {#eq-mgmt-cond}
+:::
+
+::: {.proof}
+見 @sec-proof-mgmt。
+:::
+
+### 函數化範例
+
+**二點分配**（$\sigma^2=\delta^2$）：
+
+$$
+V^3(\kappa^B)^2 \ge (2V-\mu)^2+\delta^2.
+$$
+
+**均勻分配**（$\sigma^2=\delta^2/3$）：
+
+$$
+V^3(\kappa^U)^2 \ge (2V-\mu)^2+\frac{\delta^2}{3}.
+$$
+
+### 關於 pooling 的歧義
+
+由於 LM 已被證明為唯一分離均衡（見 @prp-no-pool），第一階段的 ex ante timing choice 可以建立在唯一的續局期望報酬上，不會再出現混同均衡選擇所帶來的歧義。本文第一階段的矩陣比較，不是在多個 LM 續局均衡之間做 selection，而是直接比較唯一續局所誘導出的期望報酬。
+
+第一階段的制度選擇，本質上是在 realized type 觀察前，比較先行承諾與保留彈性的期望報酬。因此，決定性的比較對象是 $\E[U_L^{\mathrm{LM}}]$ 與 $\E[U_L^{\mathrm{SS}}]$，而非特定型別在兩種制度下的條件式報酬。相較於 @fu2006，本文的 LM 續局沒有均衡選擇歧義，因此上述 ex ante 比較可以建立在唯一確定的矩陣元素上。
+
+## 福利比較 {#sec-welfare}
+
+<!-- MODIFIED: E[W^SS] 更新為修正後的 BNE；E[W^ML] 現在與 E[W^SS] 不同 -->
+總期望福利定義為 $\E[W]=\E[U_L]+\E[U_M]$。
+
+$$
+\E[W^{\mathrm{SS}}]
+=\mu - \frac{2V\kappa\nu}{1+V\lambda} + \frac{V^2\kappa^2}{(1+V\lambda)^2}
+ + \frac{V^3\kappa^2\lambda}{(1+V\lambda)^2},
+$$ {#eq-ew-ss}
+
+$$
+\E[W^{\mathrm{ML}}]
+=\mu-V\kappa\nu+\frac{V^2\kappa^2}{2},
+$$ {#eq-ew-ml}
+
+$$
+\E[W^{\mathrm{LM}}]
+=V-\mu+\frac{\mu^2+\sigma^2}{2V}.
+$$ {#eq-ew-lm}
+
+::: {.proof}
+見 @sec-proof-welfare。
+:::
+
+$\E[W^{\mathrm{SS}}]-\E[W^{\mathrm{LM}}]$ 的符號，取決於 $V$、$\mu$、$\delta$ 與分配形狀的共同作用，且與上述均衡條件並無固定關係。由於修正後的 SS 與 ML 不再相同，三種制度的福利比較現在完全獨立。
+
+**二點分配**（$\sigma^2=\delta^2$，動差 $\kappa^B,\nu^B,\lambda^B$ 見 @tbl-moments）：
+
+$$
+\E[W^{\mathrm{SS},B}] = \mu - \frac{2V\kappa^B\nu^B}{1+V\lambda^B} + \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2} + \frac{V^3(\kappa^B)^2\lambda^B}{(1+V\lambda^B)^2},
+$$
+
+$$
+\E[W^{\mathrm{ML},B}] = \mu - V\kappa^B\nu^B + \frac{V^2(\kappa^B)^2}{2},
+\qquad
+\E[W^{\mathrm{LM},B}] = V - \mu + \frac{\mu^2 + \delta^2}{2V}.
+$$
+
+**均勻分配**（$\sigma^2=\delta^2/3$，動差 $\kappa^U,\nu^U,\lambda^U$ 見 @tbl-moments）：
+
+$$
+\E[W^{\mathrm{SS},U}] = \mu - \frac{2V\kappa^U\nu^U}{1+V\lambda^U} + \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2} + \frac{V^3(\kappa^U)^2\lambda^U}{(1+V\lambda^U)^2},
+$$
+
+$$
+\E[W^{\mathrm{ML},U}] = \mu - V\kappa^U\nu^U + \frac{V^2(\kappa^U)^2}{2},
+\qquad
+\E[W^{\mathrm{LM},U}] = V - \mu + \frac{3\mu^2 + \delta^2}{6V}.
+$$
+
+## 結果表
+
+<!-- MODIFIED: SS 欄更新為修正後的 BNE；ML 與 SS 現有各自報酬 -->
+| 項目 | SS（同時行動） | ML（資方先動） | LM（勞方先動） |
+|---|---|---|---|
+| 資方資訊 | 僅知先驗分配 | 僅知先驗分配 | 觀察 $x_L$ 並推知型別 |
+| 均衡性質 | Bayesian Nash | Stackelberg（M 先動） | 唯一分離型 PBE |
+| $x_M$ | $\dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{v(2V-v)}{4V}$ |
+| $x_L$ | $\dfrac{V\kappa\sqrt{v}}{1+V\lambda} - \dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\dfrac{V\kappa}{2}\sqrt{v} - \dfrac{V^2\kappa^2}{4}$ | $\dfrac{v^2}{4V}$ |
+| $U_L$ | $\left(\sqrt{v}-\dfrac{V\kappa}{1+V\lambda}\right)^{\!2}$ | $\left(\sqrt{v}-\dfrac{V\kappa}{2}\right)^{\!2}$ | $\dfrac{v^2}{4V}$ |
+| $U_M$ | $\dfrac{V^2\kappa}{(1+V\lambda)\sqrt{v}} - \dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\dfrac{V^2\kappa}{2\sqrt{v}} - \dfrac{V^2\kappa^2}{4}$ | $\dfrac{(2V-v)^2}{4V}$ |
+| $\E[U_L]$ | $\mu - \dfrac{2V\kappa\nu}{1+V\lambda} + \dfrac{V^2\kappa^2}{(1+V\lambda)^2}$ | $\mu - V\kappa\nu + \dfrac{V^2\kappa^2}{4}$ | $\dfrac{\mu^2+\sigma^2}{4V}$ |
+| $\E[U_M]$ | $\dfrac{V^3\kappa^2\lambda}{(1+V\lambda)^2}$ | $\dfrac{V^2\kappa^2}{4}$ | $\dfrac{(2V-\mu)^2+\sigma^2}{4V}$ |
+
+: 一般化模型下之均衡摘要 {#tbl-summary-general}
+
+其中 $\kappa=\E[V_L^{-1/2}]$、$\nu=\E[V_L^{1/2}]$、$\lambda=\E[V_L^{-1}]$，且 $\sigma^2=\Var(V_L)$。
+
+\bigskip
+
+<!-- MODIFIED: 新增 λ 列 -->
+| 動差 / 結構 | 二點分配 | 均勻分配 |
+|---|---|---|
+| $\sigma^2$ | $\delta^2$ | $\delta^2/3$ |
+| $\kappa$ | $\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}$ | $\dfrac{u_H-u_\ell}{\delta}$ |
+| $\nu$ | $\dfrac{u_\ell+u_H}{2}$ | $\dfrac{u_H^3-u_\ell^3}{3\delta}$ |
+| $\lambda$ | $\dfrac{1}{2u_\ell^2}+\dfrac{1}{2u_H^2}$ | $\dfrac{\ln(u_H/u_\ell)}{\delta}$ |
+| 時序結構 | 三種離散型態 | 臨界型別 $v^*$ |
+
+: 不同分配下之動差與時序結構 {#tbl-summary-distributions}
