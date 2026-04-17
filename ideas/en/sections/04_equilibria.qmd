@@ -1,12 +1,10 @@
 # Equilibrium Analysis {#sec-equilibria}
 
-This section studies the three subgames jointly: SS (simultaneous moves), ML (management moves first), and LM (labor moves first). Throughout, we use the best responses in @eq-brl and @eq-brm.
+This section studies SS (simultaneous moves), ML (management moves first), and LM (labor moves first), using @eq-brl and @eq-brm throughout.
 
 ## SS: Simultaneous Moves {#sec-ss}
 
-<!-- MODIFIED: corrected BNE derivation; old code incorrectly substituted labor's BR into management's objective, which computes the Stackelberg leader problem (= ML), not the BNE -->
-
-Both players choose effort simultaneously. Labor chooses $x_L$ by type $V_L$, while management chooses $x_M$ under incomplete information about $V_L$. In a Bayesian Nash equilibrium, each player optimizes given the other's equilibrium strategy. Labor's equilibrium strategy is the type-by-type best response $x_L(v) = \sqrt{vx_M} - x_M$ from @eq-brl. Management's first-order condition, taking labor's equilibrium strategy as given, is
+In SS, both players choose effort simultaneously. Labor's type-by-type best response is $x_L(v)=\sqrt{vx_M}-x_M$ from @eq-brl. Management's first-order condition, taking this strategy as given, is
 
 $$
 V\cdot\E\!\left[\frac{x_L(V_L)}{(x_L(V_L)+x_M)^2}\right] = 1.
@@ -19,12 +17,10 @@ V\cdot\E\!\left[\frac{\sqrt{V_Lx_M}-x_M}{V_Lx_M}\right]
 = V\!\left(\frac{\kappa}{\sqrt{x_M}}-\lambda\right) = 1,
 $$
 
-where $\lambda\equiv\E[V_L^{-1}]$. Solving for $\sqrt{x_M}$ yields the equilibrium.
+where $\lambda\equiv\E[V_L^{-1}]$. Solving for $\sqrt{x_M}$ gives the equilibrium.
 
 ::: {#prp-ss}
 ### Simultaneous-Move Equilibrium
-
-<!-- MODIFIED: corrected SS equilibrium formulas -->
 The SS Bayesian Nash equilibrium is
 
 $$
@@ -62,9 +58,9 @@ $$ {#eq-eum-ss}
 See @sec-proof-ss.
 :::
 
-Substituting moments from @tbl-moments into @prp-ss gives distribution-specific formulas.
+Substituting @tbl-moments gives distribution-specific formulas.
 
-**Binary.** Let $\kappa^B$, $\nu^B$, $\lambda^B$ be the binary-distribution moments from @tbl-moments:
+**Binary.** Let $\kappa^B$, $\nu^B$, $\lambda^B$ be the binary moments:
 
 $$
 x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2},
@@ -73,7 +69,7 @@ x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2},
   = \mu - \frac{2V\kappa^B\nu^B}{1+V\lambda^B} + \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2}.
 $$
 
-**Uniform.** Let $\kappa^U$, $\nu^U$, $\lambda^U$ be the uniform-distribution moments from @tbl-moments:
+**Uniform.** Let $\kappa^U$, $\nu^U$, $\lambda^U$ be the uniform moments:
 
 $$
 x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2},
@@ -82,13 +78,11 @@ x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2},
   = \mu - \frac{2V\kappa^U\nu^U}{1+V\lambda^U} + \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2}.
 $$
 
-Because $v\mapsto v^{-1/2}$ is convex, the binary distribution yields a larger $\kappa$ than the uniform distribution.
+Since $v^{-1/2}$ is convex, the binary distribution yields a larger $\kappa$.
 
 ## ML: Management Moves First {#sec-ml}
 
-<!-- MODIFIED: ML payoffs are now distinct from SS; ML solves the Stackelberg leader problem, not the BNE problem -->
-
-Management commits to $x_M$ before observing labor's type. Labor then responds type by type using @eq-brl, so management can anticipate $x_L(v)=\sqrt{vx_M}-x_M$ and maximize
+Management commits to $x_M$ before observing labor's type. Labor responds by @eq-brl, so management anticipates $x_L(v)=\sqrt{vx_M}-x_M$ and maximizes
 
 $$
 \max_{x_M\ge 0}\;\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]

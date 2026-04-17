@@ -2,21 +2,21 @@
 
 ## Stage-1 Expected-Payoff Matrix
 
-Following the endogenous-timing setup in @fu2006, let each player choose F (move in period 1) or S (move in period 2). This generates four timing profiles:
+Following @fu2006, each player chooses F (period 1) or S (period 2), generating four timing profiles:
 
 |  | Management: F | Management: S |
 |---|---|---|
 | Labor: F | SS | LM |
 | Labor: S | ML | SS |
 
-Using the results in Section @sec-equilibria, the expected-payoff matrix is
+The expected-payoff matrix is
 
 |  | Management: F | Management: S |
 |---|---|---|
 | Labor: F | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ | $(\E[U_L^{\mathrm{LM}}],\E[U_M^{\mathrm{LM}}])$ |
 | Labor: S | $(\E[U_L^{\mathrm{ML}}],\E[U_M^{\mathrm{ML}}])$ | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ |
 
-Because the corrected SS equilibrium differs from ML (see Section @sec-ml), the four matrix entries are generically distinct. In particular, management's payoff difference between ML and SS is nonnegative and equals zero only when $V\lambda=1$:
+Since SS differs from ML, the four entries are generically distinct. Management's ML-minus-SS payoff gap is nonnegative and is zero only when $V\lambda=1$:
 
 $$
 \E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
@@ -24,7 +24,7 @@ $$
 \;\ge\; 0,
 $$
 
-To make the Nash conditions line up with one-player deviations, define four payoff differences. The two labor differences compare ML with SS and LM with SS, while the two management differences compare ML with SS and SS with LM:
+Define four one-deviation payoff gaps:
 
 $$
 \Delta_L^{\mathrm{ML}}
@@ -64,7 +64,7 @@ $$
 \frac{V^3\kappa^2\lambda}{(1+V\lambda)^2} - \frac{(2V-\mu)^2+\sigma^2}{4V}.
 $$ {#eq-delta-m-ss}
 
-For the later discussion of management's direct timing preference between ML and LM, also define
+For management's direct ML-versus-LM preference, define
 
 $$
 \Delta_M
@@ -77,7 +77,7 @@ $$ {#eq-delta-m}
 ::: {#prp-stage1-br}
 ### Stage-1 Best Responses
 
-In the stage-1 timing game, labor and management choose before labor observes the realized type. Both comparisons are therefore ex ante expected-payoff comparisons:
+At stage 1, labor has not observed its realized type. Both players compare ex ante expected payoffs:
 
 1. Labor's best response when management chooses F is
 $$
@@ -303,8 +303,6 @@ Because LM is uniquely separating (@prp-no-pool), the ex ante timing game can be
 The stage-0 timing choice is made before labor observes its realized type. The relevant comparison is therefore $\E[U_L^{\mathrm{LM}}]$ versus $\E[U_L^{\mathrm{SS}}]$, not the conditional payoff of any particular type under each regime. Relative to @fu2006, the absence of pooling ambiguity in LM means this ex ante comparison rests on uniquely determined matrix entries.
 
 ## Welfare Comparison {#sec-welfare}
-
-<!-- MODIFIED: E[W^SS] updated for corrected SS equilibrium; E[W^ML] is now distinct from E[W^SS] -->
 Total expected welfare is $\E[W]=\E[U_L]+\E[U_M]$.
 
 $$
@@ -354,8 +352,6 @@ $$
 $$
 
 ## Result Tables
-
-<!-- MODIFIED: SS column updated to corrected BNE; ML now has distinct payoffs from SS -->
 | Object | SS (Simultaneous) | ML (Management First) | LM (Labor First) |
 |---|---|---|---|
 | Management information | Prior only | Prior only | Observes $x_L$ and infers type |
@@ -372,8 +368,6 @@ $$
 where $\kappa=\E[V_L^{-1/2}]$, $\nu=\E[V_L^{1/2}]$, $\lambda=\E[V_L^{-1}]$, and $\sigma^2=\Var(V_L)$.
 
 \bigskip
-
-<!-- MODIFIED: added λ row -->
 | Moment / Structure | Binary | Uniform |
 |---|---|---|
 | $\sigma^2$ | $\delta^2$ | $\delta^2/3$ |

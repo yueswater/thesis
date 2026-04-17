@@ -10,8 +10,7 @@ appendix: true
 
 ## @prp-moments 的證明 {#sec-proof-moments}
 
-<!-- MODIFIED: 新增 λ 計算 -->
-二點分配下的動差可由定義直接計算：
+二點分配的動差由兩個型別取平均即可：
 
 $$
 \kappa^B=\frac{1}{2u_\ell}+\frac{1}{2u_H},
@@ -21,13 +20,13 @@ $$
 \lambda^B=\frac{1}{2u_\ell^2}+\frac{1}{2u_H^2}.
 $$
 
-對均勻分配，設其密度為
+均勻分配的密度為
 
 $$
 f(v)=\frac{1}{2\delta}\mathbf{1}_{[\mu-\delta,\mu+\delta]}(v).
 $$
 
-由於 $[\mu-\delta,\mu+\delta]\subset(0,\infty)$ 為緊緻集，且 $v\mapsto v^{-1/2}$ 在其上連續，故 $v^{-1/2}$ 為 Lebesgue 可積。令 $u=\sqrt v$，則此為 $C^1$ 微分同胚，且 $dv=2u\,du$。因此
+直接積分得
 
 $$
 \kappa^U
@@ -36,7 +35,7 @@ $$
 =\frac{u_H-u_\ell}{\delta}.
 $$
 
-同理，$v\mapsto v^{1/2}$ 亦為 Lebesgue 可積，故
+同樣地，
 
 $$
 \nu^U
@@ -45,7 +44,7 @@ $$
 =\frac{u_H^3-u_\ell^3}{3\delta}.
 $$
 
-對 $\lambda^U$，$v\mapsto v^{-1}$ 在緊緻集 $[\mu-\delta,\mu+\delta]\subset(0,\infty)$ 上可積：
+對 $\lambda^U$，
 
 $$
 \lambda^U
@@ -55,7 +54,7 @@ $$
 =\frac{\ln(u_H/u_\ell)}{\delta}.
 $$
 
-最後比較 $\kappa^B$ 與 $\kappa^U$。由於 $v\mapsto v^{-1/2}$ 在 $(0,\infty)$ 上嚴格凸，Jensen 不等式給出
+比較 $\kappa^B$ 與 $\kappa^U$。因 $v^{-1/2}$ 為嚴格凸函數，Jensen 不等式給出
 
 $$
 \kappa^B=\E_{\mathrm{binary}}[V_L^{-1/2}]
@@ -64,7 +63,7 @@ $$
 =\mu^{-1/2}.
 $$
 
-此外，由 $u_H^2-u_\ell^2=2\delta$ 可得
+又由 $u_H^2-u_\ell^2=2\delta$ 得
 
 $$
 \kappa^U=\frac{u_H-u_\ell}{\delta}=\frac{2}{u_H+u_\ell},
@@ -73,7 +72,7 @@ $$
 =\frac{u_H+u_\ell}{2u_\ell u_H}.
 $$
 
-故
+所以
 
 $$
 \kappa^B-\kappa^U
@@ -82,11 +81,9 @@ $$
 >0.
 $$
 
-因此 $\kappa^B>\kappa^U$。
+故 $\kappa^B>\kappa^U$。
 
 ## @prp-ss 的證明 {#sec-proof-ss}
-
-<!-- MODIFIED: 完整改寫，推導正確的 BNE；舊版本將勞方 BR 代入資方目標函數最大化，實際上解的是 Stackelberg 領先者問題（ML），而非 BNE -->
 
 我們求貝葉斯均衡 $(x_M^*,\,x_L^*(\cdot))$，其中資方選常數 $x_M^*$，勞方逐型別最佳反應。由 @eq-brl，型別 $v$ 的最佳反應為
 
@@ -138,7 +135,7 @@ U_M^{\mathrm{SS}}(v)
 =\frac{V^2\kappa}{(1+V\lambda)\sqrt{v}}-\frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$
 
-最後取期望：
+取期望：
 
 $$
 \E[U_L^{\mathrm{SS}}]
@@ -152,8 +149,6 @@ $$
 $$
 
 ## @prp-ml 的證明 {#sec-proof-ml}
-
-<!-- MODIFIED: ML 報酬現與 SS 不同；ML 解的是 Stackelberg 領先者問題 -->
 在 ML 中，資方先承諾。勞方觀察 $x_M$ 後逐型別最佳反應，資方事先預期到 $x_L(v)=\sqrt{vx_M}-x_M$，因此最大化
 
 $$
@@ -364,8 +359,6 @@ $$
 故命題成立。
 
 ## @prp-exact-condition 的證明 {#sec-proof-exact}
-
-<!-- MODIFIED: 條件更新為使用修正後的 SS -->
 型別 $v$ 事後偏好先動，當且僅當
 
 $$
@@ -401,8 +394,6 @@ $$
 故命題成立。
 
 ## @prp-mgmt 的證明 {#sec-proof-mgmt}
-
-<!-- MODIFIED: LM 公式改用新記號 -->
 由 @eq-eum-ml 與 @eq-eum-lm 得
 
 $$
@@ -413,9 +404,94 @@ $$
 
 故條件 $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ 即為 @eq-mgmt-cond。此處的 $\Delta_M$ 是資方在 ML 與 LM 之間的直接偏好差額；它不同於 @thm-timing-eq 中 LM 均衡所需的單邊偏離條件 $\Delta_M^{\mathrm{SS}}\le0$。
 
-## 第 @sec-welfare 節福利公式的證明 {#sec-proof-welfare}
+## @prp-pool 的證明 {#sec-proof-ext-pool}
 
-<!-- MODIFIED: SS 與 ML 的福利現在各自獨立 -->
+兩條誘因相容限制來自同一個要求：型別 $\theta_i$ 留在混同路徑上的報酬，不能低於其在路徑外信念 $\mu=1$ 下的最佳偏離報酬。也就是說，@eq-ul-pool-i 必須弱優於 @eq-ul-dev-i。令 $y=\sqrt{x_P}$ 後，@eq-ich 與 @eq-icl 分別化為 @eq-ich-quad 與 @eq-icl-quad。
+
+看高型別的限制。$\mathrm{IC}_H$ 的邊界方程式為
+
+$$
+y^2 - \frac{\theta_H^2}{\sqrt{\Psi_0}}y + \frac{\theta_H^2}{4}=0.
+$$
+
+其判別式為
+
+$$
+\Delta_H
+= \frac{\theta_H^4}{\Psi_0}-\theta_H^2
+= \frac{\theta_H^2(\theta_H^2-\Psi_0)}{\Psi_0}.
+$$
+
+由於 $q\in(0,1)$ 且 $0<\theta_L<\theta_H$，有
+
+$$
+\Psi_0=q\theta_H^2+(1-q)\theta_L^2<\theta_H^2.
+$$
+
+故 $\Delta_H>0$。令
+
+$$
+s \equiv \sqrt{1-\frac{\Psi_0}{\theta_H^2}} \in (0,1),
+$$
+
+便可將 $\mathrm{IC}_H$ 的兩個根寫成
+
+$$
+z_{\min}=\frac{\theta_H^2}{2\sqrt{\Psi_0}}(1-s),
+\qquad
+z_{\max}=\frac{\theta_H^2}{2\sqrt{\Psi_0}}(1+s).
+$$
+
+@eq-ich-quad 是開口向下的拋物線，所以不等式成立的地方，正好落在兩根之間：
+
+$$
+y\in [z_{\min},z_{\max}].
+$$
+
+低型別的限制也用同樣方式處理。$\mathrm{IC}_L$ 的邊界方程式為
+
+$$
+y^2 - \frac{\theta_L^2}{\sqrt{\Psi_0}}y
++ \frac{\theta_L^4}{4\theta_H^2}=0.
+$$
+
+判別式為
+
+$$
+\Delta_L
+=\frac{\theta_L^4}{\Psi_0}-\frac{\theta_L^4}{\theta_H^2}
+=\frac{\theta_L^4(\theta_H^2-\Psi_0)}{\Psi_0\theta_H^2}.
+$$
+
+同樣因為 $\Psi_0<\theta_H^2$，可得 $\Delta_L>0$。於是 $\mathrm{IC}_L$ 也給出一個非退化區間，兩個根為
+
+$$
+y_{\min}=\frac{\theta_L^2}{2\sqrt{\Psi_0}}(1-s),
+\qquad
+y_{\max}=\frac{\theta_L^2}{2\sqrt{\Psi_0}}(1+s).
+$$
+
+由於 @eq-icl-quad 也開口向下，低型別的可行集合為
+
+$$
+y\in [y_{\min},y_{\max}].
+$$
+
+因此，一個混同努力 $x_P=y_P^2$ 能同時約束兩個型別，正是因為 $y_P$ 同時落在這兩個區間內，也就是 @eq-pool-intersection 成立。若兩個區間沒有交集，不論挑哪一個共同努力，至少有一個型別會找到更好的偏離，純策略混同 PBE 便無法成立。
+
+再把兩個區間的位置稍微看清楚。因為 $\theta_L^2<\theta_H^2$，可知 $y_{\min}<z_{\min}$ 且 $y_{\max}<z_{\max}$。所以交集是否存在，只剩下一個邊界要檢查：
+
+$$
+z_{\min}\leq y_{\max}.
+$$
+
+若令 $r\equiv \theta_L^2/\theta_H^2$，這個條件也可寫成
+
+$$
+\frac{1-s}{1+s}\leq r. \qquad\square
+$$
+
+## 第 @sec-welfare 節福利公式的證明 {#sec-proof-welfare}
 依定義，$W=U_L+U_M$。
 
 對 SS（修正後的 BNE）：

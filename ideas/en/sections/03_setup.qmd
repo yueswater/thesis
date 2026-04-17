@@ -2,17 +2,17 @@
 
 ## Environment
 
-There are two players: labor ($L$) and management ($M$). They compete over which side's preferred policy is implemented. The outcome is winner-take-all: the winner receives its own prize value, while the loser receives 0. Contest technology follows @tullock1980. Endogenous timing follows @hamilton1990 and @fu2006.
+There are two players: labor ($L$) and management ($M$). They compete over policy implementation. The winner receives its prize value; the loser receives 0. Contest technology follows @tullock1980. Endogenous timing follows @hamilton1990 and @fu2006.
 
 ::: {#def-prizes}
 ### Asymmetric Prize Values
 
-If labor wins, labor obtains $V_L>0$ and management obtains 0. If management wins, management obtains $V_M\equiv V>0$ and labor obtains 0. Prize values need not be symmetric.
+If labor wins, labor obtains $V_L>0$ and management obtains 0. If management wins, management obtains $V_M\equiv V>0$ and labor obtains 0. Prize values may differ.
 :::
 
 ## Information Structure
 
-Management knows only the distribution of $V_L$, not its realization. At the timing stage, labor also does not yet observe its realized prize value. Only after both players choose timing does labor privately observe $V_L$, and then the corresponding effort subgame is played. Hence the timing choice must be based on ex ante expected payoffs. We assume $V_L$ has support set $[\mu-\delta,\mu+\delta]$, with $\mu>\delta>0$, so that $\E[V_L]=\mu$.
+Management knows only the distribution of $V_L$. At the timing stage, labor also has not observed its type. After timing is chosen, labor privately observes $V_L$ and the effort subgame begins. Timing is therefore based on ex ante expected payoffs. Let $V_L$ have support $[\mu-\delta,\mu+\delta]$, with $\mu>\delta>0$, so $\E[V_L]=\mu$.
 
 Define
 
@@ -30,7 +30,7 @@ $$
 V_L \in \{V_\ell,V_H\}=\{\mu-\delta,\mu+\delta\},
 $$
 
-with probability $1/2$ on each type. Hence $\Var(V_L)=\delta^2$.
+with probability $1/2$ on each type, so $\Var(V_L)=\delta^2$.
 :::
 
 ::: {#def-uniform}
@@ -40,10 +40,10 @@ $$
 V_L \sim U[\mu-\delta,\mu+\delta],
 $$
 
-with density $f(v)=1/(2\delta)$. Hence $\Var(V_L)=\delta^2/3$.
+with density $f(v)=1/(2\delta)$, so $\Var(V_L)=\delta^2/3$.
 :::
 
-Both distributions share the same mean $\mu$ and support set $[\mu-\delta,\mu+\delta]$, but differ in variance. Equilibrium expressions depend on three moments:
+Both distributions share mean $\mu$ and support $[\mu-\delta,\mu+\delta]$, but differ in variance. Equilibrium expressions use three moments:
 
 $$
 \kappa \equiv \E\!\left[\frac{1}{\sqrt{V_L}}\right],
@@ -53,8 +53,6 @@ $$
 \lambda \equiv \E\!\left[\frac{1}{V_L}\right].
 $$ {#eq-moments}
 
-<!-- MODIFIED: added λ moment -->
-
 ## Timeline
 
 The timing protocol follows the three-stage logic in @fu2006:
@@ -63,14 +61,13 @@ The timing protocol follows the three-stage logic in @fu2006:
 2. Stage 1: nature realizes $V_L$, and only labor observes its realized type.
 3. Stage 2: players choose effort in the induced institution SS, ML, or LM.
 
-Type-level payoff comparisons are defined after realization, but the timing choice itself is made ex ante.
+Type-level payoffs can be compared after realization; timing is chosen ex ante.
 
 ::: {#prp-moments}
 ### Moment Comparison
 
-The key moments are:
+The moments are:
 
-<!-- MODIFIED: added λ row -->
 |  | Binary | Uniform |
 |---|---|---|
 | $\Var(V_L)$ | $\delta^2$ | $\delta^2/3$ |
@@ -97,7 +94,7 @@ $$
 U_M(x_L,x_M;V)=\frac{x_M}{x_L+x_M}V-x_M.
 $$ {#eq-um}
 
-First-order conditions imply best responses:
+First-order conditions give
 
 $$
 x_L^*(x_M;V_L)=\sqrt{V_Lx_M}-x_M,
@@ -107,4 +104,4 @@ $$
 x_M^*(x_L;V)=\sqrt{Vx_L}-x_L.
 $$ {#eq-brm}
 
-Management's best response @eq-brm depends only on observed effort $x_L$ and known value $V$. Beliefs about labor types do not directly enter the second-stage best response. This is central for the later separation-versus-pooling result.
+Management's best response @eq-brm depends only on effort $x_L$ and known value $V$, not on beliefs. This drives the separation result below.

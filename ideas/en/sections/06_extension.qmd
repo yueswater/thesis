@@ -1,19 +1,22 @@
 # Extension: Spatial Policy Competition {#sec-extension}
 
-The benchmark model in @sec-equilibria establishes that the LM subgame admits only a separating equilibrium. The key structural reason is that management's continuation best response depends on observed effort and the common-knowledge prize $V$, but not on posterior beliefs about labor's type. The signal-belief channel is therefore closed by construction.
+The benchmark model in @sec-equilibria gives only separation in LM. Management's continuation best response depends on effort and known prize $V$, not on posterior beliefs.
 
-This section modifies the payoff environment to reopen that channel. We replace the winner-take-all prize structure with spatial policy preferences. Under this alternative, the loss management incurs when labor wins depends directly on labor's private type. Management therefore cares about what type it is facing, and its best response becomes belief-dependent. As a consequence, pooling and semi-separating equilibria become feasible in the LM subgame.
+This section reopens the belief channel with spatial policy preferences. Management's loss when labor wins depends on labor's type, so management's best response becomes belief-dependent. Pooling can then be sustained.
 
 ## Environment and Payoffs {#sec-ext-setup}
 
-**Policy space.** Policies are points on the real line. Each player has a bliss point:
+::: {#def-spatial-env}
+### Spatial Policy Environment
+
+Policies are points on the real line. Each player has a bliss point:
 
 - Management's ideal policy: $0$ (common knowledge).
 - Labor's ideal policy: $\theta$ (labor's private type).
 
 The contest determines which side implements its preferred policy. If labor wins, policy $\theta$ is enacted; if management wins, policy $0$ is enacted.
 
-**Preferences.** Both players have quadratic spatial loss over the implemented policy $p$:
+Both players have quadratic spatial loss over the implemented policy $p$:
 
 $$u_L(p;\theta) = -(p-\theta)^2, \qquad u_M(p) = -p^2.$$
 
@@ -23,15 +26,19 @@ The resulting policy-outcome utilities are:
 |--------|--------|--------|--------|
 | Labor  | $\theta$ | $0$ | $-\theta^2$ |
 | Management | $0$ | $-\theta^2$ | $0$ |
+:::
 
-**Types.** Labor's type $\theta \in \{\theta_L, \theta_H\}$ with $0 < \theta_L < \theta_H$. The prior probability of $\theta_H$ is $q \in (0,1)$, and the prior probability of $\theta_L$ is $1-q$. Management observes only the prior; the realized type is labor's private information.
+::: {#def-spatial-info-payoffs}
+### Types, Beliefs, and Payoffs
 
-**Belief.** After observing labor's effort $x_L$, management holds posterior belief $\mu(x_L) \in [0,1]$, where $\mu$ denotes the posterior probability assigned to $\theta = \theta_H$. Define the belief-weighted expected loss:
+Labor's type is $\theta \in \{\theta_L,\theta_H\}$, with $0<\theta_L<\theta_H$. The prior probability of $\theta_H$ is $q\in(0,1)$, while the prior probability of $\theta_L$ is $1-q$. Management observes the prior distribution, but not the realized type.
+
+After observing labor's effort $x_L$, management forms a posterior belief $\mu(x_L)\in[0,1]$. Here $\mu$ is the probability management assigns to $\theta=\theta_H$. The belief-weighted expected loss is defined as
 
 $$\Psi(\mu) \equiv \mu\,\theta_H^2 + (1-\mu)\,\theta_L^2.
 $$ {#eq-psi}
 
-**Expected payoff functions.** Including effort costs and using $p_L = x_L/(x_L+x_M)$:
+Including effort costs and writing $p_L=x_L/(x_L+x_M)$ for labor's winning probability, the expected payoff functions are
 
 $$
 U_L(x_L,x_M;\theta) = -\frac{x_M}{x_L+x_M}\,\theta^2 - x_L,
@@ -42,6 +49,7 @@ U_M(x_L,x_M;\mu) = -\frac{x_L}{x_L+x_M}\,\Psi(\mu) - x_M.
 $$ {#eq-um-ext}
 
 Labor maximizes $U_L$ over $x_L$; management maximizes $U_M$ over $x_M$ taking $\mu$ as given.
+:::
 
 ::: {.remark}
 Equation @eq-ul-ext shows that labor's payoff does not depend directly on management's belief $\mu$. However, management's payoff in @eq-um-ext depends on $\mu$ through $\Psi(\mu)$. This asymmetry is what drives the strategic signaling incentive analyzed below.
@@ -109,32 +117,32 @@ The gain over truth-telling is:
 $$
 U_L^H(\mathrm{mimic}) - U_L^H(\mathrm{sep}) = \left(-\frac{\theta_H^2}{2} - \frac{\theta_L^2}{4}\right) - \left(-\frac{3\theta_H^2}{4}\right) = \frac{\theta_H^2 - \theta_L^2}{4} > 0.
 $$
-Hence type $\theta_H$ strictly prefers to mimic $\theta_L$.
+Thus type $\theta_H$ strictly prefers to mimic $\theta_L$.
 :::
 
 **Economic intuition.** By mimicking $\theta_L$, type $\theta_H$ induces management to believe $\mu = 0$. Under this belief, management responds as if the stakes are only $\theta_L^2$ — a much smaller threat than $\theta_H^2$ — and reduces its effort accordingly. The winning probability for $\theta_H$ under mimicry is the same ($p_L = 1/2$) as under truth-telling, but the effort cost is lower ($\theta_L^2/4$ instead of $\theta_H^2/4$), and the policy outcome when losing is the same in both cases. This is a clean "free-riding on a weaker opponent" effect that does not arise in the benchmark because $V$ does not vary by type.
 
 ## Pooling Equilibrium {#sec-ext-pool}
 
-We now construct a pure-strategy pooling PBE in the spatial LM subgame. Define the pooling effort level $x_P > 0$.
+We now turn to pure-strategy pooling in the spatial LM subgame. If the two labor types are to pool, they must choose the same effort on the equilibrium path. Denote this common effort by $x_P>0$.
 
-**On-path belief.** When management observes $x_P$, it holds belief $\mu(x_P) = q$ (the prior). The effective stakes are $\Psi_0 \equiv \Psi(q) = q\theta_H^2 + (1-q)\theta_L^2$.
+**On-path belief.** Once management observes $x_P$, the action itself no longer separates the two types. Management therefore falls back on the prior, $\mu(x_P)=q$. The relevant expected loss is
+$\Psi_0 \equiv \Psi(q) = q\theta_H^2 + (1-q)\theta_L^2$.
 
-**Off-path belief.** For any $x_L \neq x_P$, management holds belief $\mu(x_L) = 1$. This is the most pessimistic off-path belief for labor: management responds as if it faces the extreme type, maximally raising $x_M^*$ and thus punishing deviations most severely.
+**Off-path belief.** If management observes any $x_L\neq x_P$, it interprets the deviation as coming from type $\theta_H$, so that $\mu(x_L)=1$. This is the harsh off-path belief for labor: once a deviation appears, management reads it as the high-stakes type revealing itself and responds more aggressively.
 
-**Management's response on path:**
+On the equilibrium path, management's response is
 $$x_M^*(x_P,q) = \sqrt{\Psi_0\,x_P} - x_P.$$
 
-**On-path payoff for type $\theta_i$:**
+Type $\theta_i$'s payoff from staying in the pool is
 $$U_L^i(x_P) = -\theta_i^2 + \theta_i^2\sqrt{\frac{x_P}{\Psi_0}} - x_P.
 $$ {#eq-ul-pool-i}
 
-**Best deviation payoff for type $\theta_i$ (under off-path belief $\mu = 1$).**
-Given $\mu = 1$, management responds with $x_M^*(x_L, 1) = \theta_H\sqrt{x_L} - x_L$. Type $\theta_i$'s optimal off-path effort solves
+If type $\theta_i$ deviates, management responds under the off-path belief $\mu=1$, namely with $x_M^*(x_L,1)=\theta_H\sqrt{x_L}-x_L$. In that punitive continuation, type $\theta_i$'s optimal off-path effort solves
 
 $$\max_{x_L}\left\{-\theta_i^2 + \theta_i^2\sqrt{\frac{x_L}{\theta_H^2}} - x_L\right\},$$
 
-yielding $x_L^{\mathrm{dev},i} = \theta_i^4/(4\theta_H^2)$ and best deviation payoff:
+which yields $x_L^{\mathrm{dev},i}=\theta_i^4/(4\theta_H^2)$ and the deviation payoff
 
 $$U_L^i(\mathrm{dev}) = -\theta_i^2 + \frac{\theta_i^4}{4\theta_H^2}.
 $$ {#eq-ul-dev-i}
@@ -142,7 +150,7 @@ $$ {#eq-ul-dev-i}
 ::: {#prp-pool}
 ### Pooling Equilibrium
 
-Fix the off-path belief $\mu(x_L) = 1$ for all $x_L \neq x_P$. A pure-strategy pooling PBE with effort level $x_P$ exists if and only if the following two incentive constraints hold simultaneously:
+Fix the off-path belief $\mu(x_L)=1$ for every $x_L\neq x_P$. A pure-strategy pooling PBE with common effort $x_P$ exists exactly when neither type wants to leave the pool. Equivalently, the two incentive constraints below must hold at the same time:
 
 $$
 \mathrm{IC}_H:\quad
@@ -154,32 +162,38 @@ $$
 \theta_L^2\sqrt{\frac{x_P}{\Psi_0}} - x_P \;\geq\; \frac{\theta_L^4}{4\theta_H^2}.
 $$ {#eq-icl}
 
-A pooling equilibrium exists at the effort level $x_P^* = \theta_H^4/(4\Psi_0)$ whenever
+It is useful to see the feasible set rather than test a single point. Set $y\equiv \sqrt{x_P}$. The two constraints become the following downward-opening quadratic inequalities:
 
-$$\theta_H^4\!\left(2\theta_L^2 - \theta_H^2\right) \geq \theta_L^4\,\Psi_0,
-$$ {#eq-pool-cond}
+$$
+-y^2 + \frac{\theta_H^2}{\sqrt{\Psi_0}}y - \frac{\theta_H^2}{4} \geq 0,
+$$ {#eq-ich-quad}
 
-which is satisfied in particular when $\theta_H < \sqrt{2}\,\theta_L$.
+$$
+-y^2 + \frac{\theta_L^2}{\sqrt{\Psi_0}}y - \frac{\theta_L^4}{4\theta_H^2} \geq 0.
+$$ {#eq-icl-quad}
+
+Let $[z_{\min},z_{\max}]$ be the interval allowed by $\mathrm{IC}_H$, and let $[y_{\min},y_{\max}]$ be the interval allowed by $\mathrm{IC}_L$. Pooling then comes down to a simple interval-intersection condition:
+
+$$
+[z_{\min},z_{\max}] \cap [y_{\min},y_{\max}] \neq \varnothing.
+$$ {#eq-pool-intersection}
+
+Any $y_P$ in this intersection supports the pooling effort $x_P=y_P^2$. If the intersection is empty, every common effort makes at least one type prefer to deviate.
 :::
 
 ::: {.proof}
-The IC constraints follow directly from requiring that the on-path payoff @eq-ul-pool-i weakly dominates the best deviation payoff @eq-ul-dev-i for each type.
-
-At $x_P^* = \theta_H^4/(4\Psi_0)$, type $\theta_H$'s on-path payoff net of the constant $-\theta_H^2$ is $\theta_H^4/(4\Psi_0)$. The constraint $\mathrm{IC}_H$ requires $\theta_H^4/(4\Psi_0) \geq \theta_H^2/4$, which simplifies to $\theta_H^2 \geq \Psi_0$. Since $\Psi_0 = q\theta_H^2 + (1-q)\theta_L^2 < \theta_H^2$, this holds strictly.
-
-For $\mathrm{IC}_L$ at $x_P^*$, the on-path net gain is $\theta_L^2 \cdot \theta_H^2/(2\Psi_0) - \theta_H^4/(4\Psi_0) = (2\theta_L^2\theta_H^2 - \theta_H^4)/(4\Psi_0) = \theta_H^2(2\theta_L^2-\theta_H^2)/(4\Psi_0)$.
-The required bound is $\theta_L^4/(4\theta_H^2)$. The constraint becomes:
-$$\frac{\theta_H^2(2\theta_L^2-\theta_H^2)}{4\Psi_0} \geq \frac{\theta_L^4}{4\theta_H^2},$$
-which is equivalent to @eq-pool-cond. When $\theta_H^2 < 2\theta_L^2$, the left-hand side is positive and the inequality can hold.
+See @sec-proof-ext-pool.
 :::
 
-**The role of off-path beliefs.** The pessimistic off-path belief $\mu = 1$ is essential for sustaining the pooling equilibrium. Under this belief, any deviation triggers maximum management resistance ($\Psi = \theta_H^2$), making deviations costly even for type $\theta_H$. Alternative off-path beliefs (e.g., $\mu = q$) would reduce the punishment and potentially unravel the pool.
+**The role of off-path beliefs.** The pessimistic belief $\mu=1$ is not a cosmetic assumption here; it is doing real work. Once a deviation is interpreted as coming from type $\theta_H$, management's continuation response is governed by $\Psi=\theta_H^2$, and the deviation becomes more expensive. A milder off-path belief, say $\mu=q$, would weaken this punishment. In some parameter regions, the pool that survives under the harsher belief would simply fall apart.
 
-**When does condition @eq-pool-cond fail?** If $\theta_H > \sqrt{2}\,\theta_L$, then $2\theta_L^2 - \theta_H^2 < 0$, and @eq-pool-cond fails at $x_P^*$. In this case, type $\theta_L$ strictly prefers to deviate: the pooling effort is too high relative to what the low type values the contest, and the gain from signaling weakness (inducing low management effort) outweighs the punishment from pessimistic off-path beliefs. A pure-strategy pooling equilibrium at $x_P^*$ cannot be sustained, and one must search for an alternative pooling level or a semi-separating equilibrium.
+**Equilibrium selection.** This result also corrects a tempting but misleading shortcut. Pooling is not established by plugging in one attractive candidate effort and checking whether it works. The previously considered $x_P^*=\theta_H^4/(4\Psi_0)$ is merely type $\theta_H$'s unconstrained optimum under the on-path belief $\mu=q$. It is a useful reference point, but it is not the existence condition. The real question is more prosaic: do the two types' incentive-compatible effort intervals overlap?
+
+When @eq-pool-intersection has multiple points, PBE does not select $x_P$. A refinement such as the Cho--Kreps intuitive criterion or the Riley outcome can do that work. The natural point is not the high type's unconstrained favorite, but a boundary effort: low enough for the low type, high enough to keep the high type in the pool. Often this is $y_P=z_{\min}$ (so $x_P=z_{\min}^2$), provided $z_{\min}\in[y_{\min},y_{\max}]$. Equivalently, project the low type's on-path optimum $\theta_L^2/(2\sqrt{\Psi_0})$ onto the feasible intersection.
 
 ## Comparison with the Benchmark {#sec-ext-compare}
 
-@tbl-compare summarizes the key structural differences between the benchmark model and the spatial extension.
+@tbl-compare compares the benchmark and the spatial extension. A small formal change redirects the equilibrium logic.
 
 | Feature | Benchmark (@sec-equilibria) | Spatial Extension (@sec-extension) |
 |---------|------|------|
@@ -187,10 +201,10 @@ which is equivalent to @eq-pool-cond. When $\theta_H^2 < 2\theta_L^2$, the left-
 | Signal-belief channel | Closed | Open |
 | LM equilibrium type | Unique separating | Pooling (under parameter conditions) |
 | IC for separation | Always satisfied | Fails: $\theta_H$ mimics $\theta_L$ |
-| Pooling condition | Never satisfied | Satisfied when $\theta_H < \sqrt{2}\,\theta_L$ |
+| Pooling condition | Never satisfied | Nonempty intersection of the two IC intervals (@eq-pool-intersection) |
 
 : Benchmark vs.\ spatial extension. {#tbl-compare}
 
-The contrast is driven by a single change: in the benchmark, labor's type $V_L$ affects only labor's own prize value and does not appear in management's continuation objective. In the spatial extension, $\theta$ directly enters management's loss $\Psi(\mu)$, creating the belief-dependence that makes pooling incentive-compatible.
+The difference is narrow. In the benchmark, labor's type $V_L$ changes only labor's own value of victory; it never enters management's continuation objective. In the spatial extension, $\theta$ enters management's loss $\Psi(\mu)$. Beliefs then move actions, which creates the signaling force behind pooling.
 
-This result illustrates a general principle for signaling games embedded in contests: a necessary condition for non-separating equilibria in the LM subgame is that the informed player's type enters the uninformed player's continuation payoff. When this condition fails, as in the benchmark, the equilibrium is unique and separating regardless of the prior distribution.
+The broader lesson is simple: non-separation in LM requires the informed player's type to affect the uninformed player's continuation payoff. If beliefs cannot move actions, the benchmark returns to unique separation.

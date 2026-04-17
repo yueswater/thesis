@@ -1,12 +1,10 @@
 # 均衡分析 {#sec-equilibria}
 
-本節統一分析三個子賽局：SS（同時行動）、ML（資方先動）與 LM（勞方先動）。以下均以 @eq-brl 與 @eq-brm 的最佳反應函數為基礎。
+本節分析三個子賽局：SS（同時行動）、ML（資方先動）與 LM（勞方先動）。推導皆以 @eq-brl 與 @eq-brm 為基礎。
 
 ## SS：同時行動 {#sec-ss}
 
-<!-- MODIFIED: 修正 BNE 推導；原本將勞方 BR 代入資方目標函數最大化，實為 Stackelberg 領先者問題（即 ML），而非 BNE -->
-
-在 SS 中，雙方同時選擇投入。在貝葉斯均衡中，每一方都在對方均衡策略給定下最優化。勞方的均衡策略為逐型別最佳反應 $x_L(v)=\sqrt{vx_M}-x_M$（見 @eq-brl）。資方的一階條件——在勞方均衡策略給定下——為
+在 SS 中，雙方同時選擇投入。勞方逐型別最佳反應為 $x_L(v)=\sqrt{vx_M}-x_M$（見 @eq-brl）。資方在此策略給定下的一階條件為
 
 $$
 V\cdot\E\!\left[\frac{x_L(V_L)}{(x_L(V_L)+x_M)^2}\right] = 1.
@@ -19,12 +17,10 @@ V\cdot\E\!\left[\frac{\sqrt{V_Lx_M}-x_M}{V_Lx_M}\right]
 = V\!\left(\frac{\kappa}{\sqrt{x_M}}-\lambda\right) = 1,
 $$
 
-其中 $\lambda\equiv\E[V_L^{-1}]$。解 $\sqrt{x_M}$ 即得均衡。
+其中 $\lambda\equiv\E[V_L^{-1}]$。解 $\sqrt{x_M}$ 得均衡。
 
 ::: {#prp-ss}
 ### 同時行動均衡
-
-<!-- MODIFIED: 修正 SS 均衡公式 -->
 SS 的貝葉斯均衡為
 
 $$
@@ -62,9 +58,9 @@ $$ {#eq-eum-ss}
 見 @sec-proof-ss。
 :::
 
-將 @tbl-moments 的動差代入 @prp-ss，即可得到各分配下的具體公式。
+代入 @tbl-moments 可得各分配公式。
 
-**二點分配。** 令 $\kappa^B$、$\nu^B$、$\lambda^B$ 為 @tbl-moments 中的動差，則
+**二點分配。** 令 $\kappa^B$、$\nu^B$、$\lambda^B$ 為 @tbl-moments 中的動差：
 
 $$
 x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2},
@@ -73,7 +69,7 @@ x_M^{\mathrm{SS},B} = \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2},
   = \mu - \frac{2V\kappa^B\nu^B}{1+V\lambda^B} + \frac{V^2(\kappa^B)^2}{(1+V\lambda^B)^2}.
 $$
 
-**均勻分配。** 令 $\kappa^U$、$\nu^U$、$\lambda^U$ 為 @tbl-moments 中的動差，則
+**均勻分配。** 令 $\kappa^U$、$\nu^U$、$\lambda^U$ 為 @tbl-moments 中的動差：
 
 $$
 x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2},
@@ -82,13 +78,11 @@ x_M^{\mathrm{SS},U} = \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2},
   = \mu - \frac{2V\kappa^U\nu^U}{1+V\lambda^U} + \frac{V^2(\kappa^U)^2}{(1+V\lambda^U)^2}.
 $$
 
-由於 $v\mapsto v^{-1/2}$ 為凸函數，二點分配下的 $\kappa$ 大於均勻分配。
+因 $v^{-1/2}$ 為凸函數，二點分配下的 $\kappa$ 較大。
 
 ## ML：資方先動 {#sec-ml}
 
-<!-- MODIFIED: ML 報酬現在與 SS 不同；ML 求解 Stackelberg 領先者問題，而非 BNE 問題 -->
-
-在 ML 中，資方先承諾 $x_M$，之後勞方依型別用 @eq-brl 回應。資方事先預期到勞方的反應 $x_L(v)=\sqrt{vx_M}-x_M$，從而最大化
+在 ML 中，資方先承諾 $x_M$，勞方再依型別用 @eq-brl 回應。資方預期 $x_L(v)=\sqrt{vx_M}-x_M$，故最大化
 
 $$
 \max_{x_M\ge 0}\;\E\!\left[V\sqrt{\frac{x_M}{V_L}}-x_M\right]

@@ -10,8 +10,7 @@ appendix: true
 
 ## Proof of @prp-moments {#sec-proof-moments}
 
-<!-- MODIFIED: added λ computations -->
-For the binary distribution, the moments follow directly from the definition:
+For the binary distribution, the moments are just averages over the two types:
 
 $$
 \kappa^B=\frac{1}{2u_\ell}+\frac{1}{2u_H},
@@ -21,13 +20,13 @@ $$
 \lambda^B=\frac{1}{2u_\ell^2}+\frac{1}{2u_H^2}.
 $$
 
-For the uniform distribution, let the density be
+For the uniform distribution, the density is
 
 $$
 f(v)=\frac{1}{2\delta}\mathbf{1}_{[\mu-\delta,\mu+\delta]}(v).
 $$
 
-Because $[\mu-\delta,\mu+\delta]\subset(0,\infty)$ is compact and $v\mapsto v^{-1/2}$ is continuous on it, $v^{-1/2}$ is Lebesgue integrable. Let $u=\sqrt v$; this is a $C^1$ diffeomorphism, with $dv=2u\,du$. Hence
+Direct integration gives
 
 $$
 \kappa^U
@@ -36,7 +35,7 @@ $$
 =\frac{u_H-u_\ell}{\delta}.
 $$
 
-Similarly, $v\mapsto v^{1/2}$ is also Lebesgue integrable, so
+Similarly,
 
 $$
 \nu^U
@@ -45,7 +44,7 @@ $$
 =\frac{u_H^3-u_\ell^3}{3\delta}.
 $$
 
-For $\lambda^U$, observe that $v\mapsto v^{-1}$ is integrable on the compact set $(0,\infty)\supset[\mu-\delta,\mu+\delta]$:
+For $\lambda^U$,
 
 $$
 \lambda^U
@@ -56,7 +55,7 @@ $$
 =\frac{\ln(u_H/u_\ell)}{\delta}.
 $$
 
-To compare $\kappa^B$ and $\kappa^U$, note first that $v\mapsto v^{-1/2}$ is strictly convex on $(0,\infty)$. Jensen's inequality therefore implies
+To compare $\kappa^B$ and $\kappa^U$, use the strict convexity of $v^{-1/2}$. Jensen's inequality gives
 
 $$
 \kappa^B=\E_{\mathrm{binary}}[V_L^{-1/2}]
@@ -65,7 +64,7 @@ $$
 =\mu^{-1/2}.
 $$
 
-Moreover, since $u_H^2-u_\ell^2=2\delta$,
+Also, since $u_H^2-u_\ell^2=2\delta$,
 
 $$
 \kappa^U=\frac{u_H-u_\ell}{\delta}=\frac{2}{u_H+u_\ell},
@@ -74,7 +73,7 @@ $$
 =\frac{u_H+u_\ell}{2u_\ell u_H}.
 $$
 
-Hence
+Thus
 
 $$
 \kappa^B-\kappa^U
@@ -83,11 +82,9 @@ $$
 >0.
 $$
 
-Therefore $\kappa^B>\kappa^U$.
+Hence $\kappa^B>\kappa^U$.
 
 ## Proof of @prp-ss {#sec-proof-ss}
-
-<!-- MODIFIED: completely rewritten to derive the correct BNE; previous proof solved the Stackelberg leader problem by substituting labor's BR into management's objective -->
 
 We seek a Bayesian Nash equilibrium $(x_M^*,\,x_L^*(\cdot))$ in which management chooses a constant $x_M^*$ and labor responds type-by-type. By @eq-brl, labor's best response to $x_M^*$ for type $v$ is
 
@@ -189,8 +186,6 @@ $$
 $$
 
 ## Proof of @prp-ml {#sec-proof-ml}
-
-<!-- MODIFIED: ML payoffs are now distinct from SS; they match the old (incorrect) SS formula -->
 In ML, management commits first. Labor observes $x_M$ and best-responds type-by-type with $x_L^*(x_M;v)=\sqrt{vx_M}-x_M$, which management anticipates. Management therefore maximizes
 
 $$
@@ -440,8 +435,6 @@ $$
 This proves the proposition.
 
 ## Proof of @prp-mgmt {#sec-proof-mgmt}
-
-<!-- MODIFIED: updated LM formula notation -->
 From @eq-eum-ml and @eq-eum-lm,
 
 $$
@@ -452,9 +445,94 @@ $$
 
 Therefore the condition $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ is exactly @eq-mgmt-cond. Here $\Delta_M$ is management's direct ML-versus-LM preference gap; it is distinct from the one-deviation condition $\Delta_M^{\mathrm{SS}}\le0$ required for LM in Theorem @thm-timing-eq.
 
-## Proof of the Welfare Formulas in Section @sec-welfare {#sec-proof-welfare}
+## Proof of @prp-pool {#sec-proof-ext-pool}
 
-<!-- MODIFIED: SS and ML now have distinct welfare; separate formulas provided -->
+Both incentive constraints come from the same comparison: type $\theta_i$ must earn at least as much by staying on the pooling path as by taking its best deviation under the off-path belief $\mu=1$. Thus @eq-ul-pool-i must weakly dominate @eq-ul-dev-i. After setting $y=\sqrt{x_P}$, @eq-ich and @eq-icl become @eq-ich-quad and @eq-icl-quad.
+
+Consider the high type's constraint. The boundary equation for $\mathrm{IC}_H$ is
+
+$$
+y^2 - \frac{\theta_H^2}{\sqrt{\Psi_0}}y + \frac{\theta_H^2}{4}=0.
+$$
+
+Its discriminant is
+
+$$
+\Delta_H
+= \frac{\theta_H^4}{\Psi_0}-\theta_H^2
+= \frac{\theta_H^2(\theta_H^2-\Psi_0)}{\Psi_0}.
+$$
+
+Since $q\in(0,1)$ and $0<\theta_L<\theta_H$,
+
+$$
+\Psi_0=q\theta_H^2+(1-q)\theta_L^2<\theta_H^2.
+$$
+
+Hence $\Delta_H>0$. Write
+
+$$
+s \equiv \sqrt{1-\frac{\Psi_0}{\theta_H^2}} \in (0,1).
+$$
+
+The two roots of the high-type constraint are
+
+$$
+z_{\min}=\frac{\theta_H^2}{2\sqrt{\Psi_0}}(1-s),
+\qquad
+z_{\max}=\frac{\theta_H^2}{2\sqrt{\Psi_0}}(1+s).
+$$
+
+Since @eq-ich-quad opens downward, the inequality holds exactly between the two roots:
+
+$$
+y\in [z_{\min},z_{\max}].
+$$
+
+The low type's constraint is handled in the same way. Its boundary equation is
+
+$$
+y^2 - \frac{\theta_L^2}{\sqrt{\Psi_0}}y
++ \frac{\theta_L^4}{4\theta_H^2}=0.
+$$
+
+The discriminant is
+
+$$
+\Delta_L
+=\frac{\theta_L^4}{\Psi_0}-\frac{\theta_L^4}{\theta_H^2}
+=\frac{\theta_L^4(\theta_H^2-\Psi_0)}{\Psi_0\theta_H^2}.
+$$
+
+Again, $\Psi_0<\theta_H^2$ gives $\Delta_L>0$. Thus $\mathrm{IC}_L$ defines a nondegenerate interval with roots
+
+$$
+y_{\min}=\frac{\theta_L^2}{2\sqrt{\Psi_0}}(1-s),
+\qquad
+y_{\max}=\frac{\theta_L^2}{2\sqrt{\Psi_0}}(1+s).
+$$
+
+Since @eq-icl-quad also opens downward, the low type's feasible set is
+
+$$
+y\in [y_{\min},y_{\max}].
+$$
+
+It follows that a pooling effort $x_P=y_P^2$ satisfies both types' incentive constraints exactly when $y_P$ lies in both intervals, which is precisely @eq-pool-intersection. If the intervals fail to overlap, no common effort can work: at least one type will have a profitable deviation, and a pure-strategy pooling PBE cannot be sustained.
+
+It remains only to locate the two intervals relative to each other. Because $\theta_L^2<\theta_H^2$, we have $y_{\min}<z_{\min}$ and $y_{\max}<z_{\max}$. The intersection condition therefore reduces to the single boundary check
+
+$$
+z_{\min}\leq y_{\max}.
+$$
+
+Equivalently, if $r\equiv \theta_L^2/\theta_H^2$, this condition becomes
+
+$$
+\frac{1-s}{1+s}\leq r. \qquad\square
+$$
+
+## Proof of the Welfare Formulas in Section @sec-welfare {#sec-proof-welfare}
 By definition, $W=U_L+U_M$.
 
 For SS (corrected BNE):
