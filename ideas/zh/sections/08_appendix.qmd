@@ -100,8 +100,11 @@ $$
 由於 $x_L^*(v)+x_M=\sqrt{vx_M}$，代入得
 
 $$
+\begin{aligned}
 V\cdot\E\!\left[\frac{\sqrt{V_Lx_M}-x_M}{V_Lx_M}\right]
-= V\!\left(\frac{\kappa}{\sqrt{x_M}}-\lambda\right)=1,
+&= V\!\left(\frac{\kappa}{\sqrt{x_M}}-\lambda\right)\\
+&=1,
+\end{aligned}
 $$
 
 其中 $\lambda\equiv\E[V_L^{-1}]$。解 $\sqrt{x_M}$ 得
@@ -115,24 +118,34 @@ $$
 二階條件可驗證為負，故此為唯一極大值。再由 @eq-brl 得
 
 $$
+\begin{aligned}
 x_L^{\mathrm{SS}}(v)
-=\frac{V\kappa\sqrt{v}}{1+V\lambda}-\frac{V^2\kappa^2}{(1+V\lambda)^2},
-\qquad
-x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}=\frac{V\kappa\sqrt{v}}{1+V\lambda}.
+&=\frac{V\kappa\sqrt{v}}{1+V\lambda}
+  -\frac{V^2\kappa^2}{(1+V\lambda)^2},\\
+x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}
+&=\frac{V\kappa\sqrt{v}}{1+V\lambda}.
+\end{aligned}
 $$
 
 代回 @eq-ul 與 @eq-um 可得
 
 $$
+\begin{aligned}
 U_L^{\mathrm{SS}}(v)
-=\left(1-\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\right)v - x_L^{\mathrm{SS}}(v)
-=\left(\sqrt{v}-\frac{V\kappa}{1+V\lambda}\right)^2,
+&=\left(1-\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\right)v
+  -x_L^{\mathrm{SS}}(v)\\
+&=\left(\sqrt{v}-\frac{V\kappa}{1+V\lambda}\right)^2,
+\end{aligned}
 $$
 
 $$
+\begin{aligned}
 U_M^{\mathrm{SS}}(v)
-=\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\cdot V-\frac{V^2\kappa^2}{(1+V\lambda)^2}
-=\frac{V^2\kappa}{(1+V\lambda)\sqrt{v}}-\frac{V^2\kappa^2}{(1+V\lambda)^2}.
+&=\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\,V
+  -\frac{V^2\kappa^2}{(1+V\lambda)^2}\\
+&=\frac{V^2\kappa}{(1+V\lambda)\sqrt{v}}
+  -\frac{V^2\kappa^2}{(1+V\lambda)^2}.
+\end{aligned}
 $$
 
 取期望：
@@ -143,9 +156,12 @@ $$
 $$
 
 $$
+\begin{aligned}
 \E[U_M^{\mathrm{SS}}]
-=\frac{V^2\kappa}{1+V\lambda}\cdot\kappa-\frac{V^2\kappa^2}{(1+V\lambda)^2}
-=\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}. \qquad\square
+&=\frac{V^2\kappa}{1+V\lambda}\cdot\kappa
+  -\frac{V^2\kappa^2}{(1+V\lambda)^2}\\
+&=\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}. \qquad\square
+\end{aligned}
 $$
 
 ## @prp-ml 的證明 {#sec-proof-ml}

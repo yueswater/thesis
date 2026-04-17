@@ -92,43 +92,35 @@ $$
 x_L^*(v)=\sqrt{vx_M^*}-x_M^*.
 $$
 
-For management, given that labor uses the equilibrium strategy, management's first-order condition is obtained by differentiating $\E[U_M(x_L^*(V_L),x_M;V)]$ with respect to $x_M$:
+For management, given labor's equilibrium strategy, the first-order condition is
 
 $$
 V\cdot\E\!\left[\frac{\partial}{\partial x_M}\frac{x_M}{x_L^*(V_L)+x_M}\right]=1.
 $$
 
-Since $x_L^*(v)+x_M = \sqrt{vx_M}$, the partial derivative is
-
-$$
-\frac{\partial}{\partial x_M}\frac{x_M}{\sqrt{vx_M}}
-=\frac{\partial}{\partial x_M}\frac{\sqrt{x_M}}{\sqrt{v}}
-=\frac{1}{2\sqrt{vx_M}}.
-$$
-
-Wait—management's payoff function, written out explicitly, is
-
-$$
-U_M(x_L,x_M;V)=\frac{x_M}{x_L+x_M}V-x_M.
-$$
-
-Differentiating with respect to $x_M$ (holding $x_L$ fixed):
+Equivalently, holding $x_L$ fixed in @eq-um,
 
 $$
 \frac{\partial U_M}{\partial x_M}=\frac{x_L}{(x_L+x_M)^2}V-1.
 $$
 
-At the equilibrium, $x_L=x_L^*(v)=\sqrt{vx_M^*}-x_M^*$ and $x_L+x_M^*=\sqrt{vx_M^*}$, so $x_L/(x_L+x_M^*)^2 = (\sqrt{vx_M^*}-x_M^*)/(vx_M^*)$. Management's FOC, taking expectation over types, is
+At equilibrium, $x_L=x_L^*(v)=\sqrt{vx_M^*}-x_M^*$ and $x_L+x_M^*=\sqrt{vx_M^*}$. Taking expectations over types gives
 
 $$
 V\cdot\E\!\left[\frac{\sqrt{V_Lx_M^*}-x_M^*}{V_Lx_M^*}\right]=1.
 $$
 
-Simplifying the expectation:
+Simplifying,
 
 $$
-V\!\left(\frac{1}{\sqrt{x_M^*}}\E\!\left[V_L^{-1/2}\right]-\E\!\left[V_L^{-1}\right]\right)
-=V\!\left(\frac{\kappa}{\sqrt{x_M^*}}-\lambda\right)=1,
+\begin{aligned}
+V\!\left(
+\frac{1}{\sqrt{x_M^*}}\E[V_L^{-1/2}]
+-\E[V_L^{-1}]
+\right)
+&=V\!\left(\frac{\kappa}{\sqrt{x_M^*}}-\lambda\right)\\
+&=1,
+\end{aligned}
 $$
 
 where $\lambda\equiv\E[V_L^{-1}]$. Solving for $\sqrt{x_M^*}$:
@@ -154,35 +146,64 @@ x_L^{\mathrm{SS}}(v)
 =\frac{V\kappa\sqrt{v}}{1+V\lambda}-\frac{V^2\kappa^2}{(1+V\lambda)^2}.
 $$
 
-The total $x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}=V\kappa\sqrt{v}/(1+V\lambda)$. Substituting into @eq-ul and @eq-um:
+The total effort is
 
 $$
+x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}
+=\frac{V\kappa\sqrt{v}}{1+V\lambda}.
+$$
+
+Substituting into @eq-ul and @eq-um:
+
+$$
+\begin{aligned}
 U_L^{\mathrm{SS}}(v)
-=\frac{x_L^{\mathrm{SS}}(v)}{x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}}v - x_L^{\mathrm{SS}}(v)
-=\left(1-\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\right)v - \left(\frac{V\kappa\sqrt{v}}{1+V\lambda}-\frac{V^2\kappa^2}{(1+V\lambda)^2}\right)
-=\left(\sqrt{v}-\frac{V\kappa}{1+V\lambda}\right)^2,
+&=\frac{x_L^{\mathrm{SS}}(v)}
+        {x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}}v
+  -x_L^{\mathrm{SS}}(v)\\
+&=\left(1-\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\right)v
+  -\left(\frac{V\kappa\sqrt{v}}{1+V\lambda}
+  -\frac{V^2\kappa^2}{(1+V\lambda)^2}\right)\\
+&=\left(\sqrt{v}-\frac{V\kappa}{1+V\lambda}\right)^2,
+\end{aligned}
 $$
 
 $$
+\begin{aligned}
 U_M^{\mathrm{SS}}(v)
-=\frac{x_M^{\mathrm{SS}}}{x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}}V - x_M^{\mathrm{SS}}
-=\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\cdot V - \frac{V^2\kappa^2}{(1+V\lambda)^2}
-=\frac{V^2\kappa}{(1+V\lambda)\sqrt{v}}-\frac{V^2\kappa^2}{(1+V\lambda)^2}.
+&=\frac{x_M^{\mathrm{SS}}}
+        {x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}}V
+  -x_M^{\mathrm{SS}}\\
+&=\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\,V
+  -\frac{V^2\kappa^2}{(1+V\lambda)^2}\\
+&=\frac{V^2\kappa}{(1+V\lambda)\sqrt{v}}
+  -\frac{V^2\kappa^2}{(1+V\lambda)^2}.
+\end{aligned}
 $$
 
 Taking expectations:
 
 $$
+\begin{aligned}
 \E[U_L^{\mathrm{SS}}]
-=\E\!\left[v-\frac{2V\kappa\sqrt{v}}{1+V\lambda}+\frac{V^2\kappa^2}{(1+V\lambda)^2}\right]
-=\mu-\frac{2V\kappa\nu}{1+V\lambda}+\frac{V^2\kappa^2}{(1+V\lambda)^2},
+&=\E\!\left[
+v-\frac{2V\kappa\sqrt{v}}{1+V\lambda}
++\frac{V^2\kappa^2}{(1+V\lambda)^2}
+\right]\\
+&=\mu-\frac{2V\kappa\nu}{1+V\lambda}
++\frac{V^2\kappa^2}{(1+V\lambda)^2},
+\end{aligned}
 $$
 
 $$
+\begin{aligned}
 \E[U_M^{\mathrm{SS}}]
-=\frac{V^2\kappa}{1+V\lambda}\E[V_L^{-1/2}]-\frac{V^2\kappa^2}{(1+V\lambda)^2}
-=\frac{V^2\kappa^2}{1+V\lambda}-\frac{V^2\kappa^2}{(1+V\lambda)^2}
-=\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}. \qquad\square
+&=\frac{V^2\kappa}{1+V\lambda}\E[V_L^{-1/2}]
+  -\frac{V^2\kappa^2}{(1+V\lambda)^2}\\
+&=\frac{V^2\kappa^2}{1+V\lambda}
+  -\frac{V^2\kappa^2}{(1+V\lambda)^2}\\
+&=\frac{V^3\kappa^2\lambda}{(1+V\lambda)^2}. \qquad\square
+\end{aligned}
 $$
 
 ## Proof of @prp-ml {#sec-proof-ml}
