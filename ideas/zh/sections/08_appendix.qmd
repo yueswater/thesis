@@ -135,11 +135,7 @@ U_L^{\mathrm{SS}}(v)
 &=\left(1-\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\right)v
   -x_L^{\mathrm{SS}}(v)\\
 &=\left(\sqrt{v}-\frac{V\kappa}{1+V\lambda}\right)^2,
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
+\\[1.25ex]
 U_M^{\mathrm{SS}}(v)
 &=\frac{V\kappa}{(1+V\lambda)\sqrt{v}}\,V
   -\frac{V^2\kappa^2}{(1+V\lambda)^2}\\
@@ -151,12 +147,10 @@ $$
 取期望：
 
 $$
-\E[U_L^{\mathrm{SS}}]
-=\mu-\frac{2V\kappa\nu}{1+V\lambda}+\frac{V^2\kappa^2}{(1+V\lambda)^2},
-$$
-
-$$
 \begin{aligned}
+\E[U_L^{\mathrm{SS}}]
+&=\mu-\frac{2V\kappa\nu}{1+V\lambda}
+  +\frac{V^2\kappa^2}{(1+V\lambda)^2},\\[1.25ex]
 \E[U_M^{\mathrm{SS}}]
 &=\frac{V^2\kappa}{1+V\lambda}\cdot\kappa
   -\frac{V^2\kappa^2}{(1+V\lambda)^2}\\

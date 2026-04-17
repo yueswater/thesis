@@ -165,11 +165,7 @@ U_L^{\mathrm{SS}}(v)
   -\left(\frac{V\kappa\sqrt{v}}{1+V\lambda}
   -\frac{V^2\kappa^2}{(1+V\lambda)^2}\right)\\
 &=\left(\sqrt{v}-\frac{V\kappa}{1+V\lambda}\right)^2,
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
+\\[1.25ex]
 U_M^{\mathrm{SS}}(v)
 &=\frac{x_M^{\mathrm{SS}}}
         {x_L^{\mathrm{SS}}(v)+x_M^{\mathrm{SS}}}V
@@ -192,11 +188,7 @@ v-\frac{2V\kappa\sqrt{v}}{1+V\lambda}
 \right]\\
 &=\mu-\frac{2V\kappa\nu}{1+V\lambda}
 +\frac{V^2\kappa^2}{(1+V\lambda)^2},
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
+\\[1.25ex]
 \E[U_M^{\mathrm{SS}}]
 &=\frac{V^2\kappa}{1+V\lambda}\E[V_L^{-1/2}]
   -\frac{V^2\kappa^2}{(1+V\lambda)^2}\\
