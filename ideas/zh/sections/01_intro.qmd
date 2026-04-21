@@ -14,4 +14,4 @@
 
 本文的貢獻是分析精確化。相較於 @fu2006，本文保留事前時序選擇，改變私人資訊的經濟位置：勞方型別只影響自身勝利價值，不改變資方續局最佳反應。Fu 模型中的信念支撐機制因此關閉；知情者是否先動，改由事前期望報酬的參數比較決定。
 
-後文安排如下。第 @sec-literature 節回顧文獻；第 @sec-setup 節設定模型；第 @sec-equilibria 節解 SS、ML 與 LM；第 @sec-timing 節分析時序誘因與福利；第 @sec-extension 節提出空間政策延伸；第 @sec-conclusion 節總結。
+後文安排如下。第 @sec-literature 節回顧文獻；第 @sec-setup 節設定模型；第 @sec-equilibria 節解 SS、ML 與 LM；第 @sec-timing 節分析時序誘因與福利；第 @sec-extension 節提出部分相關型別延伸；第 @sec-conclusion 節總結。

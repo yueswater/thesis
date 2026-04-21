@@ -1,210 +1,158 @@
-# Extension: Spatial Policy Competition {#sec-extension}
+# Extension: Partially Correlated Types {#sec-extension}
 
-The benchmark model in @sec-equilibria gives only separation in LM. Management's continuation best response depends on effort and known prize $V$, not on posterior beliefs.
+The benchmark model in @sec-equilibria yields a unique separating equilibrium in the LM subgame. Labor's type is fully revealed, and management's continuation best response depends only on observed effort $x_L$ and the common prize $V$—not on posterior beliefs. The signal-belief channel is closed.
 
-This section reopens the belief channel with spatial policy preferences. Management's loss when labor wins depends on labor's type, so management's best response becomes belief-dependent. Pooling can then be sustained.
+This section reopens that channel by enriching the information structure. We introduce **partial correlation** between the players' private valuations: management's prize $v_M$ is positively correlated with labor's type $v_L$, but imperfectly so. The strength of this correlation is governed by two parameters $(q, s)$. As the correlation intensifies, management's best response becomes increasingly sensitive to beliefs, which raises the cost of credible separation. We characterize a sharp **critical boundary** $s^*(q)$ in the $(q, s)$ parameter space that partitions equilibrium outcomes: separation survives below the boundary (the benchmark region), and pooling emerges above it (the Fu 2006 region).
 
-## Environment and Payoffs {#sec-ext-setup}
+## Environment and Information Structure {#sec-ext-setup}
 
-::: {#def-spatial-env}
-### Spatial Policy Environment
+Labor's prize $v_L \in \{V_H, V_L\}$ with $V_H > V_L > 0$ is drawn with equal prior probability and is labor's private information. Unlike the benchmark, management's own prize $v_M$ is not a commonly known constant; it is privately drawn from the same binary support $\{V_H, V_L\}$ according to a joint distribution that depends on labor's realized type.
 
-Policies are points on the real line. Each player has a bliss point:
+::: {#def-partial-corr}
+### Partial Correlation Structure
 
-- Management's ideal policy: $0$ (common knowledge).
-- Labor's ideal policy: $\theta$ (labor's private type).
+The joint distribution of $(v_L, v_M)$ is parameterized by $q, s \in [0.5, 1]$:
 
-The contest determines which side implements its preferred policy. If labor wins, policy $\theta$ is enacted; if management wins, policy $0$ is enacted.
+$$\Pr(v_M = V_H \mid v_L = V_H) = q, \qquad \Pr(v_M = V_L \mid v_L = V_H) = 1-q,$$
 
-Both players have quadratic spatial loss over the implemented policy $p$:
+$$\Pr(v_M = V_L \mid v_L = V_L) = s, \qquad \Pr(v_M = V_H \mid v_L = V_L) = 1-s.$$
 
-$$u_L(p;\theta) = -(p-\theta)^2, \qquad u_M(p) = -p^2.$$
+The two polar cases studied in this thesis are:
 
-The resulting policy-outcome utilities are:
-
-| Winner | Policy | $u_L$ | $u_M$ |
-|--------|--------|--------|--------|
-| Labor  | $\theta$ | $0$ | $-\theta^2$ |
-| Management | $0$ | $-\theta^2$ | $0$ |
+| Case | Parameters | Description |
+|------|-----------|-------------|
+| Independent types | $q = s = \tfrac{1}{2}$ | Benchmark binary model (@sec-equilibria) |
+| Perfectly correlated types | $q = s = 1$ | @fu2006 |
 :::
 
-::: {#def-spatial-info-payoffs}
-### Types, Beliefs, and Payoffs
+Management observes labor's effort $x_L$ and forms a posterior belief $\mu \equiv \Pr(v_L = V_H \mid x_L)$. Define the type-conditional expected prizes for management:
 
-Labor's type is $\theta \in \{\theta_L,\theta_H\}$, with $0<\theta_L<\theta_H$. The prior probability of $\theta_H$ is $q\in(0,1)$, while the prior probability of $\theta_L$ is $1-q$. Management observes the prior distribution, but not the realized type.
+$$\bar{V}_H \equiv q V_H + (1-q)V_L, \qquad \bar{V}_L \equiv (1-s)V_H + s V_L.$$
 
-After observing labor's effort $x_L$, management forms a posterior belief $\mu(x_L)\in[0,1]$. Here $\mu$ is the probability management assigns to $\theta=\theta_H$. The belief-weighted expected loss is defined as
+Given posterior $\mu$, management's belief-weighted expected prize is
 
-$$\Psi(\mu) \equiv \mu\,\theta_H^2 + (1-\mu)\,\theta_L^2.
-$$ {#eq-psi}
+$$\hat{V}_M(\mu) \equiv \mu\,\bar{V}_H + (1-\mu)\,\bar{V}_L. $$ {#eq-vhat}
 
-Including effort costs and writing $p_L=x_L/(x_L+x_M)$ for labor's winning probability, the expected payoff functions are
+**Monotonicity.** Since $\bar{V}_H - \bar{V}_L = (q+s-1)(V_H - V_L) \geq 0$ for $q, s \geq 0.5$, we have $\hat{V}_M(\mu)$ weakly increasing in $\mu$. When management assigns higher probability to the event that labor is the high type, it expects to face a higher-stakes contest—because the high type implies management itself is more likely to have prize $V_H$. This is the mechanism that ties management's effort to beliefs.
 
-$$
-U_L(x_L,x_M;\theta) = -\frac{x_M}{x_L+x_M}\,\theta^2 - x_L,
-$$ {#eq-ul-ext}
+The payoff functions are standard Tullock:
 
-$$
-U_M(x_L,x_M;\mu) = -\frac{x_L}{x_L+x_M}\,\Psi(\mu) - x_M.
-$$ {#eq-um-ext}
+$$U_L(x_L, x_M \mid v_L) = \frac{x_L}{x_L + x_M}\,v_L - x_L, $$ {#eq-ul-ext}
 
-Labor maximizes $U_L$ over $x_L$; management maximizes $U_M$ over $x_M$ taking $\mu$ as given.
-:::
-
-::: {.remark}
-Equation @eq-ul-ext shows that labor's payoff does not depend directly on management's belief $\mu$. However, management's payoff in @eq-um-ext depends on $\mu$ through $\Psi(\mu)$. This asymmetry is what drives the strategic signaling incentive analyzed below.
-:::
+$$U_M(x_L, x_M \mid \mu) = \frac{x_M}{x_L + x_M}\,\hat{V}_M(\mu) - x_M. $$ {#eq-um-ext}
 
 ## Management's Belief-Dependent Best Response {#sec-ext-br}
 
-Management moves second in the LM subgame. After observing $x_L$, it maximizes $U_M(x_L, x_M; \mu)$ over $x_M \geq 0$.
+In the LM subgame, management moves second and maximizes @eq-um-ext over $x_M \geq 0$ after observing $x_L$ and updating to posterior $\mu$.
 
 ::: {#prp-ext-br}
 ### Belief-Dependent Best Response
 
-Given observed effort $x_L \geq 0$ and posterior belief $\mu \in [0,1]$, management's best response is
+Given $x_L \geq 0$ and posterior belief $\mu \in [0,1]$, management's unique interior best response is
 
-$$
-x_M^*(x_L,\mu) =
-\begin{cases}
-\sqrt{\Psi(\mu)\,x_L} - x_L & \text{if } x_L \leq \dfrac{\Psi(\mu)}{4},\\[6pt]
-0 & \text{if } x_L > \dfrac{\Psi(\mu)}{4}.
-\end{cases}
-$$ {#eq-br-ext}
+$$x_M^*(x_L, \mu) = \sqrt{x_L\,\hat{V}_M(\mu)} - x_L, \qquad x_L \leq \hat{V}_M(\mu)/4. $$ {#eq-br-ext}
 
+Management exerts strictly more effort when it assigns greater probability to the high type: $\partial x_M^*/\partial\mu > 0$ whenever $q + s > 1$.
 :::
 
 ::: {.proof}
-Management's objective is $U_M = -p_L\Psi(\mu) - x_M$ where $p_L = x_L/(x_L+x_M)$. The first-order condition is $\partial U_M/\partial x_M = 0$:
-$$
-\frac{x_L}{(x_L+x_M)^2}\,\Psi(\mu) = 1.
-$$
-Solving gives $(x_L+x_M)^2 = x_L\Psi(\mu)$, so $x_L + x_M = \sqrt{x_L\Psi(\mu)}$ (taking the positive root), and
-$x_M^* = \sqrt{\Psi(\mu)\,x_L} - x_L$.
-This is non-negative iff $x_L \leq \Psi(\mu)/4$; otherwise the corner solution $x_M^* = 0$ applies.
+The first-order condition $\partial U_M/\partial x_M = 0$ gives $x_L\hat{V}_M(\mu)/(x_L+x_M)^2 = 1$. Solving for the positive root: $x_L+x_M = \sqrt{x_L\hat{V}_M(\mu)}$, so $x_M^* = \sqrt{x_L\hat{V}_M(\mu)} - x_L$. Differentiating with respect to $\mu$: $\partial x_M^*/\partial\mu = (\bar{V}_H - \bar{V}_L)/(2\sqrt{\hat{V}_M(\mu)/x_L}) > 0$ when $\bar{V}_H > \bar{V}_L$.
 :::
 
-**The signal-belief channel is open.** In @eq-br-ext, $\partial x_M^*/\partial\mu = (1/2)\sqrt{x_L/\Psi(\mu)}\cdot(\theta_H^2-\theta_L^2)/\sqrt{\Psi(\mu)} > 0$: management exerts strictly more effort when it assigns higher posterior probability to the extreme type. Contrast this with the benchmark's best response @eq-brm, which depends only on $x_L$ and $V$. In the spatial model, a higher $\mu$ (belief that labor is type $\theta_H$) raises $\Psi(\mu)$ and hence $x_M^*$.
+In the benchmark, management's best response depends only on $x_L$ and the common prize $V$; there is no belief argument. Here, a higher $\mu$ raises $\hat{V}_M(\mu)$, which intensifies management's effort. When labor reveals that it is the high type, management faces a high-stakes contest and responds aggressively—making the revelation costly for the high type.
 
-The total effort $x_L + x_M^* = \sqrt{\Psi(\mu)x_L}$ determines the equilibrium winning probabilities:
+## Separating Equilibrium: Existence and Breakdown {#sec-ext-sep}
 
-$$p_L^* = \frac{x_L}{\sqrt{\Psi(\mu)x_L}} = \sqrt{\frac{x_L}{\Psi(\mu)}}, \qquad
-p_M^* = 1 - \sqrt{\frac{x_L}{\Psi(\mu)}}.
-$$ {#eq-win-ext}
+Consider a candidate separating PBE in which the high type plays $x_H$ and the low type plays $x_L^*$, with on-path beliefs $\mu(x_H) = 1$ and $\mu(x_L^*) = 0$. Management faces effective prizes $\bar{V}_H$ and $\bar{V}_L$ respectively.
 
-## Failure of Separation and the Incentive to Pool {#sec-ext-sep-fail}
+**Low type's equilibrium.** Against management with effective prize $\bar{V}_L$, the low type maximizes $\sqrt{x_L/\bar{V}_L}\cdot V_L - x_L$. The first-order condition yields:
 
-We first ask whether a separating equilibrium exists in the spatial LM subgame. In a separating candidate, each type $\theta_i$ chooses a distinct effort $x_i$, and management's on-path belief is $\mu = 1$ at $x_H$ and $\mu = 0$ at $x_L$.
+$$x_L^* = \frac{V_L^2}{4\bar{V}_L}, \qquad \Pi_L = \frac{V_L^2}{4\bar{V}_L}. $$ {#eq-low-type-eq}
 
-For each type $\theta_i$ in a separating candidate, management knows the true type on the equilibrium path: $\Psi(1) = \theta_H^2$ for type $\theta_H$ and $\Psi(0) = \theta_L^2$ for type $\theta_L$. Each type's unconstrained optimum given the separating continuation is:
+**High type's equilibrium.** Against management with effective prize $\bar{V}_H$, the high type's unconstrained optimum is:
 
-$$x_i^{\mathrm{sep}} = \frac{\theta_i^4}{4\theta_i^2} = \frac{\theta_i^2}{4}, \qquad i \in \{L, H\}.$$
+$$x_H = \frac{V_H^2}{4\bar{V}_H}, \qquad \Pi_H = \frac{V_H^2}{4\bar{V}_H}. $$ {#eq-high-type-eq}
 
-Equilibrium effort levels under separation are $x_L^{\mathrm{sep}} = \theta_L^2/4$ and $x_H^{\mathrm{sep}} = \theta_H^2/4$. The corresponding separating payoffs are $U_L^i(\mathrm{sep}) = -3\theta_i^2/4$.
+**Incentive compatibility.** If the high type deviates to $x_L^*$, management holds belief $\mu = 0$ and responds with effective prize $\bar{V}_L$. The deviation payoff for the high type is:
 
-::: {#prp-sep-fail}
-### Separating Equilibrium Fails
+$$U_L^H(\mathrm{dev}) = \sqrt{\frac{x_L^*}{\bar{V}_L}}\,V_H - x_L^* = \frac{V_L(2V_H - V_L)}{4\bar{V}_L}. $$ {#eq-dev-payoff}
 
-In the spatial LM subgame, no pure-strategy separating PBE exists.
+The high type's $\mathrm{IC}_H$ condition requires $\Pi_H \geq U_L^H(\mathrm{dev})$:
+
+$$\frac{V_H^2}{4\bar{V}_H} \;\geq\; \frac{V_L(2V_H - V_L)}{4\bar{V}_L}. $$ {#eq-ich}
+
+For the low type, deviating to $x_H$ triggers belief $\mu = 1$ and a deviation payoff of $V_H(2V_L - V_H)/(4\bar{V}_H) \leq 0$, which is weakly dominated by $\Pi_L > 0$. The $\mathrm{IC}_L$ constraint is therefore non-binding, and we focus exclusively on @eq-ich.
+
+::: {#prp-sep-exists}
+### Separating Equilibrium
+
+A pure-strategy separating PBE with on-path efforts @eq-low-type-eq and @eq-high-type-eq exists if and only if $\mathrm{IC}_H$ holds, i.e.,
+
+$$\frac{V_H^2}{\bar{V}_H} \;\geq\; \frac{V_L(2V_H - V_L)}{\bar{V}_L}, $$ {#eq-sep-condition}
+
+where $\bar{V}_H = qV_H + (1-q)V_L$ and $\bar{V}_L = (1-s)V_H + sV_L$.
+
+When @eq-sep-condition holds, the high type cannot profit by mimicking the low type: separation is credible, and labor retains a first-mover advantage. When @eq-sep-condition fails, the high type strictly prefers mimicry, and separation collapses.
 :::
 
-::: {.proof}
-It suffices to show that type $\theta_H$ strictly prefers to deviate to $x_L^{\mathrm{sep}} = \theta_L^2/4$ (mimicking $\theta_L$). Under separating beliefs, management responds to $\theta_L^2/4$ with $\mu = 0$, so $\Psi = \theta_L^2$ and $x_M^* = \theta_L^2/4$. Type $\theta_H$'s payoff from this deviation is:
-$$
-U_L^H(\mathrm{mimic}) = -\frac{1}{2}\,\theta_H^2 - \frac{\theta_L^2}{4}.
-$$
-The gain over truth-telling is:
-$$
-U_L^H(\mathrm{mimic}) - U_L^H(\mathrm{sep}) = \left(-\frac{\theta_H^2}{2} - \frac{\theta_L^2}{4}\right) - \left(-\frac{3\theta_H^2}{4}\right) = \frac{\theta_H^2 - \theta_L^2}{4} > 0.
-$$
-Thus type $\theta_H$ strictly prefers to mimic $\theta_L$.
-:::
+**Why the condition can fail.** Rewrite @eq-sep-condition as a bound on the ratio:
 
-**Economic intuition.** By mimicking $\theta_L$, type $\theta_H$ induces management to believe $\mu = 0$. Under this belief, management responds as if the stakes are only $\theta_L^2$ — a much smaller threat than $\theta_H^2$ — and reduces its effort accordingly. The winning probability for $\theta_H$ under mimicry is the same ($p_L = 1/2$) as under truth-telling, but the effort cost is lower ($\theta_L^2/4$ instead of $\theta_H^2/4$), and the policy outcome when losing is the same in both cases. This is a clean "free-riding on a weaker opponent" effect that does not arise in the benchmark because $V$ does not vary by type.
+$$\frac{\bar{V}_H}{\bar{V}_L} \;\leq\; \frac{V_H^2}{V_L(2V_H - V_L)} \;\equiv\; R. $$
 
-## Pooling Equilibrium {#sec-ext-pool}
+The threshold $R > 1$ is independent of $(q, s)$. The ratio $\bar{V}_H/\bar{V}_L$ rises as $q$ or $s$ increases: large $q$ inflates $\bar{V}_H$ (management fights hard when it knows labor is high) while large $s$ deflates $\bar{V}_L$ (management is complacent when it believes labor is low). When $\bar{V}_H/\bar{V}_L$ exceeds $R$, mimicry becomes attractive: the high type induces a weak opponent at low cost, which outweighs the gain from truthful revelation.
 
-We now turn to pure-strategy pooling in the spatial LM subgame. If the two labor types are to pool, they must choose the same effort on the equilibrium path. Denote this common effort by $x_P>0$.
+## The Critical Boundary {#sec-ext-boundary}
 
-**On-path belief.** Once management observes $x_P$, the action itself no longer separates the two types. Management therefore falls back on the prior, $\mu(x_P)=q$. The relevant expected loss is
-$\Psi_0 \equiv \Psi(q) = q\theta_H^2 + (1-q)\theta_L^2$.
+Setting @eq-ich to equality yields the **critical boundary** $s^*(q)$, the locus in $(q, s) \in [0.5, 1]^2$ where the separating equilibrium just barely survives.
 
-**Off-path belief.** If management observes any $x_L\neq x_P$, it interprets the deviation as coming from type $\theta_H$, so that $\mu(x_L)=1$. This is the harsh off-path belief for labor: once a deviation appears, management reads it as the high-stakes type revealing itself and responds more aggressively.
+::: {#prp-boundary}
+### Critical Boundary
 
-On the equilibrium path, management's response is
-$$x_M^*(x_P,q) = \sqrt{\Psi_0\,x_P} - x_P.$$
+The boundary is the straight line
 
-Type $\theta_i$'s payoff from staying in the pool is
-$$U_L^i(x_P) = -\theta_i^2 + \theta_i^2\sqrt{\frac{x_P}{\Psi_0}} - x_P.
-$$ {#eq-ul-pool-i}
+$$s^*(q) = \frac{V_H^3 - V_L(2V_H - V_L)\bigl[qV_H + (1-q)V_L\bigr]}{V_H^2(V_H - V_L)}, $$ {#eq-boundary}
 
-If type $\theta_i$ deviates, management responds under the off-path belief $\mu=1$, namely with $x_M^*(x_L,1)=\theta_H\sqrt{x_L}-x_L$. In that punitive continuation, type $\theta_i$'s optimal off-path effort solves
+with constant negative slope $ds^*/dq = -V_L(2V_H-V_L)/V_H^2 < 0$.
 
-$$\max_{x_L}\left\{-\theta_i^2 + \theta_i^2\sqrt{\frac{x_L}{\theta_H^2}} - x_L\right\},$$
+The two degenerate limits of the model lie on opposite sides of the boundary:
 
-which yields $x_L^{\mathrm{dev},i}=\theta_i^4/(4\theta_H^2)$ and the deviation payoff
-
-$$U_L^i(\mathrm{dev}) = -\theta_i^2 + \frac{\theta_i^4}{4\theta_H^2}.
-$$ {#eq-ul-dev-i}
-
-::: {#prp-pool}
-### Pooling Equilibrium
-
-Fix the off-path belief $\mu(x_L)=1$ for every $x_L\neq x_P$. A pure-strategy pooling PBE with common effort $x_P$ exists exactly when neither type wants to leave the pool. Equivalently, the two incentive constraints below must hold at the same time:
-
-$$
-\mathrm{IC}_H:\quad
-\theta_H^2\sqrt{\frac{x_P}{\Psi_0}} - x_P \;\geq\; \frac{\theta_H^2}{4},
-$$ {#eq-ich}
-
-$$
-\mathrm{IC}_L:\quad
-\theta_L^2\sqrt{\frac{x_P}{\Psi_0}} - x_P \;\geq\; \frac{\theta_L^4}{4\theta_H^2}.
-$$ {#eq-icl}
-
-It is useful to see the feasible set rather than test a single point. Set $y\equiv \sqrt{x_P}$. The two constraints become the following downward-opening quadratic inequalities:
-
-$$
--y^2 + \frac{\theta_H^2}{\sqrt{\Psi_0}}y - \frac{\theta_H^2}{4} \geq 0,
-$$ {#eq-ich-quad}
-
-$$
--y^2 + \frac{\theta_L^2}{\sqrt{\Psi_0}}y - \frac{\theta_L^4}{4\theta_H^2} \geq 0.
-$$ {#eq-icl-quad}
-
-Let $[z_{\min},z_{\max}]$ be the interval allowed by $\mathrm{IC}_H$, and let $[y_{\min},y_{\max}]$ be the interval allowed by $\mathrm{IC}_L$. Pooling then comes down to a simple interval-intersection condition:
-
-$$
-[z_{\min},z_{\max}] \cap [y_{\min},y_{\max}] \neq \varnothing.
-$$ {#eq-pool-intersection}
-
-Any $y_P$ in this intersection supports the pooling effort $x_P=y_P^2$. If the intersection is empty, every common effort makes at least one type prefer to deviate.
+- At $(q, s) = (\tfrac{1}{2}, \tfrac{1}{2})$: $\mathrm{IC}_H$ reduces to $(V_H - V_L)^2 \geq 0$, which always holds. The benchmark point lies **strictly below** $s^*$ in the separating region.
+- At $(q, s) = (1, 1)$: $\mathrm{IC}_H$ requires $V_L \geq V_H$, which contradicts the premise. The Fu (2006) point lies **strictly above** $s^*$ in the pooling region.
 :::
 
 ::: {.proof}
-See @sec-proof-ext-pool.
+See @sec-proof-ext-boundary.
 :::
 
-**The role of off-path beliefs.** The pessimistic belief $\mu=1$ is not a cosmetic assumption here; it is doing real work. Once a deviation is interpreted as coming from type $\theta_H$, management's continuation response is governed by $\Psi=\theta_H^2$, and the deviation becomes more expensive. A milder off-path belief, say $\mu=q$, would weaken this punishment. In some parameter regions, the pool that survives under the harsher belief would simply fall apart.
+**Separating region** ($s \leq s^*(q)$, lower-left in @fig-partial-corr). Moderate correlation keeps the ratio $\bar{V}_H/\bar{V}_L$ below the threshold $R$. The high type's on-path payoff exceeds the mimicry payoff, so separation is incentive compatible and labor's first-mover advantage is preserved.
 
-**Equilibrium selection.** This result also corrects a tempting but misleading shortcut. Pooling is not established by plugging in one attractive candidate effort and checking whether it works. The previously considered $x_P^*=\theta_H^4/(4\Psi_0)$ is merely type $\theta_H$'s unconstrained optimum under the on-path belief $\mu=q$. It is a useful reference point, but it is not the existence condition. The real question is more prosaic: do the two types' incentive-compatible effort intervals overlap?
+**Pooling region** ($s > s^*(q)$, upper-right in @fig-partial-corr). Strong correlation drives $\bar{V}_H/\bar{V}_L$ above $R$. The high type can profitably imitate the low type, separation collapses, and the equilibrium outcome resembles Fu (2006) in which both types pool and the signaling benefit of moving first is lost.
 
-When @eq-pool-intersection has multiple points, PBE does not select $x_P$. A refinement such as the Cho--Kreps intuitive criterion or the Riley outcome can do that work. The natural point is not the high type's unconstrained favorite, but a boundary effort: low enough for the low type, high enough to keep the high type in the pool. Often this is $y_P=z_{\min}$ (so $x_P=z_{\min}^2$), provided $z_{\min}\in[y_{\min},y_{\max}]$. Equivalently, project the low type's on-path optimum $\theta_L^2/(2\sqrt{\Psi_0})$ onto the feasible intersection.
+![Equilibrium regions in the $(q,s)$ parameter space ($V_H = 2$, $V_L = 1$). The critical boundary $s^*(q) = (5-3q)/4$ separates the separating equilibrium region (lighter, forward-slash hatching) from the pooling equilibrium region (darker, back-slash hatching). Triangle: benchmark $(\frac{1}{2},\frac{1}{2})$; square: Fu (2006) limit $(1,1)$.](../figures/partial_correlation_regions.png){#fig-partial-corr width=72%}
 
-## Comparison with the Benchmark {#sec-ext-compare}
+## Comparative Statics {#sec-ext-cs}
 
-@tbl-compare compares the benchmark and the spatial extension. A small formal change redirects the equilibrium logic.
+The boundary @eq-boundary delivers clean comparative statics.
 
-| Feature | Benchmark (@sec-equilibria) | Spatial Extension (@sec-extension) |
+**Effect of $q$.** Raising $q$ shifts $\bar{V}_H$ upward while leaving $\bar{V}_L$ unchanged. Management fights harder when it knows labor is high, depressing the high type's on-path payoff $\Pi_H = V_H^2/(4\bar{V}_H)$, while the deviation payoff $V_L(2V_H-V_L)/(4\bar{V}_L)$ is unaffected. The separating region shrinks: the boundary $s^*(q)$ is decreasing in $q$.
+
+**Effect of $s$.** Raising $s$ shifts $\bar{V}_L$ downward. Management becomes more complacent when it believes labor is low, making mimicry cheaper for the high type. The separating region again shrinks.
+
+**Relative force.** The slope $|ds^*/dq| = V_L(2V_H-V_L)/V_H^2 < 1$, so a unit increase in $q$ is less destructive to separation than a unit increase in $s$. Intuitively, $q$ affects only $\bar{V}_H$ (the on-path payoff) while $s$ affects only $\bar{V}_L$ (the deviation payoff); reducing the cost of mimicry hurts separation more than increasing its on-path burden.
+
+## Summary {#sec-ext-summary}
+
+@tbl-compare summarizes how partial correlation modifies the benchmark.
+
+| Feature | Benchmark (@sec-equilibria) | This extension |
 |---------|------|------|
-| Management's best response | Depends on $x_L$ and $V$ only | Depends on $x_L$ and belief $\mu$ |
-| Signal-belief channel | Closed | Open |
-| LM equilibrium type | Unique separating | Pooling (under parameter conditions) |
-| IC for separation | Always satisfied | Fails: $\theta_H$ mimics $\theta_L$ |
-| Pooling condition | Never satisfied | Nonempty intersection of the two IC intervals (@eq-pool-intersection) |
+| Information structure | Independent, $q=s=\tfrac{1}{2}$ | Partially correlated, $q,s\in[0.5,1]$ |
+| Management's best response | Depends on $x_L$ and $V$ only | Depends on $x_L$ and posterior $\mu$ |
+| Signal-belief channel | Closed | Open when $q+s>1$ |
+| LM equilibrium outcome | Unique separating PBE | Separating iff $s \leq s^*(q)$ |
+| First-mover advantage | Always preserved | Preserved in separating region only |
+| Nests Fu (2006) | No | Yes, at $(q,s)=(1,1)$ |
 
-: Benchmark vs.\ spatial extension. {#tbl-compare}
+: Benchmark model versus partial-correlation extension. {#tbl-compare}
 
-The difference is narrow. In the benchmark, labor's type $V_L$ changes only labor's own value of victory; it never enters management's continuation objective. In the spatial extension, $\theta$ enters management's loss $\Psi(\mu)$. Beliefs then move actions, which creates the signaling force behind pooling.
-
-The broader lesson is simple: non-separation in LM requires the informed player's type to affect the uninformed player's continuation payoff. If beliefs cannot move actions, the benchmark returns to unique separation.
+The key ingredient is whether management's effective prize $\hat{V}_M(\mu)$ is sensitive to beliefs. In the benchmark, $\bar{V}_H = \bar{V}_L$ (since $q = s = \tfrac{1}{2}$), so beliefs do not move management's effort and separation is costless. As $(q, s)$ moves toward $(1, 1)$, the wedge $\bar{V}_H - \bar{V}_L$ widens, mimicry becomes increasingly attractive, and eventually the critical boundary $s^*(q)$ is crossed. The partial-correlation framework thus provides a continuous interpolation between the benchmark (full separation, first-mover advantage) and the Fu (2006) limit (pooling, no signaling benefit from moving first).

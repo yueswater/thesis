@@ -1,209 +1,158 @@
-# 延伸：空間政策競爭 {#sec-extension}
+# 延伸：部分相關型別 {#sec-extension}
 
-@sec-equilibria 證明，基準模型的 LM 子賽局只有分離均衡。原因是資方續局最佳反應只取決於努力 $x_L$ 與公開獎酬 $V$，不受後驗信念影響。
+@sec-equilibria 的基準模型，在 LM 子賽局中給出唯一的分離均衡：勞方的型別得以完全揭露，資方的最佳反應只取決於觀察到的努力 $x_L$ 與公開獎酬 $V$，不受後驗信念影響——訊號-信念通道處於關閉狀態。
 
-本節改用**空間政策偏好**重新打開信念通道。資方在勞方勝出時的損失取決於勞方型別，最佳反應因而依賴信念；混同均衡遂可能出現。
+本節改造資訊結構，重新打開這條通道。我們引入**部分相關（partial correlation）**：資方的獎酬 $v_M$ 與勞方型別 $v_L$ 之間存在正向相關，但並非完全相關；相關程度由兩個參數 $(q, s)$ 控制。隨著相關程度增強，資方的最佳反應對信念愈發敏感，勞方維持可信分離的成本也隨之上升。我們刻畫出 $(q, s)$ 參數空間中的一條**臨界邊界** $s^*(q)$，將均衡結果一分為二：邊界以下維持分離均衡（基準情形），邊界以上出現混同均衡（Fu 2006 情形）。
 
-## 環境與報酬函數 {#sec-ext-setup}
+## 環境與資訊結構 {#sec-ext-setup}
 
-::: {#def-spatial-env}
-### 空間政策環境
+勞方的獎酬 $v_L \in \{V_H, V_L\}$（$V_H > V_L > 0$）以相等的先驗機率抽取，屬勞方私人資訊。與基準模型不同，資方的獎酬 $v_M$ 不是公開已知的常數，而是從同一支撐 $\{V_H, V_L\}$ 私下抽出，其分配取決於勞方已實現的型別。
 
-政策為實數線上的一點。雙方各有一個最理想政策位置（理想點）：
+::: {#def-partial-corr}
+### 部分相關結構
 
-- 資方的理想點：$0$（公開資訊）。
-- 勞方的理想點：$\theta$（勞方的私人型別）。
+$(v_L, v_M)$ 的聯合分配由參數 $q, s \in [0.5, 1]$ 決定：
 
-競賽決定哪一方得以執行其偏好政策。若勞方勝出，則執行政策 $\theta$；若資方勝出，則執行政策 $0$。
+$$\Pr(v_M = V_H \mid v_L = V_H) = q, \qquad \Pr(v_M = V_L \mid v_L = V_H) = 1-q,$$
 
-雙方對已執行政策 $p$ 具有二次空間損失效用：
+$$\Pr(v_M = V_L \mid v_L = V_L) = s, \qquad \Pr(v_M = V_H \mid v_L = V_L) = 1-s.$$
 
-$$u_L(p;\theta) = -(p-\theta)^2, \qquad u_M(p) = -p^2.$$
+本論文研究的兩個極端情形：
 
-由此得到雙方在各競賽結果下的效用：
-
-| 勝出方 | 執行政策 | $u_L$ | $u_M$ |
-|--------|--------|--------|--------|
-| 勞方  | $\theta$ | $0$ | $-\theta^2$ |
-| 資方 | $0$ | $-\theta^2$ | $0$ |
+| 情形 | 參數 | 說明 |
+|------|------|------|
+| 型別完全獨立 | $q = s = \tfrac{1}{2}$ | 基準二元模型（@sec-equilibria） |
+| 型別完全相關 | $q = s = 1$ | @fu2006 |
 :::
 
-::: {#def-spatial-info-payoffs}
-### 型別、信念與報酬
+資方觀察到 $x_L$ 後形成後驗信念 $\mu \equiv \Pr(v_L = V_H \mid x_L)$。定義資方的條件期望獎酬：
 
-勞方的型別為 $\theta \in \{\theta_L, \theta_H\}$，其中 $0 < \theta_L < \theta_H$。$\theta_H$ 的先驗機率為 $q \in (0,1)$，$\theta_L$ 的先驗機率為 $1-q$。資方知道先驗分配，但不能直接觀察已實現型別。
+$$\bar{V}_H \equiv q V_H + (1-q)V_L, \qquad \bar{V}_L \equiv (1-s)V_H + s V_L.$$
 
-資方觀察到勞方努力 $x_L$ 後，形成後驗信念 $\mu(x_L) \in [0,1]$。其中 $\mu$ 表示資方認為 $\theta = \theta_H$ 的機率。信念加權的期望損失定義為
+給定後驗 $\mu$，資方的信念加權期望獎酬為
 
-$$\Psi(\mu) \equiv \mu\,\theta_H^2 + (1-\mu)\,\theta_L^2.
-$$ {#eq-psi}
+$$\hat{V}_M(\mu) \equiv \mu\,\bar{V}_H + (1-\mu)\,\bar{V}_L. $$ {#eq-vhat}
 
-納入努力成本，並以 $p_L = x_L/(x_L+x_M)$ 表示勞方勝率。兩方的期望報酬函數為
+**單調性。** 因 $\bar{V}_H - \bar{V}_L = (q+s-1)(V_H - V_L) \geq 0$（當 $q, s \geq 0.5$ 時成立），$\hat{V}_M(\mu)$ 關於 $\mu$ 弱遞增。資方對勞方高型別的後驗信念愈高，預期自身面對的競賽賭注愈大——因為高型別的勞方意味著資方更可能持有獎酬 $V_H$。這正是將資方努力與信念綁定的機制。
 
-$$
-U_L(x_L,x_M;\theta) = -\frac{x_M}{x_L+x_M}\,\theta^2 - x_L,
-$$ {#eq-ul-ext}
+報酬函數採標準 Tullock 形式：
 
-$$
-U_M(x_L,x_M;\mu) = -\frac{x_L}{x_L+x_M}\,\Psi(\mu) - x_M.
-$$ {#eq-um-ext}
+$$U_L(x_L, x_M \mid v_L) = \frac{x_L}{x_L + x_M}\,v_L - x_L, $$ {#eq-ul-ext}
 
-勞方對 $x_L$ 最大化 $U_L$；資方在給定 $\mu$ 下對 $x_M$ 最大化 $U_M$。
-:::
-
-::: {.remark}
-@eq-ul-ext 顯示，勞方的報酬不直接依賴資方的後驗信念 $\mu$。然而 @eq-um-ext 中資方的報酬透過 $\Psi(\mu)$ 依賴 $\mu$。這個不對稱性正是驅動下文策略性訊號傳遞誘因的根本機制。
-:::
+$$U_M(x_L, x_M \mid \mu) = \frac{x_M}{x_L + x_M}\,\hat{V}_M(\mu) - x_M. $$ {#eq-um-ext}
 
 ## 資方的信念依賴最佳反應 {#sec-ext-br}
 
-在 LM 子賽局中，資方在第二階段行動。觀察到 $x_L$ 後，資方對 $x_M \geq 0$ 最大化 $U_M(x_L, x_M; \mu)$。
+在 LM 子賽局中，資方在第二階段觀察到 $x_L$ 並更新至後驗 $\mu$ 後，對 $x_M \geq 0$ 最大化 @eq-um-ext。
 
 ::: {#prp-ext-br}
 ### 信念依賴最佳反應
 
-給定觀察到的努力 $x_L \geq 0$ 與後驗信念 $\mu \in [0,1]$，資方的最佳反應為
+給定 $x_L \geq 0$ 與後驗信念 $\mu \in [0,1]$，資方的唯一內點最佳反應為
 
-$$
-x_M^*(x_L,\mu) =
-\begin{cases}
-\sqrt{\Psi(\mu)\,x_L} - x_L & \text{若 } x_L \leq \dfrac{\Psi(\mu)}{4},\\[6pt]
-0 & \text{若 } x_L > \dfrac{\Psi(\mu)}{4}.
-\end{cases}
-$$ {#eq-br-ext}
+$$x_M^*(x_L, \mu) = \sqrt{x_L\,\hat{V}_M(\mu)} - x_L, \qquad x_L \leq \hat{V}_M(\mu)/4. $$ {#eq-br-ext}
 
+當 $q + s > 1$ 時，$\partial x_M^*/\partial\mu > 0$：資方對高型別的後驗信念愈高，努力程度嚴格愈大。
 :::
 
 ::: {.proof}
-資方的目標為 $U_M = -p_L\Psi(\mu) - x_M$，其中 $p_L = x_L/(x_L+x_M)$。一階條件 $\partial U_M/\partial x_M = 0$ 為：
-$$
-\frac{x_L}{(x_L+x_M)^2}\,\Psi(\mu) = 1.
-$$
-解得 $(x_L+x_M)^2 = x_L\Psi(\mu)$，取正根後 $x_L + x_M = \sqrt{x_L\Psi(\mu)}$，從而
-$x_M^* = \sqrt{\Psi(\mu)\,x_L} - x_L$。
-此值非負若且唯若 $x_L \leq \Psi(\mu)/4$；否則角落解 $x_M^* = 0$ 成立。
+一階條件為 $x_L\hat{V}_M(\mu)/(x_L+x_M)^2 = 1$。解正根得 $x_L+x_M = \sqrt{x_L\hat{V}_M(\mu)}$，故 $x_M^* = \sqrt{x_L\hat{V}_M(\mu)} - x_L$。對 $\mu$ 微分：$\partial x_M^*/\partial\mu = (\bar{V}_H - \bar{V}_L)/\bigl(2\sqrt{\hat{V}_M(\mu)/x_L}\bigr) > 0$，此式在 $\bar{V}_H > \bar{V}_L$ 時成立。
 :::
 
-**訊號-信念通道被開啟。** 在 @eq-br-ext 中，$\partial x_M^*/\partial\mu = (\theta_H^2-\theta_L^2)/(2\sqrt{\Psi(\mu)/x_L}\cdot\Psi(\mu)) > 0$：當資方對極端型別賦予更高後驗機率時，其努力程度嚴格增加。相較之下，基準模型的最佳反應 @eq-brm 僅取決於 $x_L$ 與 $V$，與信念無關。在空間模型中，更高的 $\mu$（認為勞方是 $\theta_H$ 的信念）提高了 $\Psi(\mu)$，進而提高了 $x_M^*$。
+在基準模型中，資方的最佳反應僅取決於 $x_L$ 與公開獎酬 $V$，信念不進入其決策。在此模型中，更高的 $\mu$ 提升 $\hat{V}_M(\mu)$，進而加大資方努力：勞方揭露自己是高型別，便會招來更積極的對手，使如實揭露變得代價高昂。
 
-均衡勝率由以下式子決定：
+## 分離均衡的存在條件與崩潰 {#sec-ext-sep}
 
-$$p_L^* = \sqrt{\frac{x_L}{\Psi(\mu)}}, \qquad
-p_M^* = 1 - \sqrt{\frac{x_L}{\Psi(\mu)}}.
-$$ {#eq-win-ext}
+考慮一個候選分離 PBE：高型別出 $x_H$，低型別出 $x_L^*$。均衡路徑上的信念為 $\mu(x_H)=1$、$\mu(x_L^*)=0$，資方分別面對有效獎酬 $\bar{V}_H$ 與 $\bar{V}_L$。
 
-## 分離均衡的崩潰與混同誘因 {#sec-ext-sep-fail}
+**低型別的均衡。** 面對有效獎酬為 $\bar{V}_L$ 的資方，低型別最大化 $\sqrt{x_L/\bar{V}_L}\cdot V_L - x_L$。一階條件給出：
 
-先看空間 LM 子賽局是否能分離。在分離候選中，各型別 $\theta_i$ 選擇不同努力；資方在 $x_H$ 處信念為 $\mu=1$，在 $x_L$ 處為 $\mu=0$。
+$$x_L^* = \frac{V_L^2}{4\bar{V}_L}, \qquad \Pi_L = \frac{V_L^2}{4\bar{V}_L}. $$ {#eq-low-type-eq}
 
-在分離均衡中，資方在均衡路徑上能正確識別型別：面對 $\theta_H$ 時 $\Psi(1) = \theta_H^2$，面對 $\theta_L$ 時 $\Psi(0) = \theta_L^2$。各型別在分離後續行動下的無約束最優為：
+**高型別的均衡。** 面對有效獎酬為 $\bar{V}_H$ 的資方，高型別的無約束最適解為：
 
-$$x_i^{\mathrm{sep}} = \frac{\theta_i^4}{4\theta_i^2} = \frac{\theta_i^2}{4}, \qquad i \in \{L, H\}.$$
+$$x_H = \frac{V_H^2}{4\bar{V}_H}, \qquad \Pi_H = \frac{V_H^2}{4\bar{V}_H}. $$ {#eq-high-type-eq}
 
-分離均衡下的均衡努力為 $x_L^{\mathrm{sep}} = \theta_L^2/4$ 及 $x_H^{\mathrm{sep}} = \theta_H^2/4$，對應的分離報酬為 $U_L^i(\mathrm{sep}) = -3\theta_i^2/4$。
+**誘因相容。** 若高型別偏離至 $x_L^*$，資方持有信念 $\mu=0$，以有效獎酬 $\bar{V}_L$ 回應。高型別的偏離報酬為：
 
-::: {#prp-sep-fail}
-### 分離均衡不存在
+$$U_L^H(\text{偽裝}) = \sqrt{\frac{x_L^*}{\bar{V}_L}}\,V_H - x_L^* = \frac{V_L(2V_H - V_L)}{4\bar{V}_L}. $$ {#eq-dev-payoff}
 
-在空間 LM 子賽局中，不存在純策略分離 PBE。
+高型別的 $\mathrm{IC}_H$ 限制要求 $\Pi_H \geq U_L^H(\text{偽裝})$：
+
+$$\frac{V_H^2}{4\bar{V}_H} \;\geq\; \frac{V_L(2V_H - V_L)}{4\bar{V}_L}. $$ {#eq-ich}
+
+對低型別而言，偽裝成高型別會引發信念 $\mu=1$ 及偏離報酬 $V_H(2V_L - V_H)/(4\bar{V}_H) \leq 0$，弱劣於 $\Pi_L > 0$，故 $\mathrm{IC}_L$ 非約束性，以下專注於 @eq-ich。
+
+::: {#prp-sep-exists}
+### 分離均衡
+
+以 @eq-low-type-eq 與 @eq-high-type-eq 為均衡努力的純策略分離 PBE 存在，若且唯若 $\mathrm{IC}_H$（即 @eq-ich）成立：
+
+$$\frac{V_H^2}{\bar{V}_H} \;\geq\; \frac{V_L(2V_H - V_L)}{\bar{V}_L}, $$ {#eq-sep-condition}
+
+其中 $\bar{V}_H = qV_H + (1-q)V_L$，$\bar{V}_L = (1-s)V_H + sV_L$。
+
+@eq-sep-condition 成立時，高型別不能從偽裝中獲益，分離均衡具有可信性，勞方保有先動優勢。@eq-sep-condition 不成立時，高型別嚴格偏好偽裝，分離均衡崩潰。
 :::
 
-::: {.proof}
-只需證明 $\theta_H$ 型別嚴格偏好偏離至 $x_L^{\mathrm{sep}} = \theta_L^2/4$（偽裝成 $\theta_L$）。在分離信念下，資方對 $\theta_L^2/4$ 持有信念 $\mu = 0$，故 $\Psi = \theta_L^2$，$x_M^* = \theta_L^2/4$。$\theta_H$ 型別偏離後的報酬為：
-$$
-U_L^H(\text{偽裝}) = -\frac{1}{2}\,\theta_H^2 - \frac{\theta_L^2}{4}.
-$$
-偏離相對於如實揭露的收益為：
-$$
-U_L^H(\text{偽裝}) - U_L^H(\mathrm{sep}) = \left(-\frac{\theta_H^2}{2} - \frac{\theta_L^2}{4}\right) - \left(-\frac{3\theta_H^2}{4}\right) = \frac{\theta_H^2 - \theta_L^2}{4} > 0.
-$$
-故 $\theta_H$ 型別嚴格偏好偽裝成 $\theta_L$。
-:::
+**為何條件會失敗。** 將 @eq-sep-condition 改寫為比率的上界：
 
-**經濟直覺。** 透過偽裝成 $\theta_L$，$\theta_H$ 型別誘使資方相信 $\mu = 0$。在此信念下，資方的行動好像面對的威脅只有 $\theta_L^2$——遠小於真實的 $\theta_H^2$——從而大幅降低努力。$\theta_H$ 偽裝時的勝率（$p_L = 1/2$）與如實揭露時相同，但努力成本更低（$\theta_L^2/4$ 而非 $\theta_H^2/4$），落敗時的政策損失也相同。這是一種「搭弱對手便車」的效果，在基準模型中並不存在，因為基準模型中 $V$ 並不隨型別改變。
+$$\frac{\bar{V}_H}{\bar{V}_L} \;\leq\; \frac{V_H^2}{V_L(2V_H - V_L)} \;\equiv\; R.$$
 
-## 混同均衡的建構 {#sec-ext-pool}
+門檻值 $R > 1$ 與 $(q, s)$ 無關。比率 $\bar{V}_H/\bar{V}_L$ 隨 $q$ 或 $s$ 的增大而上升：高 $q$ 膨脹 $\bar{V}_H$（資方在知道勞方是高型別時更積極應對），高 $s$ 壓縮 $\bar{V}_L$（資方在認為勞方是低型別時更為懈怠）。一旦比率超過 $R$，偽裝便有利可圖：高型別以低成本誘出弱對手，這比如實揭露的收益更高。
 
-接下來看空間 LM 子賽局中的純策略混同 PBE。兩個型別若要混在一起，必須在均衡路徑上選擇同一個努力水準。記此共同努力為 $x_P > 0$。
+## 臨界邊界 {#sec-ext-boundary}
 
-**均衡路徑上的信念。** 資方若觀察到 $x_P$，便無法從行動區分型別，只能回到先驗信念 $\mu(x_P) = q$。此時資方面對的有效損失期望值為 $\Psi_0 \equiv \Psi(q) = q\theta_H^2 + (1-q)\theta_L^2$。
+將 @eq-ich 取等號，便得到**臨界邊界** $s^*(q)$——這條位於 $(q, s) \in [0.5, 1]^2$ 中的曲線，是分離均衡剛好能存活的參數集合。
 
-**均衡路徑外的信念。** 若觀察到任何 $x_L \neq x_P$，資方將偏離者視為 $\theta_H$ 型別，也就是令 $\mu(x_L) = 1$。這是一種對勞方最不友善的路徑外信念：偏離一旦發生，資方便把局面理解成最激烈的型別現身，因而提高反制努力。
+::: {#prp-boundary}
+### 臨界邊界
 
-在均衡路徑上，資方的回應為
-$$x_M^*(x_P,q) = \sqrt{\Psi_0\,x_P} - x_P.$$
+邊界是一條直線：
 
-型別 $\theta_i$ 留在混同池中時，報酬為
-$$U_L^i(x_P) = -\theta_i^2 + \theta_i^2\sqrt{\frac{x_P}{\Psi_0}} - x_P.
-$$ {#eq-ul-pool-i}
+$$s^*(q) = \frac{V_H^3 - V_L(2V_H - V_L)\bigl[qV_H + (1-q)V_L\bigr]}{V_H^2(V_H - V_L)}, $$ {#eq-boundary}
 
-若型別 $\theta_i$ 選擇偏離，資方依路徑外信念 $\mu = 1$ 回應，亦即 $x_M^*(x_L, 1) = \theta_H\sqrt{x_L} - x_L$。在這個懲罰性續局下，型別 $\theta_i$ 的最佳偏離努力為
+斜率為常數 $ds^*/dq = -V_L(2V_H-V_L)/V_H^2 < 0$。
 
-$$x_L^{\mathrm{dev},i} = \frac{\theta_i^4}{4\theta_H^2},$$
+模型的兩個極端點分別位於邊界兩側：
 
-對應的偏離報酬為
-
-$$U_L^i(\mathrm{dev}) = -\theta_i^2 + \frac{\theta_i^4}{4\theta_H^2}.
-$$ {#eq-ul-dev-i}
-
-::: {#prp-pool}
-### 混同均衡
-
-固定路徑外信念 $\mu(x_L) = 1$（對所有 $x_L \neq x_P$）。以 $x_P$ 為共同努力的純策略混同 PBE 存在，當且僅當兩個型別都不想離開混同池；也就是說，下列兩條誘因相容限制必須同時成立：
-
-$$
-\mathrm{IC}_H:\quad
-\theta_H^2\sqrt{\frac{x_P}{\Psi_0}} - x_P \;\geq\; \frac{\theta_H^2}{4},
-$$ {#eq-ich}
-
-$$
-\mathrm{IC}_L:\quad
-\theta_L^2\sqrt{\frac{x_P}{\Psi_0}} - x_P \;\geq\; \frac{\theta_L^4}{4\theta_H^2}.
-$$ {#eq-icl}
-
-為了看清楚可行集合的形狀，令 $y \equiv \sqrt{x_P}$。兩條限制便化為兩個開口向下的二次不等式：
-
-$$
--y^2 + \frac{\theta_H^2}{\sqrt{\Psi_0}}y - \frac{\theta_H^2}{4} \geq 0,
-$$ {#eq-ich-quad}
-
-$$
--y^2 + \frac{\theta_L^2}{\sqrt{\Psi_0}}y - \frac{\theta_L^4}{4\theta_H^2} \geq 0.
-$$ {#eq-icl-quad}
-
-設 $\mathrm{IC}_H$ 所允許的區間為 $[z_{\min},z_{\max}]$，$\mathrm{IC}_L$ 所允許的區間為 $[y_{\min},y_{\max}]$。混同均衡的存在性，於是變成一個很乾淨的區間交集問題：
-
-$$
-[z_{\min},z_{\max}] \cap [y_{\min},y_{\max}] \neq \varnothing.
-$$ {#eq-pool-intersection}
-
-只要能在交集裡挑出一個 $y_P$，便可用 $x_P = y_P^2$ 支撐混同；若交集是空的，任何共同努力都會讓至少一個型別想偏離。
+- 在 $(q, s) = (\tfrac{1}{2}, \tfrac{1}{2})$：$\mathrm{IC}_H$ 化簡為 $(V_H - V_L)^2 \geq 0$，恆成立。基準點**嚴格低於** $s^*$，位於分離均衡區域。
+- 在 $(q, s) = (1, 1)$：$\mathrm{IC}_H$ 要求 $V_L \geq V_H$，與前提矛盾。Fu (2006) 點**嚴格高於** $s^*$，位於混同均衡區域。
 :::
 
 ::: {.proof}
-見 @sec-proof-ext-pool。
+見 @sec-proof-ext-boundary。
 :::
 
-**路徑外信念的作用。** 這裡的悲觀信念 $\mu = 1$ 不是裝飾性的設定，而是支撐混同的關鍵。偏離者一旦被資方當成 $\theta_H$ 型別，資方的續局反應便按 $\Psi=\theta_H^2$ 調整，偏離的代價也隨之升高。若改採較溫和的路徑外信念，例如 $\mu=q$，懲罰力道會明顯變弱，原本能被撐住的混同池便可能散開。
+**分離均衡區域**（$s \leq s^*(q)$，@fig-partial-corr 左下方）。相關程度適中時，比率 $\bar{V}_H/\bar{V}_L$ 低於門檻 $R$。高型別的均衡路徑報酬超過偽裝報酬，分離具有誘因相容性，勞方的先動優勢得以保留。
 
-**均衡選擇。** 這個結果也修正了一個容易掉進去的陷阱：混同均衡不是拿某一個漂亮的候選點代入檢查就結束。先前考慮的 $x_P^*=\theta_H^4/(4\Psi_0)$，只是 $\theta_H$ 型別在均衡路徑信念 $\mu=q$ 下的無約束最適點。它可以是有用的參考點，卻不能替代存在性條件。真正要問的是：兩個型別都願意留下來的努力區間，有沒有重疊？
+**混同均衡區域**（$s > s^*(q)$，@fig-partial-corr 右上方）。相關程度強烈時，$\bar{V}_H/\bar{V}_L$ 超過 $R$。高型別獲得有利可圖的偽裝機會，分離均衡崩潰，均衡結果類似 Fu (2006)：兩個型別混同，先動的訊號優勢消失。
 
-若 @eq-pool-intersection 含多個點，PBE 不會唯一選出 $x_P$。此時可訴諸 Cho--Kreps intuitive criterion 或 Riley outcome 的最小扭曲邏輯。本模型中較想留在池中的通常是高型別；自然的混同點不是高型別的無約束極大點，而是低型別可接受且高型別仍願混同的邊界。常見情況下，這對應於 $y_P=z_{\min}$（故 $x_P=z_{\min}^2$），前提是 $z_{\min}\in[y_{\min},y_{\max}]$。也可理解為將低型別的最適點 $\theta_L^2/(2\sqrt{\Psi_0})$ 投影到可行交集上。
+![$(q,s)$ 參數空間中的均衡區域（$V_H = 2$，$V_L = 1$）。臨界邊界 $s^*(q) = (5-3q)/4$ 將分離均衡區域（較淺，正斜線網底）與混同均衡區域（較深，反斜線網底）分隔開來。三角形：基準點 $(\frac{1}{2},\frac{1}{2})$；正方形：Fu (2006) 極限點 $(1,1)$。](../figures/partial_correlation_regions.png){#fig-partial-corr width=72%}
 
-## 與基準模型的比較 {#sec-ext-compare}
+## 比較靜態 {#sec-ext-cs}
 
-@tbl-compare 比較基準模型與空間延伸模型。兩者只改一處，均衡結構卻轉向。
+邊界公式 @eq-boundary 給出乾淨的比較靜態結果。
 
-| 特徵 | 基準模型（@sec-equilibria） | 空間延伸（@sec-extension） |
+**$q$ 的效果。** 提高 $q$ 使 $\bar{V}_H$ 上升而 $\bar{V}_L$ 不變。資方在知道勞方是高型別時更積極應對，壓低了高型別的均衡路徑報酬 $\Pi_H = V_H^2/(4\bar{V}_H)$，但偽裝報酬 $V_L(2V_H-V_L)/(4\bar{V}_L)$ 不受影響。邊界 $s^*(q)$ 關於 $q$ 遞減，分離均衡區域隨之縮小。
+
+**$s$ 的效果。** 提高 $s$ 使 $\bar{V}_L$ 下降。資方在認為勞方是低型別時更為懈怠，偽裝對高型別的成本因此降低。分離均衡區域同樣縮小。
+
+**相對破壞力。** 斜率大小 $|ds^*/dq| = V_L(2V_H-V_L)/V_H^2 < 1$，意味著 $q$ 每上升一單位對分離均衡的破壞，不如 $s$ 上升一單位的破壞大。直觀上，$q$ 只影響 $\bar{V}_H$（均衡路徑報酬），而 $s$ 只影響 $\bar{V}_L$（偽裝報酬）；降低偽裝成本對分離均衡的衝擊，大於增加均衡路徑負擔的衝擊。
+
+## 小結 {#sec-ext-summary}
+
+@tbl-compare 歸納了部分相關延伸對基準模型的修改。
+
+| 特徵 | 基準模型（@sec-equilibria） | 本節延伸 |
 |------|------|------|
-| 資方最佳反應 | 僅取決於 $x_L$ 與 $V$ | 取決於 $x_L$ 與信念 $\mu$ |
-| 訊號-信念通道 | 關閉 | 開啟 |
-| LM 均衡型態 | 唯一分離均衡 | 混同均衡（滿足參數條件時） |
-| 分離誘因相容 | 恆成立 | 不成立：$\theta_H$ 偽裝 $\theta_L$ |
-| 混同存在條件 | 從不成立 | 兩個 IC 區間交集非空（@eq-pool-intersection） |
+| 資訊結構 | 型別獨立，$q=s=\tfrac{1}{2}$ | 部分相關，$q,s\in[0.5,1]$ |
+| 資方最佳反應 | 僅取決於 $x_L$ 與 $V$ | 取決於 $x_L$ 與後驗 $\mu$ |
+| 訊號-信念通道 | 關閉 | 當 $q+s>1$ 時開啟 |
+| LM 均衡結果 | 唯一分離 PBE | 當 $s \leq s^*(q)$ 時分離，否則混同 |
+| 先動優勢 | 恆成立 | 僅在分離均衡區域成立 |
+| 涵蓋 Fu (2006) | 否 | 是（在 $(q,s)=(1,1)$ 處退化） |
 
-: 基準模型與空間延伸比較。 {#tbl-compare}
+: 基準模型與部分相關延伸的比較。 {#tbl-compare}
 
-差別很集中。基準模型中，勞方型別 $V_L$ 只改變自身勝利價值，不進入資方續局目標。空間延伸中，$\theta$ 進入資方損失 $\Psi(\mu)$；信念一變，資方行動也變。混同均衡的訊號力量由此而來。
-
-一般地，LM 子賽局若要有非分離均衡，知情者型別必須影響無資訊者的續局報酬。若型別不進入對手目標，信念推不動行動；基準模型便回到唯一分離均衡。
+核心機制在於資方的有效獎酬 $\hat{V}_M(\mu)$ 對信念的敏感程度。在基準模型中，$\bar{V}_H = \bar{V}_L$（因 $q=s=\tfrac{1}{2}$），信念無法撼動資方努力，分離沒有成本，恆成立。隨著 $(q,s)$ 朝 $(1,1)$ 移動，差距 $\bar{V}_H - \bar{V}_L$ 拉大，偽裝誘因增強，直至越過臨界邊界 $s^*(q)$。部分相關框架因而提供了一個從基準（完全分離、先動優勢存在）到 Fu (2006) 極限（混同、先動優勢消失）之間的連續插補。

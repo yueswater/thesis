@@ -177,6 +177,102 @@ def plot_labor_payoffs() -> None:
     save_figure(fig, "labor_payoff_comparison.png")
 
 
+def plot_correlation_regions(
+    VH: float = 2.0,
+    VL: float = 1.0,
+    show: bool = False,
+) -> None:
+    """Phase diagram for the partial-correlation extension (Chapter 6).
+
+    Plots the critical boundary s*(q) in the (q,s) parameter space [0.5,1]^2
+    that separates the separating-equilibrium region (below) from the
+    pooling-equilibrium region (above). Grayscale only; no colour.
+    """
+
+    def s_boundary(q: np.ndarray) -> np.ndarray:
+        num = VH**3 - VL * (2 * VH - VL) * (q * VH + (1 - q) * VL)
+        den = VH**2 * (VH - VL)
+        return num / den
+
+    q_arr = np.linspace(0.5, 1.0, 500)
+    s_arr = s_boundary(q_arr)
+
+    fig, ax = plt.subplots(figsize=(5.0, 5.0))
+
+    # ── Separating region (below boundary) ─────────────────────────────────
+    # Polygon: bottom edge (0.5→1.0 at s=0.5), boundary reversed, close.
+    q_sep = np.concatenate([np.linspace(0.5, 1.0, 200), q_arr[::-1]])
+    s_sep = np.concatenate([np.full(200, 0.5), s_arr[::-1]])
+    ax.fill(q_sep, s_sep, facecolor="0.88", edgecolor="none", zorder=1)
+    ax.fill(q_sep, s_sep, facecolor="none", edgecolor="0.35",
+            hatch="///", linewidth=0.0, zorder=2)
+
+    # ── Pooling region (above boundary) ────────────────────────────────────
+    # Polygon: boundary left→right, up right edge, top, close.
+    q_pool = np.concatenate([q_arr, [1.0, 0.5, 0.5]])
+    s_pool = np.concatenate([s_arr, [1.0, 1.0, s_arr[0]]])
+    ax.fill(q_pool, s_pool, facecolor="0.55", edgecolor="none", zorder=1)
+    ax.fill(q_pool, s_pool, facecolor="none", edgecolor="0.15",
+            hatch="\\\\\\", linewidth=0.0, zorder=2)
+
+    # ── Boundary line ───────────────────────────────────────────────────────
+    ax.plot(q_arr, s_arr, "k-", linewidth=1.8, zorder=5,
+            label=r"Critical boundary $s^{*}(q)$")
+
+    # ── Special points ──────────────────────────────────────────────────────
+    ax.plot(0.5, 0.5, "k^", markersize=7, zorder=6)
+    ax.annotate(
+        r"$(\frac{1}{2},\frac{1}{2})$: independent" "\n(benchmark)",
+        xy=(0.5, 0.5), xytext=(0.515, 0.565), fontsize=8,
+        arrowprops=dict(arrowstyle="->", lw=0.8, color="black"),
+        va="bottom",
+    )
+
+    ax.plot(1.0, 1.0, "ks", markersize=7, zorder=6)
+    ax.annotate(
+        "$(1,1)$: perfectly correlated\n(Fu 2006)",
+        xy=(1.0, 1.0), xytext=(0.72, 0.96), fontsize=8,
+        arrowprops=dict(arrowstyle="->", lw=0.8, color="black"),
+        va="top",
+    )
+
+    # ── Region labels ───────────────────────────────────────────────────────
+    ax.text(0.62, 0.55, "Separating\nequilibrium", ha="center", va="center",
+            fontsize=8.5, style="italic", color="0.25")
+    ax.text(0.78, 0.88, "Pooling\nequilibrium", ha="center", va="center",
+            fontsize=8.5, style="italic", color="0.10")
+
+    # ── Axes ────────────────────────────────────────────────────────────────
+    ax.set_xlim(0.5, 1.0)
+    ax.set_ylim(0.5, 1.0)
+    ax.set_xlabel(r"$q = \Pr(v_M = V_H \mid v_L = V_H)$", fontsize=10)
+    ax.set_ylabel(r"$s = \Pr(v_M = V_L \mid v_L = V_L)$", fontsize=10)
+    ax.set_xticks([0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+    ax.set_yticks([0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+    ax.tick_params(direction="out", length=4, width=0.8)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.set_aspect("equal")
+
+    from matplotlib.patches import Patch
+    legend_elements = [
+        Patch(facecolor="0.88", edgecolor="0.35", hatch="///",
+              label="Separating equilibrium (benchmark)"),
+        Patch(facecolor="0.55", edgecolor="0.15", hatch="\\\\\\",
+              label="Pooling equilibrium (Fu 2006)"),
+        plt.Line2D([0], [0], color="k", linewidth=1.8,
+                   label=r"Critical boundary $s^{*}(q)$"),
+    ]
+    ax.legend(handles=legend_elements, loc="lower left", fontsize=7.5,
+              framealpha=0.9, frameon=True)
+
+    fig.tight_layout()
+    if show:
+        plt.show()
+    else:
+        save_figure(fig, "partial_correlation_regions.png")
+
+
 def main() -> None:
     plt.rcParams.update(
         {
@@ -190,6 +286,7 @@ def main() -> None:
     )
     plot_timing_regions()
     plot_labor_payoffs()
+    plot_correlation_regions()
 
 
 if __name__ == "__main__":

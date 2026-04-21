@@ -14,4 +14,4 @@ Third, mean and dispersion matter jointly. Comparing only $\mu$ with $V$ is not 
 
 The contribution is analytical sharpening. Relative to @fu2006, private information enters labor's prize value but not management's continuation best response. The belief channel that supports pooling in Fu is shut down. Whether the informed player leads becomes a parameter question.
 
-The paper proceeds as follows. Section @sec-literature reviews the literature. Section @sec-setup sets up the model. Section @sec-equilibria solves SS, ML, and LM. Section @sec-timing studies timing and welfare. Section @sec-extension adds a spatial-policy extension. Section @sec-conclusion concludes.
+The paper proceeds as follows. Section @sec-literature reviews the literature. Section @sec-setup sets up the model. Section @sec-equilibria solves SS, ML, and LM. Section @sec-timing studies timing and welfare. Section @sec-extension introduces a partial-correlation extension. Section @sec-conclusion concludes.

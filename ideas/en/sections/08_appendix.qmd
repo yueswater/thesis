@@ -458,92 +458,25 @@ $$
 
 Therefore the condition $\E[U_M^{\mathrm{ML}}]\ge\E[U_M^{\mathrm{LM}}]$ is exactly @eq-mgmt-cond. Here $\Delta_M$ is management's direct ML-versus-LM preference gap; it is distinct from the one-deviation condition $\Delta_M^{\mathrm{SS}}\le0$ required for LM in Theorem @thm-timing-eq.
 
-## Proof of @prp-pool {#sec-proof-ext-pool}
+## Proof of @prp-boundary {#sec-proof-ext-boundary}
 
-Both incentive constraints come from the same comparison: type $\theta_i$ must earn at least as much by staying on the pooling path as by taking its best deviation under the off-path belief $\mu=1$. Thus @eq-ul-pool-i must weakly dominate @eq-ul-dev-i. After setting $y=\sqrt{x_P}$, @eq-ich and @eq-icl become @eq-ich-quad and @eq-icl-quad.
-
-Consider the high type's constraint. The boundary equation for $\mathrm{IC}_H$ is
+Setting $\mathrm{IC}_H$ (@eq-ich) to equality:
 
 $$
-y^2 - \frac{\theta_H^2}{\sqrt{\Psi_0}}y + \frac{\theta_H^2}{4}=0.
+V_H^2\bigl[(1-s)V_H + sV_L\bigr] = V_L(2V_H - V_L)\bigl[qV_H + (1-q)V_L\bigr].
 $$
 
-Its discriminant is
+Expanding the left-hand side:
 
 $$
-\Delta_H
-= \frac{\theta_H^4}{\Psi_0}-\theta_H^2
-= \frac{\theta_H^2(\theta_H^2-\Psi_0)}{\Psi_0}.
+V_H^3 - sV_H^2(V_H - V_L) = V_L(2V_H - V_L)\bigl[qV_H + (1-q)V_L\bigr].
 $$
 
-Since $q\in(0,1)$ and $0<\theta_L<\theta_H$,
+Solving for $s$ yields @eq-boundary. Differentiating the numerator with respect to $q$ gives $ds^*/dq = -V_L(2V_H-V_L)/V_H^2 < 0$.
 
-$$
-\Psi_0=q\theta_H^2+(1-q)\theta_L^2<\theta_H^2.
-$$
+**Polar cases.** At $(q,s) = (\tfrac{1}{2}, \tfrac{1}{2})$: $\bar{V}_H = \bar{V}_L = (V_H+V_L)/2$. The condition @eq-sep-condition reduces to $V_H^2 \geq V_L(2V_H-V_L)$, i.e., $(V_H-V_L)^2 \geq 0$, which holds strictly for $V_H > V_L$. Hence the benchmark point is strictly below the boundary.
 
-Hence $\Delta_H>0$. Write
-
-$$
-s \equiv \sqrt{1-\frac{\Psi_0}{\theta_H^2}} \in (0,1).
-$$
-
-The two roots of the high-type constraint are
-
-$$
-z_{\min}=\frac{\theta_H^2}{2\sqrt{\Psi_0}}(1-s),
-\qquad
-z_{\max}=\frac{\theta_H^2}{2\sqrt{\Psi_0}}(1+s).
-$$
-
-Since @eq-ich-quad opens downward, the inequality holds exactly between the two roots:
-
-$$
-y\in [z_{\min},z_{\max}].
-$$
-
-The low type's constraint is handled in the same way. Its boundary equation is
-
-$$
-y^2 - \frac{\theta_L^2}{\sqrt{\Psi_0}}y
-+ \frac{\theta_L^4}{4\theta_H^2}=0.
-$$
-
-The discriminant is
-
-$$
-\Delta_L
-=\frac{\theta_L^4}{\Psi_0}-\frac{\theta_L^4}{\theta_H^2}
-=\frac{\theta_L^4(\theta_H^2-\Psi_0)}{\Psi_0\theta_H^2}.
-$$
-
-Again, $\Psi_0<\theta_H^2$ gives $\Delta_L>0$. Thus $\mathrm{IC}_L$ defines a nondegenerate interval with roots
-
-$$
-y_{\min}=\frac{\theta_L^2}{2\sqrt{\Psi_0}}(1-s),
-\qquad
-y_{\max}=\frac{\theta_L^2}{2\sqrt{\Psi_0}}(1+s).
-$$
-
-Since @eq-icl-quad also opens downward, the low type's feasible set is
-
-$$
-y\in [y_{\min},y_{\max}].
-$$
-
-It follows that a pooling effort $x_P=y_P^2$ satisfies both types' incentive constraints exactly when $y_P$ lies in both intervals, which is precisely @eq-pool-intersection. If the intervals fail to overlap, no common effort can work: at least one type will have a profitable deviation, and a pure-strategy pooling PBE cannot be sustained.
-
-It remains only to locate the two intervals relative to each other. Because $\theta_L^2<\theta_H^2$, we have $y_{\min}<z_{\min}$ and $y_{\max}<z_{\max}$. The intersection condition therefore reduces to the single boundary check
-
-$$
-z_{\min}\leq y_{\max}.
-$$
-
-Equivalently, if $r\equiv \theta_L^2/\theta_H^2$, this condition becomes
-
-$$
-\frac{1-s}{1+s}\leq r. \qquad\square
-$$
+At $(q,s) = (1,1)$: $\bar{V}_H = V_H$ and $\bar{V}_L = V_L$. The condition @eq-sep-condition becomes $V_H \geq 2V_H - V_L$, i.e., $V_L \geq V_H$, which contradicts the premise. Hence the Fu (2006) point is strictly above the boundary. $\square$
 
 ## Proof of the Welfare Formulas in Section @sec-welfare {#sec-proof-welfare}
 By definition, $W=U_L+U_M$.

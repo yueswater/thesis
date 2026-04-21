@@ -1,0 +1,15 @@
+{
+  "tinymist.rootPath": "/home/anthony/thesis/draft",
+  "tinymist.fontPaths": [
+    "/home/anthony/thesis/draft/fonts"
+  ],
+  "tinymist.typstExtraArgs": [
+    "--root",
+    "/home/anthony/thesis/draft",
+    "--font-path",
+    "/home/anthony/thesis/draft/fonts",
+    "--ignore-system-fonts",
+    "/home/anthony/thesis/draft/main.typ"
+  ],
+  "tinymist.outputPath": "$root/$dir/$name"
+}
