@@ -317,6 +317,30 @@ $
 這即為主文中的區間條件。
 ]
 
+== 二點分配下的符號判準 <proof-binary-structure>
+
+#proof[
+在二點分配 $V_I in {v_L, v_H}$ 下，設 $Pr(V_I=v_H)=p in (0,1)$，$Pr(V_I=v_L)=1-p$。由定義可得
+
+$
+  EE[R(V_I)] = (1-p) R(v_L) + p R(v_H),
+  quad
+  Delta_I^(I U) = -EE[R(V_I)].
+$
+
+若 $(R(v_L), R(v_H)) = (-,-)$，則 $EE[R(V_I)] < 0$，故 $Delta_I^(I U) > 0$。若 $(R(v_L), R(v_H)) = (+,+)$，則 $EE[R(V_I)] > 0$，故 $Delta_I^(I U) < 0$。若一正一負，則 $EE[R(V_I)]$ 的符號由上述機率加權和決定，從而 $Delta_I^(I U)$ 的符號亦由型別機率與兩個型別的報酬差共同決定。命題得證。
+]
+
+== 均勻分配下的臨界點判準 <proof-uniform-structure>
+
+#proof[
+在均勻分配 $V_I ~ U[mu-delta, mu+delta]$ 下，砥柱集合為閉區間 $[mu-delta, mu+delta]$。由主文定義，$R(v)$ 在該區間上連續，因此可用介值定理判斷 $R(v)=0$ 的根是否存在於砥柱集合內。
+
+若 $R(mu-delta)$ 與 $R(mu+delta)$ 異號，則依介值定理存在 $v^* in (mu-delta, mu+delta)$ 使 $R(v^*)=0$。這表示在 $v^*$ 兩側，$R(v)$ 的符號改變，故型別的事後先後動比較發生方向反轉。
+
+若兩端同號，介值定理不保證存在內點根；因此砥柱集合內可能無根，對應全體型別同向偏好的情形（全先動或全後動）。
+]
+
 == 福利比較 <proof-welfare>
 
 #proof[

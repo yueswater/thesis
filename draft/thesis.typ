@@ -32,9 +32,26 @@
 #let widetilde(body) = math.accent(body, "\u{0303}", size: 140%)
 #let qed-symbol = block(width: 100%)[#align(right)[$square.stroked$]]
 #let qed = qed-symbol
+#let theorem-font = "cwTeX Q Yuan"
+#let statement(kind, key, body, title: none) = context {
+  let ctr = counter(key)
+  ctr.step()
+  let no = str(ctr.get().at(0) + 1)
+  block(above: 1.2em, below: 0.6em)[
+    #set par(first-line-indent: 0em)
+    #text(font: theorem-font, weight: "bold")[
+      #kind #no#if title != none [ (#title) ]
+    ]
+    #h(0.5em)
+    #body
+  ]
+}
+#let definition(body, title: none) = statement("定義", "definition-counter", body, title: title)
+#let lemma(body, title: none) = statement("引理", "lemma-counter", body, title: title)
+#let theorem(body, title: none) = statement("定理", "theorem-counter", body, title: title)
 #let proof(body, qed: true) = block(above: 1.5em, below: 0.5em)[
   #set par(first-line-indent: 0em)
-  #text(font: title-font, weight: "bold")[證明]#h(0.5em)#body
+  #text(font: theorem-font, weight: "bold")[證明]#h(0.5em)#body
   #if qed [#qed-symbol]
 ]
 
@@ -74,6 +91,7 @@
   show ref: set text(fill: cite-blue)
   show heading.where(level: 1): it => thesis-heading(it, 1.4em, 0.9em)
   show heading.where(level: 2): it => thesis-heading(it, 1.1em, 0.7em)
+  show heading.where(level: 3): it => thesis-heading(it, 0.9em, 0.6em)
 
   align(center)[
     #text(font: title-font, size: 18pt, weight: "bold")[#title]

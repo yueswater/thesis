@@ -20,10 +20,12 @@
 
 給定投入 $x_I >= 0$ 與 $x_U >= 0$，Tullock 成功函數為
 
+#set math.equation(numbering: "(1)")
 $
   p_I(x_I, x_U) = x_I / (x_I + x_U), quad
   p_U(x_I, x_U) = x_U / (x_I + x_U).
 $ <eq-success-functions>
+#set math.equation(numbering: none)
 
 扣除投入成本後，型別為 $v$ 的 $I$ 之報酬為
 
@@ -41,6 +43,7 @@ $ <eq-payoff-u>
 
 當對手投入為正且內點解存在時，一階條件給出兩位參與者的最佳反應：
 
+#set math.equation(numbering: "(1)")
 $
   x_I^*(x_U; v) = sqrt(v x_U) - x_U,
 $ <eq-br-i>
@@ -48,6 +51,7 @@ $ <eq-br-i>
 $
   x_U^*(x_I; V) = sqrt(V x_I) - x_I.
 $ <eq-br-u>
+#set math.equation(numbering: none)
 
 若要求非負投入，上式可理解為內點最佳反應；邊界情形則取其與零的較大值。上述 $U$ 的最佳反應只依賴 $x_I$ 與 $V$，不含任何關於 $V_I$ 的後驗信念。這一點是本文與 #c("fu2006") 的主要差異，也是後續 $I U$ 子賽局唯一分離均衡的核心原因。
 
@@ -55,6 +59,7 @@ $ <eq-br-u>
 
 令 $pi_I^J(v)$ 表示制度 $J in {S S, U I, I U}$ 下，型別 $V_I = v$ 的 $I$ 在投入子賽局均衡中的報酬。由於第 0 階段尚未實現 $V_I$，$I$ 比較的是各制度下的事前期望報酬：
 
+#set math.equation(numbering: "(1)")
 $
   widetilde(pi)_I^J equiv EE[pi_I^J(V_I)].
 $ <eq-ex-ante-i>
@@ -64,6 +69,7 @@ $U$ 沒有私人型別，但其均衡報酬可能隨 $V_I$ 透過 $I$ 的均衡�
 $
   pi_U^J equiv EE[pi_U^J(V_I)]
 $ <eq-ex-ante-u>
+#set math.equation(numbering: none)
 
 為 $U$ 在制度 $J$ 下的期望報酬。第 0 階段的時序選擇可寫成下列策略式賽局，其中橫列為 $I$ 的策略，直欄為 $U$ 的策略：
 

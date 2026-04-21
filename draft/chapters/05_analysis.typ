@@ -1,10 +1,10 @@
-#import "../thesis.typ": c, ca, cp, cy, proof, widetilde
+#import "../thesis.typ": c, ca, cp, cy, lemma, proof, theorem, widetilde
 
-本節分析第 0 階段的內生時序選擇。第四節已求得 $S S$、$U I$ 與 $I U$ 三個投入子賽局的均衡報酬；本節將這些報酬代回第 0 階段的策略式賽局，刻畫哪些行動順序可由純策略 Nash 均衡支持。沿用 #c("fu2006") 的記號，令 $F$ 表示選擇第 1 期行動，$S$ 表示選擇第 2 期行動。
+本章分析第 0 階段的內生時序選擇。第四節已求得 $S S$、$U I$ 與 $I U$ 三個投入子賽局的均衡報酬；本節將這些報酬代回第 0 階段的策略式賽局，刻畫哪些行動順序可由純策略 Nash 均衡支持。沿用 #c("fu2006") 的記號，令 $F$ 表示選擇第 1 期行動，$S$ 表示選擇第 2 期行動。
 
-== 第 0 階段報酬矩陣 <subsec-stage0-matrix>
+== 第 0 階段分析 <subsec-stage0-analysis>
 
-第 0 階段的制度選擇可寫成一個二乘二策略式賽局。橫列為 $I$ 的時點選擇，直欄為 $U$ 的時點選擇；每一格的第一個元素為 $I$ 的事前報酬，第二個元素為 $U$ 的事前報酬：
+第 0 階段的制度選擇可寫成一個 $2 times 2$ 策略式賽局。橫列為 $I$ 的時點選擇，直欄為 $U$ 的時點選擇；每一格的第一個元素為 $I$ 的事前報酬，第二個元素為 $U$ 的事前報酬：
 
 #figure(
   table(
@@ -19,9 +19,9 @@
   supplement: [表],
 ) <tbl-stage0-analysis>
 
-此一矩陣的重點在於，兩個 $S S$ 格子雖然都代表同時行動，但其時點不同；一個是立即同時行動，另一個是延後同時行動。由於本文假設第 0 階段尚未觀察型別，兩者在事前報酬上相同。因此，時序選擇的核心是比較 $S S$、$U I$ 與 $I U$ 三組制度報酬。
+令四個單邊偏離差額分別為：
 
-本文以下定義四個單邊偏離差額。當 $U$ 選擇 $F$ 時，$I$ 從 $F$ 改選 $S$ 會使結果由 $S S$ 變成 $U I$，其差額為
+當 $U$ 選擇 $F$ 時，$I$ 從 $F$ 改選 $S$ 會使結果由 $S S$ 變成 $U I$，其差額為
 
 $
   Delta_I^(U I)
@@ -66,126 +66,180 @@ $
   - (4 V^2 - 4 V mu + EE[V_I^2]) / (4 V).
 $ <eq-delta-u-ss>
 
-這四個差額各自對應一個單邊偏離。尤其，$Delta_U^(U I)$ 恆為非負，且等號成立當且僅當 $V lambda = 1$。因此，在一般情形下，若 $I$ 已選擇第 2 期，$U$ 會嚴格偏好在第 1 期先動，而不是與 $I$ 一起延後同時行動。
+#lemma(title: [第 0 階段最佳反應])[
+  第 0 階段的最佳反應由四個單邊偏離差額決定：
 
-== 第一階段最佳反應 <subsec-stage0-br>
+  1. 若 $U$ 選擇 $F$，則 $I$ 在 $Delta_I^(U I) > 0$ 時選擇 $S$，在 $Delta_I^(U I) < 0$ 時選擇 $F$，在等號成立時無異。
+  2. 若 $U$ 選擇 $S$，則 $I$ 在 $Delta_I^(I U) > 0$ 時選擇 $F$，在 $Delta_I^(I U) < 0$ 時選擇 $S$，在等號成立時無異。
+  3. 若 $I$ 選擇 $F$，則 $U$ 在 $Delta_U^(S S) > 0$ 時選擇 $F$，在 $Delta_U^(S S) < 0$ 時選擇 $S$，在等號成立時無異。
+  4. 若 $I$ 選擇 $S$，則 $U$ 的比較由 $Delta_U^(U I)$ 決定。由於 $Delta_U^(U I) >= 0$，$U$ 弱偏好選擇 $F$，且只有在 $V lambda = 1$ 時對 $F, S$ 無異。
+] <subsec-stage0-br>
 
-第一階段的最佳反應由上述四個差額直接決定。若 $U$ 選擇 $F$，則 $I$ 在 $Delta_I^(U I) > 0$ 時選擇 $S$，在 $Delta_I^(U I) < 0$ 時選擇 $F$，在等號成立時對兩個時點無差異。若 $U$ 選擇 $S$，則 $I$ 在 $Delta_I^(I U) > 0$ 時選擇 $F$，在 $Delta_I^(I U) < 0$ 時選擇 $S$，在等號成立時無差異。
-
-相同地，若 $I$ 選擇 $F$，則 $U$ 在 $Delta_U^(S S) > 0$ 時選擇 $F$，在 $Delta_U^(S S) < 0$ 時選擇 $S$，在等號成立時無差異。若 $I$ 選擇 $S$，則 $U$ 的比較由 $Delta_U^(U I)$ 決定；由於此差額弱為正，$U$ 弱偏好選擇 $F$，且只有在 $V lambda = 1$ 時才會同時將 $F$ 與 $S$ 視為最佳反應。
+$I$ 的時序選擇由三個制度的期望報酬差決定，而 $U$ 的關鍵不對稱來自 $Delta_U^(U I) >= 0$。因此，只要 $I$ 打算後動，$U$ 通常偏好先動；僅在 $V lambda = 1$ 的臨界情形，$U$ 才會對先後動無異。
 
 #proof[見#ref(<proof-stage0-br>)。]
 
-== 純策略內生時序均衡 <subsec-stage0-ne>
+#theorem(title: [純策略內生時序均衡的刻畫])[
+  第 0 階段的純策略 Nash 均衡由下列條件完全刻畫：
 
-第 0 階段的純策略 Nash 均衡可由四個單邊偏離條件完全刻畫。$U I$，也就是 $(I:S, U:F)$，為純策略 Nash 均衡，若且唯若
+  1. $U I$，為純策略 Nash 均衡，若且唯若 $Delta_I^(U I) >= 0$。
+  2. 立即同時行動 $S S$，為純策略 Nash 均衡，若且唯若 $Delta_I^(U I) <= 0$ 且 $Delta_U^(S S) >= 0$。
+  3. $I U$，為純策略 Nash 均衡，若且唯若 $Delta_I^(I U) >= 0$ 且 $Delta_U^(S S) <= 0$。
+  4. 延後同時行動 $S S$，為純策略 Nash 均衡，若且唯若 $Delta_I^(I U) <= 0$ 且 $Delta_U^(U I) = 0$。
 
-$
-  Delta_I^(U I) >= 0.
-$ <eq-ne-ui>
+  此外，$Delta_U^(U I) = 0$ 當且僅當 $V lambda = 1$，故在一般情況 $V lambda != 1$ 下，延後同時行動 $(S,S)$ 不可能是純策略均衡。
+] <subsec-stage0-ne>
 
-立即同時行動 $S S$，也就是 $(I:F, U:F)$，為純策略 Nash 均衡，若且唯若
-
-$
-  Delta_I^(U I) <= 0
-  , quad
-  Delta_U^(S S) >= 0.
-$ <eq-ne-ss-early>
-
-$I U$，也就是 $(I:F, U:S)$，為純策略 Nash 均衡，若且唯若
-
-$
-  Delta_I^(I U) >= 0
-  , quad
-  Delta_U^(S S) <= 0.
-$ <eq-ne-iu>
-
-延後同時行動 $S S$，也就是 $(I:S, U:S)$，為純策略 Nash 均衡，若且唯若
-
-$
-  Delta_I^(I U) <= 0
-  , quad
-  Delta_U^(U I) = 0.
-$ <eq-ne-ss-late>
-
-由於 $Delta_U^(U I) = 0$ 等價於 $V lambda = 1$，延後同時行動只可能出現在此一臨界情形。在一般情形 $V lambda != 1$ 下，第 0 階段的純策略均衡只能出現在 $U I$、$I U$ 與立即同時行動 $S S$ 之間。
+在本文設定下，制度選擇可直接由四個單邊偏離差額判斷，不需再依賴均衡修正。尤其是延後同時行動 $(S,S)$ 只有在 $V lambda = 1$ 的臨界情形才可能成立，因此在一般參數下可排除。
 
 #proof[見#ref(<proof-stage0-ne>)。]
 
-== 型別層級的事後分解 <subsec-type-decomp>
+#lemma(title: [型別層級的事後分解])[
+  雖然第 0 階段的制度選擇以事前報酬為基礎，型別層級的報酬差仍可用來分解 $I$ 的時序誘因。對任一實現型別 $v$，令
 
-雖然第 0 階段的制度選擇以事前報酬為基礎，型別層級的報酬差仍可用來分解 $I$ 的時序誘因。對任一實現型別 $v$，定義後動相對於先動的報酬差為
+  $
+    R(v)
+    equiv pi_I^(S S)(v) - pi_I^(I U)(v)
+    =
+    (sqrt(v) - (V kappa) / (1 + V lambda))^2
+    - v^2 / (4 V).
+  $ <eq-rent-function>
 
-$
-  R(v)
-  equiv pi_I^(S S)(v) - pi_I^(I U)(v)
-  =
-  (sqrt(v) - (V kappa) / (1 + V lambda))^2
-  - v^2 / (4 V).
-$ <eq-rent-function>
+  則
 
-若 $R(v) > 0$，該型別在事後比較上偏好 $S S$；若 $R(v) < 0$，該型別在事後比較上偏好 $I U$。然而，$R(v)$ 不是第 0 階段的條件式策略，因為第 0 階段尚未觀察型別。它只是將事前差額拆解為不同實現型別的報酬差。
+  $
+    EE[R(V_I)]
+    =
+    widetilde(pi)_I^(S S) - widetilde(pi)_I^(I U)
+    =
+    - Delta_I^(I U).
+  $ <eq-ex-ante-decomp>
 
-對 $R(V_I)$ 取期望，可得
+  且 $R(v) <= 0$ 等價於
 
-$
-  EE[R(V_I)]
-  =
-  widetilde(pi)_I^(S S) - widetilde(pi)_I^(I U)
-  =
-  - Delta_I^(I U).
-$ <eq-ex-ante-decomp>
+  $
+    (V kappa) / (1 + V lambda)
+    in
+    [sqrt(v) - v / (2 sqrt(V)), sqrt(v) + v / (2 sqrt(V))].
+  $ <eq-type-interval>
+]
+<subsec-type-decomp>
 
-因此，$I$ 是否在 $U$ 選擇 $S$ 時偏好先動，取決於 $R(V_I)$ 的事前平均，而不是任一特定型別的事後偏好。進一步地，$R(v) <= 0$ 等價於
-
-$
-  (V kappa) / (1 + V lambda)
-  in
-  [sqrt(v) - v / (2 sqrt(V)), sqrt(v) + v / (2 sqrt(V))].
-$ <eq-type-interval>
-
-此式刻畫的是單一型別的事後比較。它有助於理解不同型別如何貢獻事前差額，但不能取代第 0 階段的期望報酬比較。
+$R(v)$ 描述的是實現型別在事後對先後動的比較，但第 0 階段決策發生於型別揭露之前，因此真正支配制度選擇的是 $EE[R(V_I)]$，亦即事前平均誘因，而非任一型別的事後偏好。
 
 #proof[見#ref(<proof-type-decomp>)。]
 
-== 不知情者的直接時序偏好 <subsec-u-direct-preference>
 
-$U$ 在兩個序列制度之間的直接偏好，也可用一個差額表示。定義
+== 各分配下的時序結構 <subsec-distribution-structure>
 
-$
-  Delta_U
-  equiv pi_U^(U I) - pi_U^(I U)
-  =
-  (V^2 kappa^2) / 4
-  - (4 V^2 - 4 V mu + EE[V_I^2]) / (4 V).
-$ <eq-delta-u-direct>
+以下利用前述 $R(v)$ 與 $EE[R(V_I)] = -Delta_I^(I U)$，說明不同分配下的時序結構。本節關心的不只是單一型別在事後偏好先動或後動，更在於這些型別比較如何在給定分配下加總成第 0 階段的整體誘因。換言之，分配假設會改變 $R(v)$ 在砥柱集合上的權重與符號結構，進而改變 $Delta_I^(I U)$ 的符號。下述分別用二點分配與均勻分配呈現這個對應關係：前者聚焦於兩個型別點的符號組合及其機率加權，後者聚焦於砥柱集合內是否存在 $R(v)=0$ 的臨界點，以及該臨界點如何劃分型別區域。
 
-若 $Delta_U >= 0$，則 $U$ 在直接比較 $U I$ 與 $I U$ 時弱偏好自己先動；若 $Delta_U < 0$，則 $U$ 在直接比較上偏好後動。這個差額有助於理解 $U$ 對兩個序列制度的排序，但它不是 $I U$ 是否成為 Nash 均衡的單邊偏離條件。$I U$ 均衡所需的 $U$ 條件是 $Delta_U^(S S) <= 0$，也就是 $U$ 不願從後動偏離到立即同時行動。
+=== 二點分配 <subsec-binary-structure>
 
-== 福利比較 <subsec-welfare>
+若 $V_I in {v_L, v_H}$ 且 $0 < v_L < v_H$，則可直接比較 $R(v_L)$ 與 $R(v_H)$：
 
-最後，本文比較三種制度下的總期望福利。令總期望福利為 $EE[W] = widetilde(pi)_I + pi_U$。由第四節的均衡報酬相加可得
+#lemma(title: [二點分配下的符號判準])[
+  在二點分配 $V_I in {v_L, v_H}$ 下，令 $0 < v_L < v_H$。
 
-$
-  EE[W^(S S)]
-  =
-  mu - (2 V kappa nu) / (1 + V lambda)
-  + (V^2 kappa^2) / (1 + V lambda)^2
-  + (V^3 kappa^2 lambda) / (1 + V lambda)^2,
-$ <eq-welfare-ss>
+  1. 若 $(R(v_L), R(v_H))$ 的符號組合為 $(-,-)$，則兩種型別事後都偏好先動（$I U$）；因此 $EE[R(V_I)] < 0$，等價於 $Delta_I^(I U) > 0$。
+  2. 若 $(R(v_L), R(v_H))$ 的符號組合為 $(+,+)$，則兩種型別事後都偏好後動（相對於 $I U$ 而言）；因此 $EE[R(V_I)] > 0$，等價於 $Delta_I^(I U) < 0$。
+  3. 若符號相異，即 $(+,-)$ 或 $(-,+)$，則 $Delta_I^(I U)$ 的符號由機率加權平均 $EE[R(V_I)]$ 決定，亦即由型別機率與兩個型別的報酬差共同決定。
+] <lem-binary-structure>
 
-$
-  EE[W^(U I)]
-  =
-  mu - V kappa nu + (V^2 kappa^2) / 2,
-$ <eq-welfare-ui>
+此處重點是：型別層級比較可用來分解誘因，但第 0 階段真正決策仍由期望差額 $Delta_I^(I U)$ 決定。
+
+#proof[見#ref(<proof-binary-structure>)。]
+
+=== 均勻分配 <subsec-uniform-structure>
+
+若 $V_I ~ cal(U)[mu - delta, mu + delta]$，其中 $cal(U)(dot.c)$ 為均勻分配，$0 < delta < mu$，可定義
 
 $
-  EE[W^(I U)]
-  =
-  V - mu + EE[V_I^2] / (2 V).
-$ <eq-welfare-iu>
+  cal(W)
+  equiv {v in [mu - delta, mu + delta]: R(v) > 0},
+$
 
-福利比較與第 0 階段的均衡條件沒有固定方向。原因在於，均衡條件檢查的是單邊偏離誘因，而福利比較加總了兩位參與者的報酬。某一制度可能是均衡，卻不一定最大化總期望福利；反之，福利較高的制度也未必能由第 0 階段的個別誘因支持。
+以及
+
+$
+  cal(F)
+  equiv {v in [mu - delta, mu + delta]: R(v) < 0}.
+$
+
+#lemma(title: [均勻分配下的臨界點判準])[
+  在均勻分配 $V_I ~ cal(U)[mu - delta, mu + delta]$ 下，因 $R(v)$ 對 $v$ 連續，可把 $R(v)=0$（且落在砥柱集合內）的解，視為 $cal(W)$ 與 $cal(F)$ 的分界點。
+
+  1. 若 $R(mu - delta)$ 與 $R(mu + delta)$ 異號，則存在臨界值 $v^* in (mu - delta, mu + delta)$，使型別在事後比較上出現方向反轉。
+  2. 若兩端同號，則砥柱集合內可能無根，對應全部型別同向偏好（全先動或全後動）的情形。
+] <lem-uniform-structure>
+
+#proof[見#ref(<proof-uniform-structure>)。]
+
+== 混合均衡分析 <subsec-pooling-analysis>
+
+在三種制度中，只有 $I U$ 可能出現「先動行為是否傳遞型別訊息」的問題：知情者先動，再由不知情者觀察 $x_I$ 後反應。相對地，$S S$ 為同時行動，$U I$ 為不知情者先動，兩者都不是由知情者向不知情者傳遞訊號的子賽局。
+
+然而，在本文設定下，$U$ 的最佳反應函數為
+
+$
+  x_U^*(x_I; V) = sqrt(V x_I) - x_I,
+$
+
+只依賴觀察到的投入 $x_I$ 與自身獎酬 $V$，不依賴對 $V_I$ 的後驗信念。因此，$I$ 的投入雖可被觀察，但不會透過「信念更新」改變 $U$ 的最適反應，隱含在 $I U$ 子賽局中，訊號通道雖存在於資訊結構層次，卻不影響行為方程；均衡比較回到投入與報酬本身。
+故本文的混合/半混合討論可簡化為：在既有反應結構下，不需額外引入均衡修正即可判斷可行均衡，且第四節已給出唯一分離均衡結果。
+
+#lemma(title: [不知情者的直接時序偏好])[
+  $U$ 在兩個序列制度之間的直接偏好可寫為
+
+  $
+    Delta_U
+    equiv pi_U^(U I) - pi_U^(I U)
+    =
+    (V^2 kappa^2) / 4
+    - (4 V^2 - 4 V mu + EE[V_I^2]) / (4 V).
+  $ <eq-delta-u-direct>
+
+  若 $Delta_U >= 0$，則 $U$ 在直接比較 $U I$ 與 $I U$ 時弱偏好自己先動；若 $Delta_U < 0$，則偏好後動。此量有助於排序兩個序列制度，但它不是 $I U$ 是否為 Nash 均衡的偏離條件；對 $I U$ 而言，關鍵是 $Delta_U^(S S) <= 0$。
+]
+<subsec-u-direct-preference>
+
+#proof[
+  由第四節可得
+  $
+    pi_U^(U I) = (V^2 kappa^2) / 4,
+    quad
+    pi_U^(I U) = (4 V^2 - 4 V mu + EE[V_I^2]) / (4 V).
+  $
+  兩式相減即得
+  $
+    Delta_U
+    equiv pi_U^(U I) - pi_U^(I U)
+    =
+    (V^2 kappa^2) / 4
+    - (4 V^2 - 4 V mu + EE[V_I^2]) / (4 V).
+  $
+  故 $Delta_U$ 的符號直接決定 $U$ 在 $U I$ 與 $I U$ 的制度排序。又因第 0 階段對 $I U$ 的偏離是與 $S S$ 比較，故其均衡條件仍為 $Delta_U^(S S) <= 0$，而非 $Delta_U$。
+]
+
+上述引理區分了「制度排序」與「偏離誘因」：$Delta_U$ 只刻畫 $U$ 對 $U I$ 與 $I U$ 的直接排序，並不等同於策略式賽局中的偏離條件。因此，均衡分析仍須回到 $Delta_U^(S S)$ 並與其他單邊差額聯合判斷。
+
+#theorem(title: [福利排序與均衡排序一般不一致])[
+  令總期望福利為
+  $
+    EE[W] = widetilde(pi)_I + pi_U
+  $
+
+  三種制度下的總期望福利分別為
+
+  $
+    E[W^(S S)] & = mu - (2 V kappa nu) / (1 + V lambda)
+                 + (V^2 kappa^2) / (1 + V lambda)^2
+                 + (V^3 kappa^2 lambda) / (1 + V lambda)^2 \
+    E[W^(U I)] & = mu - V kappa nu + (V^2 kappa^2) / 2 \
+    E[W^(I U)] & = V - mu + E[V_I^2] / (2 V)
+  $
+
+  在可行參數區域內，上述三者的排序一般不與第 0 階段的均衡排序一致；換言之，均衡條件檢查單邊偏離誘因，而福利排序是雙方報酬的加總，兩者沒有固定單調對應。
+] <subsec-welfare>
 
 #proof[見#ref(<proof-welfare>)。]

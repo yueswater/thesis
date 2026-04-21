@@ -1,13 +1,15 @@
 #import "../thesis.typ": c, ca, cp, cy, proof, widetilde
 
-本節求解第 0 階段之後的三個投入子賽局：$S S$、$U I$ 與 $I U$。三個子賽局皆以第三節的最佳反應為基礎。為簡化符號，本文令
+本章求解第 0 階段之後的三個投入子賽局：$S S$、$U I$ 與 $I U$。三個子賽局皆以第三節的最佳反應為基礎。為簡化符號，本文令
 
+#set math.equation(numbering: "(1)")
 $
   mu equiv EE[V_I], quad
   kappa equiv EE[1 / sqrt(V_I)], quad
   nu equiv EE[sqrt(V_I)], quad
   lambda equiv EE[1 / V_I].
 $ <eq-equilibria-moments>
+#set math.equation(numbering: none)
 
 本文假設上述期望量存在且有限，並先聚焦於各子賽局皆有內點最佳反應的情形。此處的重點不是型別集合本身，而是不同時序制度如何改變承諾、觀察與反應的順序。
 
@@ -15,6 +17,7 @@ $ <eq-equilibria-moments>
 
 在 $S S$ 制度中，$I$ 與 $U$ 同時選擇投入。此時 $I$ 的投入隨自身型別調整，$U$ 則在無法觀察 $V_I$ 的情況下選擇單一投入。均衡投入為
 
+#set math.equation(numbering: "(1)")
 $
   x_U^(S S) = (V^2 kappa^2) / (1 + V lambda)^2,
   quad
@@ -22,6 +25,7 @@ $
   = (V kappa sqrt(v)) / (1 + V lambda)
   - (V^2 kappa^2) / (1 + V lambda)^2.
 $ <eq-ss-efforts>
+#set math.equation(numbering: none)
 
 給定型別 $V_I = v$，均衡報酬為
 
@@ -57,12 +61,14 @@ $ <eq-ss-ex-ante-u>
 
 在 $U I$ 制度中，$U$ 先承諾投入，$I$ 在觀察 $x_U$ 並得知自身型別後再選擇投入。均衡投入為
 
+#set math.equation(numbering: "(1)")
 $
   x_U^(U I) = (V^2 kappa^2) / 4,
   quad
   x_I^(U I)(v)
   = (V kappa sqrt(v)) / 2 - (V^2 kappa^2) / 4.
 $ <eq-ui-efforts>
+#set math.equation(numbering: none)
 
 逐型別均衡報酬為
 
@@ -98,11 +104,13 @@ $U I$ 與 $S S$ 的差異在於承諾順序。$U$ 先動時可先設定投入，
 
 在唯一分離均衡中，型別 $v$ 的投入與 $U$ 的後續反應為
 
+#set math.equation(numbering: "(1)")
 $
   x_I^(I U)(v) = v^2 / (4 V),
   quad
   x_U^(I U)(v) = v (2 V - v) / (4 V).
 $ <eq-iu-efforts>
+#set math.equation(numbering: none)
 
 對應的逐型別報酬為
 
