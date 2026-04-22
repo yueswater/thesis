@@ -1,2 +1,4 @@
 .typst/
 main.pdf
+.venv/
+.matplotlib/
