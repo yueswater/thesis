@@ -54,7 +54,7 @@
 | rent-seeking | 尋租 |
 | asymmetric information | 訊息不對稱 / 資訊不對稱（擇一統一） |
 | separating equilibrium | 分離均衡 |
-| pooling equilibrium | 混同均衡 |
+| pooling equilibrium | 混合均衡 |
 | subgame | 子賽局 |
 | best response | 最佳反應 |
 | prior / posterior belief | 事前 / 後驗信念 |

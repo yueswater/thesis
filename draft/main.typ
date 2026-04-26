@@ -1,7 +1,7 @@
 #import "thesis.typ": thesis
 
 #show: thesis.with(
-  title: "雙重不對稱下的分離、混同與內生時序",
+  title: "雙重不對稱下的分離、混合與內生時序",
   author: "宋品岳",
   bib: "refs.bib",
 )
@@ -25,6 +25,10 @@
 = 內生時序選擇 <sec-analysis>
 
 #include "chapters/05_analysis.typ"
+
+= 模型延伸：部分相關型別 <sec-extension>
+
+#include "chapters/06_extension.typ"
 
 #pagebreak()
 
