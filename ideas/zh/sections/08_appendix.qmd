@@ -337,7 +337,7 @@ $$ $\square$
 - 若勞方選 F，資方比較的是 $\E[U_M^{\mathrm{SS}}]$（選 F）與 $\E[U_M^{\mathrm{LM}}]$（選 S），故差額為 $\Delta_M^{\mathrm{SS}}$。
 - 若勞方選 S，資方比較的是 $\E[U_M^{\mathrm{ML}}]$（選 F）與 $\E[U_M^{\mathrm{SS}}]$（選 S），故差額為 $\Delta_M^{\mathrm{ML}}=V^2\kappa^2(1-V\lambda)^2/(4(1+V\lambda)^2)\ge 0$。
 
-命題中的四個最佳反應直接由上述四個比較推出。尤其 $\Delta_M^{\mathrm{ML}}=0$ 當且僅當 $V\lambda=1$，因此資方在勞方選 S 時於一般情形下唯一最佳反應為 F，在臨界情形下則對 F 與 S 無差異。
+命題中的四個最佳反應直接由上述四個比較推出。尤其 $\Delta_M^{\mathrm{ML}}=0$ 若且唯若 $V\lambda=1$，因此資方在勞方選 S 時於一般情形下唯一最佳反應為 F，在臨界情形下則對 F 與 S 無差異。
 
 ## @prp-stage1-ne 的證明 {#sec-proof-stage1-ne}
 
@@ -352,7 +352,7 @@ $$ $\square$
 
 ## @thm-timing-eq 的證明 {#sec-proof-timing-eq}
 
-定理直接由 @prp-stage1-ne 得出。四個格子的單邊偏離條件分別給出 ML、立即 SS、LM 與延後 SS 的充要條件；而 @eq-delta-m-ml 顯示 $\Delta_M^{\mathrm{ML}}\ge0$，且 $\Delta_M^{\mathrm{ML}}=0$ 當且僅當 $V\lambda=1$。因此，在一般情形 $V\lambda\ne1$ 下，延後同時行動 $(S,S)$ 無法成為純策略 Nash 均衡；在臨界情形 $V\lambda=1$ 下，$(S,S)$ 還需滿足勞方條件 $\Delta_L^{\mathrm{LM}}\le0$。$\square$
+定理直接由 @prp-stage1-ne 得出。四個格子的單邊偏離條件分別給出 ML、立即 SS、LM 與延後 SS 的充要條件；而 @eq-delta-m-ml 顯示 $\Delta_M^{\mathrm{ML}}\ge0$，且 $\Delta_M^{\mathrm{ML}}=0$ 若且唯若 $V\lambda=1$。因此，在一般情形 $V\lambda\ne1$ 下，延後同時行動 $(S,S)$ 無法成為純策略 Nash 均衡；在臨界情形 $V\lambda=1$ 下，$(S,S)$ 還需滿足勞方條件 $\Delta_L^{\mathrm{LM}}\le0$。$\square$
 
 ## @prp-ex-ante-decomp 的證明 {#sec-proof-decomp}
 
@@ -369,7 +369,7 @@ $$
 故命題成立。
 
 ## @prp-exact-condition 的證明 {#sec-proof-exact}
-型別 $v$ 事後偏好先動，當且僅當
+型別 $v$ 事後偏好先動，若且唯若
 
 $$
 R(v)\le 0.

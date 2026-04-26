@@ -16,7 +16,7 @@
 | 勞方：F | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ | $(\E[U_L^{\mathrm{LM}}],\E[U_M^{\mathrm{LM}}])$ |
 | 勞方：S | $(\E[U_L^{\mathrm{ML}}],\E[U_M^{\mathrm{ML}}])$ | $(\E[U_L^{\mathrm{SS}}],\E[U_M^{\mathrm{SS}}])$ |
 
-SS 與 ML 不同，故四格報酬一般互異。資方在 ML 與 SS 間的差額為非負，且等號當且僅當 $V\lambda=1$：
+SS 與 ML 不同，故四格報酬一般互異。資方在 ML 與 SS 間的差額為非負，且等號若且唯若 $V\lambda=1$：
 
 $$
 \E[U_M^{\mathrm{ML}}]-\E[U_M^{\mathrm{SS}}]
@@ -117,7 +117,7 @@ $$
 \{F,S\}, & \Delta_M^{\mathrm{ML}}=0.
 \end{cases}
 $$
-由 @eq-delta-m-ml 可知 $\Delta_M^{\mathrm{ML}}\ge0$，且 $\Delta_M^{\mathrm{ML}}=0$ 當且僅當 $V\lambda=1$。因此，除 $V\lambda=1$ 的臨界情形外，資方在勞方後動時嚴格偏好先動。
+由 @eq-delta-m-ml 可知 $\Delta_M^{\mathrm{ML}}\ge0$，且 $\Delta_M^{\mathrm{ML}}=0$ 若且唯若 $V\lambda=1$。因此，除 $V\lambda=1$ 的臨界情形外，資方在勞方後動時嚴格偏好先動。
 :::
 
 ::: {.proof}
@@ -131,10 +131,10 @@ $$
 
 第一階段時序賽局的純策略 Nash 均衡為：
 
-1. $(S,F)$ 當且僅當 $\Delta_L^{\mathrm{ML}}\ge 0$。
-2. $(F,F)$ 當且僅當 $\Delta_L^{\mathrm{ML}}\le 0$ 且 $\Delta_M^{\mathrm{SS}}\ge 0$。
-3. $(F,S)$ 當且僅當 $\Delta_L^{\mathrm{LM}}\ge 0$ 且 $\Delta_M^{\mathrm{SS}}\le 0$。
-4. $(S,S)$ 當且僅當 $\Delta_L^{\mathrm{LM}}\le 0$ 且 $\Delta_M^{\mathrm{ML}}=0$，亦即 $\Delta_L^{\mathrm{LM}}\le 0$ 且 $V\lambda=1$。
+1. $(S,F)$ 若且唯若 $\Delta_L^{\mathrm{ML}}\ge 0$。
+2. $(F,F)$ 若且唯若 $\Delta_L^{\mathrm{ML}}\le 0$ 且 $\Delta_M^{\mathrm{SS}}\ge 0$。
+3. $(F,S)$ 若且唯若 $\Delta_L^{\mathrm{LM}}\ge 0$ 且 $\Delta_M^{\mathrm{SS}}\le 0$。
+4. $(S,S)$ 若且唯若 $\Delta_L^{\mathrm{LM}}\le 0$ 且 $\Delta_M^{\mathrm{ML}}=0$，亦即 $\Delta_L^{\mathrm{LM}}\le 0$ 且 $V\lambda=1$。
 :::
 
 ::: {.proof}
@@ -152,7 +152,7 @@ $$
 
 3. **LM**（$(F,S)$，勞方先動）為純策略 Nash 均衡，若且唯若 $\Delta_L^{\mathrm{LM}}\ge0$ 且 $\Delta_M^{\mathrm{SS}}\le0$。其中 $\Delta_L^{\mathrm{LM}}\ge0$ 表示勞方在資方選擇 S 時偏好先動 F，而 $\Delta_M^{\mathrm{SS}}\le0$ 表示資方在勞方選擇 F 時偏好後動 S，不會偏離至立即同時行動 SS。
 
-4. **延後 SS**（$(S,S)$，延後同時行動）為純策略 Nash 均衡，若且唯若 $\Delta_L^{\mathrm{LM}}\le0$ 且 $\Delta_M^{\mathrm{ML}}=0$。第一個條件使勞方不願從 S 偏離至 F；第二個條件使資方不會因偏離至 F 而嚴格提高報酬。由 @eq-delta-m-ml 可知 $\Delta_M^{\mathrm{ML}}=0$ 當且僅當 $V\lambda=1$，故此均衡只可能出現在該臨界情形。
+4. **延後 SS**（$(S,S)$，延後同時行動）為純策略 Nash 均衡，若且唯若 $\Delta_L^{\mathrm{LM}}\le0$ 且 $\Delta_M^{\mathrm{ML}}=0$。第一個條件使勞方不願從 S 偏離至 F；第二個條件使資方不會因偏離至 F 而嚴格提高報酬。由 @eq-delta-m-ml 可知 $\Delta_M^{\mathrm{ML}}=0$ 若且唯若 $V\lambda=1$，故此均衡只可能出現在該臨界情形。
 
 因此，在一般情形 $V\lambda\ne1$ 下，$(S,S)$ 不是純策略 Nash 均衡；所有純策略均衡只能出現在 ML、LM 與立即同時行動 SS 之間。邊界上可能存在多重均衡，上述弱不等式已包含這些情形。
 :::
@@ -206,7 +206,7 @@ $$ {#eq-rent-factored}
 ::: {#prp-exact-condition}
 ### 精確的型別條件
 
-realized type $v$ 事後偏好先動，當且僅當
+realized type $v$ 事後偏好先動，若且唯若
 
 $$
 \frac{V\kappa}{1+V\lambda}
