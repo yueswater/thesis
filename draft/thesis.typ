@@ -49,6 +49,7 @@
 #let definition(body, title: none) = statement("定義", "definition-counter", body, title: title)
 #let lemma(body, title: none) = statement("引理", "lemma-counter", body, title: title)
 #let theorem(body, title: none) = statement("定理", "theorem-counter", body, title: title)
+#let proposition(body, title: none) = statement("命題", "proposition-counter", body, title: title)
 #let proof(body, qed: true) = block(above: 1.5em, below: 0.5em)[
   #set par(first-line-indent: 0em)
   #text(font: theorem-font, weight: "bold")[證明]#h(0.5em)#body

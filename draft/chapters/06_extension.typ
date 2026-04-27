@@ -1,4 +1,4 @@
-#import "../thesis.typ": c, definition, lemma, proof, theorem
+#import "../thesis.typ": c, definition, lemma, proof, proposition, theorem
 
 本章在前文基準模型上加入部分相關型別結構，目的是回答一個更精確的問題：在什麼條件下，前文 $I U$ 子賽局的唯一分離結果會被破壞，退化為 #c("fu2006") 的混合結果。
 
@@ -109,7 +109,7 @@ $
 
 == 分離條件與臨界邊界 <subsec-ext-boundary>
 
-本節先聚焦在 $q+s>=1$（獨立到正相關）區間。考慮候選分離均衡：高型別與低型別各自選不同投入，且路徑上的信念為
+本節先聚焦在 $q+s>=1$ (獨立到正相關) 區間。考慮候選分離均衡：高型別與低型別各自選不同投入，且路徑上的信念為
 
 $
   mu(x_H)=1, quad mu(x_L)=0.
@@ -208,6 +208,192 @@ $
   (d s^*(q))/ (d q) = - (V_L (2V_H-V_L)) / (V_H^2) < 0.
 $
 故 $q$ 越高，可維持分離的 $s$ 上限越低；給定 $q$ 時，只要 $s$ 超過該上限，該組 $(q,s)$ 即落入混合區域。
+
+== 負相關區間的誘因反轉與臨界比例 <subsec-ext-negative>
+
+前節建立在 $q+s>=1$ 的正相關區間。當 $q+s<1$ 時，由
+$
+  overline(V)_H - overline(V)_L = (q+s-1)(V_H-V_L)
+$
+可知 $overline(V)_H < overline(V)_L$。因此由前述信念加權獎酬定義，$hat(V)_U(mu)$ 對 $mu$ 嚴格遞減：當不知情者越相信知情者是高型別，其面對的有效獎酬反而越低，續局投入反應越弱，從而使得偏離誘因方向與前節相反；在負相關區間，主導偏離可能由低型別模仿高型別 (bluffing) 所驅動。
+
+延續前節的候選分離路徑，低型別誠實時報酬為
+
+$
+  pi_L = V_L^2/(4 overline(V)_L).
+$
+
+若低型別偏離並模仿高型別，則其投入為 $x_H = V_H^2/(4 overline(V)_H)$，且誘導後驗 $mu=1$。由上一節的最佳反應公式，
+
+$
+  x_U^*(x_H, 1)
+  =
+  sqrt(x_H overline(V)_H) - x_H
+  =
+  V_H/2 - V_H^2/(4 overline(V)_H).
+$
+
+故總投入與低型別勝率分別為
+
+$
+  x_H + x_U^*(x_H,1) = V_H/2,
+  quad
+  x_H / (x_H + x_U^*(x_H,1)) = V_H/(2 overline(V)_H).
+$
+
+低型別偏離報酬可化簡為
+
+$
+  U_L^d
+  =
+  (V_H V_L)/(2 overline(V)_H) - V_H^2/(4 overline(V)_H)
+  =
+  V_H (2V_L - V_H)/(4 overline(V)_H).
+$ <eq-ext-uld>
+
+因此低型別誘因相容條件為
+
+$
+  V_L^2/(4 overline(V)_L) >= V_H (2V_L - V_H)/(4 overline(V)_H),
+$
+
+等價地
+
+$
+  V_L^2 overline(V)_H >= V_H (2V_L - V_H) overline(V)_L.
+$ <eq-ext-icl>
+
+若 $2V_L<=V_H$，則上式右側非正，而 $pi_L>0$，故 $I C_L$ 必成立，區域 III 必為空。以下聚焦 $2V_L>V_H$ 的情形。將上式取等號並代入
+
+$
+  overline(V)_H = q V_H + (1-q) V_L,
+  quad
+  overline(V)_L = (1-s) V_H + s V_L,
+$
+
+可得
+
+$
+  V_L^2 [q V_H + (1-q) V_L] & =
+                              V_H (2V_L - V_H) [(1-s) V_H + s V_L] \
+                            & =
+                              V_H (2V_L - V_H) [V_H - s (V_H - V_L)].
+$
+
+移項後得到
+
+$
+  s V_H (2V_L - V_H) (V_H - V_L)
+  =
+  V_H^2 (2V_L - V_H)
+  - V_L^2 [q V_H + (1-q) V_L].
+$
+
+因此低型別臨界邊界為
+
+$
+  s_L^*(q)
+  =
+  (
+  V_H^2 (2V_L - V_H)
+  - V_L^2 [q V_H + (1-q) V_L]
+  ) / (V_H (2V_L - V_H) (V_H - V_L)).
+$ <eq-ext-sl-boundary>
+
+其斜率為
+
+$
+  (d s_L^*(q))/(d q)
+  =
+  - V_L^2 / (V_H (2V_L - V_H))
+  < 0.
+$
+
+#proposition(title: [區域 III 非空的充要條件])[
+  在 $V_I in {V_H, V_L}$、$(q,s) in [0,1]^2$ 與 $V_H>V_L>0$ 下，存在某組 $(q,s)$ 使低型別誘因相容條件違反 (亦即區域 III 非空) ，若且唯若
+  $
+    V_H / V_L < phi.alt = (1 + sqrt(5))/2.
+  $
+] <prop-ext-region3>
+
+#proof[
+  先考慮 $2V_L<=V_H$。由前述偏離報酬公式，$U_L^d<=0$，且誠實報酬 $pi_L=V_L^2/(4 overline(V)_L)>0$，故 $I C_L$ 對所有 $(q,s)$ 成立，區域 III 為空。此時 $V_H/V_L>=2>phi.alt$，與命題結論一致。考慮 $2V_L>V_H$。由上式違反 $I C_L$，等價於
+
+  $
+    V_L^2 overline(V)_H < V_H (2V_L - V_H) overline(V)_L.
+  $
+
+  左側隨 $q$ 嚴格遞增，右側隨 $s$ 嚴格遞減，因此最容易違反的位置是 $(q,s)=(0,0)$。代入可得
+
+  $
+    V_L^3 < V_H^2 (2V_L - V_H).
+  $
+
+  設 $rho = V_H/V_L > 1$，同除以 $V_L^3$ 後得到
+
+  $
+    rho^3 - 2rho^2 + 1 < 0.
+  $
+
+  又
+
+  $
+    (rho - 1) (rho^2 - rho - 1)
+    = rho^3 - rho^2 - rho - rho^2 + rho + 1
+    = rho^3 - 2rho^2 + 1.
+  $
+
+  因此
+
+  $
+    rho^3 - 2rho^2 + 1 < 0
+    equiv
+    (rho - 1) (rho^2 - rho - 1) < 0.
+  $
+
+  由 $rho>1$ 可知 $rho - 1 > 0$，故上式等價於 $rho^2 - rho - 1 < 0$，也就是 $rho<phi.alt$。反向推論同理成立，命題得證。
+]
+
+#figure(
+  image("../figures/fig6_golden_ratio_threshold.pdf", width: 95%),
+  caption: [區域 III 存在的臨界條件 #footnote[左圖呈現區域 III 在 $(q,s) in [0,1]^2$ 的面積如何隨 $rho = V_H/V_L$ 變動，並在 $rho=phi.alt$ 精確歸零。右圖畫出 $f(rho)=rho^3-2rho^2+1$ 的兩個根 $rho=1$(退化情形)與 $rho=phi.alt approx 1.618$。]],
+  supplement: [圖],
+) <fig-ch6-golden-ratio>
+
+#ref(<fig-ch6-golden-ratio>) 顯示，臨界比例 $rho^* = phi.alt$ 來自兩個尺度的互鎖：一方面，Tullock 競賽的均衡投入具有二次尺度；另一方面，部分相關結構透過線性條件期望進入有效獎酬。當 $rho^2 = rho + 1$ 時，低型別偏離的勝率增益與投入成本恰好平衡；一旦 $rho$ 超過此臨界值，訊號誇大的額外成本系統性高於其策略收益，區域 III 因而消失。
+
+為與前節符號一致，令 $s_H^*(q)$ 表示式 @eq-ext-boundary[] 的高型別臨界邊界，則完整的 $(q,s)$ 分區可整理如下。
+
+#figure(
+  text(size: 10pt)[
+    #table(
+      columns: (0.95fr, 2.0fr, 0.75fr, 1.7fr, 1.45fr),
+      stroke: none,
+      inset: 5pt,
+      align: center,
+      table.hline(y: 0, stroke: 0.7pt),
+      table.hline(y: 1, stroke: 0.4pt),
+      table.hline(y: 5, stroke: 0.7pt),
+      [區間], [條件], [綁定 IC], [經濟機制], [對應區域],
+      [$q+s>=1$], [$s <= s_H^*(q)$], [無], [雙方均無偽裝誘因], [I (分離)],
+      [$q+s>=1$], [$s > s_H^*(q)$], [$I C_H$], [高型別模仿低型別], [II (混合)],
+      [$q+s<1$], [$s >= s_L^*(q)$ 或 $V_H/V_L >= phi.alt$], [無], [低型別偏離不具利潤], [I (延伸)],
+      [$q+s<1$], [$s < s_L^*(q)$ 且 $V_H/V_L < phi.alt$], [$I C_L$], [低型別模仿高型別], [III (混合)],
+    )
+  ],
+  caption: [完整 $(q,s)$ 參數空間下的均衡分類],
+  supplement: [表],
+) <tbl-ext-regions-full>
+
+#figure(
+  image("../figures/fig6_qs_regions_main.pdf", width: 95%),
+  caption: [部分相關結構 $(q,s)$ 下的均衡分區 #footnote("區域 I 為分離均衡；區域 II 由高型別 $I C_H$ 綁定，延續前節結論；區域 III 為負相關區下由低型別 $I C_L$ 綁定的新混合區域。基準點 $(0.5, 0.704)$ 與前節臨界邊界銜接。")],
+  supplement: [圖],
+) <fig-ch6-qs-regions-main>
+
+#ref(<fig-ch6-qs-regions-main>) 與表 @tbl-ext-regions-full[] 合併呈現了第六章的完整結構：區域 II 與區域 III 分別對應兩種相反方向的偽裝誘因，且兩者皆以分離區域 I 為基準向外擴張。
+
+在文獻連結上，議價與訊息不對稱研究多聚焦於提案者私有資訊 (如保留價格與貼現率) 如何影響機制表現，代表性的綜述可見 #c("ausubel2002")，相關議題也見 #c("cramton1992")。本文的 $(q,s)$ 架構則把「資訊不對稱」與「獎酬相關性」拆為可分離的兩個維度，使誘因翻轉可由同一組參數連續追蹤。就競賽 spillovers 而言，經典討論如 Baik and Shogren (1992) 與 Leininger (1993) 多將關聯結構視為外生給定；而本文設定讓關聯結構本身決定訊號通道何時有效。這一點與 #c("konrad2009") 對競賽制度的整理、以及 #c("warneryd2003")、#c("dentermorgansisak2022") 對資訊不對稱競賽的分析可互補對照。整體而言，前述命題提供的是一個可驗證的封閉式門檻，刻畫何時資訊結構足以打破分離均衡，而非對特定參數點的個案比較。
 
 == 小結 <subsec-ext-summary>
 
