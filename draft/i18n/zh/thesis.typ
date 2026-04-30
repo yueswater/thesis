@@ -39,7 +39,7 @@
   let no = str(ctr.get().at(0) + 1)
   block(above: 1.2em, below: 0.6em)[
     #set par(first-line-indent: 0em)
-    #text(font: theorem-font, weight: "bold")[
+    #text(font: theorem-font, weight: 500)[
       #kind #no#if title != none [ (#title) ]
     ]
     #h(0.5em)
@@ -52,7 +52,7 @@
 #let proposition(body, title: none) = statement("命題", "proposition-counter", body, title: title)
 #let proof(body, qed: true) = block(above: 1.5em, below: 0.5em)[
   #set par(first-line-indent: 0em)
-  #text(font: theorem-font, weight: "bold")[證明]#h(0.5em)#body
+  #text(font: theorem-font, weight: 500)[證明]#h(0.5em)#body
   #if qed [#qed-symbol]
 ]
 
@@ -111,6 +111,7 @@
   v(1.8em)
 
   body
+  pagebreak()
 
   text(lang: "en", region: "US")[
     #bibliography(

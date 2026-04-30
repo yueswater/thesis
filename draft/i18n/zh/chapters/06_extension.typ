@@ -198,7 +198,7 @@ $ <eq-ext-ich-qs>
 ]
 
 #figure(
-  image("../figures/fig6_qs_regions.pdf", width: 100%),
+  image("../../../figures/fig6_qs_regions.pdf", width: 100%),
   caption: [$(q,s)$ 參數空間中的均衡分區],
   supplement: [圖],
 ) <fig-ch6-qs-regions>
@@ -211,13 +211,13 @@ $
 
 == 負相關區間的誘因反轉與臨界比例 <subsec-ext-negative>
 
-前節建立在 $q+s>=1$ 的正相關區間。當 $q+s<1$ 時，由
+前一小節建立在 $q+s>=1$ 的正相關區間。當 $q+s<1$ 時，由
 $
   overline(V)_H - overline(V)_L = (q+s-1)(V_H-V_L)
 $
-可知 $overline(V)_H < overline(V)_L$。因此由前述信念加權獎酬定義，$hat(V)_U(mu)$ 對 $mu$ 嚴格遞減：當不知情者越相信知情者是高型別，其面對的有效獎酬反而越低，續局投入反應越弱，從而使得偏離誘因方向與前節相反；在負相關區間，主導偏離可能由低型別模仿高型別 (bluffing) 所驅動。
+可知 $overline(V)_H < overline(V)_L$。因此由前述信念加權獎酬定義，$hat(V)_U(mu)$ 對 $mu$ 嚴格遞減：當不知情者越相信知情者是高型別，其面對的有效獎酬反而越低，續局投入反應越弱，從而使得偏離誘因方向與前一小節相反；在負相關區間，主導偏離可能由低型別模仿高型別 (bluffing) 所驅動。
 
-延續前節的候選分離路徑，低型別誠實時報酬為
+延續前一小節的候選分離路徑，低型別誠實時報酬為
 
 $
   pi_L = V_L^2/(4 overline(V)_L).
@@ -312,12 +312,12 @@ $
 #proposition(title: [區域 III 非空的充要條件])[
   在 $V_I in {V_H, V_L}$、$(q,s) in [0,1]^2$ 與 $V_H>V_L>0$ 下，存在某組 $(q,s)$ 使低型別誘因相容條件違反 (亦即區域 III 非空) ，若且唯若
   $
-    V_H / V_L < phi.alt = (1 + sqrt(5))/2.
+    V_H / V_L < phi = (1 + sqrt(5))/2.
   $
 ] <prop-ext-region3>
 
 #proof[
-  先考慮 $2V_L<=V_H$。由前述偏離報酬公式，$U_L^d<=0$，且誠實報酬 $pi_L=V_L^2/(4 overline(V)_L)>0$，故 $I C_L$ 對所有 $(q,s)$ 成立，區域 III 為空。此時 $V_H/V_L>=2>phi.alt$，與命題結論一致。考慮 $2V_L>V_H$。由上式違反 $I C_L$，等價於
+  先考慮 $2V_L<=V_H$。由前述偏離報酬公式，$U_L^d<=0$，且誠實報酬 $pi_L=V_L^2/(4 overline(V)_L)>0$，故 $I C_L$ 對所有 $(q,s)$ 成立，區域 III 為空。此時 $V_H/V_L>=2>phi$，與命題結論一致。考慮 $2V_L>V_H$。由上式違反 $I C_L$，等價於
 
   $
     V_L^2 overline(V)_H < V_H (2V_L - V_H) overline(V)_L.
@@ -351,18 +351,18 @@ $
     (rho - 1) (rho^2 - rho - 1) < 0.
   $
 
-  由 $rho>1$ 可知 $rho - 1 > 0$，故上式等價於 $rho^2 - rho - 1 < 0$，也就是 $rho<phi.alt$。反向推論同理成立，命題得證。
+  由 $rho>1$ 可知 $rho - 1 > 0$，故上式等價於 $rho^2 - rho - 1 < 0$，即 $rho<phi$。反向推論同理成立，命題得證。
 ]
 
 #figure(
-  image("../figures/fig6_golden_ratio_threshold.pdf", width: 95%),
-  caption: [區域 III 存在的臨界條件 #footnote[左圖呈現區域 III 在 $(q,s) in [0,1]^2$ 的面積如何隨 $rho = V_H/V_L$ 變動，並在 $rho=phi.alt$ 精確歸零。右圖畫出 $f(rho)=rho^3-2rho^2+1$ 的兩個根 $rho=1$(退化情形)與 $rho=phi.alt approx 1.618$。]],
+  image("../../../figures/fig6_golden_ratio_threshold.pdf", width: 95%),
+  caption: [區域 III 存在的臨界條件 #footnote[左圖呈現區域 III 在 $(q,s) in [0,1]^2$ 的面積如何隨 $rho = V_H/V_L$ 變動，並在 $rho=phi$ 精確歸零。右圖畫出 $f(rho)=rho^3-2rho^2+1$ 的兩個根 $rho=1$(退化情形)與 $rho=phi approx 1.618$。]],
   supplement: [圖],
 ) <fig-ch6-golden-ratio>
 
-#ref(<fig-ch6-golden-ratio>) 顯示，臨界比例 $rho^* = phi.alt$ 來自兩個尺度的互鎖：一方面，Tullock 競賽的均衡投入具有二次尺度；另一方面，部分相關結構透過線性條件期望進入有效獎酬。當 $rho^2 = rho + 1$ 時，低型別偏離的勝率增益與投入成本恰好平衡；一旦 $rho$ 超過此臨界值，訊號誇大的額外成本系統性高於其策略收益，區域 III 因而消失。
+#ref(<fig-ch6-golden-ratio>) 顯示，臨界比例 $rho^* = phi$ 來自兩個尺度的互鎖：一方面，Tullock 競賽的均衡投入具有二次尺度；另一方面，部分相關結構透過線性條件期望進入有效獎酬。當 $rho^2 = rho + 1$ 時，低型別偏離的勝率增益與投入成本恰好平衡；一旦 $rho$ 超過此臨界值，訊號誇大的額外成本系統性高於其策略收益，區域 III 因而消失。
 
-為與前節符號一致，令 $s_H^*(q)$ 表示式 @eq-ext-boundary[] 的高型別臨界邊界，則完整的 $(q,s)$ 分區可整理如下。
+為與前一小節符號一致，令 $s_H^*(q)$ 表示式 @eq-ext-boundary[] 的高型別臨界邊界，則完整的 $(q,s)$ 分區可整理如下。
 
 #figure(
   text(size: 10pt)[
@@ -377,8 +377,8 @@ $
       [區間], [條件], [綁定 IC], [經濟機制], [對應區域],
       [$q+s>=1$], [$s <= s_H^*(q)$], [無], [雙方均無偽裝誘因], [I (分離)],
       [$q+s>=1$], [$s > s_H^*(q)$], [$I C_H$], [高型別模仿低型別], [II (混合)],
-      [$q+s<1$], [$s >= s_L^*(q)$ 或 $V_H/V_L >= phi.alt$], [無], [低型別偏離不具利潤], [I (延伸)],
-      [$q+s<1$], [$s < s_L^*(q)$ 且 $V_H/V_L < phi.alt$], [$I C_L$], [低型別模仿高型別], [III (混合)],
+      [$q+s<1$], [$s >= s_L^*(q)$ 或 $V_H/V_L >= phi$], [無], [低型別偏離不具利潤], [I (延伸)],
+      [$q+s<1$], [$s < s_L^*(q)$ 且 $V_H/V_L < phi$], [$I C_L$], [低型別模仿高型別], [III (混合)],
     )
   ],
   caption: [完整 $(q,s)$ 參數空間下的均衡分類],
@@ -386,8 +386,8 @@ $
 ) <tbl-ext-regions-full>
 
 #figure(
-  image("../figures/fig6_qs_regions_main.pdf", width: 95%),
-  caption: [部分相關結構 $(q,s)$ 下的均衡分區 #footnote("區域 I 為分離均衡；區域 II 由高型別 $I C_H$ 綁定，延續前節結論；區域 III 為負相關區下由低型別 $I C_L$ 綁定的新混合區域。基準點 $(0.5, 0.704)$ 與前節臨界邊界銜接。")],
+  image("../../../figures/fig6_qs_regions_main.pdf", width: 95%),
+  caption: [部分相關結構 $(q,s)$ 下的均衡分區 #footnote("區域 I 為分離均衡；區域 II 由高型別 $I C_H$ 綁定，延續前一小節結論；區域 III 為負相關區下由低型別 $I C_L$ 綁定的新混合區域。基準點 $(0.5, 0.704)$ 與前一小節臨界邊界銜接。")],
   supplement: [圖],
 ) <fig-ch6-qs-regions-main>
 
