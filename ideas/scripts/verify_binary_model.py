@@ -1,119 +1,110 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 import math
 import sys
 
 
-def kappa(mu: float, delta: float) -> float:
-    return 0.5 / math.sqrt(mu - delta) + 0.5 / math.sqrt(mu + delta)
+TOL = 1e-9
 
 
-def sim_payoff_labor(v_l: float, v_m: float, kap: float) -> float:
-    return (math.sqrt(v_l) - v_m * kap / 2.0) ** 2
+def assert_close(a: float, b: float, label: str) -> None:
+    if abs(a - b) > TOL:
+        raise AssertionError(f"{label}: left={a:.12g}, right={b:.12g}")
 
 
-def sep_payoff_labor(v_l: float, v_m: float) -> float:
-    return v_l * v_l / (4.0 * v_m)
+def mean(v_low: float, v_high: float, q: float) -> float:
+    return (1.0 - q) * v_low + q * v_high
 
 
-def rent(v_l: float, v_m: float, kap: float) -> float:
-    return sim_payoff_labor(v_l, v_m, kap) - sep_payoff_labor(v_l, v_m)
+def variance(v_low: float, v_high: float, q: float) -> float:
+    return q * (1.0 - q) * (v_high - v_low) ** 2
 
 
-def profile(mu: float, delta: float, v_m: float = 1.0) -> tuple[bool, bool]:
-    kap = kappa(mu, delta)
-    r_low = rent(mu - delta, v_m, kap)
-    r_high = rent(mu + delta, v_m, kap)
-    return (r_low > 1e-10, r_high > 1e-10)
+def kappa(v_low: float, v_high: float, q: float) -> float:
+    return (1.0 - q) / math.sqrt(v_low) + q / math.sqrt(v_high)
 
 
-def interval_contains(v_l: float, v_m: float, kap: float) -> bool:
-    u = math.sqrt(v_l)
-    c = v_m * kap / 2.0
-    lower = u - v_l / (2.0 * math.sqrt(v_m))
-    upper = u + v_l / (2.0 * math.sqrt(v_m))
-    return lower - 1e-10 <= c <= upper + 1e-10
+def nu(v_low: float, v_high: float, q: float) -> float:
+    return (1.0 - q) * math.sqrt(v_low) + q * math.sqrt(v_high)
 
 
-def assert_interval_characterization(v_m: float = 1.0) -> None:
-    for i in range(30, 301):
-        mu = i / 100.0
-        for j in range(1, i):
-            delta = j / 100.0
-            kap = kappa(mu, delta)
-            for v_l in (mu - delta, mu + delta):
-                prefers_second = rent(v_l, v_m, kap) > 1e-10
-                first_interval = interval_contains(v_l, v_m, kap)
-                if prefers_second == first_interval:
-                    raise AssertionError(
-                        f"interval test failed at mu={mu}, delta={delta}, "
-                        f"V_L={v_l}, rent={rent(v_l, v_m, kap)}"
-                    )
+def lam(v_low: float, v_high: float, q: float) -> float:
+    return (1.0 - q) / v_low + q / v_high
 
 
-def assert_high_wait_implies_low_wait(v_m: float = 1.0) -> None:
-    for i in range(101, 301):
-        mu = i / 100.0
-        for j in range(1, i):
-            delta = j / 100.0
-            kap = kappa(mu, delta)
-            r_low = rent(mu - delta, v_m, kap)
-            r_high = rent(mu + delta, v_m, kap)
-            if r_high > 1e-9 and r_low <= 1e-9:
-                raise AssertionError(
-                    f"ordering check failed at mu={mu}, delta={delta}: "
-                    f"R_low={r_low}, R_high={r_high}"
-                )
+def ul_ss_type(v: float, v_low: float, v_high: float, q: float, V: float) -> float:
+    c = V * kappa(v_low, v_high, q) / (1.0 + V * lam(v_low, v_high, q))
+    return (math.sqrt(v) - c) ** 2
 
 
-def find_examples(v_m: float = 1.0) -> dict[str, tuple[float, float]]:
-    examples: dict[str, tuple[float, float]] = {}
-    for i in range(101, 301):
-        mu = i / 100.0
-        for j in range(1, i):
-            delta = j / 100.0
-            status = profile(mu, delta, v_m)
-            if status == (True, True) and "both_wait" not in examples:
-                examples["both_wait"] = (mu, delta)
-            elif status == (True, False) and "only_low_waits" not in examples:
-                examples["only_low_waits"] = (mu, delta)
-            elif status == (False, False) and mu > v_m and "both_first" not in examples:
-                examples["both_first"] = (mu, delta)
-            if len(examples) == 3:
-                return examples
-    raise AssertionError("failed to locate all three mu>V timing profiles")
+def ul_lm_type(v: float, V: float) -> float:
+    return v * v / (4.0 * V)
 
 
-def assert_pooling_impossible(v_m: float = 1.0) -> None:
-    mu = 1.4
-    delta = 0.4
-    x_low = (mu - delta) ** 2 / (4.0 * v_m)
-    x_high = (mu + delta) ** 2 / (4.0 * v_m)
-    if abs(x_low - x_high) < 1e-12:
-        raise AssertionError("pooling check picked degenerate parameters")
+def rent(v: float, v_low: float, v_high: float, q: float, V: float) -> float:
+    return ul_ss_type(v, v_low, v_high, q, V) - ul_lm_type(v, V)
+
+
+def e_ul_ss(v_low: float, v_high: float, q: float, V: float) -> float:
+    mu = mean(v_low, v_high, q)
+    kap = kappa(v_low, v_high, q)
+    nu_val = nu(v_low, v_high, q)
+    lam_val = lam(v_low, v_high, q)
+    denom = 1.0 + V * lam_val
+    return mu - 2.0 * V * kap * nu_val / denom + (V * kap) ** 2 / denom**2
+
+
+def e_ul_lm(v_low: float, v_high: float, q: float, V: float) -> float:
+    return ((1.0 - q) * v_low * v_low + q * v_high * v_high) / (4.0 * V)
+
+
+def verify_moments() -> None:
+    for v_low, v_high, q in ((0.8, 1.6, 0.3), (0.8, 1.6, 0.5), (0.8, 1.6, 0.7), (1.2, 2.4, 0.4)):
+        mu = mean(v_low, v_high, q)
+        sigma2 = variance(v_low, v_high, q)
+        assert_close(mu, (1.0 - q) * v_low + q * v_high, "binary mean")
+        assert_close(sigma2, q * (1.0 - q) * (v_high - v_low) ** 2, "binary variance")
+        assert_close(kappa(v_low, v_high, q), (1.0 - q) / math.sqrt(v_low) + q / math.sqrt(v_high), "kappa")
+        assert_close(nu(v_low, v_high, q), (1.0 - q) * math.sqrt(v_low) + q * math.sqrt(v_high), "nu")
+        assert_close(lam(v_low, v_high, q), (1.0 - q) / v_low + q / v_high, "lambda")
+
+
+def verify_lm_formula() -> None:
+    for v_low, v_high, q, V in ((0.8, 1.6, 0.3, 1.0), (0.8, 1.6, 0.7, 1.4), (1.2, 2.0, 0.4, 1.8)):
+        mu = mean(v_low, v_high, q)
+        sigma2 = variance(v_low, v_high, q)
+        lhs = e_ul_lm(v_low, v_high, q, V)
+        rhs = (mu * mu + sigma2) / (4.0 * V)
+        assert_close(lhs, rhs, "E[U_L^LM]")
+
+
+def verify_timing_decomposition() -> None:
+    for v_low, v_high, q, V in ((0.8, 1.6, 0.3, 1.0), (0.8, 1.6, 0.5, 1.0), (0.8, 1.6, 0.7, 1.0)):
+        lhs = e_ul_lm(v_low, v_high, q, V) - e_ul_ss(v_low, v_high, q, V)
+        rhs = -((1.0 - q) * rent(v_low, v_low, v_high, q, V) + q * rent(v_high, v_low, v_high, q, V))
+        assert_close(lhs, rhs, "Delta_L^LM decomposition")
+
+
+def verify_binary_ic() -> None:
+    for v_low, v_high, V in ((0.8, 1.6, 1.0), (1.1, 2.2, 1.7), (1.4, 2.1, 2.0)):
+        ic_h = v_high * v_high / (4.0 * V) - (v_high * v_low / (2.0 * V) - v_low * v_low / (4.0 * V))
+        ic_l = v_low * v_low / (4.0 * V) - (v_low * v_high / (2.0 * V) - v_high * v_high / (4.0 * V))
+        target = (v_high - v_low) ** 2 / (4.0 * V)
+        assert_close(ic_h, target, "IC_H")
+        assert_close(ic_l, target, "IC_L")
 
 
 def main() -> int:
-    assert_interval_characterization()
-    assert_high_wait_implies_low_wait()
-    assert_pooling_impossible()
-    examples = find_examples()
-    print("Verified in sandbox:")
-    print("1. The exact interval condition matches the rent formula on a dense grid.")
-    print("2. If the high type prefers waiting, the low type does too.")
-    print("3. Pooling cannot be optimal for both types when delta > 0.")
-    print("Example regimes with V=1:")
-    print(
-        f"- both wait: mu={examples['both_wait'][0]:.2f}, "
-        f"delta={examples['both_wait'][1]:.2f}"
-    )
-    print(
-        f"- only low type waits: mu={examples['only_low_waits'][0]:.2f}, "
-        f"delta={examples['only_low_waits'][1]:.2f}"
-    )
-    print(
-        f"- both move first: mu={examples['both_first'][0]:.2f}, "
-        f"delta={examples['both_first'][1]:.2f}"
-    )
+    verify_moments()
+    verify_lm_formula()
+    verify_timing_decomposition()
+    verify_binary_ic()
+    print("Verified binary-model formulas with general prior q.")
+    print("1. Mean, variance, and moment formulas match direct weighted averages.")
+    print("2. LM expected payoff equals (mu^2 + sigma^2) / (4V).")
+    print("3. Delta_L^LM equals -[(1-q)R(V_l) + qR(V_H)].")
+    print("4. Binary IC_H and IC_L remain (V_H - V_l)^2 / (4V), independent of q.")
     return 0
 
 

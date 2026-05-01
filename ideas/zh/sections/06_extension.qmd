@@ -1,158 +1,288 @@
 # 延伸：部分相關型別 {#sec-extension}
 
-@sec-equilibria 的基準模型，在 LM 子賽局中給出唯一的分離均衡：勞方的型別得以完全揭露，資方的最佳反應只取決於觀察到的努力 $x_L$ 與公開獎酬 $V$，不受後驗信念影響——訊號-信念通道處於關閉狀態。
+@sec-equilibria 的基準模型令資方獎酬固定為公開常數 $V_M \equiv V$。因此，在 LM 子賽局中，資方觀察到勞方投入 $x_L$ 後的最佳反應只取決於 $(x_L, V)$，不取決於對勞方型別的後驗信念；訊號-信念通道是關閉的。
 
-本節改造資訊結構，重新打開這條通道。我們引入**部分相關（partial correlation）**：資方的獎酬 $v_M$ 與勞方型別 $v_L$ 之間存在正向相關，但並非完全相關；相關程度由兩個參數 $(q, s)$ 控制。隨著相關程度增強，資方的最佳反應對信念愈發敏感，勞方維持可信分離的成本也隨之上升。我們刻畫出 $(q, s)$ 參數空間中的一條**臨界邊界** $s^*(q)$，將均衡結果一分為二：邊界以下維持分離均衡（基準情形），邊界以上出現混合均衡（Fu 2006 情形）。
+本節將資方獎酬提升為隨機變數 $V_M \in \{V_\ell, V_H\}$，並允許它與勞方型別 $V_L \in \{V_\ell, V_H\}$ 正向相關。核心問題是：當觀察到高型別勞方的訊號，也意味著資方更可能面對高獎酬狀態時，分離均衡是否仍能維持？以下依 Ch3–5 已建立的 $(V_\ell, V_H, q)$ 記號，重寫這個延伸模型。
 
-## 環境與資訊結構 {#sec-ext-setup}
+## 環境與聯合機率分配 {#sec-ext-setup}
 
-勞方的獎酬 $v_L \in \{V_H, V_L\}$（$V_H > V_L > 0$）以相等的先驗機率抽取，屬勞方私人資訊。與基準模型不同，資方的獎酬 $v_M$ 不是公開已知的常數，而是從同一支撐 $\{V_H, V_L\}$ 私下抽出，其分配取決於勞方已實現的型別。
+勞方型別仍為兩點分配：
+
+$$
+\Pr(V_L = V_H) = q,
+\qquad
+\Pr(V_L = V_\ell) = 1-q,
+\qquad q \in (0,1),
+$$
+
+其中 $V_H > V_\ell > 0$。與基準模型不同的是，資方獎酬 $V_M$ 不再是公開常數，而是另一個取值於同一砥柱集合的隨機變數。
 
 ::: {#def-partial-corr}
 ### 部分相關結構
 
-$(v_L, v_M)$ 的聯合分配由參數 $q, s \in [0.5, 1]$ 決定：
+定義兩個條件機率：
 
-$$\Pr(v_M = V_H \mid v_L = V_H) = q, \qquad \Pr(v_M = V_L \mid v_L = V_H) = 1-q,$$
+$$
+p_H \equiv \Pr(V_M = V_H \mid V_L = V_H),
+\qquad
+p_\ell \equiv \Pr(V_M = V_\ell \mid V_L = V_\ell).
+$$
 
-$$\Pr(v_M = V_L \mid v_L = V_L) = s, \qquad \Pr(v_M = V_H \mid v_L = V_L) = 1-s.$$
+則 $(V_L, V_M)$ 的聯合分配可寫為
 
-本論文研究的兩個極端情形：
+|  | $V_M = V_H$ | $V_M = V_\ell$ | 邊際 |
+|---|---|---|---|
+| $V_L = V_H$ | $q\,p_H$ | $q(1-p_H)$ | $q$ |
+| $V_L = V_\ell$ | $(1-q)(1-p_\ell)$ | $(1-q)p_\ell$ | $1-q$ |
 
-| 情形 | 參數 | 說明 |
-|------|------|------|
-| 型別完全獨立 | $q = s = \tfrac{1}{2}$ | 基準二元模型（@sec-equilibria） |
-| 型別完全相關 | $q = s = 1$ | @fu2006 |
+: 勞方型別與資方獎酬的聯合機率表。 {#tbl-joint-prob}
+
+若要求兩方共享同一個高型別邊際機率 $q$，則必須滿足
+
+$$
+\Pr(V_M = V_H) = q\,p_H + (1-q)(1-p_\ell) = q,
+$$
+
+亦即
+
+$$
+(1-q)(1-p_\ell) = q(1-p_H).
+$$ {#eq-marginal-consistency}
+
+這條邊際一致性限制會在本節所有座標轉換中維持不變。
+
+三個基準狀態為：
+
+1. **統計獨立**：$p_H = q$ 且 $p_\ell = 1-q$。此時觀察 $V_L$ 不會更新對 $V_M$ 的信念。
+2. **完全正相關**：$p_H = p_\ell = 1$。此時 $V_M = V_L$ 幾乎必然成立，對應 @fu2006 的極限情形。
+3. **部分正相關**：$q < p_H < 1$ 且 $1-q < p_\ell < 1$，並同時滿足 @eq-marginal-consistency。
 :::
 
-資方觀察到 $x_L$ 後形成後驗信念 $\mu \equiv \Pr(v_L = V_H \mid x_L)$。定義資方的條件期望獎酬：
+## 後驗信念與資方期望獎酬 {#sec-ext-br}
 
-$$\bar{V}_H \equiv q V_H + (1-q)V_L, \qquad \bar{V}_L \equiv (1-s)V_H + s V_L.$$
+在 LM 子賽局中，資方觀察 $x_L$ 後形成對高型別的後驗信念。為避免與 Ch3–5 的平均數 $\mu = \E[V_L]$ 混淆，本節記
 
-給定後驗 $\mu$，資方的信念加權期望獎酬為
+$$
+m(x_L) \equiv \Pr(V_L = V_H \mid x_L) \in [0,1].
+$$
 
-$$\hat{V}_M(\mu) \equiv \mu\,\bar{V}_H + (1-\mu)\,\bar{V}_L. $$ {#eq-vhat}
+給定後驗 $m$，資方的信念加權期望獎酬為
 
-**單調性。** 因 $\bar{V}_H - \bar{V}_L = (q+s-1)(V_H - V_L) \geq 0$（當 $q, s \geq 0.5$ 時成立），$\hat{V}_M(\mu)$ 關於 $\mu$ 弱遞增。資方對勞方高型別的後驗信念愈高，預期自身面對的競賽賭注愈大——因為高型別的勞方意味著資方更可能持有獎酬 $V_H$。這正是將資方努力與信念綁定的機制。
+$$
+\hat{V}_M(m)
+= m\bigl[p_HV_H + (1-p_H)V_\ell\bigr]
++ (1-m)\bigl[(1-p_\ell)V_H + p_\ell V_\ell\bigr].
+$$ {#eq-vhat}
 
-報酬函數採標準 Tullock 形式：
+特別地，
 
-$$U_L(x_L, x_M \mid v_L) = \frac{x_L}{x_L + x_M}\,v_L - x_L, $$ {#eq-ul-ext}
+$$
+\hat{V}_M(1) = p_HV_H + (1-p_H)V_\ell,
+\qquad
+\hat{V}_M(0) = (1-p_\ell)V_H + p_\ell V_\ell.
+$$
 
-$$U_M(x_L, x_M \mid \mu) = \frac{x_M}{x_L + x_M}\,\hat{V}_M(\mu) - x_M. $$ {#eq-um-ext}
+對後驗信念微分得
 
-## 資方的信念依賴最佳反應 {#sec-ext-br}
+$$
+\frac{\partial \hat{V}_M(m)}{\partial m}
+= (p_H + p_\ell - 1)(V_H - V_\ell).
+$$ {#eq-vhat-derivative}
 
-在 LM 子賽局中，資方在第二階段觀察到 $x_L$ 並更新至後驗 $\mu$ 後，對 $x_M \geq 0$ 最大化 @eq-um-ext。
+因此，若 $p_H + p_\ell > 1$，則較高的後驗信念會提高資方的有效獎酬；獨立情形 $p_H=q$、$p_\ell=1-q$ 則使上式恰為零。
+
+報酬函數仍為 Tullock 形式：
+
+$$
+U_L(x_L, x_M \mid V_L) = \frac{x_L}{x_L + x_M}V_L - x_L,
+$$ {#eq-ul-ext}
+
+$$
+U_M(x_L, x_M \mid m) = \frac{x_M}{x_L + x_M}\hat{V}_M(m) - x_M.
+$$ {#eq-um-ext}
 
 ::: {#prp-ext-br}
 ### 信念依賴最佳反應
 
-給定 $x_L \geq 0$ 與後驗信念 $\mu \in [0,1]$，資方的唯一內點最佳反應為
+給定 $x_L \ge 0$ 與後驗信念 $m \in [0,1]$，資方的唯一內點最佳反應為
 
-$$x_M^*(x_L, \mu) = \sqrt{x_L\,\hat{V}_M(\mu)} - x_L, \qquad x_L \leq \hat{V}_M(\mu)/4. $$ {#eq-br-ext}
+$$
+x_M^*(x_L,m) = \sqrt{x_L\hat{V}_M(m)} - x_L,
+\qquad
+x_L \le \frac{\hat{V}_M(m)}{4}.
+$$ {#eq-br-ext}
 
-當 $q + s > 1$ 時，$\partial x_M^*/\partial\mu > 0$：資方對高型別的後驗信念愈高，努力程度嚴格愈大。
+若 $p_H + p_\ell > 1$，則 $\partial x_M^*/\partial m > 0$：觀察到較像高型別的訊號時，資方會更積極投入。
 :::
 
 ::: {.proof}
-一階條件為 $x_L\hat{V}_M(\mu)/(x_L+x_M)^2 = 1$。解正根得 $x_L+x_M = \sqrt{x_L\hat{V}_M(\mu)}$，故 $x_M^* = \sqrt{x_L\hat{V}_M(\mu)} - x_L$。對 $\mu$ 微分：$\partial x_M^*/\partial\mu = (\bar{V}_H - \bar{V}_L)/\bigl(2\sqrt{\hat{V}_M(\mu)/x_L}\bigr) > 0$，此式在 $\bar{V}_H > \bar{V}_L$ 時成立。
+一階條件為 $x_L\hat{V}_M(m)/(x_L+x_M)^2 = 1$。解正根得 $x_L+x_M = \sqrt{x_L\hat{V}_M(m)}$，故
+$$
+x_M^*(x_L,m) = \sqrt{x_L\hat{V}_M(m)} - x_L.
+$$
+再由 @eq-vhat-derivative 可得
+$$
+\partial x_M^*/\partial m
+= (\partial \hat V_M/\partial m)\sqrt{x_L}/(2\sqrt{\hat V_M(m)}),
+$$
+當 $p_H+p_\ell>1$ 時嚴格為正。
 :::
 
-在基準模型中，資方的最佳反應僅取決於 $x_L$ 與公開獎酬 $V$，信念不進入其決策。在此模型中，更高的 $\mu$ 提升 $\hat{V}_M(\mu)$，進而加大資方努力：勞方揭露自己是高型別，便會招來更積極的對手，使如實揭露變得代價高昂。
+## Tullock IC$_H$ 與分離均衡 {#sec-ext-sep}
 
-## 分離均衡的存在條件與崩潰 {#sec-ext-sep}
+考慮一個候選分離 PBE。均衡路徑上，高型別選擇 $x_H$、低型別選擇 $x_\ell$，並誘發後驗 $m(x_H)=1$ 與 $m(x_\ell)=0$。
 
-考慮一個候選分離 PBE：高型別出 $x_H$，低型別出 $x_L^*$。均衡路徑上的信念為 $\mu(x_H)=1$、$\mu(x_L^*)=0$，資方分別面對有效獎酬 $\bar{V}_H$ 與 $\bar{V}_L$。
+**低型別。** 當資方相信勞方是低型別時，面對的有效獎酬為 $\hat V_M(0)$。低型別的最佳反應為
 
-**低型別的均衡。** 面對有效獎酬為 $\bar{V}_L$ 的資方，低型別最大化 $\sqrt{x_L/\bar{V}_L}\cdot V_L - x_L$。一階條件給出：
+$$
+x_\ell = \frac{V_\ell^2}{4\hat V_M(0)},
+\qquad
+\Pi_\ell = \frac{V_\ell^2}{4\hat V_M(0)}.
+$$ {#eq-low-type-eq}
 
-$$x_L^* = \frac{V_L^2}{4\bar{V}_L}, \qquad \Pi_L = \frac{V_L^2}{4\bar{V}_L}. $$ {#eq-low-type-eq}
+**高型別。** 當資方相信勞方是高型別時，面對的有效獎酬為 $\hat V_M(1)$。高型別的最佳反應為
 
-**高型別的均衡。** 面對有效獎酬為 $\bar{V}_H$ 的資方，高型別的無約束最適解為：
+$$
+x_H = \frac{V_H^2}{4\hat V_M(1)},
+\qquad
+\Pi_H = \frac{V_H^2}{4\hat V_M(1)}.
+$$ {#eq-high-type-eq}
 
-$$x_H = \frac{V_H^2}{4\bar{V}_H}, \qquad \Pi_H = \frac{V_H^2}{4\bar{V}_H}. $$ {#eq-high-type-eq}
+若高型別偽裝成低型別，資方會以 $\hat V_M(0)$ 回應，其偏離報酬為
 
-**誘因相容。** 若高型別偏離至 $x_L^*$，資方持有信念 $\mu=0$，以有效獎酬 $\bar{V}_L$ 回應。高型別的偏離報酬為：
+$$
+\widetilde\Pi_H
+= \frac{V_\ell(2V_H - V_\ell)}{4\hat V_M(0)}.
+$$ {#eq-dev-payoff}
 
-$$U_L^H(\text{偽裝}) = \sqrt{\frac{x_L^*}{\bar{V}_L}}\,V_H - x_L^* = \frac{V_L(2V_H - V_L)}{4\bar{V}_L}. $$ {#eq-dev-payoff}
+因此，高型別的誘因相容限制為
 
-高型別的 $\mathrm{IC}_H$ 限制要求 $\Pi_H \geq U_L^H(\text{偽裝})$：
+$$
+\frac{V_H^2}{\hat V_M(1)}
+\ge
+\frac{V_\ell(2V_H - V_\ell)}{\hat V_M(0)}.
+$$ {#eq-ich}
 
-$$\frac{V_H^2}{4\bar{V}_H} \;\geq\; \frac{V_L(2V_H - V_L)}{4\bar{V}_L}. $$ {#eq-ich}
+等價地，
 
-對低型別而言，偽裝成高型別會引發信念 $\mu=1$ 及偏離報酬 $V_H(2V_L - V_H)/(4\bar{V}_H) \leq 0$，弱劣於 $\Pi_L > 0$，故 $\mathrm{IC}_L$ 非約束性，以下專注於 @eq-ich。
+$$
+\frac{\hat V_M(1)}{\hat V_M(0)}
+\le
+R
+\equiv
+\frac{V_H^2}{V_\ell(2V_H - V_\ell)}.
+$$ {#eq-sep-condition}
+
+由於 $V_H > V_\ell > 0$，故 $R>1$。另一方面，低型別若模仿高型別，其偏離報酬為 $V_H(2V_\ell - V_H)/(4\hat V_M(1)) \le 0$，弱劣於 $\Pi_\ell > 0$，因此 $\mathrm{IC}_\ell$ 非約束性。
 
 ::: {#prp-sep-exists}
-### 分離均衡
+### 分離均衡存在條件
 
-以 @eq-low-type-eq 與 @eq-high-type-eq 為均衡努力的純策略分離 PBE 存在，若且唯若 $\mathrm{IC}_H$（即 @eq-ich）成立：
+以 @eq-low-type-eq 與 @eq-high-type-eq 為路徑投入的純策略分離 PBE 存在，若且唯若 @eq-ich 成立；亦即，若且唯若
 
-$$\frac{V_H^2}{\bar{V}_H} \;\geq\; \frac{V_L(2V_H - V_L)}{\bar{V}_L}, $$ {#eq-sep-condition}
+$$
+\frac{\hat V_M(1)}{\hat V_M(0)} \le R.
+$$
 
-其中 $\bar{V}_H = qV_H + (1-q)V_L$，$\bar{V}_L = (1-s)V_H + sV_L$。
-
-@eq-sep-condition 成立時，高型別不能從偽裝中獲益，分離均衡具有可信性，勞方保有先動優勢。@eq-sep-condition 不成立時，高型別嚴格偏好偽裝，分離均衡崩潰。
+當此條件成立時，高型別不能從偽裝中獲利，LM 子賽局維持分離。當此條件失敗時，高型別嚴格偏好模仿低型別，分離均衡崩潰，pooling 或半分離結果便重新成為可能。
 :::
-
-**為何條件會失敗。** 將 @eq-sep-condition 改寫為比率的上界：
-
-$$\frac{\bar{V}_H}{\bar{V}_L} \;\leq\; \frac{V_H^2}{V_L(2V_H - V_L)} \;\equiv\; R.$$
-
-門檻值 $R > 1$ 與 $(q, s)$ 無關。比率 $\bar{V}_H/\bar{V}_L$ 隨 $q$ 或 $s$ 的增大而上升：高 $q$ 膨脹 $\bar{V}_H$（資方在知道勞方是高型別時更積極應對），高 $s$ 壓縮 $\bar{V}_L$（資方在認為勞方是低型別時更為懈怠）。一旦比率超過 $R$，偽裝便有利可圖：高型別以低成本誘出弱對手，這比如實揭露的收益更高。
-
-## 臨界邊界 {#sec-ext-boundary}
-
-將 @eq-ich 取等號，便得到**臨界邊界** $s^*(q)$——這條位於 $(q, s) \in [0.5, 1]^2$ 中的曲線，是分離均衡剛好能存活的參數集合。
 
 ::: {#prp-boundary}
 ### 臨界邊界
 
-邊界是一條直線：
+將 @eq-ich 取等號，可得 $(p_H,p_\ell)$ 平面上的臨界邊界：
 
-$$s^*(q) = \frac{V_H^3 - V_L(2V_H - V_L)\bigl[qV_H + (1-q)V_L\bigr]}{V_H^2(V_H - V_L)}, $$ {#eq-boundary}
+$$
+p_\ell^*(p_H)
+=
+\frac{RV_H - V_\ell - p_H(V_H - V_\ell)}{R(V_H - V_\ell)}.
+$$ {#eq-boundary}
 
-斜率為常數 $ds^*/dq = -V_L(2V_H-V_L)/V_H^2 < 0$。
-
-模型的兩個極端點分別位於邊界兩側：
-
-- 在 $(q, s) = (\tfrac{1}{2}, \tfrac{1}{2})$：$\mathrm{IC}_H$ 化簡為 $(V_H - V_L)^2 \geq 0$，恆成立。基準點**嚴格低於** $s^*$，位於分離均衡區域。
-- 在 $(q, s) = (1, 1)$：$\mathrm{IC}_H$ 要求 $V_L \geq V_H$，與前提矛盾。Fu (2006) 點**嚴格高於** $s^*$，位於混合均衡區域。
+位於邊界下方（亦即 $\hat V_M(1)/\hat V_M(0) \le R$）的點維持分離；位於邊界上方的點則使高型別出現有利可圖的偽裝誘因。
 :::
 
-::: {.proof}
-見 @sec-proof-ext-boundary。
-:::
+三個基準狀態可直接代入驗證：
 
-**分離均衡區域**（$s \leq s^*(q)$，@fig-partial-corr 左下方）。相關程度適中時，比率 $\bar{V}_H/\bar{V}_L$ 低於門檻 $R$。高型別的均衡路徑報酬超過偽裝報酬，分離具有誘因相容性，勞方的先動優勢得以保留。
+1. **獨立點** $(p_H,p_\ell)=(q,1-q)$：由 @eq-marginal-consistency 得
+   $$
+   \hat V_M(1)=\hat V_M(0)=qV_H+(1-q)V_\ell,
+   $$
+   因此 $\hat V_M(1)/\hat V_M(0)=1<R$，故 IC$_H$ 嚴格成立。
+2. **完全相關點** $(1,1)$：
+   $$
+   \hat V_M(1)=V_H,\qquad \hat V_M(0)=V_\ell,
+   $$
+   故比值為 $V_H/V_\ell > R$；高型別會偏好偽裝，分離失敗。
+3. **部分相關區域**：比值介於 $1$ 與 $V_H/V_\ell$ 之間，均衡型態取決於點 $(p_H,p_\ell)$ 落在 @eq-boundary 的哪一側。
 
-**混合均衡區域**（$s > s^*(q)$，@fig-partial-corr 右上方）。相關程度強烈時，$\bar{V}_H/\bar{V}_L$ 超過 $R$。高型別獲得有利可圖的偽裝機會，分離均衡崩潰，均衡結果類似 Fu (2006)：兩個型別混合，先動的訊號優勢消失。
-
-![$(q,s)$ 參數空間中的均衡區域（$V_H = 2$，$V_L = 1$）。臨界邊界 $s^*(q) = (5-3q)/4$ 將分離均衡區域（較淺，正斜線網底）與混合均衡區域（較深，反斜線網底）分隔開來。三角形：基準點 $(\frac{1}{2},\frac{1}{2})$；正方形：Fu (2006) 極限點 $(1,1)$。](../figures/partial_correlation_regions.png){#fig-partial-corr width=72%}
+![$(p_H,p_\ell)$ 平面上的分離與 pooling 區域（$V_H = 2$，$V_\ell = 1$）。實線為臨界邊界 $p_\ell^*(p_H)$；標記同時顯示獨立點與完全相關點，並以虛線示意代表性的邊際一致性軌跡。](../figures/partial_correlation_regions.png){#fig-partial-corr width=72%}
 
 ## 比較靜態 {#sec-ext-cs}
 
-邊界公式 @eq-boundary 給出乾淨的比較靜態結果。
+令
 
-**$q$ 的效果。** 提高 $q$ 使 $\bar{V}_H$ 上升而 $\bar{V}_L$ 不變。資方在知道勞方是高型別時更積極應對，壓低了高型別的均衡路徑報酬 $\Pi_H = V_H^2/(4\bar{V}_H)$，但偽裝報酬 $V_L(2V_H-V_L)/(4\bar{V}_L)$ 不受影響。邊界 $s^*(q)$ 關於 $q$ 遞減，分離均衡區域隨之縮小。
+$$
+\rho(p_H,p_\ell)
+\equiv
+\frac{\hat V_M(1)}{\hat V_M(0)}
+=
+\frac{p_HV_H + (1-p_H)V_\ell}{(1-p_\ell)V_H + p_\ell V_\ell}.
+$$
 
-**$s$ 的效果。** 提高 $s$ 使 $\bar{V}_L$ 下降。資方在認為勞方是低型別時更為懈怠，偽裝對高型別的成本因此降低。分離均衡區域同樣縮小。
+則分離條件即為 $\rho(p_H,p_\ell) \le R$。直接微分得
 
-**相對破壞力。** 斜率大小 $|ds^*/dq| = V_L(2V_H-V_L)/V_H^2 < 1$，意味著 $q$ 每上升一單位對分離均衡的破壞，不如 $s$ 上升一單位的破壞大。直觀上，$q$ 只影響 $\bar{V}_H$（均衡路徑報酬），而 $s$ 只影響 $\bar{V}_L$（偽裝報酬）；降低偽裝成本對分離均衡的衝擊，大於增加均衡路徑負擔的衝擊。
+$$
+\frac{\partial \rho}{\partial p_H}
+=
+\frac{V_H - V_\ell}{\hat V_M(0)}
+> 0,
+\qquad
+\frac{\partial \rho}{\partial p_\ell}
+=
+\frac{\hat V_M(1)(V_H - V_\ell)}{\hat V_M(0)^2}
+> 0.
+$$
 
-## 小結 {#sec-ext-summary}
+因此，不論提高 $p_H$ 或提高 $p_\ell$，都會提高 $\rho$、壓縮分離區域。經濟上，兩者的破壞方式不同：
 
-@tbl-compare 歸納了部分相關延伸對基準模型的修改。
+- 提高 $p_H$ 會拉高 $\hat V_M(1)$，使高型別如實揭露時面對更強的對手，降低分離路徑上的報酬。
+- 提高 $p_\ell$ 會壓低 $\hat V_M(0)$，使高型別偽裝成低型別時面對更弱的對手，直接提高偽裝報酬。
+
+由於
+
+$$
+\frac{\partial \rho/\partial p_\ell}{\partial \rho/\partial p_H}
+=
+\frac{\hat V_M(1)}{\hat V_M(0)}
+=
+\rho(p_H,p_\ell)
+\ge 1,
+$$
+
+只要相關為正，則 $p_\ell$ 的邊際上升對分離均衡的破壞至少與 $p_H$ 一樣大；當 $\rho>1$ 時，$p_\ell$ 的破壞力嚴格更強。
+
+若再加上 @eq-marginal-consistency，則可將可行參數集合視為 $(p_H,p_\ell)$ 平面中的一條線段。沿著這條線段由獨立點 $(q,1-q)$ 向完全相關點 $(1,1)$ 移動時，$\hat V_M(1)$ 單調上升、$\hat V_M(0)$ 單調下降，因此 $\rho$ 單調增加；一旦越過臨界邊界，分離均衡便不再可行。
+
+## 連續光譜與小結 {#sec-ext-summary}
+
+本節的延伸不是把基準模型替換掉，而是把它放進一個更大的相關結構光譜中：
+
+1. **獨立端點**：$(p_H,p_\ell)=(q,1-q)$。資方觀察到勞方訊號後，不會更新對自身獎酬的信念，模型退化為 Ch3–5 的基準環境。
+2. **部分相關區域**：$q < p_H < 1$、$1-q < p_\ell < 1$。訊號-信念通道部分開啟，分離是否存活取決於 @eq-sep-condition。
+3. **完全相關端點**：$(p_H,p_\ell)=(1,1)$。勞方揭露高型別等同於揭露資方也處於高獎酬狀態，最接近 @fu2006 的 pooling 邏輯。
+
+@tbl-compare 摘要了這個延伸相對於基準模型的差異。
 
 | 特徵 | 基準模型（@sec-equilibria） | 本節延伸 |
-|------|------|------|
-| 資訊結構 | 型別獨立，$q=s=\tfrac{1}{2}$ | 部分相關，$q,s\in[0.5,1]$ |
-| 資方最佳反應 | 僅取決於 $x_L$ 與 $V$ | 取決於 $x_L$ 與後驗 $\mu$ |
-| 訊號-信念通道 | 關閉 | 當 $q+s>1$ 時開啟 |
-| LM 均衡結果 | 唯一分離 PBE | 當 $s \leq s^*(q)$ 時分離，否則混合 |
-| 先動優勢 | 恆成立 | 僅在分離均衡區域成立 |
-| 涵蓋 Fu (2006) | 否 | 是（在 $(q,s)=(1,1)$ 處退化） |
+|---|---|---|
+| 資方獎酬 | 公開常數 $V_M \equiv V$ | 兩點隨機變數 $V_M \in \{V_\ell, V_H\}$ |
+| 勞方先驗 | $\Pr(V_L=V_H)=q$ | 同 |
+| 額外參數 | 無 | $p_H,\;p_\ell$ |
+| 邊際一致性 | 不需要 | $(1-q)(1-p_\ell)=q(1-p_H)$ |
+| 資方最佳反應 | 僅依 $(x_L,V)$ | 依 $(x_L,\hat V_M(m))$ |
+| LM 均衡 | 唯一分離 PBE | 當 $\hat V_M(1)/\hat V_M(0)\le R$ 時分離 |
+| 與 #c("fu2006") 的距離 | 不可連續對接 | 可由 $(q,1-q)$ 連續移向 $(1,1)$ |
 
 : 基準模型與部分相關延伸的比較。 {#tbl-compare}
 
-核心機制在於資方的有效獎酬 $\hat{V}_M(\mu)$ 對信念的敏感程度。在基準模型中，$\bar{V}_H = \bar{V}_L$（因 $q=s=\tfrac{1}{2}$），信念無法撼動資方努力，分離沒有成本，恆成立。隨著 $(q,s)$ 朝 $(1,1)$ 移動，差距 $\bar{V}_H - \bar{V}_L$ 拉大，偽裝誘因增強，直至越過臨界邊界 $s^*(q)$。部分相關框架因而提供了一個從基準（完全分離、先動優勢存在）到 Fu (2006) 極限（混合、先動優勢消失）之間的連續插補。
+核心機制很直接：只要資方把「看到高型別勞方」解讀成「自己更可能處於高獎酬狀態」，則高型別勞方如實揭露時所招致的對手會變得更強，偽裝誘因也會同步上升。當這個信念效應仍小於門檻 $R$ 時，分離均衡存活；當它超過門檻，基準模型中的先動揭露優勢便會消失。

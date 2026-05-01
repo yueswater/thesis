@@ -1,6 +1,6 @@
 # Literature Review {#sec-literature}
 
-## Relation to Fu (2006)
+## Relation to #c("fu2006")
 
 @fu2006 is the closest benchmark. Fu studies a two-player Tullock contest with one informed and one uninformed player. When the informed player leads, equilibrium may be separating, pooling, or semi-separating; when the uninformed player leads, the informed follower responds to the observed action. The mechanism is simple: informed effort is a signal, and the follower updates beliefs.
 

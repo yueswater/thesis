@@ -476,7 +476,7 @@ Solving for $s$ yields @eq-boundary. Differentiating the numerator with respect 
 
 **Polar cases.** At $(q,s) = (\tfrac{1}{2}, \tfrac{1}{2})$: $\bar{V}_H = \bar{V}_L = (V_H+V_L)/2$. The condition @eq-sep-condition reduces to $V_H^2 \geq V_L(2V_H-V_L)$, i.e., $(V_H-V_L)^2 \geq 0$, which holds strictly for $V_H > V_L$. Hence the benchmark point is strictly below the boundary.
 
-At $(q,s) = (1,1)$: $\bar{V}_H = V_H$ and $\bar{V}_L = V_L$. The condition @eq-sep-condition becomes $V_H \geq 2V_H - V_L$, i.e., $V_L \geq V_H$, which contradicts the premise. Hence the Fu (2006) point is strictly above the boundary. $\square$
+At $(q,s) = (1,1)$: $\bar{V}_H = V_H$ and $\bar{V}_L = V_L$. The condition @eq-sep-condition becomes $V_H \geq 2V_H - V_L$, i.e., $V_L \geq V_H$, which contradicts the premise. Hence the #c("fu2006") point is strictly above the boundary. $\square$
 
 ## Proof of the Welfare Formulas in Section @sec-welfare {#sec-proof-welfare}
 By definition, $W=U_L+U_M$.

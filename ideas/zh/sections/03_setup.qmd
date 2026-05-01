@@ -12,25 +12,47 @@
 
 ## 資訊結構
 
-資方只知道 $V_L$ 的分配。第一階段選擇時序時，勞方也尚未觀察自身型別；時序確定後，勞方才私下觀察 $V_L$ 並進入投入子賽局。因此第一階段比較事前期望報酬。設 $V_L$ 的支持集為 $[\mu-\delta,\mu+\delta]$，其中 $\mu>\delta>0$，故 $\E[V_L]=\mu$。
+資方只知道 $V_L$ 的分配。第一階段選擇時序時，勞方也尚未觀察自身型別；時序確定後，勞方才私下觀察 $V_L$ 並進入投入子賽局。因此第一階段比較事前期望報酬。$V_L$ 的支持集為兩個正實數的集合或正實區間，記其平均數為 $\mu \equiv \E[V_L]$，二階中央矩為 $\sigma^2 \equiv \Var(V_L)$。
+
+::: {#def-prior}
+### 先驗機率
+為使本文的基準模型能與後續第 @sec-extension 節之部分相關延伸對齊，正式引入勞方型別為高的**先驗機率**：
+
+$$
+\Pr(V_L = V_H) = q,
+\qquad
+\Pr(V_L = V_\ell) = 1 - q,
+\qquad q \in (0, 1).
+$$
+
+當 $q = 1/2$ 時，先驗對稱；本文的核心分析結果並不依賴 $q = 1/2$，但第二章 #c("fu2006") 的特例對應於 $q = 1/2$ 的對稱先驗。
+:::
 
 令
 
 $$
-u_\ell \equiv \sqrt{\mu-\delta}, \qquad
-u_H \equiv \sqrt{\mu+\delta}.
+u_\ell \equiv \sqrt{V_\ell}, \qquad
+u_H \equiv \sqrt{V_H}.
 $$ {#eq-u-types}
 
 本文使用兩個基準分配。
 
 ::: {#def-binary}
-### 二點分配 {#sec-distributions}
+### 兩點分配 {#sec-distributions}
 
 $$
-V_L \in \{V_\ell,V_H\}=\{\mu-\delta,\mu+\delta\},
+V_L \in \{V_\ell, V_H\}, \qquad V_H > V_\ell > 0,
 $$
 
-兩型別機率皆為 $1/2$，故 $\Var(V_L)=\delta^2$。
+機率為 $\Pr(V_L = V_H) = q$、$\Pr(V_L = V_\ell) = 1 - q$。基本參數為 $(V_\ell, V_H, q)$，派生量為
+
+$$
+\mu = q V_H + (1 - q) V_\ell,
+\qquad
+\sigma^2 = q(1 - q)(V_H - V_\ell)^2.
+$$
+
+當 $q = 1/2$ 時，$V_\ell = \mu - \delta$、$V_H = \mu + \delta$，且 $\sigma^2 = \delta^2$，回到對稱兩點分配的標準參數化。
 :::
 
 ::: {#def-uniform}
@@ -40,10 +62,10 @@ $$
 V_L \sim U[\mu-\delta,\mu+\delta],
 $$
 
-密度為 $f(v)=1/(2\delta)$，故 $\Var(V_L)=\delta^2/3$。
+密度為 $f(v)=1/(2\delta)$，故 $\Var(V_L)=\delta^2/3$。先驗 $q$ 概念在連續分配下不適用；均勻分配以 $(\mu, \delta)$ 為基本參數。
 :::
 
-兩個分配有相同平均數 $\mu$ 與支持集，但變異數不同。均衡表達式用到三個動差：
+兩個分配的支持集與第一動差相同（均勻分配於 $[\mu - \delta, \mu + \delta]$；兩點分配當 $q = 1/2$ 時亦同），但變異數與高階動差不同。均衡表達式用到三個動差：
 
 $$
 \kappa \equiv \E\!\left[\frac{1}{\sqrt{V_L}}\right],
@@ -67,14 +89,16 @@ $$ {#eq-moments}
 ### 動差比較
 動差如下：
 
-|  | 二點分配 | 均勻分配 |
+|  | 兩點分配 | 均勻分配 |
 |---|---|---|
-| $\Var(V_L)$ | $\delta^2$ | $\delta^2/3$ |
-| $\kappa$ | $\dfrac{1}{2u_\ell}+\dfrac{1}{2u_H}$ | $\dfrac{u_H-u_\ell}{\delta}$ |
-| $\nu$ | $\dfrac{u_\ell+u_H}{2}$ | $\dfrac{u_H^3-u_\ell^3}{3\delta}$ |
-| $\lambda$ | $\dfrac{1}{2u_\ell^2}+\dfrac{1}{2u_H^2}$ | $\dfrac{\ln(u_H/u_\ell)}{\delta}$ |
+| $\Var(V_L)$ | $q(1-q)(V_H - V_\ell)^2$ | $\delta^2/3$ |
+| $\kappa$ | $\dfrac{1-q}{u_\ell}+\dfrac{q}{u_H}$ | $\dfrac{u_H-u_\ell}{\delta}$ |
+| $\nu$ | $(1-q)\,u_\ell+q\,u_H$ | $\dfrac{u_H^3-u_\ell^3}{3\delta}$ |
+| $\lambda$ | $\dfrac{1-q}{u_\ell^2}+\dfrac{q}{u_H^2}$ | $\dfrac{\ln(u_H/u_\ell)}{\delta}$ |
 
-: 二點分配與均勻分配下的關鍵動差 {#tbl-moments}
+: 兩點分配與均勻分配下的關鍵動差 {#tbl-moments}
+
+兩點分配的動差以 $(V_\ell, V_H, q)$ 表達；均勻分配以 $(\mu, \delta)$ 表達。當 $q = 1/2$ 時，兩點分配欄位回到對稱情形 $\frac{1}{2u_\ell} + \frac{1}{2u_H}$ 等。
 :::
 
 ::: {.proof}

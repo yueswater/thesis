@@ -6,10 +6,10 @@ Reference journals: *American Economic Review*, *Journal of Economic Theory*, *G
 
 ## 1. Citation format
 
-- In-text citations follow the "Author (year)" convention with parentheses, e.g., `Fu (2006)`, `Hurley and Shogren (1998)`.
+- In-text citations follow the "Author (year)" convention with parentheses, e.g., `#c("fu2006")`, `Hurley and Shogren (1998)`.
 - Two authors are joined by `and`; three or more authors are listed in full on first mention, e.g., `Baik, Lee, and Lee (2022)`.
 - When the citation is embedded in the sentence as the subject:
-  - ✓ `Fu (2006) shows that ...`
+  - ✓ `#c("fu2006") shows that ...`
   - ✓ `Hurley and Shogren (1998) find that ...`
   - ✗ Avoid leading with a citation followed by a clause without a verb linking the two.
 - Parenthetical (non-subject) citations: `... (Fu, 2006)`.

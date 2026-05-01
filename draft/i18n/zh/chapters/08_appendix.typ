@@ -1,15 +1,15 @@
-#import "../thesis.typ": proof, widetilde
+#import "../thesis.typ": headingref, proof, widetilde
 
-== $S S$ 子賽局 <proof-ss>
+== $S S$ 子賽局均衡的推導 <proof-ss>
 
 #proof[
-  在 $S S$ 中，兩位參與者同時選擇投入。給定 $U$ 的投入 $x_U$，型別為 $V_I = v$ 的 $I$ 的最佳反應為
+  在 $S S$ 中，兩位參與者同時選擇投入。給定不知情者的投入 $x_U$，型別為 $V_I = v$ 的知情者的最佳反應為
 
   $
     x_I(v) = sqrt(v x_U) - x_U.
   $
 
-  $U$ 在選擇 $x_U$ 時，預期 $I$ 會依型別採取上述反應。因此，$U$ 的一階條件為
+  不知情者在選擇 $x_U$ 時，預期知情者會依型別採取上述反應。因此，不知情者的一階條件為
 
   $
     V EE[
@@ -22,48 +22,42 @@
   $
     V EE[
       (sqrt(V_I x_U) - x_U) / (V_I x_U)
-    ]
-    = V (kappa / sqrt(x_U) - lambda)
-    = 1.
+    ] & = V (kappa / sqrt(x_U) - lambda) \
+      & = 1.
   $
 
   解此式得
 
   $
-    sqrt(x_U^(S S)) = (V kappa) / (1 + V lambda),
-    quad
-    x_U^(S S) = (V^2 kappa^2) / (1 + V lambda)^2.
+    sqrt(x_U^(S S)) & = (V kappa) / (1 + V lambda),
+                      quad
+                      x_U^(S S) & = (V^2 kappa^2) / (1 + V lambda)^2.
   $
 
-  再將 $x_U^(S S)$ 代回 $I$ 的最佳反應，得到
+  再將 $x_U^(S S)$ 代回知情者的最佳反應，得到
 
   $
-    x_I^(S S)(v)
-    = (V kappa sqrt(v)) / (1 + V lambda)
-    - (V^2 kappa^2) / (1 + V lambda)^2.
+    x_I^(S S)(v) & =
+                   (V kappa sqrt(v)) / (1 + V lambda) \
+                 & - (V^2 kappa^2) / (1 + V lambda)^2.
   $
 
-  由於 $x_I^(S S)(v) + x_U^(S S) = (V kappa sqrt(v)) / (1 + V lambda)$，$I$ 的均衡報酬為
+  由於 $x_I^(S S)(v) + x_U^(S S) = (V kappa sqrt(v)) / (1 + V lambda)$，知情者的均衡報酬為
 
   $
-    pi_I^(S S)(v)
-    =
-    (1 - (V kappa) / ((1 + V lambda) sqrt(v))) v
-    - x_I^(S S)(v)
-    =
-    (sqrt(v) - (V kappa) / (1 + V lambda))^2.
+    pi_I^(S S)(v) & =
+                    (1 - (V kappa) / ((1 + V lambda) sqrt(v))) v - x_I^(S S)(v) \
+                  & =
+                    (sqrt(v) - (V kappa) / (1 + V lambda))^2.
   $
 
-  $U$ 的均衡報酬則為
+  不知情者的均衡報酬則為
 
   $
-    pi_U^(S S)(v)
-    =
-    (V kappa) / ((1 + V lambda) sqrt(v)) V
-    - (V^2 kappa^2) / (1 + V lambda)^2
-    =
-    (V^2 kappa) / ((1 + V lambda) sqrt(v))
-    - (V^2 kappa^2) / (1 + V lambda)^2.
+    pi_U^(S S)(v) & =
+                    (V kappa) / ((1 + V lambda) sqrt(v)) V - (V^2 kappa^2) / (1 + V lambda)^2 \
+                  & =
+                    (V^2 kappa) / ((1 + V lambda) sqrt(v)) - (V^2 kappa^2) / (1 + V lambda)^2.
   $
 
   最後對 $V_I$ 取期望，可得
@@ -71,111 +65,98 @@
   $
     widetilde(pi)_I^(S S)
     =
-    mu - (2 V kappa nu) / (1 + V lambda)
-    + (V^2 kappa^2) / (1 + V lambda)^2,
+    mu - (2 V kappa nu) / (1 + V lambda) + (V^2 kappa^2) / (1 + V lambda)^2,
   $
 
   $
-    pi_U^(S S)
-    =
-    (V^2 kappa) / (1 + V lambda) kappa
-    - (V^2 kappa^2) / (1 + V lambda)^2
-    =
-    (V^3 kappa^2 lambda) / (1 + V lambda)^2.
+    pi_U^(S S) & =
+                 (V^2 kappa) / (1 + V lambda) kappa - (V^2 kappa^2) / (1 + V lambda)^2 \
+               & =
+                 (V^3 kappa^2 lambda) / (1 + V lambda)^2.
   $
 ]
 
-== 第六章：臨界邊界推導 <proof-ext-boundary>
+== 臨界邊界的推導 <proof-ext-boundary>
 
 #proof[
-  由第六章高型別誘因相容條件
+  由#headingref(<subsec-ext-boundary>)的高型別誘因相容條件
 
   $
-    V_H^2 / bar(V)_H
+    V_H^2 / hat(V)_U(1)
     >=
-    V_L(2V_H - V_L) / bar(V)_L
+    V_L (2 V_H - V_L) / hat(V)_U(0)
   $
 
-  取等號可得臨界線。代入
+  取等號，並令
 
   $
-    bar(V)_H = q V_H + (1-q) V_L,
-    quad
-    bar(V)_L = (1-s) V_H + s V_L,
+    R & equiv
+        V_H^2 / (V_L (2 V_H - V_L)),
+  $
+
+  則臨界線滿足
+
+  $
+    hat(V)_U(1) = R hat(V)_U(0).
+  $
+
+  再代入
+
+  $
+    hat(V)_U(1) & = p_H V_H + (1-p_H) V_L,
+                  quad
+                  hat(V)_U(0) & = (1-p_L) V_H + p_L V_L,
   $
 
   得
 
   $
-    V_H^2[(1-s) V_H + s V_L]
+    p_H V_H + (1-p_H) V_L
     =
-    V_L(2V_H - V_L)[q V_H + (1-q) V_L].
+    R[(1-p_L) V_H + p_L V_L].
   $
 
-  展開左側後整理：
+  整理後可解出
 
   $
-    V_H^3 - s V_H^2(V_H - V_L)
-    =
-    V_L(2V_H - V_L)[q V_H + (1-q) V_L].
-  $
-
-  解出 $s$：
-
-  $
-    s^*(q)
+    p_L^*(p_H)
     =
     (
-    V_H^3
-    - V_L(2V_H-V_L)[q V_H + (1-q) V_L]
-    ) / (V_H^2(V_H - V_L)).
+    R V_H - V_L - p_H (V_H - V_L)
+    ) / (R (V_H - V_L)).
   $
 
-  即主文的臨界邊界公式。再對 $q$ 微分得
+  即主文的臨界邊界公式。檢查兩個基準點：
 
-  $
-    d s^*(q)/d q
-    =
-    -V_L(2V_H - V_L)/V_H^2 < 0.
-  $
+  1. 獨立點 $(p_H,p_L)=(q,1-q)$ 時，
+    $
+      hat(V)_U(1) = hat(V)_U(0) = q V_H + (1-q) V_L.
+    $
+    故主文條件化為 $1 <= R$。由 $V_H > V_L > 0$ 可知 $R>1$，因此分離條件嚴格成立。
 
-  接著檢查兩個端點。
-
-  1. $(q,s) = (1/2, 1/2)$ 時，
-  $
-    bar(V)_H = bar(V)_L = (V_H + V_L)/2.
-  $
-  主文條件化為
-  $
-    V_H^2 >= V_L(2V_H - V_L)
-    <=>
-    (V_H - V_L)^2 >= 0,
-  $
-  且在 $V_H > V_L$ 下嚴格成立，故位於分離區域。
-
-  2. $(q,s) = (1,1)$ 時，
-  $
-    bar(V)_H = V_H, quad bar(V)_L = V_L.
-  $
-  主文條件化為
-  $
-    V_H >= 2V_H - V_L
-    <=>
-    V_L >= V_H,
-  $
-  與 $V_H > V_L$ 矛盾，故位於混合區域。命題得證。
+  2. 完全相關點 $(1,1)$ 時，
+    $
+      hat(V)_U(1)=V_H,
+      quad
+      hat(V)_U(0)=V_L.
+    $
+    因此比值為 $V_H/V_L$。而
+    $
+      V_H / V_L > V_H^2 / (V_L (2 V_H - V_L))
+    $
+    等價於 $V_H > V_L$，故完全相關點位於邊界上方，分離均衡失敗。
 ]
 
-== $U I$ 子賽局 <proof-ui>
+== $U I$ 子賽局均衡的推導 <proof-ui>
 
 #proof[
-  在 $U I$ 中，$U$ 先承諾投入，$I$ 觀察 $x_U$ 後依型別回應。給定 $x_U$ 與型別 $v$，$I$ 的最佳反應為
+  在 $U I$ 中，不知情者先承諾投入，知情者觀察 $x_U$ 後依型別回應。給定 $x_U$ 與型別 $v$，知情者的最佳反應為
 
   $
     x_I(v) = sqrt(v x_U) - x_U.
   $
 
-  因此，$U$ 在第一期的問題為
+  因此，不知情者在第一期的問題為
 
   $
     max_(x_U >= 0)
@@ -197,11 +178,12 @@
     x_U^(U I) = (V^2 kappa^2) / 4.
   $
 
-  代回 $I$ 的最佳反應，得到
+  代回知情者的最佳反應，得到
 
   $
     x_I^(U I)(v)
-    = (V kappa sqrt(v)) / 2 - (V^2 kappa^2) / 4.
+    =
+    (V kappa sqrt(v)) / 2 - (V^2 kappa^2) / 4.
   $
 
   由於 $x_I^(U I)(v) + x_U^(U I) = (V kappa sqrt(v)) / 2$，逐型別報酬為
@@ -227,31 +209,29 @@
   $
 
   $
-    pi_U^(U I)
-    =
-    (V^2 kappa) / 2 kappa - (V^2 kappa^2) / 4
-    =
-    (V^2 kappa^2) / 4.
+    pi_U^(U I) & =
+                 (V^2 kappa) / 2 kappa - (V^2 kappa^2) / 4 \
+               & =
+                 (V^2 kappa^2) / 4.
   $
 ]
 
-== $I U$ 子賽局 <proof-iu>
+== $I U$ 子賽局均衡與分離性的推導 <proof-iu>
 
 #proof[
-  在 $I U$ 中，$I$ 先投入，$U$ 觀察後再回應。給定 $I$ 的投入 $x_I$，$U$ 的最佳反應為
+  在 $I U$ 中，知情者先投入，不知情者觀察後再回應。給定知情者的投入 $x_I$，不知情者的最佳反應為
 
   $
     x_U^*(x_I; V) = sqrt(V x_I) - x_I.
   $
 
-  型別為 $v$ 的 $I$ 預期到此一反應後，選擇 $x_I$ 以最大化
+  型別為 $v$ 的知情者預期到此一反應後，選擇 $x_I$ 以最大化
 
   $
-    W(x_I; v)
-    equiv
-    x_I / (x_I + x_U^*(x_I; V)) v - x_I
-    =
-    v / sqrt(V) sqrt(x_I) - x_I.
+    W(x_I; v) & equiv
+                x_I / (x_I + x_U^*(x_I; V)) v - x_I \
+              & =
+                v / sqrt(V) sqrt(x_I) - x_I.
   $
 
   此目標函數對 $x_I$ 嚴格凹。一階條件為
@@ -266,14 +246,13 @@
     x_I^(I U)(v) = v^2 / (4 V).
   $
 
-  將此投入代入 $U$ 的最佳反應，得到
+  將此投入代入不知情者的最佳反應，得到
 
   $
-    x_U^(I U)(v)
-    =
-    sqrt(V v^2 / (4 V)) - v^2 / (4 V)
-    =
-    v (2 V - v) / (4 V).
+    x_U^(I U)(v) & =
+                   sqrt(V v^2 / (4 V)) - v^2 / (4 V) \
+                 & =
+                   v (2 V - v) / (4 V).
   $
 
   均衡報酬為
@@ -293,31 +272,28 @@
   $
 
   $
-    pi_U^(I U)
-    =
-    EE[(2 V - V_I)^2] / (4 V)
-    =
-    (4 V^2 - 4 V mu + EE[V_I^2]) / (4 V).
+    pi_U^(I U) & =
+                 EE[(2 V - V_I)^2] / (4 V) \
+               & =
+                 (4 V^2 - 4 V mu + EE[V_I^2]) / (4 V).
   $
 
-  接著檢查誘因相容。固定真實型別 $v$，並考慮任一替代型別 $s != v$。若型別 $v$ 模仿 $s$ 的均衡投入，其投入為 $s^2 / (4 V)$。在 $U$ 依最佳反應回應後，偏離報酬為
+  接著檢查誘因相容。固定真實型別 $v$，並考慮任一替代型別 $s != v$。若型別 $v$ 模仿 $s$ 的均衡投入，其投入為 $s^2 / (4 V)$。在 不知情者依最佳反應回應後，偏離報酬為
 
   $
-    widetilde(U)(v, s)
-    =
-    v / sqrt(V) sqrt(s^2 / (4 V)) - s^2 / (4 V)
-    =
-    (2 v s - s^2) / (4 V).
+    widetilde(U)(v, s) & =
+                         v / sqrt(V) sqrt(s^2 / (4 V)) - s^2 / (4 V) \
+                       & =
+                         (2 v s - s^2) / (4 V).
   $
 
   誠實行動的報酬為 $v^2 / (4 V)$。兩者相減可得
 
   $
-    v^2 / (4 V) - widetilde(U)(v, s)
-    =
-    (v - s)^2 / (4 V) > 0
-    quad (s != v).
+    v^2 / (4 V) - widetilde(U)(v, s) & =
+                                       (v - s)^2 / (4 V) > 0
+                                       quad (s != v).
   $
 
-  因此，每一型別都嚴格偏好自己的分離行動。混合均衡與半分離均衡皆無法成立，$I U$ 子賽局的完美貝葉斯均衡為唯一分離均衡。
+  因此，每一型別都嚴格偏好自己的分離行動。混合均衡與半分離均衡皆無法成立，$I U$ 子賽局的完美貝氏均衡為唯一分離均衡。
 ]

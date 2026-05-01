@@ -263,6 +263,14 @@ $
   - If the endpoints share the same sign, the intermediate value theorem does not guarantee an interior root, so no root may lie in the support; all types then prefer the same direction (all move first or all move second).
 ]
 
+As shown in #ref(<fig-ch5-uniform-regions>), under the uniform distribution the $(mu, delta)$ plane can be partitioned according to whether the support is split by an interior threshold $v^*$. If $R(v) < 0$ throughout the support, every type prefers to remain in $I U$. When both signs appear within the same support, continuity implies the existence of at least one interior threshold that partitions the type space into the regions $cal(F)$ and $cal(W)$. Unlike the two-point case, the panel parameter here is not a probability weight $q$ but the public prize level $V$, which directly alters the shape of $R(v)$. The dashed line marks the feasibility boundary $delta = mu$; above it the lower endpoint of the support would be non-positive. Within the plotted feasible region, no panel exhibits a region in which all types prefer $S S$; what appears instead is a contrast between a split region with an interior threshold and a region in which all types prefer $I U$. As $V$ rises, the split region expands.
+
+#figure(
+  image("../../../figures/fig5_uniform_regions.pdf", width: 90%),
+  caption: [Type-partition regions on the $(mu, delta)$ plane under the uniform distribution. The light region indicates an interior threshold that splits the support into types preferring $I U$ and types preferring $S S$; the medium gray region indicates that all types prefer $I U$. The dashed line is the feasibility boundary $delta = mu$. The three panels correspond to $V = 0.5$, $1.0$, and $1.5$.],
+  supplement: [Figure],
+) <fig-ch5-uniform-regions>
+
 == Pooling analysis <subsec-pooling-analysis>
 
 Of the three regimes, only $I U$ raises the question of whether the leader's effort transmits type information: $I$ moves first and $U$ responds after observing $x_I$. The other two regimes do not: $S S$ has simultaneous moves, and $U I$ has $U$ moving first; in neither case does $I$ signal to $U$.

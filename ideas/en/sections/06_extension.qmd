@@ -117,7 +117,7 @@ with constant negative slope $ds^*/dq = -V_L(2V_H-V_L)/V_H^2 < 0$.
 The two degenerate limits of the model lie on opposite sides of the boundary:
 
 - At $(q, s) = (\tfrac{1}{2}, \tfrac{1}{2})$: $\mathrm{IC}_H$ reduces to $(V_H - V_L)^2 \geq 0$, which always holds. The benchmark point lies **strictly below** $s^*$ in the separating region.
-- At $(q, s) = (1, 1)$: $\mathrm{IC}_H$ requires $V_L \geq V_H$, which contradicts the premise. The Fu (2006) point lies **strictly above** $s^*$ in the pooling region.
+- At $(q, s) = (1, 1)$: $\mathrm{IC}_H$ requires $V_L \geq V_H$, which contradicts the premise. The #c("fu2006") point lies **strictly above** $s^*$ in the pooling region.
 :::
 
 ::: {.proof}
@@ -126,9 +126,9 @@ See @sec-proof-ext-boundary.
 
 **Separating region** ($s \leq s^*(q)$, lower-left in @fig-partial-corr). Moderate correlation keeps the ratio $\bar{V}_H/\bar{V}_L$ below the threshold $R$. The high type's on-path payoff exceeds the mimicry payoff, so separation is incentive compatible and labor's first-mover advantage is preserved.
 
-**Pooling region** ($s > s^*(q)$, upper-right in @fig-partial-corr). Strong correlation drives $\bar{V}_H/\bar{V}_L$ above $R$. The high type can profitably imitate the low type, separation collapses, and the equilibrium outcome resembles Fu (2006) in which both types pool and the signaling benefit of moving first is lost.
+**Pooling region** ($s > s^*(q)$, upper-right in @fig-partial-corr). Strong correlation drives $\bar{V}_H/\bar{V}_L$ above $R$. The high type can profitably imitate the low type, separation collapses, and the equilibrium outcome resembles #c("fu2006") in which both types pool and the signaling benefit of moving first is lost.
 
-![Equilibrium regions in the $(q,s)$ parameter space ($V_H = 2$, $V_L = 1$). The critical boundary $s^*(q) = (5-3q)/4$ separates the separating equilibrium region (lighter, forward-slash hatching) from the pooling equilibrium region (darker, back-slash hatching). Triangle: benchmark $(\frac{1}{2},\frac{1}{2})$; square: Fu (2006) limit $(1,1)$.](../figures/partial_correlation_regions.png){#fig-partial-corr width=72%}
+![Equilibrium regions in the $(q,s)$ parameter space ($V_H = 2$, $V_L = 1$). The critical boundary $s^*(q) = (5-3q)/4$ separates the separating equilibrium region (lighter, forward-slash hatching) from the pooling equilibrium region (darker, back-slash hatching). Triangle: benchmark $(\frac{1}{2},\frac{1}{2})$; square: #c("fu2006") limit $(1,1)$.](../figures/partial_correlation_regions.png){#fig-partial-corr width=72%}
 
 ## Comparative Statics {#sec-ext-cs}
 
@@ -151,8 +151,8 @@ The boundary @eq-boundary delivers clean comparative statics.
 | Signal-belief channel | Closed | Open when $q+s>1$ |
 | LM equilibrium outcome | Unique separating PBE | Separating iff $s \leq s^*(q)$ |
 | First-mover advantage | Always preserved | Preserved in separating region only |
-| Nests Fu (2006) | No | Yes, at $(q,s)=(1,1)$ |
+| Nests #c("fu2006") | No | Yes, at $(q,s)=(1,1)$ |
 
 : Benchmark model versus partial-correlation extension. {#tbl-compare}
 
-The key ingredient is whether management's effective prize $\hat{V}_M(\mu)$ is sensitive to beliefs. In the benchmark, $\bar{V}_H = \bar{V}_L$ (since $q = s = \tfrac{1}{2}$), so beliefs do not move management's effort and separation is costless. As $(q, s)$ moves toward $(1, 1)$, the wedge $\bar{V}_H - \bar{V}_L$ widens, mimicry becomes increasingly attractive, and eventually the critical boundary $s^*(q)$ is crossed. The partial-correlation framework thus provides a continuous interpolation between the benchmark (full separation, first-mover advantage) and the Fu (2006) limit (pooling, no signaling benefit from moving first).
+The key ingredient is whether management's effective prize $\hat{V}_M(\mu)$ is sensitive to beliefs. In the benchmark, $\bar{V}_H = \bar{V}_L$ (since $q = s = \tfrac{1}{2}$), so beliefs do not move management's effort and separation is costless. As $(q, s)$ moves toward $(1, 1)$, the wedge $\bar{V}_H - \bar{V}_L$ widens, mimicry becomes increasingly attractive, and eventually the critical boundary $s^*(q)$ is crossed. The partial-correlation framework thus provides a continuous interpolation between the benchmark (full separation, first-mover advantage) and the #c("fu2006") limit (pooling, no signaling benefit from moving first).

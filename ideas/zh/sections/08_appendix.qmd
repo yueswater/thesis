@@ -10,15 +10,40 @@ appendix: true
 
 ## @prp-moments 的證明 {#sec-proof-moments}
 
-二點分配的動差由兩個型別取平均即可：
+兩點分配下，$V_L$ 以機率 $1-q$ 取 $V_\ell$，以機率 $q$ 取 $V_H$。令 $u_\ell=\sqrt{V_\ell}$、$u_H=\sqrt{V_H}$，則
 
 $$
-\kappa^B=\frac{1}{2u_\ell}+\frac{1}{2u_H},
-\qquad
-\nu^B=\frac{u_\ell+u_H}{2},
-\qquad
-\lambda^B=\frac{1}{2u_\ell^2}+\frac{1}{2u_H^2}.
+\begin{aligned}
+\kappa^B
+&=\E[V_L^{-1/2}]
+= \frac{1-q}{u_\ell} + \frac{q}{u_H},\\[0.75ex]
+\nu^B
+&=\E[V_L^{1/2}]
+= (1-q)u_\ell + qu_H,\\[0.75ex]
+\lambda^B
+&=\E[V_L^{-1}]
+= \frac{1-q}{u_\ell^2} + \frac{q}{u_H^2}.
+\end{aligned}
 $$
+
+同時，
+
+$$
+\mu
+= \E[V_L]
+= (1-q)V_\ell + qV_H,
+\qquad
+\sigma_B^2
+= \Var(V_L)
+= q(1-q)(V_H-V_\ell)^2.
+$$
+
+當 $q=1/2$ 時，便回到舊式的對稱兩點分配公式
+$
+\kappa^B = \frac{1}{2u_\ell}+\frac{1}{2u_H},\;
+\nu^B = \frac{u_\ell+u_H}{2},\;
+\lambda^B = \frac{1}{2u_\ell^2}+\frac{1}{2u_H^2}.
+$
 
 均勻分配的密度為
 
@@ -54,38 +79,9 @@ $$
 =\frac{\ln(u_H/u_\ell)}{\delta}.
 $$
 
-比較 $\kappa^B$ 與 $\kappa^U$。因 $v^{-1/2}$ 為嚴格凸函數，Jensen 不等式給出
-
-$$
-\kappa^B=\E_{\mathrm{binary}}[V_L^{-1/2}]
->
-\left(\E_{\mathrm{binary}}[V_L]\right)^{-1/2}
-=\mu^{-1/2}.
-$$
-
-又由 $u_H^2-u_\ell^2=2\delta$ 得
-
-$$
-\kappa^U=\frac{u_H-u_\ell}{\delta}=\frac{2}{u_H+u_\ell},
-\qquad
-\kappa^B=\frac{1}{2u_\ell}+\frac{1}{2u_H}
-=\frac{u_H+u_\ell}{2u_\ell u_H}.
-$$
-
-所以
-
-$$
-\kappa^B-\kappa^U
-=\frac{(u_H+u_\ell)^2-4u_\ell u_H}{2u_\ell u_H(u_H+u_\ell)}
-=\frac{(u_H-u_\ell)^2}{2u_\ell u_H(u_H+u_\ell)}
->0.
-$$
-
-故 $\kappa^B>\kappa^U$。
-
 ## @prp-ss 的證明 {#sec-proof-ss}
 
-我們求貝葉斯均衡 $(x_M^*,\,x_L^*(\cdot))$，其中資方選常數 $x_M^*$，勞方逐型別最佳反應。由 @eq-brl，型別 $v$ 的最佳反應為
+我們求貝氏均衡 $(x_M^*,\,x_L^*(\cdot))$，其中資方選常數 $x_M^*$，勞方逐型別最佳反應。由 @eq-brl，型別 $v$ 的最佳反應為
 
 $$
 x_L^*(v)=\sqrt{vx_M^*}-x_M^*.
@@ -290,7 +286,7 @@ $$
 
 此差額為正定二次型，對所有 $s\neq v$ 皆嚴格為正。故任何要求型別 $v$ 採取 $s^2/(4V)$（其中 $s\neq v$）的策略，都被 truthful 策略嚴格支配。
 
-在二點型別特例下，上式即對應正文的 $\text{IC}_{H}$ 與 $\text{IC}_{L}$。這兩條限制同時成立，是候選分離均衡可行的必要且充分條件。必要性來自分離均衡必須排除雙向模仿。充分性則來自，在 @eq-brm 給定的續局最佳反應下，只要兩條 IC 同時成立，兩型別各自選擇自己的行動即為最佳反應。
+在兩點型別特例下，上式即對應正文的 $\text{IC}_{H}$ 與 $\text{IC}_{L}$。這兩條限制同時成立，是候選分離均衡可行的必要且充分條件。必要性來自分離均衡必須排除雙向模仿。充分性則來自，在 @eq-brm 給定的續局最佳反應下，只要兩條 IC 同時成立，兩型別各自選擇自己的行動即為最佳反應。
 
 若令
 
@@ -306,7 +302,7 @@ $$
 
 在 $v=s$ 處變號。這提供了單交叉性的表述。不過，本文不需額外依賴單交叉性。原因是 $D(v,s)>0$ 對所有 $s\neq v$ 皆成立，已直接給出更強的全域嚴格誘因相容。
 
-又因資方的續局最佳反應只依賴觀察到的投入與參數 $V$，不依賴後驗信念，故信念無法改變上述偏離誘因。於是，PBE 中不存在混合均衡或半分離均衡行為，也不存在使 pooling 可行的參數區域。LM 子賽局的唯一完美貝葉斯均衡，必為分離均衡。
+又因資方的續局最佳反應只依賴觀察到的投入與參數 $V$，不依賴後驗信念，故信念無法改變上述偏離誘因。於是，PBE 中不存在混合均衡或半分離均衡行為，也不存在使 pooling 可行的參數區域。LM 子賽局的唯一完美貝氏均衡，必為分離均衡。
 
 ## LM 期望報酬公式的證明 {#sec-proof-lm-payoff}
 
@@ -419,20 +415,110 @@ $$
 將 $\mathrm{IC}_H$（@eq-ich）取等號：
 
 $$
-V_H^2\bigl[(1-s)V_H + sV_L\bigr] = V_L(2V_H - V_L)\bigl[qV_H + (1-q)V_L\bigr].
+V_H^2\hat V_M(0)
+=
+V_\ell(2V_H - V_\ell)\hat V_M(1).
 $$
 
-展開左側：
+令
 
 $$
-V_H^3 - sV_H^2(V_H - V_L) = V_L(2V_H - V_L)\bigl[qV_H + (1-q)V_L\bigr].
+R \equiv \frac{V_H^2}{V_\ell(2V_H - V_\ell)}.
 $$
 
-解出 $s$ 即得 @eq-boundary。對分子關於 $q$ 微分，得 $ds^*/dq = -V_L(2V_H-V_L)/V_H^2 < 0$。
+則等號條件可寫成
 
-**極端情形。** 在 $(q,s) = (\tfrac{1}{2}, \tfrac{1}{2})$：$\bar{V}_H = \bar{V}_L = (V_H+V_L)/2$。@eq-sep-condition 化簡為 $V_H^2 \geq V_L(2V_H-V_L)$，即 $(V_H-V_L)^2 \geq 0$，對 $V_H > V_L$ 嚴格成立。故基準點嚴格位於邊界以下（分離均衡區域）。
+$$
+\hat V_M(1) = R\hat V_M(0).
+$$
 
-在 $(q,s) = (1,1)$：$\bar{V}_H = V_H$，$\bar{V}_L = V_L$。@eq-sep-condition 要求 $V_H \geq 2V_H - V_L$，即 $V_L \geq V_H$，與前提矛盾。故 Fu (2006) 點嚴格位於邊界以上（混合均衡區域）。$\square$
+代入 $\hat V_M(1)=p_HV_H+(1-p_H)V_\ell$ 與 $\hat V_M(0)=(1-p_\ell)V_H+p_\ell V_\ell$ 得
+
+$$
+p_HV_H+(1-p_H)V_\ell
+=
+R\bigl[(1-p_\ell)V_H+p_\ell V_\ell\bigr].
+$$
+
+整理後即得
+
+$$
+p_\ell^*(p_H)
+=
+\frac{RV_H - V_\ell - p_H(V_H-V_\ell)}{R(V_H-V_\ell)},
+$$
+
+亦即 @eq-boundary。
+
+**極端情形。**
+
+1. 在獨立點 $(p_H,p_\ell)=(q,1-q)$，由 @eq-marginal-consistency 可得
+   $$
+   \hat V_M(1)=\hat V_M(0)=qV_H+(1-q)V_\ell.
+   $$
+   因此 $\hat V_M(1)/\hat V_M(0)=1<R$，故基準點位於邊界下方。
+
+2. 在完全相關點 $(1,1)$，
+   $$
+   \hat V_M(1)=V_H,\qquad \hat V_M(0)=V_\ell.
+   $$
+   故
+   $$
+   \frac{\hat V_M(1)}{\hat V_M(0)}
+   =
+   \frac{V_H}{V_\ell}
+   >
+   \frac{V_H^2}{V_\ell(2V_H-V_\ell)}
+   = R,
+   $$
+   其中最後一個嚴格不等式等價於 $V_H>V_\ell$。因此完全相關點位於邊界上方，分離均衡失敗。$\square$
+
+## 第 @sec-extension 節 IC 推導補充 {#sec-proof-ext-ic}
+
+在部分相關延伸中，低型別與高型別的均衡路徑投入分別為
+
+$$
+x_\ell = \frac{V_\ell^2}{4\hat V_M(0)},
+\qquad
+x_H = \frac{V_H^2}{4\hat V_M(1)}.
+$$
+
+高型別若偽裝成低型別，則資方以 $\hat V_M(0)$ 回應，故偏離報酬為
+
+$$
+\widetilde\Pi_H
+=
+\frac{V_H}{\sqrt{\hat V_M(0)}}\sqrt{x_\ell} - x_\ell
+=
+\frac{V_HV_\ell}{2\hat V_M(0)} - \frac{V_\ell^2}{4\hat V_M(0)}
+=
+\frac{V_\ell(2V_H-V_\ell)}{4\hat V_M(0)}.
+$$
+
+因此，高型別誘因相容等價於
+
+$$
+\Pi_H \ge \widetilde\Pi_H
+\iff
+\frac{V_H^2}{4\hat V_M(1)}
+\ge
+\frac{V_\ell(2V_H-V_\ell)}{4\hat V_M(0)},
+$$
+
+亦即正文的 @eq-ich。
+
+另一方面，低型別若模仿高型別，其偏離報酬為
+
+$$
+\widetilde\Pi_\ell
+=
+\frac{V_\ell V_H}{2\hat V_M(1)} - \frac{V_H^2}{4\hat V_M(1)}
+=
+\frac{V_H(2V_\ell-V_H)}{4\hat V_M(1)}
+\le 0.
+$$
+
+由於真實低型別在均衡路徑上的報酬 $\Pi_\ell = V_\ell^2/[4\hat V_M(0)] > 0$，故 $\mathrm{IC}_\ell$ 非約束性，分離是否存在完全由 $\mathrm{IC}_H$ 決定。這也說明了為何正文的命題 @prp-sep-exists 可只用一條不等式刻畫。 
 
 ## 第 @sec-welfare 節福利公式的證明 {#sec-proof-welfare}
 依定義，$W=U_L+U_M$。

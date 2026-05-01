@@ -248,7 +248,7 @@ and the ex post first-move region is $\mathcal F\equiv\{v:R(v)<0\}$. Since $R(v)
 
 ## Pooling Analysis
 
-Among the three timing regimes, only LM requires a pooling analysis. Only in LM does the informed player move first and the uninformed player respond after observing that action, so only LM creates a signaling problem in the sense of Fu (2006). By contrast, SS is a simultaneous-move Bayesian Nash environment, and ML has Management move first while Labor responds second. Neither SS nor ML is an informed-first signaling subgame, so pooling versus separation is not the relevant classification there.
+Among the three timing regimes, only LM requires a pooling analysis. Only in LM does the informed player move first and the uninformed player respond after observing that action, so only LM creates a signaling problem in the sense of #c("fu2006"). By contrast, SS is a simultaneous-move Bayesian Nash environment, and ML has Management move first while Labor responds second. Neither SS nor ML is an informed-first signaling subgame, so pooling versus separation is not the relevant classification there.
 
 In @fu2006, separating, pooling, and semi-separating outcomes can arise when the informed player moves first because the follower's continuation payoff depends on posterior beliefs about the hidden type. That mechanism is absent here.
 

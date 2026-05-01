@@ -33,6 +33,16 @@
 #let qed-symbol = block(width: 100%)[#align(right)[$square.stroked$]]
 #let qed = qed-symbol
 #let theorem-font = "cwTeX Q Yuan"
+#let headingref(target) = context {
+  let elem = query(target).at(0)
+  let loc = elem.location()
+  let nums = counter(heading).at(loc)
+  if elem.level == 1 {
+    link(loc)[#text(fill: cite-blue)[第 #nums.at(0) 章]]
+  } else {
+    link(loc)[#text(fill: cite-blue)[第 #nums.at(0) 章第 #nums.at(1) 小節]]
+  }
+}
 #let statement(kind, key, body, title: none) = context {
   let ctr = counter(key)
   ctr.step()
@@ -51,7 +61,7 @@
 #let theorem(body, title: none) = statement("定理", "theorem-counter", body, title: title)
 #let proposition(body, title: none) = statement("命題", "proposition-counter", body, title: title)
 #let proof(body, qed: true) = block(above: 1.5em, below: 0.5em)[
-  #set par(first-line-indent: 0em)
+  #set par(first-line-indent: 2em)
   #text(font: theorem-font, weight: 500)[證明]#h(0.5em)#body
   #if qed [#qed-symbol]
 ]

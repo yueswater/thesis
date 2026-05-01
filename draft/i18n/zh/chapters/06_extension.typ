@@ -1,404 +1,367 @@
-#import "../thesis.typ": c, definition, lemma, proof, proposition, theorem
+#import "../thesis.typ": c, definition, headingref, lemma, proof, proposition, widetilde
 
-本章在前文基準模型上加入部分相關型別結構，目的是回答一個更精確的問題：在什麼條件下，前文 $I U$ 子賽局的唯一分離結果會被破壞，退化為 #c("fu2006") 的混合結果。
-
-第五章的關鍵是，不知情者的續局最佳反應不依賴對知情者類型的後驗信念，因此訊號雖可被觀察，卻不會改變對手反應。本章將此處打開：令 $U$ 的獎酬與 $I$ 的類型部分相關，則 $U$ 的最佳反應會透過後驗信念改變，分離均衡便不再自動成立。
+#headingref(<sec-extension>)將#headingref(<sec-analysis>)的基準模型納入一個更具一般性的相關結構中。在#headingref(<subsec-pooling-analysis>)對 $I U$ 子賽局的分析中之所以得到唯一分離均衡，關鍵在於不知情者的獎酬價值固定為公開常數 $V$，導致其最佳反應僅取決於觀察到知情者的投入量，而不受對知情者型別後驗信念之影響。#headingref(<sec-extension>)放寬此一假設，將不知情者的獎酬價值與知情者均為兩點隨機變數，並允許其與知情者的型別呈正向相關。在此架構下，觀察到高型別訊號將同時隱含對手實力較強與自身獎酬價值較高雙重意涵，使得不知情者的決策不再與信念脫鉤，分離均衡也就不再必然成立。
 
 == 部分相關結構 <subsec-ext-setup>
 
-考慮二點型別 $v_I in {V_H, V_L}$，其中 $V_H > V_L > 0$，且先驗機率為 $1/2$ 與 $1/2$。與前文不同的是，$U$ 的獎酬不再是公開常數，而是隨 $v_I$ 以條件分配抽樣：
+在#headingref(<subsec-ext-setup>)中，我們將基準模型的資訊環境進一步一般化。與#headingref(<sec-analysis>)的設定不同的是，不知情者的獎酬價值不再是已知的公開常數，而是同樣取值於同一砥柱集合的隨機變數，即 $V_U in {V_L, V_H}$。易言之，在賽局開始前，雙方對於彼此以及自身的獎酬價值均存在具關聯之不確定性。
 
 #definition(title: [部分相關型別])[
-  給定參數 $q, s in [0, 1]$，
+  定義兩個條件機率
 
   $
-    Pr(v_U = V_H | v_I = V_H) & = q,
-                                quad
-                                Pr(v_U = V_L | v_I = V_H) & = 1 - q, \
-    Pr(v_U = V_L | v_I = V_L) & = s,
-                                quad
-                                Pr(v_U = V_H | v_I = V_L) & = 1 - s.
+    p_H equiv Pr(V_U = V_H | V_I = V_H),
+    quad
+    p_L equiv Pr(V_U = V_L | V_I = V_L).
   $
 
-  兩個基準點為：
-  1. $(q, s) = (1/2, 1/2)$：型別獨立，回到前文基準模型；
-  2. $(q, s) = (1, 1)$：型別完全相關，對應 #c("fu2006") 的極限環境。
+  $p_H$ 反映了當參賽者 $I$ 為高型別時，參賽者 $U$ 同樣身處高價值環境的機率；$p_L$ 則反映了低型別下的對稱性。據此，$(V_I, V_U)$ 的聯合機率可表述為：
+
+  $
+    Pr(V_I = V_H, V_U = V_H) & = q p_H, \
+    Pr(V_I = V_H, V_U = V_L) & = q (1-p_H), \
+    Pr(V_I = V_L, V_U = V_H) & = (1-q)(1-p_L), \
+    Pr(V_I = V_L, V_U = V_L) & = (1-q) p_L.
+  $
+
+  以列聯表呈現則如下表所示：
+
+  #figure(
+    table(
+      columns: 3,
+      inset: 8pt,
+      align: center + horizon,
+      stroke: none,
+      table.hline(y: 1, stroke: 0.4pt),
+      table.vline(x: 1, stroke: 0.4pt),
+      table.cell(
+        inset: 0pt,
+        box(width: 64pt, height: 32pt)[
+          #place(top + right, dx: -6pt, dy: 4pt)[$V_U$]
+          #place(bottom + left, dx: 6pt, dy: -4pt)[$V_I$]
+          #place(top + left, line(start: (0pt, 0pt), end: (64pt, 32pt), stroke: 0.4pt))
+        ],
+      ),
+      $V_H$, $V_L$,
+      $V_H$, $q p_H$, $q (1-p_H)$,
+      $V_L$, $(1-q)(1-p_L)$, $(1-q) p_L$,
+    ),
+    caption: [$(V_I, V_U)$ 之聯合機率分配列聯表],
+    supplement: [表],
+  ) <tbl-ext-joint>
 ] <def-partial-corr>
 
-把先驗 $Pr(v_I=V_H)=Pr(v_I=V_L)=1/2$ 併入後，可得聯合分配：
+注意到，若要使 $V_U$ 的邊際機率分佈與 $V_I$ 保持一致，即雙方共享同一個高型別邊際機率 $q$ ($Pr(V_U = V_H) = q$)，則機率參數必須滿足以下邊際一致性限制：
 
 $
-  Pr(v_I=V_H, v_U=V_H) = q/2,
-  quad
-  Pr(v_I=V_H, v_U=V_L) = (1-q)/2,
-$
+  (1-q)(1-p_L) = q(1-p_H).
+$ <eq-ext-marginal-consistency>
+
+根據上述參數組合，我們可以將資訊結構歸納為以下三種具備理論代表性的基準狀態：
+
+1. 統計獨立：當 $p_H = q$ 且 $p_L = 1-q$ 時，雙方的獎酬價值互不影響，此時模型退化回獎酬價值不具相關性的基本情境。
+2. 完全正相關：當 $p_H = p_L = 1$ 時，雙方必然處於相同的標的環境，與 #c("fu2006") 的設定高度吻合。
+3. 部分正相關：當參數滿足 $q < p_H < 1$ 且 $1-q < p_L < 1$，並符合前述邊際一致性限制時，#headingref(<sec-extension>)將在此更具一般性的環境下，探討分離均衡與混同均衡的變遷機制。
+
+== 信念加權獎酬與最佳反應 <subsec-ext-br>
+
+在部分相關的資訊結構下，不知情者的決策邏輯較基準模型更為複雜。由於不知情者的獎酬價值與知情者的型別存在統計相關性，因此知情者所發出的訊號 (即投入量 $x_I$) 不僅揭露了知情者自身強弱，同時也間接提供了關於不知情者獎酬的資訊。
+
+令 $m(x_I)$ 表示不知情者在觀察到知情者的投入量 $x_I$ 後，對「對手為高型別 ($V_I = V_H$)」的後驗信念：
 
 $
-  Pr(v_I=V_L, v_U=V_H) = (1-s)/2,
-  quad
-  Pr(v_I=V_L, v_U=V_L) = s/2.
+  m(x_I) equiv Pr(V_I = V_H | x_I) in [0,1].
 $
 
-令 $mu(x_I)$ 表示 $U$ 在觀察 $x_I$ 後對「高型別」事件的後驗機率。定義
+給定此後驗信念 $m$，不知情者對於自身獎酬的預期不再是單一常數，而是根據機率結構加權後的有效獎酬 $hat(V)_U$：
 
 $
-  overline(V)_H = q V_H + (1-q) V_L,
-  quad
-  overline(V)_L = (1-s) V_H + s V_L,
-$
-
-以及信念加權獎酬
-
-$
-  hat(V)_U(mu) = mu overline(V)_H + (1-mu) overline(V)_L.
+  hat(V)_U(m) & = E[V_U | x_I] \
+              & = m Pr(V_U | V_I = V_H) + (1-m) Pr(V_U | V_I = V_L) \
+              & = m [p_H V_H + (1-p_H) V_L] + (1-m) [(1-p_L) V_H + p_L V_L].
 $ <eq-vhat-u>
 
-由定義可得
-$
-  overline(V)_H = EE[v_U|v_I=V_H], quad overline(V)_L = EE[v_U|v_I=V_L],
-$
-且由全期望法則
-$
-  hat(V)_U(mu) = EE[v_U|x_I] = mu overline(V)_H + (1-mu) overline(V)_L.
-$
-因此，$q,s$ 透過條件機率進入條件期望，並進一步進入賽局中的有效賭注。又因
-$
-  overline(V)_H - overline(V)_L = (q+s-1)(V_H-V_L),
-$
-故 $hat(V)_U(mu)$ 對 $mu$ 的單調性由 $q+s-1$ 決定：當 $q+s>=1$ 時弱遞增；當 $q+s<1$ 時嚴格遞減。
-
-== 信念依賴最佳反應 <subsec-ext-br>
-
-在 $I U$ 子賽局中，$U$ 面對觀察到的 $x_I$ 與後驗 $mu$，其面對的問題為：
+在此定義下，當不知情者確信知情者的型別時，其有效獎酬分別退化為特定型別下的條件期望值：
 
 $
-  max_(x_U >= 0) U_U(x_I, x_U | mu)
+  hat(V)_U(1) = p_H V_H + (1-p_H) V_L,
+  quad
+  hat(V)_U(0) = (1-p_L) V_H + p_L V_L.
+$
+
+為了觀察信念變動如何影響有效獎酬，對 $m$ 進行一階微分可得：
+
+$
+  (d hat(V)_U(m)) / (d m)
   =
-  max_(x_U >= 0)
-  [
-    x_U/(x_I+x_U) hat(V)_U(mu) - x_U
-  ].
-$
+  (p_H + p_L - 1)(V_H - V_L).
+$ <eq-ext-vhat-derivative>
+
+從上式可知，有效獎酬對信念的敏感度取決於相關係數的符號。在統計獨立點 ($p_H=q, p_L=1-q$) 上，導數恰為零，代表信念更新不具備資訊價值；然而，只要雙方獎酬價值具備正相關性 ($p_H+p_L > 1$)，較高的後驗信念便會透過相關性結構，顯著提高不知情者對自身有效獎酬的預期。
+
+基於此有效獎酬，我們可以給出不知情者在一般化環境下的最佳反應行為：
 
 #lemma(title: [部分相關下 $U$ 的最佳反應])[
-  給定 $x_I > 0$ 與 $mu in [0,1]$，$U$ 的內點最佳反應為
+  給定知情者的投入量 $x_I > 0$ 與不知情者的後驗信念 $m in [0,1]$，不知情者的內點最佳反應函數為：
 
   $
-    x_U^*(x_I, mu) = sqrt(x_I hat(V)_U(mu)) - x_I.
+    x_U^*(x_I, m) = sqrt(x_I hat(V)_U(m)) - x_I.
   $ <eq-ext-br>
 
-  若 $q+s>1$，則在內點區域有 $(d x_U^*)/(d mu) > 0$。
+  若資訊結構滿足正相關性條件，則不知情者的投入量將隨其對知情者實力評估而單調遞增。
+  // 即
+  // $
+  //   (d x_U^*)/(d m) > 0.
+  // $ <eq-ext-u-effort>
 ] <lem-ext-br>
 
 #proof[
-  一階條件為
+  在 Tullock 競賽的架構下，不知情者極大化其預期報酬，即
+
   $
-    x_I hat(V)_U(mu) / (x_I + x_U)^2 = 1.
+    max_x_U hat(pi)_U = hat(V)_U(m) dot x_U / (x_I + x_U) - x_U
   $
-  解正根得 $x_I + x_U = sqrt(x_I hat(V)_U(mu))$，因此得到上式最佳反應。
-  又
+
+  其對應的一階條件為：
+
   $
-    (d x_U^*)/(d mu)
-    =
-    (overline(V)_H - overline(V)_L) / (2 sqrt(hat(V)_U(mu)/x_I)),
+    (x_I hat(V)_U(m)) / (x_I + x_U)^2 = 1.
   $
-  當 $q+s>1$ 時，$overline(V)_H - overline(V)_L > 0$，故導數為正。
+  移項並解得正根後，即可得 $x_U^*(x_I, m) = sqrt(x_I hat(V)_U(m)) - x_I$。進一步分析信念對行為的邊際影響：
+  $
+    (d x_U^*)/(d m) & =
+                      (partial x_U^*) / (partial hat(V)_U) dot (d hat(V)_U) / (d m) \
+                    & =
+                      (sqrt(x_I) / (2 sqrt(hat(V)_U(m)))) dot (p_H + p_L - 1)(V_H - V_L).
+  $
+  在 $p_H+p_L > 1$ 且獎酬價值具備異質性 ($V_H > V_L$) 的假設下，上述導數項嚴格為正 #footnote("其直覺在於：當獎酬價值具備型別正相關性時，不知情者對於「對手實力」與「自身利益」的判斷會產生連動。當不知情者觀察到知情者的投入並上修對對手為高型別的後驗信念時，由於雙方型別呈正向相關，隱含不知情者自身的獎酬價值更可能處於高水準。此種「獎品價值更高」的預期心理，抵銷了對手變強帶來的威懾效應，誘發其投入更多資源進行競爭。")。
 ]
 
-在基準模型中，最佳反應僅依賴觀察投入，不依賴信念；而在本章中，最佳反應依賴信念，此差異正是分離可否持續的來源。
+== 分離均衡、誘因相容與臨界邊界 <subsec-ext-boundary>
 
-== 分離條件與臨界邊界 <subsec-ext-boundary>
-
-本節先聚焦在 $q+s>=1$ (獨立到正相關) 區間。考慮候選分離均衡：高型別與低型別各自選不同投入，且路徑上的信念為
+#headingref(<subsec-ext-boundary>)旨在探討分離均衡在一般化資訊結構下的存續條件。考慮一個候選分離配置，其中高型別與低型別參賽者分別選擇不同的均衡投入量，並誘發不知情者產生以下的路徑上信念：
 
 $
-  mu(x_H)=1, quad mu(x_L)=0.
+  m(x_H) = 1,
+  quad
+  m(x_L) = 0.
 $
 
-在這個配置下，兩型別面對的對手有效獎酬分別是 $overline(V)_H$ 與 $overline(V)_L$，因此可得
+在此配置下，兩類型參賽者在均衡路徑上的投入水平與對應報酬分別為：
 
 $
-   x_H & = V_H^2/(4 overline(V)_H),
-         quad
-         x_L  & = V_L^2/(4 overline(V)_L), \
-  pi_H & = V_H^2/(4 overline(V)_H),
-         quad
-         pi_L & = V_L^2/(4 overline(V)_L).
+  x_H & = V_H^2 / (4 hat(V)_U(1)),
+        quad
+        pi_H & = V_H^2 / (4 hat(V)_U(1)), \
+  x_L & = V_L^2 / (4 hat(V)_U(0)),
+        quad
+        pi_L & = V_L^2 / (4 hat(V)_U(0)).
 $
 
-若高型別改為模仿低型別，其偏離報酬為
+分離均衡能否維持，核心在於高型別參賽者是否具備「模仿低型別」以換取對手降低投入的偏離動機。若高型別選擇偽裝成低型別，其偏離報酬表現為：
 
 $
-  U_H^d = (V_L (2V_H-V_L))/(4 overline(V)_L).
-$
+  widetilde(pi)_H
+  =
+  V_L (2 V_H - V_L) / (4 hat(V)_U(0)).
+$ <eq-ext-dev-h>
 
-所以，高型別的誘因相容條件為
+據此，高型別的誘因相容條件可表示為：
 
 $
-  V_H^2 / overline(V)_H
+  V_H^2 / hat(V)_U(1)
   >=
-  (V_L (2V_H - V_L)) / overline(V)_L.
+  V_L (2 V_H - V_L) / hat(V)_U(0).
 $ <eq-ext-ich>
 
-把 $overline(V)_H = q V_H + (1-q) V_L$ 與 $overline(V)_L = (1-s) V_H + s V_L$ 代回後，條件可直接寫成
+經整理，上述條件可轉換為兩類信念下有效獎酬的比值關係：
 
 $
-  V_H^2 / [q V_H + (1-q) V_L]
-  >=
-  (V_L (2V_H-V_L)) / [(1-s) V_H + s V_L].
-$ <eq-ext-ich-qs>
+  hat(V)_U(1) / hat(V)_U(0) <= R = V_H^2 / (V_L (2 V_H - V_L)).
+$ <eq-ext-sep-condition>
 
-左側由 $q$ 影響，即高型別路徑下對手反應強度，而右側由 $s$ 影響，即偽裝路徑下對手反應強度。
+其中 $R > 1$ 為衡量型別差異程度的常數。對於低型別而言，若其模仿高型別，其偏離報酬為
+
+$
+  widetilde(pi)_L^d
+  =
+  V_H (2 V_L - V_H) / (4 hat(V)_U(1)).
+$
+
+因此，低型別的誘因相容條件為
+
+$
+  V_L^2 / (4 hat(V)_U(0))
+  >=
+  V_H (2 V_L - V_H) / (4 hat(V)_U(1)),
+$
+
+亦即
+
+$
+  hat(V)_U(1) / hat(V)_U(0)
+  >=
+  V_H (2 V_L - V_H) / V_L^2.
+$
+
+在本文關心的正相關區域，$hat(V)_U(1) > hat(V)_U(0)$，故左式嚴格大於 $1$；另一方面，若令 $rho equiv V_H / V_L > 1$，則右式可寫成 $2 rho - rho^2 = 1 - (rho - 1)^2 < 1$。因此，低型別的誘因相容條件自動成立，真正具約束力者僅為高型別。
+
+#proposition(title: [分離均衡的存在條件])[
+  在 $I U$ 子賽局中，純策略分離均衡存在若且唯若高型別之誘因相容條件成立。亦即，當兩類後驗信念下的有效獎酬比值低於臨界閾值 $R$ 時，分離均衡始能穩健存在：
+  $
+    hat(V)_U(1) / hat(V)_U(0) <= R.
+  $
+  若此條件失效，則高型別將因偽裝帶來的競爭優勢 (對手投入大幅下降) 超過真實型別的邊際報酬，導致分離均衡崩潰。
+] <prop-ext-separation>
 
 #proof[
-  在候選分離路徑上，高型別誠實選擇 $x_H = V_H^2/(4 overline(V)_H)$，其報酬為
+  考慮#headingref(<subsec-ext-boundary>)前述的候選分離配置。若高型別誠實揭露，則其均衡報酬為
+
   $
-    pi_H = V_H^2/(4 overline(V)_H).
+    pi_H = V_H^2 / (4 hat(V)_U(1)).
   $
 
-  若高型別改為模仿低型別並選擇 $x_L = V_L^2/(4 overline(V)_L)$，則 $U$ 以低型別信念回應，故高型別偏離報酬為
+  若高型別改為模仿低型別，則不知情者會沿低型別路徑反應，因此其偏離報酬為
+
   $
-    U_H^d = (V_L (2V_H-V_L))/(4 overline(V)_L).
+    widetilde(pi)_H^d
+    =
+    V_L (2 V_H - V_L) / (4 hat(V)_U(0)).
   $
 
-  誘因相容要求 $pi_H >= U_H^d$，即
+  因而，高型別的誘因相容條件為
+
   $
-    V_H^2/(4 overline(V)_H) >= (V_L (2V_H-V_L))/(4 overline(V)_L).
+    pi_H >= widetilde(pi)_H^d,
   $
-  整理後即得所求。
+
+  也就是
+
+  $
+    V_H^2 / (4 hat(V)_U(1))
+    >=
+    V_L (2 V_H - V_L) / (4 hat(V)_U(0)).
+  $
+
+  兩邊同乘 $4 hat(V)_U(1) hat(V)_U(0)$ 後，可改寫為
+
+  $
+    hat(V)_U(1) / hat(V)_U(0)
+    <=
+    V_H^2 / (V_L (2 V_H - V_L))
+    =
+    R.
+  $
+
+  再看低型別。其誠實報酬為 $pi_L = V_L^2 / (4 hat(V)_U(0))$；若模仿高型別，偏離報酬為
+
+  $
+    widetilde(pi)_L^d
+    =
+    V_H (2 V_L - V_H) / (4 hat(V)_U(1)).
+  $
+
+  因此，低型別的誘因相容條件等價於
+
+  $
+    hat(V)_U(1) / hat(V)_U(0)
+    >=
+    V_H (2 V_L - V_H) / V_L^2.
+  $
+
+  在本文關心的正相關區域，$hat(V)_U(1) / hat(V)_U(0) > 1$。另一方面，令 $rho equiv V_H / V_L > 1$，則右式為
+
+  $
+    2 rho - rho^2 = 1 - (rho - 1)^2 < 1.
+  $
+
+  故低型別的誘因相容條件必然成立，不會成為約束。於是，候選分離配置能否構成純策略分離均衡，若且唯若高型別的誘因相容條件成立；等價地，若且唯若
+
+  $
+    hat(V)_U(1) / hat(V)_U(0) <= R.
+  $
 ]
 
-在 $q+s>=1$ 區間下，低型別偏離去模仿高型別不會優於留在均衡路徑，因此這裡真正有約束力的條件只來自高型別。
+#proposition(title: [臨界邊界])[
+  將高型別誘因相容條件取等號，可得臨界邊界
 
-#theorem(title: [正相關區間的分離均衡存在與臨界邊界])[
-  在 $q+s>=1$ 區間下，$I U$ 子賽局存在上述純策略分離完美貝氏均衡，若且唯若高型別誘因相容條件成立；等價地，也就是滿足前述展開後的 $q,s$ 版本不等式。將該誘因相容條件取等號可得臨界邊界
-
-  #set math.equation(numbering: "(1)")
   $
-    s^*(q)
+    p_L^*(p_H)
     =
-    (
-    V_H^3
-    - V_L (2V_H-V_L)[q V_H + (1-q) V_L]
-    ) / (V_H^2(V_H - V_L)).
+    (R V_H - V_L - p_H (V_H - V_L)) / (R (V_H - V_L)).
   $ <eq-ext-boundary>
 
-  因此：
-  1. $s <= s^*(q)$ 時，分離可維持。
-  2. $s > s^*(q)$ 時，高型別偽裝有利，分離崩潰並進入混合區域。
-] <thm-ext-boundary>
+  位於該邊界下方的點滿足分離條件；位於其上方的點則會使高型別出現有利可圖的偽裝誘因。
+] <prop-ext-boundary>
 
 #proof[
-  分離存在的充要性來自高型別是否有模仿誘因，即高型別誘因相容條件的成立與否，證明詳見
-  #context if query(<proof-ext-boundary>).len() > 0 [
-    #ref(<proof-ext-boundary>)
-  ] else [
-    附錄「第六章：臨界邊界推導」
-  ]。
+  令 $Delta V equiv V_H - V_L$。由
+  $
+    hat(V)_U(1) & = p_H V_H + (1-p_H) V_L \
+                & = V_L + p_H Delta V,
+  $
+  以及
+  $
+    hat(V)_U(0) & = (1-p_L) V_H + p_L V_L \
+                & = V_H - p_L Delta V,
+  $
+  把高型別誘因相容條件取等號後寫成
+  $
+    V_L + p_H Delta V = R (V_H - p_L Delta V).
+  $
+  解出 $p_L$ 即得上式的臨界邊界。
 ]
 
+由@fig-ch6-phpl-regions 可見，獨立點 $(q, 1-q)$ 與完全相關點 $(1, 1)$ 分處邊界兩側，揭櫫資訊相關性如何根本性地改變賽局性質：
+
+1. 在獨立點 $(p_H,p_L)=(q,1-q)$，有
+  $
+    hat(V)_U(1) = hat(V)_U(0) = q V_H + (1-q) V_L,
+  $
+  故比值恰為 $1<R$；該點落在區域 I，分離均衡嚴格成立。
+2. 在完全相關點 $(1,1)$，有
+  $
+    hat(V)_U(1)=V_H,
+    quad
+    hat(V)_U(0)=V_L,
+  $
+  故比值為 $V_H/V_L > R$；該點落在區域 II，分離失敗。
+3. 在部分相關情形下，比值介於 $1$ 與 $V_H/V_L$ 之間，點 $(p_H,p_L)$ 究竟落在區域 I 或 II，端視臨界邊界 $p_L^*(p_H)$ 的位置而定。圖 @fig-ch6-phpl-regions[] 中的點 $A$、$B$、$C$ 分別對應三個代表性的獨立點 $(q,1-q)$，其中 $q=0.3, 0.5, 0.7$；三點都位於區域 I 內，說明只要維持統計獨立，不論先驗如何改變，高型別誘因相容條件仍嚴格成立。
+
 #figure(
-  image("../../../figures/fig6_qs_regions.pdf", width: 100%),
-  caption: [$(q,s)$ 參數空間中的均衡分區],
+  image("../../../figures/fig6_qs_regions.png", width: 100%),
+  caption: [$(p_H, p_L)$ 平面以臨界邊界切成的兩個區域。],
   supplement: [圖],
-) <fig-ch6-qs-regions>
+) <fig-ch6-phpl-regions>
 
-#ref(<fig-ch6-qs-regions>) 在 $q+s>=1$ 下存在兩個區域：區域 I 對應分離均衡，區域 II 則對應高型別偽裝低型別的混合均衡。邊界 $s^*(q)$ 是高型別誘因相容恰好綁定的位置。由臨界邊界公式 (式 @eq-ext-boundary[]) 的斜率可得
-$
-  (d s^*(q))/ (d q) = - (V_L (2V_H-V_L)) / (V_H^2) < 0.
-$
-故 $q$ 越高，可維持分離的 $s$ 上限越低；給定 $q$ 時，只要 $s$ 超過該上限，該組 $(q,s)$ 即落入混合區域。
+== 比較靜態與連續光譜 <subsec-ext-summary>
 
-== 負相關區間的誘因反轉與臨界比例 <subsec-ext-negative>
-
-前一小節建立在 $q+s>=1$ 的正相關區間。當 $q+s<1$ 時，由
-$
-  overline(V)_H - overline(V)_L = (q+s-1)(V_H-V_L)
-$
-可知 $overline(V)_H < overline(V)_L$。因此由前述信念加權獎酬定義，$hat(V)_U(mu)$ 對 $mu$ 嚴格遞減：當不知情者越相信知情者是高型別，其面對的有效獎酬反而越低，續局投入反應越弱，從而使得偏離誘因方向與前一小節相反；在負相關區間，主導偏離可能由低型別模仿高型別 (bluffing) 所驅動。
-
-延續前一小節的候選分離路徑，低型別誠實時報酬為
+定義相關性比值函數
 
 $
-  pi_L = V_L^2/(4 overline(V)_L).
+  rho(p_H, p_L) & equiv
+                  hat(V)_U(1) / hat(V)_U(0) \
+                & =
+                  (p_H V_H + (1-p_H) V_L) / ((1-p_L) V_H + p_L V_L).
 $
 
-若低型別偏離並模仿高型別，則其投入為 $x_H = V_H^2/(4 overline(V)_H)$，且誘導後驗 $mu=1$。由上一節的最佳反應公式，
+透過對條件機率參數進行比較靜態分析，可得：
 
 $
-  x_U^*(x_H, 1)
-  =
-  sqrt(x_H overline(V)_H) - x_H
-  =
-  V_H/2 - V_H^2/(4 overline(V)_H).
-$
-
-故總投入與低型別勝率分別為
-
-$
-  x_H + x_U^*(x_H,1) = V_H/2,
+  (d rho)/(d p_H) = (V_H - V_L) / hat(V)_U(0) > 0,
   quad
-  x_H / (x_H + x_U^*(x_H,1)) = V_H/(2 overline(V)_H).
+  (d rho)/(d p_L) = hat(V)_U(1) (V_H - V_L) / hat(V)_U(0)^2 > 0.
 $
 
-低型別偏離報酬可化簡為
+因此，提高 $p_H$ 或提高 $p_L$ 都會壓縮分離區域；然而，兩者的經濟意涵截然不同：$p_H$ 的上升增加了如實揭露型別時所面臨的對手競爭強度 (負向推力)；而 $p_L$ 的上升則降低了偽裝成低型別時所面對的對手強度 (正向拉力)。由於梯度之比
 
 $
-  U_L^d
+  ((d rho)/(d p_L)) / ((d rho)/(d p_H))
   =
-  (V_H V_L)/(2 overline(V)_H) - V_H^2/(4 overline(V)_H)
-  =
-  V_H (2V_L - V_H)/(4 overline(V)_H).
-$ <eq-ext-uld>
-
-因此低型別誘因相容條件為
-
-$
-  V_L^2/(4 overline(V)_L) >= V_H (2V_L - V_H)/(4 overline(V)_H),
+  rho(p_H, p_L)
+  >= 1,
 $
 
-等價地
+顯示在正相關區域內，$p_L$ 的邊際變動對分離均衡的破壞力更勝於 $p_H$。
 
-$
-  V_L^2 overline(V)_H >= V_H (2V_L - V_H) overline(V)_L.
-$ <eq-ext-icl>
-
-若 $2V_L<=V_H$，則上式右側非正，而 $pi_L>0$，故 $I C_L$ 必成立，區域 III 必為空。以下聚焦 $2V_L>V_H$ 的情形。將上式取等號並代入
-
-$
-  overline(V)_H = q V_H + (1-q) V_L,
-  quad
-  overline(V)_L = (1-s) V_H + s V_L,
-$
-
-可得
-
-$
-  V_L^2 [q V_H + (1-q) V_L] & =
-                              V_H (2V_L - V_H) [(1-s) V_H + s V_L] \
-                            & =
-                              V_H (2V_L - V_H) [V_H - s (V_H - V_L)].
-$
-
-移項後得到
-
-$
-  s V_H (2V_L - V_H) (V_H - V_L)
-  =
-  V_H^2 (2V_L - V_H)
-  - V_L^2 [q V_H + (1-q) V_L].
-$
-
-因此低型別臨界邊界為
-
-$
-  s_L^*(q)
-  =
-  (
-  V_H^2 (2V_L - V_H)
-  - V_L^2 [q V_H + (1-q) V_L]
-  ) / (V_H (2V_L - V_H) (V_H - V_L)).
-$ <eq-ext-sl-boundary>
-
-其斜率為
-
-$
-  (d s_L^*(q))/(d q)
-  =
-  - V_L^2 / (V_H (2V_L - V_H))
-  < 0.
-$
-
-#proposition(title: [區域 III 非空的充要條件])[
-  在 $V_I in {V_H, V_L}$、$(q,s) in [0,1]^2$ 與 $V_H>V_L>0$ 下，存在某組 $(q,s)$ 使低型別誘因相容條件違反 (亦即區域 III 非空) ，若且唯若
-  $
-    V_H / V_L < phi = (1 + sqrt(5))/2.
-  $
-] <prop-ext-region3>
-
-#proof[
-  先考慮 $2V_L<=V_H$。由前述偏離報酬公式，$U_L^d<=0$，且誠實報酬 $pi_L=V_L^2/(4 overline(V)_L)>0$，故 $I C_L$ 對所有 $(q,s)$ 成立，區域 III 為空。此時 $V_H/V_L>=2>phi$，與命題結論一致。考慮 $2V_L>V_H$。由上式違反 $I C_L$，等價於
-
-  $
-    V_L^2 overline(V)_H < V_H (2V_L - V_H) overline(V)_L.
-  $
-
-  左側隨 $q$ 嚴格遞增，右側隨 $s$ 嚴格遞減，因此最容易違反的位置是 $(q,s)=(0,0)$。代入可得
-
-  $
-    V_L^3 < V_H^2 (2V_L - V_H).
-  $
-
-  設 $rho = V_H/V_L > 1$，同除以 $V_L^3$ 後得到
-
-  $
-    rho^3 - 2rho^2 + 1 < 0.
-  $
-
-  又
-
-  $
-    (rho - 1) (rho^2 - rho - 1)
-    = rho^3 - rho^2 - rho - rho^2 + rho + 1
-    = rho^3 - 2rho^2 + 1.
-  $
-
-  因此
-
-  $
-    rho^3 - 2rho^2 + 1 < 0
-    equiv
-    (rho - 1) (rho^2 - rho - 1) < 0.
-  $
-
-  由 $rho>1$ 可知 $rho - 1 > 0$，故上式等價於 $rho^2 - rho - 1 < 0$，即 $rho<phi$。反向推論同理成立，命題得證。
-]
-
-#figure(
-  image("../../../figures/fig6_golden_ratio_threshold.pdf", width: 95%),
-  caption: [區域 III 存在的臨界條件 #footnote[左圖呈現區域 III 在 $(q,s) in [0,1]^2$ 的面積如何隨 $rho = V_H/V_L$ 變動，並在 $rho=phi$ 精確歸零。右圖畫出 $f(rho)=rho^3-2rho^2+1$ 的兩個根 $rho=1$(退化情形)與 $rho=phi approx 1.618$。]],
-  supplement: [圖],
-) <fig-ch6-golden-ratio>
-
-#ref(<fig-ch6-golden-ratio>) 顯示，臨界比例 $rho^* = phi$ 來自兩個尺度的互鎖：一方面，Tullock 競賽的均衡投入具有二次尺度；另一方面，部分相關結構透過線性條件期望進入有效獎酬。當 $rho^2 = rho + 1$ 時，低型別偏離的勝率增益與投入成本恰好平衡；一旦 $rho$ 超過此臨界值，訊號誇大的額外成本系統性高於其策略收益，區域 III 因而消失。
-
-為與前一小節符號一致，令 $s_H^*(q)$ 表示式 @eq-ext-boundary[] 的高型別臨界邊界，則完整的 $(q,s)$ 分區可整理如下。
-
-#figure(
-  text(size: 10pt)[
-    #table(
-      columns: (0.95fr, 2.0fr, 0.75fr, 1.7fr, 1.45fr),
-      stroke: none,
-      inset: 5pt,
-      align: center,
-      table.hline(y: 0, stroke: 0.7pt),
-      table.hline(y: 1, stroke: 0.4pt),
-      table.hline(y: 5, stroke: 0.7pt),
-      [區間], [條件], [綁定 IC], [經濟機制], [對應區域],
-      [$q+s>=1$], [$s <= s_H^*(q)$], [無], [雙方均無偽裝誘因], [I (分離)],
-      [$q+s>=1$], [$s > s_H^*(q)$], [$I C_H$], [高型別模仿低型別], [II (混合)],
-      [$q+s<1$], [$s >= s_L^*(q)$ 或 $V_H/V_L >= phi$], [無], [低型別偏離不具利潤], [I (延伸)],
-      [$q+s<1$], [$s < s_L^*(q)$ 且 $V_H/V_L < phi$], [$I C_L$], [低型別模仿高型別], [III (混合)],
-    )
-  ],
-  caption: [完整 $(q,s)$ 參數空間下的均衡分類],
-  supplement: [表],
-) <tbl-ext-regions-full>
-
-#figure(
-  image("../../../figures/fig6_qs_regions_main.pdf", width: 95%),
-  caption: [部分相關結構 $(q,s)$ 下的均衡分區 #footnote("區域 I 為分離均衡；區域 II 由高型別 $I C_H$ 綁定，延續前一小節結論；區域 III 為負相關區下由低型別 $I C_L$ 綁定的新混合區域。基準點 $(0.5, 0.704)$ 與前一小節臨界邊界銜接。")],
-  supplement: [圖],
-) <fig-ch6-qs-regions-main>
-
-#ref(<fig-ch6-qs-regions-main>) 與表 @tbl-ext-regions-full[] 合併呈現了第六章的完整結構：區域 II 與區域 III 分別對應兩種相反方向的偽裝誘因，且兩者皆以分離區域 I 為基準向外擴張。
-
-在文獻連結上，議價與訊息不對稱研究多聚焦於提案者私有資訊 (如保留價格與貼現率) 如何影響機制表現，代表性的綜述可見 #c("ausubel2002")，相關議題也見 #c("cramton1992")。本文的 $(q,s)$ 架構則把「資訊不對稱」與「獎酬相關性」拆為可分離的兩個維度，使誘因翻轉可由同一組參數連續追蹤。就競賽 spillovers 而言，經典討論如 Baik and Shogren (1992) 與 Leininger (1993) 多將關聯結構視為外生給定；而本文設定讓關聯結構本身決定訊號通道何時有效。這一點與 #c("konrad2009") 對競賽制度的整理、以及 #c("warneryd2003")、#c("dentermorgansisak2022") 對資訊不對稱競賽的分析可互補對照。整體而言，前述命題提供的是一個可驗證的封閉式門檻，刻畫何時資訊結構足以打破分離均衡，而非對特定參數點的個案比較。
-
-== 小結 <subsec-ext-summary>
-
-本章的核心貢獻是將第五章模型推導出必然分離的結果，與 #c("fu2006") 的可混合架構放在同一個可連續變動的資訊結構內進行比較、參照，並加以統一。參數 $q$ 與 $s$ 控制了不知情者的條件期望獎酬：$q$ 影響高型別路徑下不知情者的有效賭注，$s$ 影響低型別下不知情者的有效賭注。當這兩個參數使得不知情者的續局反應對後驗信念更敏感時，高型別誠實揭露的相對報酬會下降，而模仿低型別的偏離報酬會上升，最終改變 $I U$ 子賽局的均衡型態。
-
-臨界邊界 $s^*(q)$ 界定了分離均衡的存續範圍。給定 $q$ 下，當 $s$ 超過此邊界時，高型別將透過偏離策略達到獲利，導致分離均衡崩潰為混合均衡。值得注意的是，$s^*(q)$ 的斜率隱含了核心直覺：當雙方利益呈現高度相關時 (即 $q$ 上升)，對手的預期抵抗力道增強，此時將會抬升高型別誠實披露資訊的成本，迫使其更有誘因隱藏實力，從而使分離均衡可行區域縮小。
-
-參數空間的兩個極端點界定了模型的理論光譜。當 $(q,s)=(1/2,1/2)$ 時，雙方估值完全獨立，信念對資方的預期獎酬無實質影響，模型退化為前文的基準情形，維持唯一分離均衡。而當 $(q, s) = (1, 1)$ 時，估值完全正相關，模型退化為 #c("fu2006") 的特例，此時高型別因面臨強烈的抵抗預期而選擇偽裝，導致分離均衡崩潰。在制度意涵上，本章闡明了先動優勢的存續條件，取決於雙方利益的相關程度是否高到足以迫使高型別隱藏實力，此由分離轉向混合的絕對門檻，正是由臨界邊界 $s^*(q)$ 所界定。
+最後，若納入邊際一致性限制，則所有經濟上可行的參數組合將構成一條連接「獨立」與「完全相關」的路徑。沿著此路徑移動，即展現了從本文基準模型平滑過渡至 #c("fu2006") 設定的連續光譜，不僅可證明本文模型具備更廣泛的參數解釋力，亦顯示了傳統文獻中的混合均衡，實則為本框架下分離均衡崩潰後的特定退化結果。

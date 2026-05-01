@@ -109,7 +109,7 @@ def render_main_figure(v_h, v_l):
     ax.plot(1.0, 1.0, marker="s", color="black", markersize=7, zorder=6)
     ax.plot(0.0, 0.0, marker="o", color="black", markersize=6, zorder=6)
 
-    ax.annotate("Fu (2006) limit $(1,1)$", xy=(1.0, 1.0),
+    ax.annotate("#c("fu2006") limit $(1,1)$", xy=(1.0, 1.0),
                 xytext=(0.70, 0.965), fontsize=9,
                 arrowprops=dict(arrowstyle="->", lw=0.85, color="black"),
                 va="top")
