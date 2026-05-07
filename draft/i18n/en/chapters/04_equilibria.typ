@@ -136,6 +136,23 @@ $ <eq-iu-ex-ante-u>
 
 The defining feature of the $I U$ subgame is separation, not pooling. Every type strictly prefers his own separating effort and never mimics another type; pooling and semi-separating equilibria are therefore ruled out. Relative to #c("fu2006"), the $I U$ subgame here has no belief-driven equilibrium-selection problem: a signal exists at the observational level but does not change $U$'s best response.
 
+If we further specialize to two-point types $V_I in {V_L, V_H}$ with prior probabilities $Pr(V_I = V_H) = q$ and $Pr(V_I = V_L) = 1 - q$, then the bidirectional mimicry margins for the high and low types are
+
+$
+  I C_H & =
+          V_H^2 / (4V)
+          - ((V_H V_L) / (2V) - V_L^2 / (4V))
+          =
+          (V_H - V_L)^2 / (4V), \
+  I C_L & =
+          V_L^2 / (4V)
+          - ((V_L V_H) / (2V) - V_H^2 / (4V))
+          =
+          (V_H - V_L)^2 / (4V).
+$
+
+Both inequalities are strictly positive and depend only on $(V_L, V_H, V)$, not on the prior $q$. The above $I U$ separation result therefore continues to hold under a general prior $(q, 1 - q)$.
+
 #proof[See #ref(<proof-iu>).]
 
 == Summary <subsec-equilibria-summary>

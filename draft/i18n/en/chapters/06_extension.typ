@@ -1,403 +1,500 @@
-#import "../thesis.typ": c, definition, lemma, proof, proposition, theorem
+#import "../thesis.typ": c, definition, lemma, proof, proposition, widetilde
 
-This section augments the baseline model with a partially correlated type structure. The aim is to answer a sharper question: under what conditions does the unique separating outcome of the $I U$ subgame in the previous sections break down and revert to the pooling outcome of #c("fu2006")?
-
-The crucial feature of Section 5 is that the uninformed player's continuation best response does not depend on the posterior belief about the informed player's type, so the signal can be observed but does not alter the opponent's response. This section opens that channel: when $U$'s prize is partially correlated with $I$'s type, $U$'s best response shifts through the posterior belief, and a separating equilibrium no longer obtains automatically.
+This section embeds the baseline model of Section 5 into a more general correlated structure. The reason the analysis of the $I U$ subgame in Section 5.3 yielded a unique separating equilibrium is that the uninformed player's prize value was fixed at the public constant $V$, so his best response depended only on the observed effort and was insensitive to the posterior belief about $I$'s type. We now relax this assumption: the uninformed player's prize is also a two-point random variable, and we allow it to be positively correlated with the informed player's type. Under this structure, observing a high-type signal simultaneously implies that the opponent is stronger and that one's own prize is more likely to be high; the uninformed player's decision is no longer decoupled from beliefs, and the separating equilibrium need no longer hold.
 
 == Partial correlation structure <subsec-ext-setup>
 
-Consider two-point types $v_I in {V_H, V_L}$ with $V_H > V_L > 0$ and equal prior probabilities $1/2$. Unlike before, $U$'s prize is no longer a public constant but is drawn from a conditional distribution given $v_I$.
+This subsection further generalizes the information environment of the baseline model. Unlike Section 5, the uninformed player's prize is no longer a known public constant but a random variable taking values in the same support, that is, $V_U in {V_L, V_H}$. In other words, before the contest begins, the two players face correlated uncertainty about each other's and their own prize values.
 
 #definition(title: [Partially correlated types])[
-  Given parameters $q, s in [0, 1]$,
+  Define two conditional probabilities
 
   $
-    Pr(v_U = V_H | v_I = V_H) & = q,
-                                quad
-                                Pr(v_U = V_L | v_I = V_H) & = 1 - q, \
-    Pr(v_U = V_L | v_I = V_L) & = s,
-                                quad
-                                Pr(v_U = V_H | v_I = V_L) & = 1 - s.
+    p_H equiv Pr(V_U = V_H | V_I = V_H),
+    quad
+    p_L equiv Pr(V_U = V_L | V_I = V_L).
   $
 
-  Two benchmarks anchor the parameter space:
-  1. $(q, s) = (1/2, 1/2)$: types are independent, recovering the baseline model;
-  2. $(q, s) = (1, 1)$: types are perfectly correlated, corresponding to the limit environment of #c("fu2006").
+  $p_H$ captures the probability that, when player $I$ is high-type, player $U$ also faces a high-value environment; $p_L$ captures the symmetric statement at the low type. Combined with the prior $Pr(V_I = V_H) = q$, the joint distribution of $(V_I, V_U)$ is
+
+  $
+    Pr(V_I = V_H, V_U = V_H) & = q p_H, \
+    Pr(V_I = V_H, V_U = V_L) & = q (1-p_H), \
+    Pr(V_I = V_L, V_U = V_H) & = (1-q)(1-p_L), \
+    Pr(V_I = V_L, V_U = V_L) & = (1-q) p_L.
+  $
+
+  In contingency-table form:
+
+  #figure(
+    table(
+      columns: 3,
+      inset: 8pt,
+      align: center + horizon,
+      stroke: none,
+      table.hline(y: 1, stroke: 0.4pt),
+      table.vline(x: 1, stroke: 0.4pt),
+      table.cell(
+        inset: 0pt,
+        box(width: 64pt, height: 32pt)[
+          #place(top + right, dx: -6pt, dy: 4pt)[$V_U$]
+          #place(bottom + left, dx: 6pt, dy: -4pt)[$V_I$]
+          #place(top + left, line(start: (0pt, 0pt), end: (64pt, 32pt), stroke: 0.4pt))
+        ],
+      ),
+      $V_H$, $V_L$,
+      $V_H$, $q p_H$, $q (1-p_H)$,
+      $V_L$, $(1-q)(1-p_L)$, $(1-q) p_L$,
+    ),
+    caption: [Joint probability distribution of $(V_I, V_U)$.],
+    supplement: [Table],
+  ) <tbl-ext-joint>
 ] <def-partial-corr>
 
-Combining the prior $Pr(v_I = V_H) = Pr(v_I = V_L) = 1/2$ yields the joint distribution
+For the marginal distribution of $V_U$ to coincide with that of $V_I$ — that is, for the two players to share the same high-type marginal probability $q$ ($Pr(V_U = V_H) = q$) — the probability parameters must satisfy the marginal-consistency restriction
 
 $
-  Pr(v_I = V_H, v_U = V_H) = q/2,
-  quad
-  Pr(v_I = V_H, v_U = V_L) = (1 - q)/2,
-$
+  (1-q)(1-p_L) = q(1-p_H).
+$ <eq-ext-marginal-consistency>
+
+Under the parameter combinations above, three theoretically representative benchmark configurations of the information structure can be identified:
+
+1. Statistical independence: when $p_H = q$ and $p_L = 1-q$, the two players' prize values are mutually unaffected, and the model reduces to the baseline environment without correlation.
+2. Perfect positive correlation: when $p_H = p_L = 1$, the two players are necessarily in the same prize environment, which closely matches the setting of #c("fu2006").
+3. Partial positive correlation: when $q < p_H < 1$ and $1-q < p_L < 1$ jointly satisfy the marginal-consistency restriction, this section investigates how the separating and pooling equilibria evolve in this more general environment.
+
+== Belief-weighted prize and best response <subsec-ext-br>
+
+Under the partially correlated information structure, the uninformed player's decision logic is more involved than in the baseline. Because $V_U$ is statistically related to $V_I$, the signal $I$ sends — namely the effort $x_I$ — not only reveals $I$'s own strength but also indirectly carries information about $U$'s prize.
+
+Let $m(x_I)$ denote $U$'s posterior belief that "the opponent is high-type ($V_I = V_H$)" after observing $I$'s effort:
 
 $
-  Pr(v_I = V_L, v_U = V_H) = (1 - s)/2,
-  quad
-  Pr(v_I = V_L, v_U = V_L) = s/2.
+  m(x_I) equiv Pr(V_I = V_H | x_I) in [0,1].
 $
 
-Let $mu(x_I)$ denote $U$'s posterior probability of the high-type event after observing $x_I$. Define
+Given the posterior $m$, $U$'s expectation of his own prize is no longer a single constant but a probability-weighted effective prize $hat(V)_U$:
 
 $
-  overline(V)_H = q V_H + (1 - q) V_L,
-  quad
-  overline(V)_L = (1 - s) V_H + s V_L,
-$
-
-and the belief-weighted prize
-
-$
-  hat(V)_U(mu) = mu overline(V)_H + (1 - mu) overline(V)_L.
+  hat(V)_U(m) & = E[V_U | x_I] \
+              & = m Pr(V_U | V_I = V_H) + (1-m) Pr(V_U | V_I = V_L) \
+              & = m [p_H V_H + (1-p_H) V_L] + (1-m) [(1-p_L) V_H + p_L V_L].
 $ <eq-vhat-u>
 
-By construction
-$
-  overline(V)_H = EE[v_U | v_I = V_H], quad overline(V)_L = EE[v_U | v_I = V_L],
-$
-and by the law of iterated expectations
-$
-  hat(V)_U(mu) = EE[v_U | x_I] = mu overline(V)_H + (1 - mu) overline(V)_L.
-$
-The parameters $q$ and $s$ thus enter the conditional expectations and, through them, the effective prize that $U$ faces in the contest. Furthermore,
-$
-  overline(V)_H - overline(V)_L = (q + s - 1)(V_H - V_L),
-$
-so the monotonicity of $hat(V)_U(mu)$ in $mu$ is governed by $q + s - 1$: it is weakly increasing when $q + s >= 1$ and strictly decreasing when $q + s < 1$.
-
-== Belief-dependent best response <subsec-ext-br>
-
-In the $I U$ subgame, $U$ faces an observed effort $x_I$ and a posterior $mu$, and solves
+Under this definition, when $U$ is certain about $I$'s type, the effective prize reduces to the conditional expectation under each type:
 
 $
-  max_(x_U >= 0) U_U(x_I, x_U | mu)
+  hat(V)_U(1) = p_H V_H + (1-p_H) V_L,
+  quad
+  hat(V)_U(0) = (1-p_L) V_H + p_L V_L.
+$
+
+To see how a change in belief affects the effective prize, differentiating with respect to $m$ gives
+
+$
+  (d hat(V)_U(m)) / (d m)
   =
-  max_(x_U >= 0)
-  [
-    x_U/(x_I + x_U) hat(V)_U(mu) - x_U
-  ].
-$
+  (p_H + p_L - 1)(V_H - V_L).
+$ <eq-ext-vhat-derivative>
 
-#lemma(title: [Best response of $U$ under partial correlation])[
-  Given $x_I > 0$ and $mu in [0, 1]$, $U$'s interior best response is
+The sensitivity of the effective prize to belief therefore depends on the sign of the correlation. At the independence point ($p_H = q$, $p_L = 1 - q$), the derivative is exactly zero, so belief updating has no informational value; once the two players' prizes are positively correlated ($p_H + p_L > 1$), however, a higher posterior belief raises $U$'s expectation of his own effective prize through the correlation structure.
+
+Building on this effective prize, $U$'s best response in the more general environment is as follows.
+
+#lemma(title: [$U$'s best response under partial correlation])[
+  Given $I$'s effort $x_I > 0$ and $U$'s posterior belief $m in [0,1]$, the interior best response of $U$ is
 
   $
-    x_U^*(x_I, mu) = sqrt(x_I hat(V)_U(mu)) - x_I.
+    x_U^*(x_I, m) = sqrt(x_I hat(V)_U(m)) - x_I.
   $ <eq-ext-br>
 
-  When $q + s > 1$, the interior region satisfies $(d x_U^*) / (d mu) > 0$.
+  If the information structure satisfies the positive-correlation condition, $U$'s effort is monotonically increasing in his assessment of $I$'s strength.
 ] <lem-ext-br>
 
 #proof[
-  The first-order condition is
+  Under the Tullock contest, $U$ maximizes his expected payoff,
+
   $
-    x_I hat(V)_U(mu) / (x_I + x_U)^2 = 1.
+    max_x_U hat(pi)_U = hat(V)_U(m) dot x_U / (x_I + x_U) - x_U,
   $
-  Solving for the positive root gives $x_I + x_U = sqrt(x_I hat(V)_U(mu))$, which yields the best response above. Differentiating,
+
+  whose first-order condition is
+
   $
-    (d x_U^*) / (d mu)
-    =
-    (overline(V)_H - overline(V)_L) / (2 sqrt(hat(V)_U(mu) / x_I));
+    (x_I hat(V)_U(m)) / (x_I + x_U)^2 = 1.
   $
-  when $q + s > 1$, $overline(V)_H - overline(V)_L > 0$, so the derivative is positive.
+
+  Solving for the positive root yields $x_U^*(x_I, m) = sqrt(x_I hat(V)_U(m)) - x_I$. The marginal effect of belief on behavior is
+
+  $
+    (d x_U^*)/(d m) & =
+                      (partial x_U^*) / (partial hat(V)_U) dot (d hat(V)_U) / (d m) \
+                    & =
+                      (sqrt(x_I) / (2 sqrt(hat(V)_U(m)))) dot (p_H + p_L - 1)(V_H - V_L).
+  $
+
+  Under $p_H + p_L > 1$ and prize heterogeneity ($V_H > V_L$), this derivative is strictly positive #footnote("The intuition is that, when the prizes are positively correlated by type, the uninformed player's assessments of \"the opponent's strength\" and \"his own benefit\" move together. When $U$ observes $I$'s effort and revises upward the posterior probability that the opponent is high-type, the positive correlation implies that $U$'s own prize is also more likely to be high. The expectation of a higher prize partially offsets the deterrence from facing a stronger opponent and induces $U$ to commit more resources to the contest.").
 ]
 
-In the baseline model, the best response depends only on the observed effort and not on beliefs; in this section, the best response depends on beliefs, and this difference is precisely the source of whether separation can be sustained.
+== Separating equilibrium, incentive compatibility, and critical boundary <subsec-ext-boundary>
 
-== Separation conditions and the critical boundary <subsec-ext-boundary>
-
-We first focus on the region $q + s >= 1$ (independence to positive correlation). Consider a candidate separating equilibrium in which the high and low types choose different efforts and on-path beliefs are
+This subsection investigates the conditions under which the separating equilibrium continues to exist in the generalized information structure. Consider a candidate separating profile in which the high-type and low-type informed players choose distinct equilibrium efforts and induce the on-path beliefs
 
 $
-  mu(x_H) = 1, quad mu(x_L) = 0.
+  m(x_H) = 1,
+  quad
+  m(x_L) = 0.
 $
 
-In this configuration, the two types face effective opponent prizes $overline(V)_H$ and $overline(V)_L$ respectively, so
+Under this profile, the on-path efforts and corresponding payoffs of the two types are
 
 $
-   x_H & = V_H^2 / (4 overline(V)_H),
-         quad
-         x_L  & = V_L^2 / (4 overline(V)_L), \
-  pi_H & = V_H^2 / (4 overline(V)_H),
-         quad
-         pi_L & = V_L^2 / (4 overline(V)_L).
+  x_H & = V_H^2 / (4 hat(V)_U(1)),
+        quad
+        pi_H & = V_H^2 / (4 hat(V)_U(1)), \
+  x_L & = V_L^2 / (4 hat(V)_U(0)),
+        quad
+        pi_L & = V_L^2 / (4 hat(V)_U(0)).
 $
 
-If the high type instead mimics the low type, the deviation payoff is
+Whether the separating equilibrium is sustained turns on whether the high-type has an incentive to "mimic the low type" in exchange for a reduced response from the opponent. If the high-type imitates the low-type, the deviation payoff is
 
 $
-  U_H^d = (V_L (2 V_H - V_L)) / (4 overline(V)_L).
-$
+  widetilde(pi)_H
+  =
+  V_L (2 V_H - V_L) / (4 hat(V)_U(0)).
+$ <eq-ext-dev-h>
 
-The high type's incentive-compatibility condition is therefore
+The high-type incentive-compatibility (IC) condition is
 
 $
-  V_H^2 / overline(V)_H
+  V_H^2 / hat(V)_U(1)
   >=
-  (V_L (2 V_H - V_L)) / overline(V)_L.
+  V_L (2 V_H - V_L) / hat(V)_U(0).
 $ <eq-ext-ich>
 
-Substituting $overline(V)_H = q V_H + (1 - q) V_L$ and $overline(V)_L = (1 - s) V_H + s V_L$, this condition becomes
+Rearranging, the condition can be written as a ratio of effective prizes under the two posteriors:
 
 $
-  V_H^2 / [q V_H + (1 - q) V_L]
-  >=
-  (V_L (2 V_H - V_L)) / [(1 - s) V_H + s V_L].
-$ <eq-ext-ich-qs>
+  hat(V)_U(1) / hat(V)_U(0) <= R = V_H^2 / (V_L (2 V_H - V_L)).
+$ <eq-ext-sep-condition>
 
-The left-hand side, depending on $q$, governs the strength of $U$'s response on the high-type path; the right-hand side, depending on $s$, governs $U$'s response on the mimicry path.
+Here $R > 1$ is a constant that measures the magnitude of type heterogeneity. For the low-type, mimicking the high-type yields the deviation payoff
+
+$
+  widetilde(pi)_L^d
+  =
+  V_H (2 V_L - V_H) / (4 hat(V)_U(1)).
+$
+
+The low-type IC condition is therefore
+
+$
+  V_L^2 / (4 hat(V)_U(0))
+  >=
+  V_H (2 V_L - V_H) / (4 hat(V)_U(1)),
+$
+
+equivalently,
+
+$
+  hat(V)_U(1) / hat(V)_U(0)
+  >=
+  V_H (2 V_L - V_H) / V_L^2.
+$
+
+In the positively correlated region of interest, $hat(V)_U(1) > hat(V)_U(0)$, so the left-hand side is strictly greater than $1$. On the other hand, letting $rho equiv V_H / V_L > 1$, the right-hand side equals $2 rho - rho^2 = 1 - (rho - 1)^2 < 1$. The low-type IC condition is therefore automatically satisfied; only the high-type IC condition is binding.
+
+#proposition(title: [Existence condition for the separating equilibrium])[
+  In the $I U$ subgame, the pure-strategy separating equilibrium exists if and only if the high-type incentive-compatibility condition holds. Equivalently, when the ratio of effective prizes under the two posteriors is below the critical threshold $R$, the separating equilibrium is sustained:
+  $
+    hat(V)_U(1) / hat(V)_U(0) <= R.
+  $
+  If this condition fails, the high-type's competitive gain from mimicking (a sharply reduced opponent effort) outweighs the marginal gain from honest play, and the separating equilibrium collapses.
+] <prop-ext-separation>
 
 #proof[
-  On the candidate separating path, an honest high type chooses $x_H = V_H^2 / (4 overline(V)_H)$ with payoff
+  Consider the candidate separating profile defined above. Under honest revelation, the high-type's equilibrium payoff is
+
   $
-    pi_H = V_H^2 / (4 overline(V)_H).
+    pi_H = V_H^2 / (4 hat(V)_U(1)).
   $
 
-  If the high type mimics the low type by choosing $x_L = V_L^2 / (4 overline(V)_L)$, then $U$ responds with the low-type belief, and the high type's deviation payoff is
+  If the high-type instead mimics the low-type, $U$ responds along the low-type path, and the deviation payoff is
+
   $
-    U_H^d = (V_L (2 V_H - V_L)) / (4 overline(V)_L).
+    widetilde(pi)_H^d
+    =
+    V_L (2 V_H - V_L) / (4 hat(V)_U(0)).
   $
 
-  Incentive compatibility requires $pi_H >= U_H^d$, i.e.
+  The high-type IC condition is therefore
+
   $
-    V_H^2 / (4 overline(V)_H) >= (V_L (2 V_H - V_L)) / (4 overline(V)_L).
+    pi_H >= widetilde(pi)_H^d,
   $
-  Rearranging gives the stated condition.
+
+  that is,
+
+  $
+    V_H^2 / (4 hat(V)_U(1))
+    >=
+    V_L (2 V_H - V_L) / (4 hat(V)_U(0)).
+  $
+
+  Multiplying both sides by $4 hat(V)_U(1) hat(V)_U(0)$ yields
+
+  $
+    hat(V)_U(1) / hat(V)_U(0)
+    <=
+    V_H^2 / (V_L (2 V_H - V_L))
+    =
+    R.
+  $
+
+  Turn now to the low-type. Honest play yields $pi_L = V_L^2 / (4 hat(V)_U(0))$; mimicking the high-type yields the deviation payoff
+
+  $
+    widetilde(pi)_L^d
+    =
+    V_H (2 V_L - V_H) / (4 hat(V)_U(1)).
+  $
+
+  The low-type IC condition is therefore equivalent to
+
+  $
+    hat(V)_U(1) / hat(V)_U(0)
+    >=
+    V_H (2 V_L - V_H) / V_L^2.
+  $
+
+  In the positively correlated region of interest, $hat(V)_U(1) / hat(V)_U(0) > 1$. On the other hand, letting $rho equiv V_H / V_L > 1$, the right-hand side equals
+
+  $
+    2 rho - rho^2 = 1 - (rho - 1)^2 < 1.
+  $
+
+  The low-type IC condition is therefore automatic and never binds. Consequently, the candidate separating profile constitutes a pure-strategy separating equilibrium if and only if the high-type IC condition holds; equivalently, if and only if
+
+  $
+    hat(V)_U(1) / hat(V)_U(0) <= R.
+  $
 ]
 
-In the region $q + s >= 1$, deviation by the low type to mimic the high type cannot improve on the equilibrium path, so the only binding condition arises from the high type.
+#proposition(title: [Critical boundary])[
+  Setting the high-type IC condition with equality yields the critical boundary
 
-#theorem(title: [Existence of a separating equilibrium and critical boundary in the positively correlated region])[
-  In the region $q + s >= 1$, the $I U$ subgame admits the candidate pure-strategy separating perfect Bayesian equilibrium described above if and only if the high-type incentive-compatibility condition holds; equivalently, the inequality in $(q, s)$ form above is satisfied. Setting this condition with equality yields the critical boundary
-
-  #set math.equation(numbering: "(1)")
   $
-    s^*(q)
+    p_L^*(p_H)
     =
-    (
-    V_H^3
-    - V_L (2 V_H - V_L) [q V_H + (1 - q) V_L]
-    ) / (V_H^2 (V_H - V_L)).
+    (R V_H - V_L - p_H (V_H - V_L)) / (R (V_H - V_L)).
   $ <eq-ext-boundary>
 
-  Hence:
-  1. Separation is sustained when $s <= s^*(q)$.
-  2. When $s > s^*(q)$, mimicry by the high type is profitable, separation breaks down, and the regime enters the pooling region.
-] <thm-ext-boundary>
+  Points below this boundary satisfy the separating condition; points above it generate a profitable mimicry incentive for the high-type.
+] <prop-ext-boundary>
 
 #proof[
-  Existence of a separating equilibrium is necessary and sufficient for the high type to lack a profitable mimicry deviation, which is the high-type incentive-compatibility condition. The detailed derivation appears in
-  #context if query(<proof-ext-boundary>).len() > 0 [
-    #ref(<proof-ext-boundary>)
-  ] else [
-    Appendix "Section 6: critical boundary derivation"
-  ].
+  Let $Delta V equiv V_H - V_L$. From
+  $
+    hat(V)_U(1) & = p_H V_H + (1-p_H) V_L \
+                & = V_L + p_H Delta V,
+  $
+  and
+  $
+    hat(V)_U(0) & = (1-p_L) V_H + p_L V_L \
+                & = V_H - p_L Delta V,
+  $
+  setting the high-type IC condition with equality gives
+  $
+    V_L + p_H Delta V = R (V_H - p_L Delta V).
+  $
+  Solving for $p_L$ delivers the critical boundary stated above.
 ]
 
+As @fig-ch6-phpl-regions shows, the independence point $(q, 1-q)$ and the perfect-correlation point $(1, 1)$ lie on opposite sides of the boundary, illustrating how the correlation structure fundamentally alters the game:
+
+1. At the independence point $(p_H, p_L) = (q, 1-q)$,
+  $
+    hat(V)_U(1) = hat(V)_U(0) = q V_H + (1-q) V_L,
+  $
+  so the ratio is $1 < R$; this point lies in Region I, and the separating equilibrium holds strictly.
+2. At the perfect-correlation point $(1, 1)$,
+  $
+    hat(V)_U(1) = V_H,
+    quad
+    hat(V)_U(0) = V_L,
+  $
+  so the ratio is $V_H / V_L > R$; this point lies in Region II, and separation fails.
+3. Under partial correlation, the ratio lies between $1$ and $V_H / V_L$, and whether $(p_H, p_L)$ falls in Region I or II is determined by the position of the critical boundary $p_L^*(p_H)$. The points $A$, $B$, $C$ in @fig-ch6-phpl-regions correspond to three representative independence points $(q, 1 - q)$ at $q = 0.3, 0.5, 0.7$; all three lie inside Region I, showing that whenever statistical independence is preserved, the high-type IC condition holds strictly regardless of the prior.
+
 #figure(
-  image("../../../figures/fig6_qs_regions.pdf", width: 100%),
-  caption: [Equilibrium partition in the $(q, s)$ parameter space.],
+  image("../../../figures/fig6_qs_regions.png", width: 100%),
+  caption: [Two regions on the $(p_H, p_L)$ plane separated by the critical boundary.],
   supplement: [Figure],
-) <fig-ch6-qs-regions>
+) <fig-ch6-phpl-regions>
 
-In #ref(<fig-ch6-qs-regions>), two regions arise within $q + s >= 1$: region I corresponds to the separating equilibrium and region II to the pooling equilibrium in which the high type mimics the low type. The boundary $s^*(q)$ is the locus on which the high type's incentive compatibility binds. Differentiating the boundary expression (eq. @eq-ext-boundary[]) with respect to $q$ gives
-$
-  (d s^*(q)) / (d q) = - (V_L (2 V_H - V_L)) / (V_H^2) < 0.
-$
-Thus the higher $q$ is, the lower the upper bound on $s$ for which separation is sustained; for any given $q$, separation breaks down once $s$ exceeds this upper bound, and the pair $(q, s)$ enters the pooling region.
+== Comparative statics and the continuous spectrum <subsec-ext-summary>
 
-== Incentive reversal in the negatively correlated region and the critical ratio <subsec-ext-negative>
-
-The previous subsection focused on $q + s >= 1$. When $q + s < 1$,
-$
-  overline(V)_H - overline(V)_L = (q + s - 1)(V_H - V_L)
-$
-is negative, so $overline(V)_H < overline(V)_L$. By the definition of the belief-weighted prize, $hat(V)_U(mu)$ is therefore strictly decreasing in $mu$: the more confident $U$ is that $I$ is the high type, the lower $U$'s effective prize and the weaker $U$'s continuation effort response. The direction of the deviation incentive is reversed relative to the previous subsection: in the negatively correlated region, the dominant deviation may be the low type mimicking the high type — that is, bluffing.
-
-Continuing with the candidate separating path of the previous subsection, the honest payoff of the low type is
+Define the correlation ratio function
 
 $
-  pi_L = V_L^2 / (4 overline(V)_L).
+  rho(p_H, p_L) & equiv
+                  hat(V)_U(1) / hat(V)_U(0) \
+                & =
+                  (p_H V_H + (1-p_H) V_L) / ((1-p_L) V_H + p_L V_L).
 $
 
-If the low type deviates and mimics the high type, the chosen effort is $x_H = V_H^2 / (4 overline(V)_H)$, inducing the posterior $mu = 1$. By the best response derived above,
+Comparative statics with respect to the conditional-probability parameters give
 
 $
-  x_U^*(x_H, 1)
-  =
-  sqrt(x_H overline(V)_H) - x_H
-  =
-  V_H/2 - V_H^2 / (4 overline(V)_H).
-$
-
-The total effort and the low type's winning probability are therefore
-
-$
-  x_H + x_U^*(x_H, 1) = V_H / 2,
+  (d rho)/(d p_H) = (V_H - V_L) / hat(V)_U(0) > 0,
   quad
-  x_H / (x_H + x_U^*(x_H, 1)) = V_H / (2 overline(V)_H).
+  (d rho)/(d p_L) = hat(V)_U(1) (V_H - V_L) / hat(V)_U(0)^2 > 0.
 $
 
-The low type's deviation payoff simplifies to
+Both raising $p_H$ and raising $p_L$ shrink the separating region; their economic interpretations differ, however. An increase in $p_H$ raises the strength of the opponent that the high-type faces under honest revelation (a negative push); an increase in $p_L$ reduces the opponent's strength under mimicry of the low-type (a positive pull). Since the gradient ratio satisfies
 
 $
-  U_L^d
+  ((d rho)/(d p_L)) / ((d rho)/(d p_H))
   =
-  (V_H V_L) / (2 overline(V)_H) - V_H^2 / (4 overline(V)_H)
-  =
-  V_H (2 V_L - V_H) / (4 overline(V)_H).
-$ <eq-ext-uld>
-
-The low-type incentive-compatibility condition is therefore
-
-$
-  V_L^2 / (4 overline(V)_L) >= V_H (2 V_L - V_H) / (4 overline(V)_H),
+  rho(p_H, p_L)
+  >= 1,
 $
 
-equivalently
+within the positively correlated region a marginal change in $p_L$ destroys the separating equilibrium more powerfully than a marginal change in $p_H$.
+
+Finally, imposing the marginal-consistency restriction, all economically feasible parameter combinations form a path connecting "independence" and "perfect correlation." Moving along this path traces a continuous spectrum that smoothly transitions from our baseline model to the setting of #c("fu2006"). This not only demonstrates that our framework offers broader explanatory range, but also reveals that the pooling equilibrium emphasized in the existing literature is, in our framework, a degenerate consequence of separating-equilibrium collapse at the extreme.
+
+== Pooling equilibrium and mimicry incentives <subsec-ext-pooling>
+
+As Section 6.3 makes clear, once the correlation parameters $(p_H, p_L)$ cross the critical boundary $p_L^*(p_H)$ into Region II, the high-type's deviation payoff from mimicry exceeds his honest-revelation equilibrium payoff, and the separating equilibrium collapses. The failure of the separating structure does not, however, mean that the game is left without an equilibrium. This subsection further argues that, when the separating equilibrium collapses, a pure-strategy pooling equilibrium — in which the high-type actively mimics the low-type — takes over. By establishing the existence of this pooling equilibrium, we both complete the equilibrium picture in Region II and produce a continuous transition from the necessary separation in the baseline to the perfectly correlated setting of #c("fu2006").
+
+Consider a candidate pooling profile in which $I$ chooses the same equilibrium effort $x_P > 0$ regardless of his type. Because the two types take identical actions on the equilibrium path, $U$ cannot distinguish $I$'s true type from observing $x_P$; by Bayes' rule, $U$'s posterior remains at the prior,
 
 $
-  V_L^2 overline(V)_H >= V_H (2 V_L - V_H) overline(V)_L.
-$ <eq-ext-icl>
-
-If $2 V_L <= V_H$, the right-hand side is non-positive while $pi_L > 0$, so $I C_L$ holds automatically and region III is empty. We focus on the case $2 V_L > V_H$. Setting the inequality with equality and substituting
-
-$
-  overline(V)_H = q V_H + (1 - q) V_L,
-  quad
-  overline(V)_L = (1 - s) V_H + s V_L,
+  m(x_P) = q.
 $
 
-gives
+By the effective-prize and best-response formulas in Section 6.2, $U$'s effective prize is $hat(V)_U(q)$ and his best response is
 
 $
-  V_L^2 [q V_H + (1 - q) V_L] & =
-                                V_H (2 V_L - V_H) [(1 - s) V_H + s V_L] \
-                              & =
-                                V_H (2 V_L - V_H) [V_H - s (V_H - V_L)].
+  x_U^*(x_P, q) = sqrt(x_P hat(V)_U(q)) - x_P.
 $
 
-Rearranging yields
+Type $v in {V_L, V_H}$'s on-path expected payoff is therefore
 
 $
-  s V_H (2 V_L - V_H) (V_H - V_L)
-  =
-  V_H^2 (2 V_L - V_H)
-  - V_L^2 [q V_H + (1 - q) V_L].
-$
+  pi_P (v) = v sqrt(x_P / hat(V)_U(q)) - x_P.
+$ <eq-ext-pool-payoff>
 
-The low-type critical boundary is therefore
+Sustaining a pooling equilibrium relies on imposing a strong enough penalty on deviations. To this end, we adopt the most pessimistic off-path belief: if $U$ observes any effort $x != x_P$, $U$ assigns full probability to the high-type, that is,
 
 $
-  s_L^*(q)
-  =
-  (
-  V_H^2 (2 V_L - V_H)
-  - V_L^2 [q V_H + (1 - q) V_L]
-  ) / (V_H (2 V_L - V_H) (V_H - V_L)).
-$ <eq-ext-sl-boundary>
-
-Its slope is
-
-$
-  (d s_L^*(q)) / (d q)
-  =
-  - V_L^2 / (V_H (2 V_L - V_H))
-  < 0.
+  m(x) = 1, quad forall x != x_P.
 $
 
-#proposition(title: [Necessary and sufficient condition for region III to be non-empty])[
-  Under $V_I in {V_H, V_L}$, $(q, s) in [0, 1]^2$, and $V_H > V_L > 0$, there exists $(q, s)$ at which the low-type incentive-compatibility condition is violated (i.e. region III is non-empty) if and only if
-  $
-    V_H / V_L < phi = (1 + sqrt(5)) / 2.
-  $
-] <prop-ext-region3>
+This belief specification can be viewed as a "strongest-defense" assumption: any off-path effort immediately leads $U$ to revise his assessment of the opponent upward to the high-type and to elicit the most aggressive competitive response. Under this belief, $U$'s effective prize rises to its upper bound $hat(V)_U(1)$ and the corresponding best response is
+
+$
+  x_U^*(x, 1) = sqrt(x hat(V)_U(1)) - x.
+$
+
+Given this strong counter-attack, if a type-$v$ informed player considers deviating to some $x$, his maximization problem is
+
+$
+  max_x quad v sqrt(x / hat(V)_U(1)) - x.
+$
+
+The first-order condition gives the optimal deviation effort
+
+$
+  x_d (v) = v^2 / (4 hat(V)_U(1)),
+$
+
+and the maximal deviation payoff
+
+$
+  widetilde(pi)_d (v) = v^2 / (4 hat(V)_U(1)).
+$ <eq-ext-pool-dev>
+
+The pooling equilibrium is sustained as long as both types' on-path payoffs are at least as large as their maximal deviation payoffs. From the on-path expected payoff and the maximal deviation payoff above, the IC conditions for the two types can be written down separately. The high-type IC condition is
+
+$
+  V_H sqrt(x_P / hat(V)_U(q)) - x_P
+  >=
+  V_H^2 / (4 hat(V)_U(1));
+$ <eq-ext-pool-ich>
+
+the low-type IC condition is
+
+$
+  V_L sqrt(x_P / hat(V)_U(q)) - x_P
+  >=
+  V_L^2 / (4 hat(V)_U(1)).
+$ <eq-ext-pool-icl>
+
+#proposition(title: [Existence of the pooling equilibrium])[
+  Under a positively correlated information structure, if the two types' IC conditions admit a common real solution in $x_P > 0$, the $I U$ subgame admits a pure-strategy pooling equilibrium characterized by effort $x_P$. Three components jointly sustain this equilibrium: the on-path strategy $x_I = x_P$; $U$'s best response $x_U^*(x_P, q)$; and the most pessimistic off-equilibrium-path belief $m(x != x_P) = 1$.
+] <prop-ext-pooling>
 
 #proof[
-  Consider first $2 V_L <= V_H$. By the deviation payoff above, $U_L^d <= 0$ while the honest payoff $pi_L = V_L^2 / (4 overline(V)_L) > 0$, so $I C_L$ holds for every $(q, s)$ and region III is empty. In this case $V_H / V_L >= 2 > phi$, consistent with the statement. Consider next $2 V_L > V_H$. Violating $I C_L$ is equivalent to
+  Let $alpha equiv 1 - hat(V)_U(q) / hat(V)_U(1)$. Under positive correlation, the derivative computation in Section 6.2 implies that $hat(V)_U(1) > hat(V)_U(q)$ holds throughout, so $alpha in (0, 1)$. The IC condition for any type $v in {V_L, V_H}$ can be rewritten as a quadratic inequality in $sqrt(x_P)$:
 
   $
-    V_L^2 overline(V)_H < V_H (2 V_L - V_H) overline(V)_L.
+    (sqrt(x_P))^2 - v / sqrt(hat(V)_U(q)) sqrt(x_P) + v^2 / (4 hat(V)_U(1)) <= 0.
   $
 
-  The left-hand side is strictly increasing in $q$ and the right-hand side is strictly decreasing in $s$, so the most likely violation occurs at $(q, s) = (0, 0)$. Substituting yields
+  The discriminant is $v^2 alpha \/ hat(V)_U(q) > 0$, ensuring a real solution. The solution interval to type $v$'s IC condition $I C_v$ can therefore be written as
 
   $
-    V_L^3 < V_H^2 (2 V_L - V_H).
+    sqrt(x_P) in [y_v^-, y_v^+],
+    quad
+    y_v^(plus.minus) = v / (2 sqrt(hat(V)_U(q))) (1 plus.minus sqrt(alpha)).
   $
 
-  Setting $rho = V_H / V_L > 1$ and dividing by $V_L^3$,
+  Both endpoints scale linearly in the true type $v$. Since $V_H > V_L$, the intersection of the two types' solution intervals is bounded below by the high-type's lower endpoint and above by the low-type's upper endpoint:
 
   $
-    rho^3 - 2 rho^2 + 1 < 0.
+    sqrt(x_P) in [y_(V_H)^-, y_(V_L)^+]
+    =
+    [V_H (1 - sqrt(alpha)) / (2 sqrt(hat(V)_U(q))), V_L (1 + sqrt(alpha)) / (2 sqrt(hat(V)_U(q)))].
   $
 
-  Since
+  For this common solution interval to be non-empty,
 
   $
-    (rho - 1) (rho^2 - rho - 1)
-    = rho^3 - rho^2 - rho - rho^2 + rho + 1
-    = rho^3 - 2 rho^2 + 1,
+    V_H (1 - sqrt(alpha)) <= V_L (1 + sqrt(alpha)),
   $
 
-  we have
+  which rearranges to
 
   $
-    rho^3 - 2 rho^2 + 1 < 0
-    equiv
-    (rho - 1) (rho^2 - rho - 1) < 0.
-  $
+    sqrt(alpha) >= (V_H - V_L) / (V_H + V_L).
+  $ <eq-ext-pool-alpha>
 
-  Because $rho > 1$ implies $rho - 1 > 0$, the inequality is equivalent to $rho^2 - rho - 1 < 0$, that is, $rho < phi$. The reverse implication is analogous, completing the proof.
+  Whenever this non-emptiness condition holds, there exists $x_P > 0$ in the parameter space at which the two types' IC conditions are simultaneously satisfied. Combined with $U$'s best response and the most pessimistic off-path belief, the equilibrium effort $x_P$ delivers a self-enforcing pure-strategy pooling equilibrium. This completes the proof.
 ]
 
+The non-emptiness condition $sqrt(alpha) >= (V_H - V_L) / (V_H + V_L)$ provides a clean view of the comparative statics: it shows how the existence of the pooling equilibrium varies continuously with the strength of correlation. At the independence point $(q, 1-q)$, the derivative computation in Section 6.2 yields $hat(V)_U(1) = hat(V)_U(q)$, so $alpha = 0$, the non-emptiness condition fails, and the pooling equilibrium does not exist; this matches the conclusion in Section 6.3 that the independence point lies in Region I and the separating equilibrium necessarily holds.
+
+As correlation strengthens, however, and $(p_H, p_L)$ crosses the critical boundary toward the perfect-correlation point $(1, 1)$, $hat(V)_U(1)$ rises substantially toward $V_H$, while $hat(V)_U(q)$ — weighted by the prior $q in (0, 1)$ — only reaches $q V_H + (1-q) V_L$. The widening gap drives $alpha$ upward monotonically from zero. In other words, the stronger the positive correlation, the more aggressive the uninformed player's potential counter-attack under the most pessimistic off-path belief. This deterrent effect sharply reduces the maximal deviation payoff $widetilde(pi)_d (v) = v^2 / (4 hat(V)_U(1))$, slackens both types' IC conditions, and eventually pushes the system past the non-empty-intersection threshold.
+
+To visualize this comparative-statics conclusion on the $(p_H, p_L)$ plane, @fig-ch6-pooling-regions plots the separating critical boundary $p_L^*(p_H)$ from Section 6.3 together with the pooling non-degeneracy boundary $sqrt(alpha) = (V_H - V_L) \/ (V_H + V_L)$ derived here, with baseline values $V_H = 2$, $V_L = 1$, $q = 0.5$. Both boundaries are linear, and the pooling boundary always lies below the separating boundary. The plane decomposes into three regions with distinct economic content:
+
++ Pure separating region (Region I): the high-type IC condition holds strictly and pooling has no solution; the unique pure-strategy equilibrium is separating.
+
++ Coexistence region (Region C): both separating and pooling equilibria hold; multiple equilibria are present.
+
++ Pure pooling region (Region II): the separating structure collapses and the pooling equilibrium takes over.
+
+Notably, the independence point $(q, 1-q)$ always lies in the interior of Region I, consistent with the conclusion in Section 6.3 that "statistical independence implies separation must hold." As the information structure moves along the marginal-consistency path toward $(1, 1)$, the parameter combination passes through Region C and arrives at Region II — a visual illustration of the central thesis that "when separation collapses, pooling takes over."
+
 #figure(
-  image("../../../figures/fig6_golden_ratio_threshold.pdf", width: 95%),
-  caption: [Critical condition for the existence of region III #footnote[The left panel shows how the area of region III in $(q, s) in [0, 1]^2$ varies with $rho = V_H / V_L$ and vanishes exactly at $rho = phi$. The right panel plots the two roots of $f(rho) = rho^3 - 2 rho^2 + 1$: $rho = 1$ (the degenerate case) and $rho = phi approx 1.618$.]],
+  image("../../../figures/fig6_pooling_regions.pdf", width: 100%),
+  caption: [Separating and pooling boundaries on the $(p_H, p_L)$ plane.],
   supplement: [Figure],
-) <fig-ch6-golden-ratio>
+) <fig-ch6-pooling-regions>
 
-#ref(<fig-ch6-golden-ratio>) shows that the critical ratio $rho^* = phi$ arises from the interlocking of two scales: on the one hand, equilibrium effort in a Tullock contest scales quadratically; on the other, the partial correlation structure enters the effective prize linearly through the conditional expectation. When $rho^2 = rho + 1$, the low type's winning-probability gain from mimicry exactly balances the additional effort cost; once $rho$ exceeds this threshold, the cost of signal exaggeration systematically dominates the strategic gain, and region III disappears.
+In economic terms, the proposition above clarifies the mechanism through which the pooling equilibrium replaces the separating equilibrium: when the two players' information is highly correlated, the competitive cost of full revelation becomes too large. Anticipating $U$'s aggressive counter-attack, the high-type gives up the separating strategy and chooses the same equilibrium effort $x_P$ as the low-type to conceal his strength. The low-type, by contrast, has a small true value $V_L$, so deviating to trigger the pessimistic belief delivers an extremely thin marginal gain; the low-type IC condition is satisfied automatically and there is no incentive to deviate. Defense and concealment, respectively, lead the two types to converge on a single effort level $x_P$, and the pooling equilibrium is established.
 
-To keep notation consistent with the previous subsection, let $s_H^*(q)$ denote the high-type critical boundary in eq. @eq-ext-boundary[]. The full $(q, s)$ partition can then be summarized as follows.
-
-#figure(
-  text(size: 10pt)[
-    #table(
-      columns: (0.95fr, 2.0fr, 0.75fr, 1.7fr, 1.45fr),
-      stroke: none,
-      inset: 5pt,
-      align: center,
-      table.hline(y: 0, stroke: 0.7pt),
-      table.hline(y: 1, stroke: 0.4pt),
-      table.hline(y: 5, stroke: 0.7pt),
-      [Region], [Condition], [Binding IC], [Economic mechanism], [Corresponding region],
-      [$q + s >= 1$], [$s <= s_H^*(q)$], [None], [Neither type gains from mimicry], [I (separating)],
-      [$q + s >= 1$], [$s > s_H^*(q)$], [$I C_H$], [High type mimics low type], [II (pooling)],
-      [$q + s < 1$], [$s >= s_L^*(q)$ or $V_H / V_L >= phi$], [None], [Low-type deviation unprofitable], [I (extended)],
-      [$q + s < 1$], [$s < s_L^*(q)$ and $V_H / V_L < phi$], [$I C_L$], [Low type mimics high type], [III (pooling)],
-    )
-  ],
-  caption: [Equilibrium classification across the full $(q, s)$ parameter space.],
-  supplement: [Table],
-) <tbl-ext-regions-full>
-
-#figure(
-  image("../../../figures/fig6_qs_regions_main.pdf", width: 95%),
-  caption: [Equilibrium partition under partially correlated types $(q, s)$ #footnote("Region I is the separating equilibrium; region II is bound by the high type's IC and continues the conclusion of the previous subsection; region III is a new pooling region in the negatively correlated zone bound by the low type's IC. The benchmark point $(0.5, 0.704)$ matches the boundary of the previous subsection.")],
-  supplement: [Figure],
-) <fig-ch6-qs-regions-main>
-
-#ref(<fig-ch6-qs-regions-main>) and table @tbl-ext-regions-full[] together display the full structure of this section: regions II and III correspond to mimicry incentives in opposite directions, both expanding outward from the separating region I.
-
-In terms of literature, work on bargaining under asymmetric information has mostly focused on how the proposer's private information (such as reservation prices and discount rates) shapes mechanism performance; representative surveys include #c("ausubel2002"), with related discussion in #c("cramton1992"). Our $(q, s)$ framework instead separates "asymmetric information" and "prize correlation" into two distinct dimensions, allowing the incentive reversal to be tracked continuously through a single set of parameters. With respect to spillovers in contests, classic discussions such as Baik and Shogren (1992) and Leininger (1993) treat the correlation structure as exogenously given; our setup, by contrast, lets the correlation structure itself determine when the signaling channel is active. This complements the surveys of contest design in #c("konrad2009") and the analyses of asymmetric-information contests in #c("warneryd2003") and #c("dentermorgansisak2022"). Overall, the propositions above provide a verifiable closed-form threshold for when the information structure suffices to break a separating equilibrium, rather than a comparison of isolated parameter points.
-
-== Summary <subsec-ext-summary>
-
-The central contribution of this section is to nest the necessarily separating result derived in the model of Section 5 and the pooling-permitting framework of #c("fu2006") within a single continuously varying information structure, allowing direct comparison and unification. The parameters $q$ and $s$ control $U$'s conditional expected prize: $q$ governs $U$'s effective stake on the high-type path, and $s$ governs $U$'s effective stake on the low-type path. When the two parameters make $U$'s continuation response more sensitive to the posterior belief, the relative payoff of honest disclosure by the high type falls while the deviation payoff from mimicking the low type rises, eventually altering the equilibrium structure of the $I U$ subgame.
-
-The critical boundary $s^*(q)$ delineates the range over which the separating equilibrium survives. Given $q$, when $s$ exceeds this boundary, the high type can profit by deviating, and the separating equilibrium collapses into a pooling equilibrium. The slope of $s^*(q)$ encodes the core intuition: when the two parties' payoffs are highly correlated (i.e. $q$ rises), the opponent's expected resistance is stronger, raising the cost of honest disclosure for the high type and pushing the high type toward concealment, which shrinks the feasible region for separation.
-
-The two extreme corners of the parameter space delineate the theoretical spectrum of the model. At $(q, s) = (1/2, 1/2)$, the two valuations are independent, beliefs have no substantive effect on $U$'s expected prize, and the model collapses to the baseline of the previous sections, sustaining the unique separating equilibrium. At $(q, s) = (1, 1)$, valuations are perfectly correlated and the model reduces to the special case of #c("fu2006"); the high type then conceals in the face of strong expected resistance, and the separating equilibrium collapses. At the institutional level, this section clarifies that the survival of the first-mover advantage depends on whether the two parties' payoffs are correlated enough to force concealment by the high type — and the absolute threshold for the transition from separating to pooling is precisely the critical boundary $s^*(q)$.
+To sum up, the extended model in this section traces out the continuous influence of information correlation on the endogenous-timing equilibrium. At the independence endpoint $(q, 1-q)$, the game admits a unique pure-strategy separating equilibrium; as positive correlation strengthens and crosses the critical boundary $p_L^*(p_H)$, the separating structure collapses and is replaced by the pooling equilibrium; and at the perfect-correlation endpoint $(1, 1)$, the model coincides exactly with the original setting of #c("fu2006"). By constructing this smooth "separating-pooling" theoretical spectrum, the section not only unifies the timing dynamics across heterogeneous settings but also shows that the pooling equilibrium emphasized in the existing literature is in fact a degenerate special case of our generalized information structure at extreme parameters.

@@ -85,85 +85,75 @@
   $
 ]
 
-== Section 6: Derivation of the critical boundary <proof-ext-boundary>
+== Derivation of the critical boundary <proof-ext-boundary>
 
 #proof[
-  Start from the high-type incentive-compatibility condition in Section 6:
+  Start from the high-type incentive-compatibility condition in Section 6.3:
 
   $
-    V_H^2 / bar(V)_H
+    V_H^2 / hat(V)_U(1)
     >=
-    V_L(2V_H - V_L) / bar(V)_L
+    V_L (2 V_H - V_L) / hat(V)_U(0).
   $
 
-  Setting equality gives the critical boundary. Substituting
+  Setting equality, and letting
 
   $
-    bar(V)_H = q V_H + (1-q) V_L,
-    quad
-    bar(V)_L = (1-s) V_H + s V_L,
+    R & equiv
+        V_H^2 / (V_L (2 V_H - V_L)),
+  $
+
+  the critical boundary satisfies
+
+  $
+    hat(V)_U(1) = R hat(V)_U(0).
+  $
+
+  Substituting
+
+  $
+    hat(V)_U(1) & = p_H V_H + (1-p_H) V_L,
+                  quad
+                  hat(V)_U(0) & = (1-p_L) V_H + p_L V_L,
   $
 
   yields
 
   $
-    V_H^2[(1-s) V_H + s V_L]
+    p_H V_H + (1-p_H) V_L
     =
-    V_L(2V_H - V_L)[q V_H + (1-q) V_L].
+    R[(1-p_L) V_H + p_L V_L].
   $
 
-  Expanding and rearranging the left-hand side:
+  Solving for $p_L$,
 
   $
-    V_H^3 - s V_H^2(V_H - V_L)
-    =
-    V_L(2V_H - V_L)[q V_H + (1-q) V_L].
-  $
-
-  Solving for $s$:
-
-  $
-    s^*(q)
+    p_L^*(p_H)
     =
     (
-    V_H^3
-    - V_L(2V_H-V_L)[q V_H + (1-q) V_L]
-    ) / (V_H^2(V_H - V_L)).
+    R V_H - V_L - p_H (V_H - V_L)
+    ) / (R (V_H - V_L)),
   $
 
-  This is the critical-boundary expression in the main text. Differentiating with respect to $q$ gives
+  which is the critical-boundary expression in the main text. We check the two benchmark points.
 
+  1. At the independence point $(p_H, p_L) = (q, 1-q)$,
   $
-    d s^*(q)/d q
-    =
-    -V_L(2V_H - V_L)/V_H^2 < 0.
+    hat(V)_U(1) = hat(V)_U(0) = q V_H + (1-q) V_L.
   $
+  The main-text condition becomes $1 <= R$. Since $V_H > V_L > 0$ implies $R > 1$, the separating condition holds strictly.
 
-  Next, check the two benchmark points.
-
-  1. At $(q,s) = (1/2, 1/2)$,
+  2. At the perfect-correlation point $(1, 1)$,
   $
-    bar(V)_H = bar(V)_L = (V_H + V_L)/2.
+    hat(V)_U(1) = V_H,
+    quad
+    hat(V)_U(0) = V_L,
   $
-  The main-text condition becomes
+  so the ratio is $V_H / V_L$. The inequality
   $
-    V_H^2 >= V_L(2V_H - V_L)
-    <=>
-    (V_H - V_L)^2 >= 0,
+    V_H / V_L > V_H^2 / (V_L (2 V_H - V_L))
   $
-  which is strict under $V_H > V_L$, so this point lies in the separating region.
-
-  2. At $(q,s) = (1,1)$,
-  $
-    bar(V)_H = V_H, quad bar(V)_L = V_L.
-  $
-  The main-text condition becomes
-  $
-    V_H >= 2V_H - V_L
-    <=>
-    V_L >= V_H,
-  $
-  which contradicts $V_H > V_L$. Hence this point lies in the pooling region. The proposition follows.
+  is equivalent to $V_H > V_L$, so this point lies above the boundary and the separating equilibrium fails.
 ]
 
 == $U I$ subgame <proof-ui>
