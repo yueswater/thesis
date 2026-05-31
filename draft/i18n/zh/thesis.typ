@@ -97,7 +97,14 @@
     first-line-indent: 2em,
   )
   set heading(numbering: "1.1")
-  set math.equation(supplement: [式])
+  show ref: it => {
+    if it.element != none and it.element.func() == math.equation {
+      let n = counter(math.equation).at(it.element.location()).first()
+      link(it.element.location())[式 (#n)]
+    } else {
+      it
+    }
+  }
   show raw: set text(font: latin-mono)
   show cite: set text(fill: cite-blue)
   show ref: set text(fill: cite-blue)
