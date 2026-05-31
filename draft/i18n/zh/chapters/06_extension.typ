@@ -651,25 +651,62 @@ $ <eq-ext-pool-threshold>
 
 #proposition(title: [$I U$ 子賽局的全均衡刻畫])[
   $I U$ 子賽局的純策略完美貝氏均衡由相關參數 $rho$ 完全決定：
-  - $rho in [0, rho_P)$（區域 I）：唯一均衡為分離；
-  - $rho in [rho_P, rho^*]$（區域 C）：分離與混同均衡並存，均通過直覺準則；
-  - $rho in (rho^*, 1]$（區域 II）：唯一均衡為混同。
+
+  - $rho in [0, rho_P)$（區域 I）：唯一均衡為未扭曲分離；
+  - $rho in [rho_P, rho^*]$（區域 C）：未扭曲分離與混同均衡並存，均通過直覺準則；
+  - $rho in (rho^*, rho^(**))$（區域 C'）：D1 選出之 Riley 扭曲分離與混同均衡並存；
+  - $rho in (rho^(**), 1]$（區域 II）：唯一均衡為混同。
+
+  在基準參數 $V_H = 2 V_L$ 下，$rho^(**) = 1$，區域 II 退化為空集；對 $rho > rho^*$ 的完整區間，Riley 扭曲分離與混同持續並存。
 ] <prop-ext-full-characterization>
 
 在揭露型態之外，相關性更透過子賽局報酬牽動第 0 階段的時序選擇。回顧#headingref(<subsec-pooling-analysis>)，#c("fu2006") 與本文基準模型對「知情者是否願意先動」給出截然不同的答案：在 #ca("fu2006") 的完全相關設定下，知情者先動會經由訊號通道洩露評價、侵蝕資訊租金，因此知情者嚴格偏好後動、由不知情者先動 ($U I$)；而在本文 $rho = 0$ 的獨立基準下，投入層次的訊號通道關閉，知情者的時序偏好回歸純粹的事前期望報酬比較，$I U$ 在部分參數下反而可被支持。本章的單參數架構恰好把這兩種對立的時序結論連成一條連續光譜。
 
-#proposition(title: [相關性對知情者時序偏好的牽引])[
-  訊號通道強度 $d hat(V)_U \/ d m = rho Delta V$ 隨 $rho$ 嚴格遞增，使知情者先動的資訊洩露成本單調上升，先動誘因因而單調削弱。特別地，$rho = 1$ 時知情者嚴格偏好後動，精確還原 #ca("fu2006") 之結論。
+為嚴格論證時序偏好的翻轉，需先釐清相關版三個子賽局的事前報酬。
+
+*相關版 $S S$ 子賽局*：同時行動下不知情者從未更新信念，有效獎酬維持先驗加權 $hat(V)_U(q)$（由 @eq-vhat-q[]，與 $rho$ 無關）。故相關版 $S S$ 均衡報酬與基準完全相同，只需以 $hat(V)_U(q)$ 取代常數 $V$：
+
+$
+  widetilde(pi)_I^(S S, rho) = widetilde(pi)_I^(S S) |_(V = hat(V)_U(q)),
+  quad
+  pi_U^(S S, rho) = pi_U^(S S) |_(V = hat(V)_U(q)).
+$
+
+因此 $hat(V)_U(q)$ 與 $rho$ 無關，$S S$ 報酬對 $rho$ 的偏導數為零。
+
+*相關版 $I U$ 子賽局（分離區，$rho <= rho^*$）*：均衡為未扭曲分離，知情者事前報酬為
+
+$
+  widetilde(pi)_I^(I U, rho) = EE[V_I^2] / (4 hat(V)_U(1)(rho)),
+$
+
+其中 $hat(V)_U(1)(rho) = V_L + [q + rho(1-q)] Delta V$ 隨 $rho$ 嚴格遞增。故
+
+$
+  (partial widetilde(pi)_I^(I U, rho)) / (partial rho)
+  =
+  - EE[V_I^2] (1-q) Delta V / (4 hat(V)_U(1)^2)
+  < 0.
+$
+
+先動報酬隨 $rho$ 嚴格遞減，而 $S S$ 報酬不變，因此偏離差額 $Delta_I^(I U)(rho) equiv widetilde(pi)_I^(I U, rho) - widetilde(pi)_I^(S S, rho)$ 隨 $rho$ 嚴格遞減，確保時序翻轉臨界的存在唯一性。
+
+#proposition(title: [相關性對知情者時序偏好的牽引（修訂版）])[
+  在相關版 $I U$ 子賽局為未扭曲分離的區間 $rho in [0, rho^*]$ 內，知情者先動相對於 $S S$ 的事前偏離差額 $Delta_I^(I U)(rho)$ 為 $rho$ 的嚴格遞減函數。因此，
+
+  - 存在唯一的時序翻轉臨界 $rho^dagger in (0, 1]$，使得 $rho < rho^dagger$ 時知情者偏好先動，$rho > rho^dagger$ 時偏好後動；
+  - $rho = 0$：回歸基準模型，先動誘因由 $Delta_I^(I U)|_(rho=0)$ 決定，在部分參數下為正；
+  - $rho = 1$：精確還原 #ca("fu2006") 的後動結論。
 ] <prop-ext-timing>
 
 #proof[
-  先動的資訊成本來自先動會被觀察、且不知情者據以調整反應這一事實。其強度恰由不知情者有效獎酬對信念的敏感度度量；由 @eq-ext-vhat-derivative[]，$d hat(V)_U \/ d m = rho Delta V$，對 $rho$ 嚴格遞增。以下分別檢視兩端點，再由通道強度之單調性收束方向。
+  由前段推導，$partial widetilde(pi)_I^(I U, rho) \/ partial rho < 0$ 且 $partial widetilde(pi)_I^(S S, rho) \/ partial rho = 0$，故 $partial Delta_I^(I U) \/ partial rho < 0$，差額嚴格遞減。
 
-  端點 $rho = 0$：由 @eq-vhat-u[]，$hat(V)_U(m) = q V_H + (1-q) V_L$ 與信念 $m$ 無關，不知情者的最佳反應 $x_U^*(x_I, m) = sqrt(x_I hat(V)_U(q)) - x_I$ 不受後驗信念左右。此時 $I U$ 子賽局退化為#headingref(<subsec-pooling-analysis>)之基準情形：先動雖被觀察卻不改變對手行為，訊號通道形同關閉。時序選擇因而化為純粹的事前期望報酬比較，由#headingref(<subsec-stage0-analysis>)之單邊偏離差額 $Delta_I^(I U)$ 判定，知情者於部分參數區域確可被支持先動。
+  端點 $rho = 0$：訊號通道關閉，$hat(V)_U(m) = hat(V)_U(q)$ 與信念無關，$I U$ 子賽局退化為基準模型，$Delta_I^(I U)(0) = Delta_I^(I U)|_(rho=0)$。
 
-  端點 $rho = 1$：由 @eq-vhat-u[]，$hat(V)_U(1) = V_H$、$hat(V)_U(0) = V_L$，先動完全揭露評價，且由全均衡刻畫可知此端點落於純混同區，$I U$ 僅能以隱匿型別之混同形式存在，知情者承受租值耗散。此即 #ca("fu2006") 之完全相關設定，其結論為知情者嚴格偏好後動、由不知情者先動。
+  端點 $rho = 1$：$hat(V)_U(1) = V_H$，先動者完全揭露型別。在完全相關端點，$I U$ 子賽局落於均衡刻畫的並存帶（區域 C'），知情者先動伴隨租值耗散，嚴格偏好後動，即 #ca("fu2006") 之結論。
 
-  介於兩端點之間，由全均衡刻畫，$I U$ 子賽局的揭露型態隨 $rho$ 自純分離 (低 $rho$) 經並存帶過渡至純混同 (高 $rho$)；而先動的資訊成本之強度 $rho Delta V$ 對 $rho$ 嚴格遞增。兩者合觀：相關性愈高，先動所洩露之資訊對不知情者反應的影響愈大，知情者先動相對於後動的誘因即被單調削弱。因此存在臨界相關度，使知情者的時序偏好由先動向後動翻轉，且於 $rho = 1$ 精確還原 #ca("fu2006")。
+  兩端點差額的變號（$Delta_I^(I U)(0)$ 可為正、$Delta_I^(I U)(1) <= 0$）配合嚴格單調性，保證唯一零點 $rho^dagger$ 的存在。
 ]
 
 上述之時序偏好命題補上了本章「Fu 為光譜端點」主張的最後一環：先前各節說明的是 $rho$ 如何決定 $I U$ 子賽局內部的揭露型態 (分離或混同)，本節則進一步把相關性接回第 0 階段，說明 $rho$ 如何決定知情者是否願意先動。兩者合觀，方完整呈現相關性低時仍可支持先動、相關性高時先動誘因消失的時序光譜，而 #ca("fu2006") 正是此光譜在 $rho = 1$ 的端點。
