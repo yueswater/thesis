@@ -18,7 +18,8 @@ pdf: zh
 
 figures:
 	$(PYTHON) scripts/render_chapter5_figures.py
-	$(PYTHON) scripts/render_chapter6_qs_regions.py
+	$(PYTHON) scripts/render_chapter6_pooling_regions.py
+	$(PYTHON) scripts/render_chapter6_spectrum.py
 
 verify:
 	$(PYTHON) scripts/verify_binary_model.py

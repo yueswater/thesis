@@ -100,41 +100,43 @@
     hat(V)_U(1) = R hat(V)_U(0).
   $
 
-  再代入
+  再代入有效獎酬的單參數表達式 (令 $Delta V equiv V_H - V_L$)
 
   $
-    hat(V)_U(1) & = p_H V_H + (1-p_H) V_L,
+    hat(V)_U(1) & = V_L + [q + rho (1-q)] Delta V,
                   quad
-                  hat(V)_U(0) & = (1-p_L) V_H + p_L V_L,
+                  hat(V)_U(0) & = V_L + q (1 - rho) Delta V,
   $
 
-  得
+  並把含 $rho$ 之項整理至一側，
 
   $
-    p_H V_H + (1-p_H) V_L
+    rho [(1-q) + R q] Delta V
     =
-    R[(1-p_L) V_H + p_L V_L].
-  $
-
-  整理後可解出
-
-  $
-    p_L^*(p_H)
+    (R - 1)(V_L + q Delta V)
     =
-    (
-    R V_H - V_L - p_H (V_H - V_L)
-    ) / (R (V_H - V_L)).
+    (R - 1) hat(V)_U(q),
   $
 
-  即主文的臨界邊界公式。檢查兩個基準點：
+  即得分離臨界相關度
 
-  1. 獨立點 $(p_H,p_L)=(q,1-q)$ 時，
-    $
-      hat(V)_U(1) = hat(V)_U(0) = q V_H + (1-q) V_L.
-    $
-    故主文條件化為 $1 <= R$。由 $V_H > V_L > 0$ 可知 $R>1$，因此分離條件嚴格成立。
+  $
+    rho^*
+    =
+    ((R - 1) hat(V)_U(q)) / (Delta V (1 - q + R q)),
+    quad
+    hat(V)_U(q) = V_L + q Delta V.
+  $
 
-  2. 完全相關點 $(1,1)$ 時，
+  即主文的臨界相關度公式。檢查兩個端點：
+
+  1. 獨立端點 $rho = 0$ 時，
+    $
+      hat(V)_U(1) = hat(V)_U(0) = q V_H + (1-q) V_L,
+    $
+    故比值化為 $1 <= R$。由 $V_H > V_L > 0$ 可知 $R>1$，因此分離條件嚴格成立。
+
+  2. 完全相關端點 $rho = 1$ 時，
     $
       hat(V)_U(1)=V_H,
       quad
@@ -144,7 +146,7 @@
     $
       V_H / V_L > V_H^2 / (V_L (2 V_H - V_L))
     $
-    等價於 $V_H > V_L$，故完全相關點位於邊界上方，分離均衡失敗。
+    等價於 $V_H > V_L$，故完全相關端點位於臨界相關度之上方，分離均衡失敗。
 ]
 
 == $U I$ 子賽局均衡的推導 <proof-ui>

@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{Model}{15}{0}{2}
+\beamer@sectionintoc {3}{Equilibrium Analysis}{27}{0}{3}
+\beamer@sectionintoc {4}{Endogenous Timing}{36}{0}{4}
+\beamer@sectionintoc {5}{Extension: Partially Correlated Types}{50}{0}{5}
+\beamer@sectionintoc {6}{Conclusion}{65}{0}{6}
