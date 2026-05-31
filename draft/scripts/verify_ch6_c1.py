@@ -18,7 +18,7 @@ def verify_baseline(V_H=2.0, V_L=1.0, q=0.5):
     v0 = vhat(0, rho_star, V_H, V_L, q)
     v1 = vhat(1, rho_star, V_H, V_L, q)
     alpha_sep = 1 - v0/v1
-    xL_riley = V_H**2 / (4*v0) * (1 + np.sqrt(alpha_sep))**2
+    xL_riley = V_H**2 / (4*v0) * (1 - np.sqrt(alpha_sep))**2
 
     # Low-type deviation payoff (cases I and II boundary check)
     low_dev = V_H*(2*V_L - V_H) / (4*v1)
@@ -38,7 +38,7 @@ def verify_baseline(V_H=2.0, V_L=1.0, q=0.5):
     print(f"V_hat(1)|rho* = {v1:.6f}  (expected 12/7 ≈ 1.714286)")
     print(f"alpha_sep  = {alpha_sep:.6f}  (expected 1/4 = 0.250000)")
     print(f"sqrt(alpha)= {np.sqrt(alpha_sep):.6f}  (expected 1/2 = 0.500000)")
-    print(f"x_L^Riley  = {xL_riley:.6f}  (expected 7/4 = 1.750000)")
+    print(f"x_L^Riley  = {xL_riley:.6f}  (expected 7/36 ≈ 0.194444)")
     print(f"Low-type deviation payoff = {low_dev:.6f}  (expected 0 for V_H=2V_L)")
     print(f"High-type IC slack at Riley = {hi_ic_slack:.8f}  (expected ≈ 0)")
     print()
