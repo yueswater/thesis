@@ -3,7 +3,7 @@
 #let cjk-main = "cwTeX Q Ming"
 #let title-font = "cwTeX Q Yuan"
 #let heading-font = ("Roboto", title-font)
-#let cite-style = "chicago-author-date"
+#let cite-style = "apa"
 #let cite-blue = rgb("#0000ff")
 
 #let pad2(value) = if value < 10 { "0" + str(value) } else { str(value) }
@@ -97,6 +97,7 @@
     first-line-indent: 2em,
   )
   set heading(numbering: "1.1")
+  set math.equation(supplement: [式])
   show raw: set text(font: latin-mono)
   show cite: set text(fill: cite-blue)
   show ref: set text(fill: cite-blue)

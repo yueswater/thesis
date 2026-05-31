@@ -104,7 +104,7 @@
   + $I U$ iff $Delta_I^(I U) >= 0$ 且 $Delta_U^(S S) <= 0$。
 ] <subsec-stage0-ne>
 
-在本文設定下，制度選擇可直接由#headingref(<subsec-stage0-analysis>)的四個單邊偏離差額判斷(即式 @eq-stage0-deltas[])，不需再依賴均衡修正。尤其是延後同時行動 $(S,S)$ 只有在 $V lambda = 1$ 的臨界情形才可能成立，因此在一般參數下可排除。
+在本文設定下，制度選擇可直接由#headingref(<subsec-stage0-analysis>)的四個單邊偏離差額判斷(即 @eq-stage0-deltas)，不需再依賴均衡修正。尤其是延後同時行動 $(S,S)$ 只有在 $V lambda = 1$ 的臨界情形才可能成立，因此在一般參數下可排除。
 
 #proof[
   純策略 Nash 均衡要求任一參賽者在給定對方時點策略之下，皆不具備單邊偏離的誘因。我們窮舉第 0 階段所有可能的策略組合進行檢驗：
