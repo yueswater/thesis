@@ -343,7 +343,7 @@ $
   （i）*高型別 IC*：高型別不模仿低型別的條件等價於
 
   $
-    sqrt(x_L') <= z_H^+ equiv V_H / (2 sqrt(hat(V)_U(0))) (1 + sqrt(alpha_"sep")),
+    sqrt(x_L') <= z_H^- equiv V_H / (2 sqrt(hat(V)_U(0))) (1 - sqrt(alpha_"sep")),
     quad
     alpha_"sep" equiv 1 - hat(V)_U(0) / hat(V)_U(1).
   $
@@ -359,26 +359,32 @@ $
   （iii）*Riley 結果*：D1 精煉（見#headingref(<subsec-ext-refinement>)）在扭曲分離族中唯一選出最低成本均衡
 
   $
-    x_L^"Riley" = (z_H^+)^2 = V_H^2 / (4 hat(V)_U(0)) (1 + sqrt(alpha_"sep"))^2.
+    x_L^"Riley" = (z_H^-)^2 = V_H^2 / (4 hat(V)_U(0)) (1 - sqrt(alpha_"sep"))^2.
   $
 
   （iv）*存活範圍*：在基準參數 $V_H = 2 V_L$ 下，$pi_L^"dev" = 0$，低型別 IC 在等號成立，扭曲分離對所有 $rho in (0, 1]$ 存活，故 $rho^(**) = 1$。
 ] <prop-ext-distorted-sep>
 
 #proof[
-  高型別偏離至 $x_L'$ 時，信念跳至 $m=0$，偏離報酬為
+  高型別偏離至 $x_L'$ 時，信念跳至 $m = 0$，偏離報酬為
 
   $
     pi_H^"dev"(x_L') = V_H sqrt(x_L' \/ hat(V)_U(0)) - x_L'.
   $
 
-  令 $z equiv sqrt(x_L')$，高型別 IC $pi_H^"sep" >= pi_H^"dev"$ 化為二次不等式：
+  令 $z equiv sqrt(x_L')$，高型別 IC $pi_H^"sep" >= pi_H^"dev"$ 化為二次不等式
 
   $
-    z^2 - V_H / sqrt(hat(V)_U(0)) z + V_H^2 / (4 hat(V)_U(1)) <= 0,
+    f(z) equiv z^2 - V_H / sqrt(hat(V)_U(0)) z + V_H^2 / (4 hat(V)_U(1)) >= 0. quad (*)
   $
 
-  判別式 $Delta_H = V_H^2 alpha_"sep" \/ hat(V)_U(0) > 0$（$rho > 0$ 時），解出上界 $z <= z_H^+$，即（i）。
+  此二次式開口向上，判別式 $Delta_H = V_H^2 alpha_"sep" \/ hat(V)_U(0) > 0$（$rho > 0$ 時），兩根為
+
+  $
+    z_H^(plus.minus) = V_H / (2 sqrt(hat(V)_U(0))) (1 plus.minus sqrt(alpha_"sep")).
+  $
+
+  $(*)$ 成立（IC 滿足）的區域為 $z <= z_H^-$ 或 $z >= z_H^+$；在區間 $(z_H^-, z_H^+)$ 內二次式為負，IC 失敗。選取向下扭曲分支（$x_L' <= x_L^*$，即 $z <= sqrt(x_L^*)$），可行域為 $z <= z_H^-$，即（i）。
 
   對低型別，若模仿 $x_H$ 則信念跳至 $m = 1$，偏離報酬為
 
@@ -386,12 +392,16 @@ $
     pi_L^"dev" = V_L dot V_H / (2 hat(V)_U(1)) - V_H^2 / (4 hat(V)_U(1)) = V_H (2 V_L - V_H) / (4 hat(V)_U(1)).
   $
 
-  當 $V_H >= 2 V_L$ 時，$2 V_L - V_H <= 0$，故 $pi_L^"dev" <= 0 <= pi_L^"sep"(x_L')$，IC 自動成立，即（ii）。
-
-  Riley 結果取高型別 IC 等號，即（iii）。（iv）由 $V_H = 2 V_L$ 代入 $pi_L^"dev" = 0$ 直接得出。
+  當 $V_H >= 2 V_L$ 時，$2 V_L - V_H <= 0$，故 $pi_L^"dev" <= 0 <= pi_L^"sep"(x_L')$，IC 自動成立，即（ii）。Riley 結果取向下分支中高型別 IC 恰好綁住的最高 $x_L'$，即 $z = z_H^-$，故（iii）。（iv）由 $V_H = 2 V_L$ 代入直接得出。
 ]
 
-在基準參數下，$alpha_"sep" bar_(rho = rho^*) = 1/4$，從而 $x_L^"Riley" bar_(rho = rho^*) = 7/4$。由於扭曲分離對所有 $rho in (0,1]$ 存活，純混同的「區域 II」在基準參數下退化為空集，完整的均衡形態劃分見#headingref(<subsec-ext-timing>)。
+在基準參數下，$alpha_"sep" bar_(rho = rho^*) = 1/4$，從而
+
+$
+  x_L^"Riley" bar_(rho = rho^*) = V_H^2 / (4 hat(V)_U(0)) (1 - 1/2)^2 = 4 / (4 dot 9/7) dot 1/4 = 7/36 approx 0.194.
+$
+
+注意 $x_L^* bar_(rho = rho^*) = V_L^2 \/ (4 hat(V)_U(0)) = 7/36$，Riley 結果與未扭曲最佳在 $rho^*$ 處精確重合：臨界 $rho^*$ 上扭曲恰好為零，兩段分離結構平滑銜接。由於扭曲分離對所有 $rho in (0,1]$ 存活，純混同的「區域 II」在基準參數 $V_H = 2 V_L$ 下退化為空集，完整的均衡形態劃分見#headingref(<subsec-ext-timing>)。
 
 由@fig-ch6-spectrum 可見，有效獎酬比值 $hat(V)_U(1) \/ hat(V)_U(0)$ 沿 $rho in [0, 1]$ 單調上升，並在 $rho^*$ 處唯一穿越臨界 $R$，揭櫫資訊相關性如何根本性地改變賽局性質：
 
