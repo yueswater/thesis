@@ -163,10 +163,10 @@ def plot_timing_regions_pdf(q_values: tuple[float, ...] = (0.3, 0.5, 0.7)) -> No
         add_axis_arrows(ax)
 
     legend_items = [
-        Patch(facecolor="#f2f2f2", edgecolor="black", label=r"$\Delta_I^{IU}\geq0,\ \Delta_U\geq0$"),
-        Patch(facecolor="#d9d9d9", edgecolor="black", label=r"$\Delta_I^{IU}\geq0,\ \Delta_U<0$"),
-        Patch(facecolor="#bdbdbd", edgecolor="black", label=r"$\Delta_I^{IU}<0,\ \Delta_U\geq0$"),
-        Patch(facecolor="#969696", edgecolor="black", label=r"$\Delta_I^{IU}<0,\ \Delta_U<0$"),
+        Patch(facecolor="#f2f2f2", edgecolor="black", label=r"$\Delta_I^{IU}\geq0,\ \Xi_U\geq0$"),
+        Patch(facecolor="#d9d9d9", edgecolor="black", label=r"$\Delta_I^{IU}\geq0,\ \Xi_U<0$"),
+        Patch(facecolor="#bdbdbd", edgecolor="black", label=r"$\Delta_I^{IU}<0,\ \Xi_U\geq0$"),
+        Patch(facecolor="#969696", edgecolor="black", label=r"$\Delta_I^{IU}<0,\ \Xi_U<0$"),
     ]
     legend_x = (margin_l + n * panel_size + (n - 1) * gap + gap) / fig_w
     fig.legend(

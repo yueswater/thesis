@@ -781,53 +781,59 @@
 
   \begin{block}{Now}
     Let $U$'s prize also be random, $V_U \in \{V_L, V_H\}$, and
-    \textbf{positively correlated} with $V_I$.
+    \textbf{positively correlated} with $V_I$ via a single parameter
+    $\rho \in [0,1]$.
   \end{block}
 \end{frame}
 
 \begin{frame}{Partial correlation structure}
+  Single parameter $\rho \in [0,1]$: Pearson correlation between $V_I$ and $V_U$.
+
+  Diagonal mass of the joint distribution:
   \begin{equation}
-    p_H \equiv \Pr(V_U = V_H \mid V_I = V_H),
-  \end{equation}
-  \begin{equation}
-    p_L \equiv \Pr(V_U = V_L \mid V_I = V_L).
+    \Pr(V_I=V_H, V_U=V_H) = q^2 + \rho\,q(1-q).
   \end{equation}
 
-  Marginal consistency (same prior $q$ for both):
-  \begin{equation}
-    (1-q)(1-p_L) = q(1-p_H).
-  \end{equation}
+  Conditional probabilities are clean linear functions of $\rho$:
+  \begin{align*}
+    p_H &\equiv \Pr(V_U=V_H \mid V_I=V_H) = q + \rho(1-q),\\
+    p_L &\equiv \Pr(V_U=V_L \mid V_I=V_L) = 1 - q(1-\rho).
+  \end{align*}
 \end{frame}
 
 \begin{frame}{Three benchmarks}
   \begin{itemize}
-    \item \textbf{Independence} ($p_H=q,\ p_L=1-q$) ---
-          the baseline model
-    \item \textbf{Full correlation} ($p_H=p_L=1$) ---
+    \item $\rho = 0$: statistical independence ---
+          the baseline model ($V_U \equiv V$)
+    \item $\rho = 1$: full correlation ---
           exactly \citet{fu2006}
-    \item \textbf{Partial correlation} --- the focus, on the marginal
-          consistency path
+    \item $0 < \rho < 1$: partial correlation --- the focus of this
+          chapter
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Belief-weighted prize}
-  $U$'s effective prize is no longer constant:
+  $U$'s effective prize is no longer constant.
+  With posterior $m = \Pr(V_I=V_H \mid x_I)$:
   \begin{equation}
-    \Vhat(m) = m\,\Vhat(1) + (1-m)\,\Vhat(0),
+    \Vhat(m) = V_L + \bigl[q + \rho(m-q)\bigr]\Delta V,
+    \qquad \Delta V = V_H - V_L.
   \end{equation}
-  with $\Vhat(1) = V_L + p_H\,\Delta V$,
-  $\;\Vhat(0) = V_H - p_L\,\Delta V$, $\;\Delta V = V_H - V_L$.
+
+  \vspace{0.3em}
+  Key: $\Vhat(q) = qV_H + (1-q)V_L$ is \emph{independent of $\rho$} ---
+  the $\rSS$ payoffs are unaffected by correlation.
 \end{frame}
 
 \begin{frame}{Sensitivity to beliefs}
   \begin{equation}
-    \dfrac{d\Vhat}{dm} = (p_H + p_L - 1)(V_H - V_L).
+    \dfrac{d\Vhat}{dm} = \rho\,\Delta V.
   \end{equation}
 
   \begin{itemize}
-    \item Independence: derivative $= 0$, beliefs carry no value
-    \item Positive correlation ($p_H+p_L>1$): a higher posterior raises
-          $U$'s expected own prize
+    \item $\rho = 0$: derivative $= 0$ --- beliefs carry no value
+    \item $\rho > 0$: a higher posterior raises $U$'s expected own prize
+          proportionally to $\rho$
   \end{itemize}
 \end{frame}
 
@@ -845,9 +851,9 @@
 \begin{frame}{A numerical illustration}
   Fix $V_H=2$, $V_L=1$, $q=0.5$, observed $x_I=1$.
   \begin{itemize}
-    \item Independence: $\Vhat\equiv 1.5$,
+    \item Independence ($\rho=0$): $\Vhat\equiv 1.5$,
           $x_U^{*}=\sqrt{1.5}-1\approx 0.225$
-    \item Positive corr.: $\Vhat(0)=1.2$, $\Vhat(1)=1.8$;
+    \item Positive corr.\ ($\rho=0.6$): $\Vhat(0)=1.2$, $\Vhat(1)=1.8$;
           $x_U^{*}$ runs $0.095 \to 0.342$ --- more than tripling
   \end{itemize}
 \end{frame}
@@ -863,55 +869,67 @@
   automatically.
 \end{frame}
 
-\begin{frame}{The critical boundary}
+\begin{frame}{The critical correlation $\rho^{*}$}
+  Because $\Vhat(1)/\Vhat(0)$ is strictly increasing in $\rho$, the
+  separation condition translates to a unique critical value:
   \begin{equation}
-    p_L^{*}(p_H)
-    = \dfrac{R\,V_H - V_L - p_H(V_H - V_L)}{R\,(V_H - V_L)}.
+    \rho^{*}
+    = \dfrac{(R-1)\,\Vhat(q)}{\Delta V\,(1-q+Rq)},
+    \qquad
+    R = \dfrac{V_H^2}{V_L(2V_H-V_L)}.
   \end{equation}
 
-  Below the boundary: separation holds. Above it: the high type's
-  mimicry becomes profitable.
+  Undistorted separation holds iff $\rho \le \rho^{*}$.
 
   \begin{proof}
     \hyperref[prf:ch6]{See proof in page \pageref{prf:ch6}.}
   \end{proof}
 \end{frame}
 
-\begin{frame}{Separating vs.\ pooling regions}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{fig6_qs_regions.pdf}
+\begin{frame}{Riley distorted separation ($\rho > \rho^{*}$)}
+  When $\rho > \rho^{*}$, undistorted separation fails.
+  But low type can \textbf{distort effort downward} to block mimicry.
 
-    \par\medskip{\footnotesize Critical boundary in the $(p_H,p_L)$ plane.\par}
-  \end{figure}
+  \begin{block}{D1 refinement selects the unique distorted equilibrium}
+    \begin{equation*}
+      x_L^{\mathrm{Riley}} = (z_H^{-})^2
+      = \dfrac{V_H^2}{4\Vhat(0)}\bigl(1-\sqrt{\alpha_{\mathrm{sep}}}\bigr)^2,
+      \quad
+      \alpha_{\mathrm{sep}} \equiv 1 - \dfrac{\Vhat(0)}{\Vhat(1)}.
+    \end{equation*}
+    This is the minimum-cost separating equilibrium (\citet{riley1979}).
+  \end{block}
 
-  \centering
-  \small Independence $\Rightarrow$ separating; full correlation
-  $\Rightarrow$ it fails.
+  At baseline $V_H = 2V_L$: Riley distorted separation coexists with
+  pooling for \emph{all} $\rho \in (\rho^{*}, 1]$.
 \end{frame}
 
 \begin{frame}{Pooling steps in}
-  When separation collapses, a pooling equilibrium supports play.
-  With $\alpha \equiv 1 - \Vhat(q)/\Vhat(1)$, it exists
+  When separation collapses, a pooling equilibrium also supports play.
+  With $\alpha \equiv 1 - \Vhat(q)/\Vhat(1)$, it exists iff
   \begin{equation}
-    \Longleftrightarrow \quad
     \sqrt{\alpha} \;\ge\; \dfrac{V_H - V_L}{V_H + V_L}.
   \end{equation}
 
-  At independence $\alpha=0$: no pooling --- consistent with unique
-  separation there.
+  Pooling appears at $\rho = \rho_P < \rho^{*}$.
+  At $\rho = 0$: $\alpha = 0$ --- no pooling, consistent with
+  unique separation at independence.
 \end{frame}
 
-\begin{frame}{Three equilibrium regions}
+\begin{frame}{Four equilibrium regions}
   \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{fig6_pooling_regions.pdf}
+    \includegraphics[width=0.9\textwidth]{fig6_pooling_regions.pdf}
 
-    \par\medskip{\footnotesize Separating only, coexistence, and pooling only.\par}
+    \par\medskip{\footnotesize Equilibrium regions along the $\rho \in [0,1]$ spectrum.\par}
   \end{figure}
 
   \centering
-  \small The independence prior sits strictly in ``separating only''.
+  \small
+  \textbf{I}: sep.\ only \quad
+  \textbf{C}: undist.\ sep.+pool.\ \quad
+  \textbf{C'}: Riley+pool.\ \quad
+  \textbf{II}: pool.\ only (empty at $V_H=2V_L$)
 \end{frame}
 
 \begin{frame}{One continuous spectrum}
@@ -919,11 +937,28 @@
     \centering
     \includegraphics[width=0.72\textwidth]{fig6_spectrum.pdf}
 
-    \par\medskip{\footnotesize Effective prize ratio crosses $R$ at $t^{*}$.\par}
+    \par\medskip{\footnotesize Effective prize ratio $\Vhat(1)/\Vhat(0)$ crosses $R$ uniquely at $\rho^{*}$.\par}
   \end{figure}
 
   \centering
-  \small Along the consistency path the ratio rises monotonically.
+  \small Along the $\rho$-axis the ratio rises monotonically from
+  $1$ (at $\rho=0$) to $V_H/V_L$ (at $\rho=1$).
+\end{frame}
+
+\begin{frame}{Timing preference reversal}
+  \begin{alertblock}{Proposition}
+    For $\rho \in [0, \rho^{*}]$, $I$'s gain from moving first,
+    $\Delta_I^{\rIU}(\rho)$, is \textbf{strictly decreasing} in $\rho$.
+  \end{alertblock}
+  \begin{itemize}
+    \item $\rho=0$: baseline --- $I$ may prefer to move first
+    \item $\rho=1$: exactly \citet{fu2006} --- $I$ strictly prefers to wait
+    \item Unique crossing $\rho^{\dagger} \in (0,1]$
+  \end{itemize}
+
+  \vspace{0.3em}
+  Fu's ``informed player always waits'' is the $\rho=1$ endpoint of this
+  spectrum.
 \end{frame}
 
 \begin{frame}{Unifying message}
@@ -1257,46 +1292,43 @@
   \end{proof}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Critical boundary}\label{prf:ch6}
+\begin{frame}[allowframebreaks]{Critical correlation $\rho^{*}$}\label{prf:ch6}
   \begin{proof}
-    Start from the high-type incentive-compatibility condition
-    $\frac{V_H^2}{\bar V_H} \ge \frac{V_L\left(2V_H-V_L\right)}{\bar V_L}$
-    and set it with equality. Substituting
+    Set the high-type IC with equality:
+    $\Vhat(1)/\Vhat(0) = R$, where
+    $R = V_H^2/[V_L(2V_H-V_L)]$.
+    Substituting
     \[
-      \bar V_H = q V_H + (1-q)V_L,
+      \Vhat(1) = V_L + [q+\rho(1-q)]\Delta V,
       \qquad
-      \bar V_L = (1-s)V_H + s V_L,
+      \Vhat(0) = V_L + q(1-\rho)\Delta V,
     \]
-    yields
+    the equality $\Vhat(1) = R\,\Vhat(0)$ expands to
     \[
-      V_H^2\left[(1-s)V_H + s V_L\right]
-      = V_L\left(2V_H-V_L\right)\left[q V_H + (1-q)V_L\right].
+      V_L + [q+\rho(1-q)]\Delta V
+      = R\bigl(V_L + q(1-\rho)\Delta V\bigr).
     \]
-    Expanding the left-hand side,
+    Collecting $\rho$ terms:
     \[
-      V_H^3 - s\,V_H^2\left(V_H-V_L\right)
-      = V_L\left(2V_H-V_L\right)\left[q V_H + (1-q)V_L\right],
+      \rho\bigl[(1-q)+Rq\bigr]\Delta V
+      = (R-1)(V_L + q\Delta V)
+      = (R-1)\,\Vhat(q).
     \]
-    so
+    Dividing both sides by $[(1-q)+Rq]\Delta V > 0$ gives
     \[
-      s^{*}(q) =
-      \dfrac{V_H^3 - V_L\left(2V_H-V_L\right)
-            \left[q V_H + (1-q)V_L\right]}
-           {V_H^2\left(V_H-V_L\right)},
-      \qquad
-      \dfrac{d s^{*}}{d q}
-      = -\,\dfrac{V_L\left(2V_H-V_L\right)}{V_H^2} < 0.
+      \rho^{*}
+      = \dfrac{(R-1)\,\Vhat(q)}{\Delta V\,(1-q+Rq)}.
     \]
-    Two benchmarks pin down the regions:
+    Since $\Vhat(1)/\Vhat(0)$ is strictly increasing in $\rho$
+    (numerator increases, denominator decreases), undistorted separation
+    holds iff $\rho \le \rho^{*}$.
+
+    Two endpoints confirm the regions:
     \begin{itemize}
-      \item At $(q,s)=\left(\frac12,\frac12\right)$,
-        $\bar V_H=\bar V_L=\frac{V_H+V_L}{2}$, and the condition becomes
-        $V_H^2 \ge V_L\left(2V_H-V_L\right)
-         \iff \left(V_H-V_L\right)^2 \ge 0$, strict under $V_H>V_L$ ---
-        the separating region.
-      \item At $(q,s)=(1,1)$, $\bar V_H=V_H$, $\bar V_L=V_L$, and the
-        condition becomes $V_H \ge 2V_H-V_L \iff V_L \ge V_H$,
-        contradicting $V_H>V_L$ --- the pooling region.
+      \item $\rho=0$: $\Vhat(1)=\Vhat(0)=\Vhat(q)$, ratio $=1 < R$
+            (strict separation).
+      \item $\rho=1$: $\Vhat(1)=V_H$, $\Vhat(0)=V_L$, ratio $=V_H/V_L > R$
+            (separation fails --- \citet{fu2006}).
     \end{itemize}
   \end{proof}
 \end{frame}
