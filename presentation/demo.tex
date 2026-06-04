@@ -26,7 +26,7 @@
 \usepgfplotslibrary{dateplot}
 
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
+\usetikzlibrary{arrows.meta,positioning,backgrounds}
 \usepackage{float, graphicx}
 \graphicspath{{figures/}}
 
@@ -223,7 +223,8 @@
     \node[paper]   (fu)  at (3.3,-6.1)   {Fu '06};
     \node[paper]   (pro) at (7.6,-6.1)   {Protopappas '25};
     \node[ours]    (us)  at (5.5,-7.7)   {This paper};
-    % --- edges -----------------------------------------------------------
+    % --- edges (drawn behind nodes) --------------------------------------
+    \begin{scope}[on background layer]
     \draw[e] (tul) -- (dix);
     \draw[e] (tul) -- (hs);
     \draw[e] (tul) -- (hur);
@@ -238,6 +239,7 @@
     \draw[e, very thick, draw=alert] (fu) -- (us)
           node[lab, midway, left]{we generalize};
     \draw[e] (pro) -- (us) node[lab, midway, right]{contrast};
+    \end{scope}
   \end{tikzpicture}}
   \end{center}
 \end{frame}
