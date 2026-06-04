@@ -92,14 +92,17 @@
 
 \begin{document}
 
-\maketitle
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
 
-\begin{frame}{Contents}
+\begin{frame}[noframenumbering]{Contents}
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents[hideallsubsections]
 \end{frame}
 
 % =========================================================================
+\setcounter{framenumber}{0}
 \section{Introduction}
 % =========================================================================
 
@@ -1008,7 +1011,7 @@
   \bibliographystyle{apalike}
   {
     \renewcommand{\bibsection}{\vspace{-5pt}}
-    \bibliography{demo}
+    \bibliography{thesis-bm}
   }
 \end{frame}
 

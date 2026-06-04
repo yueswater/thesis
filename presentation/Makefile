@@ -1,4 +1,4 @@
-TEX        := demo
+TEX        := thesis-bm
 SRCFIG     := ../draft/figures
 FIGDIR     := figures
 
