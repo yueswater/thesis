@@ -412,7 +412,7 @@ $
 3. 在部分相關 ($0 < rho < 1$) 情形下，比值介於 $1$ 與 $V_H \/ V_L$ 之間，究竟落在區域 I 或 II，端視 $rho$ 是否超過臨界相關度 $rho^*$ 而定。
 
 #figure(
-  image("../../../figures/fig6_spectrum.pdf", width: 80%),
+  image("../figures/fig6_spectrum.pdf", width: 80%),
   caption: [有效獎酬比值 $hat(V)_U(1) \/ hat(V)_U(0)$ 沿相關參數 $rho$ 單調上升，於 $rho^*$ 處唯一穿越分離臨界 $R$。],
   supplement: [圖],
 ) <fig-ch6-spectrum>
@@ -586,7 +586,7 @@ $ <eq-ext-pool-threshold>
 值得注意的是，獨立端點 $rho = 0$ 始終座落於區域 I 之內部，呼應#headingref(<subsec-ext-boundary>)所述統計獨立蘊含分離均衡必然性的結論；隨著相關性 $rho$ 由 $0$ 推進至 $1$，參數先後穿越區域 C 而抵達區域 II，恰可視覺化呈現分離崩潰之際必有混同接替的核心主張。
 
 #figure(
-  image("../../../figures/fig6_pooling_regions.pdf", width: 90%),
+  image("../figures/fig6_pooling_regions.pdf", width: 90%),
   caption: [$I U$ 子賽局之均衡形態隨相關參數 $rho$ 的變化。],
   supplement: [圖],
 ) <fig-ch6-pooling-regions>
