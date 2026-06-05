@@ -1,40 +1,40 @@
 TYPST      := typst
-PYTHON     := draft/.venv/bin/python
+PYTHON     := docs/.venv/bin/python
 HOST       := 127.0.0.1
 PORT       := 9955
 
-DRAFT_FLAGS := --font-path draft/fonts --ignore-system-fonts
+DRAFT_FLAGS := --font-path docs/fonts --ignore-system-fonts
 
 .PHONY: all draft presentation figures verify watch watch-presentation webwatch clean
 
 all: figures draft presentation
 
 draft: figures
-	$(TYPST) compile $(DRAFT_FLAGS) draft/main.typ draft/main.pdf
+	$(TYPST) compile $(DRAFT_FLAGS) docs/main.typ docs/main.pdf
 
 presentation:
 	cd presentation && latexmk -xelatex thesis-bm
 
 figures:
-	$(PYTHON) draft/scripts/render_chapter5_figures.py
-	$(PYTHON) draft/scripts/render_chapter6_pooling_regions.py
-	$(PYTHON) draft/scripts/render_chapter6_spectrum.py
+	$(PYTHON) docs/scripts/render_chapter5_figures.py
+	$(PYTHON) docs/scripts/render_chapter6_pooling_regions.py
+	$(PYTHON) docs/scripts/render_chapter6_spectrum.py
 
 verify:
-	$(PYTHON) draft/scripts/verify_binary_model.py
-	$(PYTHON) draft/scripts/verify_model_results.py
+	$(PYTHON) docs/scripts/verify_binary_model.py
+	$(PYTHON) docs/scripts/verify_model_results.py
 
 watch:
-	$(TYPST) watch $(DRAFT_FLAGS) draft/main.typ draft/main.pdf
+	$(TYPST) watch $(DRAFT_FLAGS) docs/main.typ docs/main.pdf
 
 watch-presentation:
 	cd presentation && latexmk -xelatex -pvc thesis-bm
 
 webwatch:
-	$(PYTHON) draft/scripts/pdf_webwatch.py --host $(HOST) --port $(PORT) --pdf draft/main.pdf --open -- \
-		$(TYPST) watch $(DRAFT_FLAGS) draft/main.typ draft/main.pdf
+	$(PYTHON) docs/scripts/pdf_webwatch.py --host $(HOST) --port $(PORT) --pdf docs/main.pdf --open -- \
+		$(TYPST) watch $(DRAFT_FLAGS) docs/main.typ docs/main.pdf
 
 clean:
-	rm -f draft/main.pdf draft/main.html
-	rm -rf draft/.typst
+	rm -f docs/main.pdf docs/main.html
+	rm -rf docs/.typst
 	cd presentation && latexmk -c thesis-bm
