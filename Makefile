@@ -5,6 +5,8 @@ PORT       := 9955
 
 DRAFT_FLAGS := --root . --font-path docs/fonts --ignore-system-fonts
 
+export PYTHONPATH = .
+
 .PHONY: all draft presentation figures verify watch watch-presentation webwatch clean
 
 all: figures draft presentation
@@ -16,13 +18,13 @@ presentation:
 	cd presentation && latexmk -xelatex thesis-bm
 
 figures:
-	$(PYTHON) python/render_chapter5_figures.py
-	$(PYTHON) python/render_chapter6_pooling_regions.py
-	$(PYTHON) python/render_chapter6_spectrum.py
+	$(PYTHON) -m python.render.chapter5
+	$(PYTHON) -m python.render.ch6_pooling
+	$(PYTHON) -m python.render.ch6_spectrum
 
 verify:
-	$(PYTHON) python/verify_binary_model.py
-	$(PYTHON) python/verify_model_results.py
+	$(PYTHON) -m python.verify.binary
+	$(PYTHON) -m python.verify.results
 
 watch:
 	$(TYPST) watch $(DRAFT_FLAGS) docs/main.typ docs/main.pdf

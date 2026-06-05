@@ -1,9 +1,7 @@
-#!/usr/bin/env python3
 from __future__ import annotations
 
 import math
 import sys
-
 
 TOL = 1e-9
 
@@ -70,7 +68,7 @@ def main() -> int:
     verify_independence_and_fu_points()
     verify_boundary_equation()
     verify_comparative_statics()
-    print("verify_model_results.py: Chapter 6 consistency checks passed")
+    print("verify results: Chapter 6 consistency checks passed")
     return 0
 
 

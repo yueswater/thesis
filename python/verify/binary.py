@@ -1,9 +1,7 @@
-#!/usr/bin/env python3
 from __future__ import annotations
 
 import math
 import sys
-
 
 TOL = 1e-9
 
@@ -35,9 +33,7 @@ def lam(V_L: float, v_h: float, q: float) -> float:
 
 def rent(v: float, V_L: float, v_h: float, q: float, V: float) -> float:
     c = V * kappa(V_L, v_h, q) / (1.0 + V * lam(V_L, v_h, q))
-    ss = (math.sqrt(v) - c) ** 2
-    iu = v * v / (4.0 * V)
-    return ss - iu
+    return (math.sqrt(v) - c) ** 2 - v * v / (4.0 * V)
 
 
 def verify_binary_moments() -> None:
@@ -77,7 +73,7 @@ def main() -> int:
     verify_binary_moments()
     verify_timing_decomposition()
     verify_binary_ic()
-    print("verify_binary_model.py: all binary-q checks passed")
+    print("verify binary: all checks passed")
     return 0
 
 
