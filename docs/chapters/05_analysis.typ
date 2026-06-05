@@ -242,7 +242,7 @@ $R(v)$ 描述的是實現型別在事後對先後動的比較，但第 0 階段�
 如#ref(<fig-ch5-timing-regions>)所示，在固定 $V=1$ 的兩點分配下，$(mu, delta)$ 會把參數空間劃分為不同的符號區域；這些區域對應 $Delta_I^(I U)$ 與 $Xi_U$ 的正負組合，因而直接對應到第 0 階段的制度誘因。
 
 #figure(
-  image("../figures/fig5_regions.pdf", width: 130%),
+  image("../../figures/fig5_regions.pdf", width: 130%),
   caption: [兩點分配在 $(mu, delta)$ 平面上的 $(Delta_I^(I U), Xi_U)$ 符號區域。],
   supplement: [圖],
 ) <fig-ch5-timing-regions>
@@ -282,7 +282,7 @@ $
 ]
 
 #figure(
-  image("../figures/fig5_uniform_regions.pdf", width: 130%),
+  image("../../figures/fig5_uniform_regions.pdf", width: 130%),
   caption: [均勻分配於 $(mu, delta)$ 平面上的型別劃分區域。],
   supplement: [圖],
 ) <fig-ch5-uniform-regions>

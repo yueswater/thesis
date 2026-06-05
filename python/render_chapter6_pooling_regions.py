@@ -8,19 +8,11 @@ to avoid label crowding when the two thresholds are close together.
 
 from __future__ import annotations
 
-import os
-from pathlib import Path
-
-ROOT = Path(__file__).resolve().parent.parent
-os.environ.setdefault("MPLCONFIGDIR", str(ROOT / ".matplotlib"))
-
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-FIG_DIR = ROOT / "figures"
-FIG_DIR.mkdir(exist_ok=True)
-(ROOT / ".matplotlib").mkdir(exist_ok=True)
+from paths import FIGURES_DIR as FIG_DIR
 
 
 def render_pooling_regions(

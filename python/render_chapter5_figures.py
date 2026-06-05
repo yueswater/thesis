@@ -2,11 +2,6 @@
 from __future__ import annotations
 
 import math
-import os
-from pathlib import Path
-
-ROOT = Path(__file__).resolve().parent.parent
-os.environ.setdefault("MPLCONFIGDIR", str(ROOT / ".matplotlib"))
 
 import matplotlib
 
@@ -18,10 +13,7 @@ from matplotlib.colors import ListedColormap
 from matplotlib.patches import Patch
 from matplotlib.ticker import FuncFormatter
 
-
-FIG_DIR = ROOT / "figures"
-FIG_DIR.mkdir(exist_ok=True)
-(ROOT / ".matplotlib").mkdir(exist_ok=True)
+from paths import FIGURES_DIR as FIG_DIR
 
 V = 1.0
 

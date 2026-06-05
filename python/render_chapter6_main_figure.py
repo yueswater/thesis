@@ -2,12 +2,6 @@
 """Main phase diagram for Section 6.4: full (q,s) plane with Region III added."""
 from __future__ import annotations
 
-import os
-from pathlib import Path
-
-ROOT = Path(__file__).resolve().parent.parent
-os.environ.setdefault("MPLCONFIGDIR", str(ROOT / ".matplotlib"))
-
 import matplotlib
 
 matplotlib.use("Agg")
@@ -17,9 +11,7 @@ import numpy as np
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 
-FIG_DIR = ROOT / "figures"
-FIG_DIR.mkdir(exist_ok=True)
-(ROOT / ".matplotlib").mkdir(exist_ok=True)
+from paths import FIGURES_DIR as FIG_DIR
 
 
 def style_axes(ax, xlabel, ylabel):

@@ -1,8 +1,23 @@
 .quarto/
 **/*.quarto_ipynb
 .DS_Store
+**/__pycache__/
+**/*.pyc
 
 /prompt/
 /literatures/Endogenous Timing of Contest with Asymmetric Information.pdf
+/figures/
+/.matplotlib/
+/python/.venv/
+
+presentation/*.aux
+presentation/*.fdb_latexmk
+presentation/*.fls
+presentation/*.log
+presentation/*.nav
+presentation/*.out
+presentation/*.snm
+presentation/*.toc
+presentation/*.xdv
 
 CLAUDE.md
