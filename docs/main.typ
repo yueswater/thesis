@@ -14,21 +14,17 @@
 
 #include "chapters/02_literatures.typ"
 
-= 模型設定 <sec-model>
+= 問題意識與基準模型 <sec-model>
 
-#include "chapters/03_model.typ"
+#include "chapters/03_motivation_benchmark.typ"
 
-= 均衡分析 <sec-equilibria>
+= 核心模型 <sec-analysis>
 
-#include "chapters/04_equilibria.typ"
+#include "chapters/04_main_model.typ"
 
-= 內生時序選擇 <sec-analysis>
+= 延伸討論 <sec-extension>
 
-#include "chapters/05_analysis.typ"
-
-= 模型延伸：部分相關型別 <sec-extension>
-
-#include "chapters/06_extension.typ"
+#include "chapters/05_extension_placeholder.typ"
 
 #pagebreak()
 
@@ -38,5 +34,5 @@
 
   = 附錄：證明 <sec-appendix>
 
-  #include "chapters/08_appendix.typ"
+  #include "chapters/08_appendix_placeholder.typ"
 ]

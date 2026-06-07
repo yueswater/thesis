@@ -4,6 +4,9 @@
 \usefonttheme{professionalfonts}
 \usepackage{fontspec}
 \usepackage{unicode-math}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
 
 \setmainfont{Roboto}[
   Path=fonts/,
@@ -23,9 +26,13 @@
 ]
 \setmathfont{texgyrepagella-math.otf}[Path=fonts/]
 
-\usetheme{metropolis}
+\usetheme{Boadilla}
 \usecolortheme{default}
 
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{title}{series=\bfseries,size=\Large}
+\setbeamerfont{frametitle}{series=\bfseries,size=\large}
+\setbeamertemplate{sections/subsections in toc}[sections numbered]
 \setbeamerfont{author}{size=\normalsize}
 \setbeamerfont{institute}{size=\normalsize}
 \setbeamerfont{date}{size=\normalsize}
@@ -37,9 +44,14 @@
 
 \title[Two-sided Asymmetry]{Separation, Pooling, and Endogenous Timing}
 \subtitle{A Tullock Contest under Two-sided Asymmetry}
-\author{Pin Yue, Sung}
-\institute[NCCU IB]{Department of International Business, National Chengchi University}
-\date{\today}
+\author{Pin Yue Sung}
+\institute[NCCU IB]{Department of International Business\\National Chengchi University}
+\date{Master's Thesis Defense}
+
+\newcommand{\vhat}{\hat V_U}
+\newcommand{\rhosep}{\rho^{*}}
+\newcommand{\rhopool}{\rho_{P}}
+\newcommand{\rhodag}{\rho^{\dagger}}
 
 \begin{document}
 
@@ -47,18 +59,253 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Table of Contents}
+\begin{frame}{Roadmap}
   \tableofcontents
 \end{frame}
 
 \section{Introduction}
 
+\begin{frame}{Research Question}
+  \begin{itemize}
+    \item How does prize-value correlation affect equilibrium revelation?
+    \item How does it reshape the informed player's timing incentive?
+    \item Can the benchmark and the fully correlated case be unified in one model?
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{Main message}
+
+  \begin{itemize}
+    \item Correlation is the single force that moves the game from separation to pooling.
+    \item The fully correlated case is the endpoint \(\rho = 1\), not a separate model.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{What This Thesis Does}
+  \begin{itemize}
+    \item Replaces the old benchmark with an \textbf{iid benchmark}.
+    \item Promotes \textbf{partial correlation} to the main model.
+    \item Characterizes separation, pooling, and coexistence.
+    \item Links subgame equilibrium to \textbf{endogenous timing}.
+  \end{itemize}
+\end{frame}
+
 \section{Literature Review}
 
-\section{Motivation}
+\begin{frame}{Literature and Gap}
+  \small
+  \begin{center}
+    \begin{tabular}{>{\bfseries}m{3.2cm} m{7.6cm}}
+      \toprule
+      Strand & What it contributes \\
+      \midrule
+      Tullock contests & effort-based competition with probabilistic winning \\
+      Endogenous timing & strategic value of moving early or late \\
+      Signaling & effort can transmit private information \\
+      \midrule
+      Gap & the transition from iid values to the fully correlated case is not fully characterized \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\section{Motivation and Benchmark}
+
+\begin{frame}{Why an iid Benchmark?}
+  \small
+  \begin{center}
+    \begin{tabular}{>{\bfseries}m{2.6cm} m{3.7cm} m{3.7cm}}
+      \toprule
+      Issue & Old benchmark & iid benchmark \\
+      \midrule
+      \(V_U\) & public constant & random variable \\
+      Architecture & disconnected from main model & same structure as main model \\
+      Belief channel & weak & still weak at \(\rho=0\) \\
+      Role & isolated special case & natural left endpoint \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  \vspace{0.7em}
+  \begin{itemize}
+    \item \(\rho=0\): iid benchmark; \(\rho=1\): fully correlated endpoint.
+    \item The benchmark is a reference point, not the main contribution.
+  \end{itemize}
+\end{frame}
 
 \section{Main Model}
 
+\begin{frame}{Environment and Timing Regimes}
+  \small
+  \begin{center}
+    \begin{tabular}{>{\bfseries}m{2.8cm} m{7.6cm}}
+      \toprule
+      Component & Specification \\
+      \midrule
+      Players & one informed player \(I\), one uninformed player \(U\) \\
+      Values & \(V_I, V_U \in \{v_L,v_H\}\), with \(v_H > v_L > 0\) \\
+      Marginals & \(\Pr(V_I=v_H)=\Pr(V_U=v_H)=q\) \\
+      Contest & Tullock success function \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  \vspace{0.8em}
+  \begin{center}
+    \begin{tabular}{>{\bfseries}m{2.4cm} m{8.0cm}}
+      \toprule
+      Regime & Interpretation \\
+      \midrule
+      \(SS\) & simultaneous effort choices \\
+      \(UI\) & uninformed player moves first; informed player responds \\
+      \(IU\) & informed player moves first; uninformed player responds \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Correlation and the Main Mechanism}
+  \small
+  \begin{itemize}
+    \item A single parameter \(\rho \in [0,1]\) indexes correlation:
+    \[
+      \Pr(V_I = v_H, V_U = v_H)=q^2+\rho q(1-q).
+    \]
+  \end{itemize}
+
+  \begin{center}
+    \begin{tabular}{>{\bfseries}m{2.2cm} m{7.8cm}}
+      \toprule
+      Case & Interpretation \\
+      \midrule
+      \(\rho=0\) & iid benchmark \\
+      \(0<\rho<1\) & partial correlation \\
+      \(\rho=1\) & fully correlated endpoint \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item With posterior \(m(x_I)=\Pr(V_I=v_H\mid x_I)\), the effective prize is
+    \[
+      \hat V_U(m)=v_L+[q+\rho(m-q)](v_H-v_L),
+    \]
+    \item and the best response is
+    \[
+      x_U^*(x_I,m) = \sqrt{x_I \hat V_U(m)} - x_I.
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Threshold Results}
+  \small
+  \begin{center}
+    \begin{tabular}{>{\bfseries}m{2.8cm} m{3.1cm} m{4.3cm}}
+      \toprule
+      Result & Threshold & Meaning \\
+      \midrule
+      Undistorted separation & \(\rho \le \rhosep\) & survives only below a finite cutoff \\
+      Pooling & \(\rho \ge \rhopool\) & appears before separation fully disappears \\
+      Coexistence & \(\rho \in [\rhopool,\rhosep]\) & separation and pooling coexist \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  \vspace{0.8em}
+  \[
+    \text{Benchmark calibration } (v_H,v_L,q)=(2,1,0.5):
+    \qquad
+    \rhopool=0.375,\quad \rhosep \approx 0.43.
+  \]
+\end{frame}
+
+\begin{frame}{Equilibrium Regions in the \(IU\) Subgame}
+  \small
+  \begin{center}
+    \includegraphics[width=0.88\linewidth]{../figures/fig6_pooling_regions.pdf}
+  \end{center}
+
+  \vspace{-0.3em}
+  \begin{itemize}
+    \item Region I: unique undistorted separation.
+    \item Region C: separation and pooling coexist.
+    \item Region C': Riley separation and pooling coexist.
+    \item In the benchmark calibration, the pure-pooling-only region disappears.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Refinement and Timing}
+  \small
+  \begin{center}
+    \begin{tabular}{>{\bfseries}m{2.8cm} m{7.2cm}}
+      \toprule
+      Question & Result \\
+      \midrule
+      Refinement & pooling survives the Intuitive Criterion and D1; D1 selects Riley on the separating side \\
+      Timing & \(\Delta_I^{IU}(\rho)=\widetilde{\pi}_I^{IU}(\rho)-\widetilde{\pi}_I^{SS}\) decreases with \(\rho\) in the separating region \\
+      Implication & there is a unique threshold \(\rho^\dagger\): low correlation can support informed leadership; high correlation cannot \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{From Benchmark to Endpoint}
+  \begin{center}
+    \includegraphics[width=0.80\linewidth]{../figures/fig6_spectrum.pdf}
+  \end{center}
+
+  \vspace{-0.3em}
+  \begin{itemize}
+    \item \(\rho = 0\): the iid benchmark.
+    \item \(\rho = 1\): the fully correlated endpoint.
+    \item The contribution is the continuous spectrum in between.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Welfare and Policy Implication}
+  \small
+  \begin{center}
+    \begin{tabular}{>{\bfseries}m{3.0cm} m{7.0cm}}
+      \toprule
+      Policy question & Should regulators force simultaneous action? \\
+      \midrule
+      Comparison object & total effort and rent dissipation across \(SS\), \(UI\), and \(IU\) \\
+      Why correlation matters & it changes both revelation incentives and timing incentives \\
+      Main implication & simultaneity is not automatically welfare-dominant \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
 \section{Extension}
+
+\begin{frame}{Extension}
+  \small
+  \begin{center}
+    \begin{tabular}{>{\bfseries}m{2.8cm} m{7.2cm}}
+      \toprule
+      Direction & timing chosen after private information is realized \\
+      \midrule
+      New signal space & a binary timing signal plus a continuous effort signal \\
+      Value & richer signaling structure than the current model \\
+      Status & left as future work rather than included in incomplete form \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Conclusion}
+  \begin{itemize}
+    \item The iid benchmark and the fully correlated case belong to one unified model.
+    \item Correlation is the key parameter behind:
+    \begin{itemize}
+      \item separation \(\rightarrow\) pooling,
+      \item multiplicity and refinement,
+      \item the informed player's timing preference.
+    \end{itemize}
+    \item The endpoint result is the limiting case of a broader equilibrium spectrum.
+  \end{itemize}
+\end{frame}
 
 \end{document}

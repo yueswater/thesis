@@ -1,7 +1,7 @@
 #let latin-main = "TeX Gyre Pagella"
 #let latin-mono = "Roboto"
 #let cjk-main = "cwTeX Q Ming"
-#let title-font = "cwTeX Q Yuan"
+#let title-font = "TaiwanPearl"
 #let heading-font = ("Roboto", title-font)
 #let cite-style = "apa"
 #let cite-blue = rgb("#0000ff")
@@ -13,12 +13,12 @@
 
 #let thesis-heading(it, above, below) = block(above: above, below: below)[
   #if it.numbering != none [
-    #text(font: heading-font, size: heading-size, weight: "regular")[
+    #text(font: heading-font, size: heading-size, weight: "light")[
       #counter(heading).display(it.numbering)
     ]
     #h(0.45em)
   ]
-  #text(font: heading-font, size: heading-size, weight: "regular")[#it.body]
+  #text(font: heading-font, size: heading-size, weight: "light")[#it.body]
 ]
 
 #let c(key, supplement: none) = cite(
@@ -32,7 +32,7 @@
 #let widetilde(body) = math.accent(body, "\u{0303}", size: 140%)
 #let qed-symbol = block(width: 100%)[#align(right)[$square.stroked$]]
 #let qed = qed-symbol
-#let theorem-font = "cwTeX Q Yuan"
+#let theorem-font = "TaiwanPearl"
 #let headingref(target) = context {
   let elem = query(target).at(0)
   let loc = elem.location()
@@ -43,14 +43,17 @@
     link(loc)[#text(fill: cite-blue)[第 #nums.at(0) 章第 #nums.at(1) 小節]]
   }
 }
-#let statement(kind, key, body, title: none) = context {
+#let statement(kind, key, body, title: none, above: 1.2em, below: 0.6em) = context {
   let ctr = counter(key)
   ctr.step()
   let no = str(ctr.get().at(0) + 1)
-  block(above: 1.2em, below: 0.6em)[
+  block(above: above, below: below)[
     #set par(first-line-indent: 0em)
-    #text(font: theorem-font, weight: 500)[
-      #kind #no#if title != none [ (#title) ]
+    #text(font: theorem-font, weight: "light")[
+      #kind #no#if title != none [
+        #h(0.1em)
+        #text(font: theorem-font, weight: "light")[(]#title#text(font: theorem-font, weight: "light")[)]
+      ]
     ]
     #h(0.5em)
     #body
@@ -60,9 +63,10 @@
 #let lemma(body, title: none) = statement("引理", "lemma-counter", body, title: title)
 #let theorem(body, title: none) = statement("定理", "theorem-counter", body, title: title)
 #let proposition(body, title: none) = statement("命題", "proposition-counter", body, title: title)
+#let example(body, title: none) = statement("範例", "example-counter", body, title: title, below: 1em)
 #let proof(body, qed: true) = block(above: 1.5em, below: 0.5em)[
   #set par(first-line-indent: 2em)
-  #text(font: theorem-font, weight: 500)[證明]#h(0.5em)#body
+  #text(font: theorem-font, weight: "light")[證明]#h(0.5em)#body
   #if qed [#qed-symbol]
 ]
 
@@ -108,15 +112,16 @@
   show raw: set text(font: latin-mono)
   show cite: set text(fill: cite-blue)
   show ref: set text(fill: cite-blue)
+  show figure: it => block(below: 1em)[#it]
   show heading.where(level: 1): it => thesis-heading(it, 1.4em, 0.9em)
   show heading.where(level: 2): it => thesis-heading(it, 1.1em, 0.7em)
   show heading.where(level: 3): it => thesis-heading(it, 0.9em, 0.6em)
 
   align(center)[
-    #text(font: title-font, size: 18pt, weight: "bold")[#title]
+    #text(font: title-font, size: 18pt, weight: "light")[#title]
     #if subtitle != none [
       #v(0.4em)
-      #text(font: title-font, size: 16pt, weight: "regular")[#subtitle]
+      #text(font: title-font, size: 16pt, weight: "light")[#subtitle]
     ]
     #v(0.9em)
     #text(size: 14pt)[#author]
