@@ -16,6 +16,15 @@
   weight: "bold",
 )[#body]
 
+#let term(chinese, english: none) = {
+  text(font: title-font)[#chinese]
+  if english != none {
+    [ (]
+    text(font: latin-main)[#english]
+    [)]
+  }
+}
+
 #let heading-size = 13pt
 
 #let thesis-heading(it, above, below) = block(above: above, below: below)[
@@ -81,6 +90,7 @@
 #let lemma(body, title: none) = statement("引理", "lemma-counter", body, title: title)
 #let theorem(body, title: none) = statement("定理", "theorem-counter", body, title: title)
 #let proposition(body, title: none) = statement("命題", "proposition-counter", body, title: title)
+#let corollary(body, title: none) = statement("推論", "corollary-counter", body, title: title)
 #let example(body, title: none) = statement("範例", "example-counter", body, title: title, below: 1em)
 #let proof(body, qed: true) = {
   v(1em, weak: true)
@@ -98,10 +108,10 @@
   col_player,
   row_actions: ([A], [B]),
   col_actions: ([A], [B]),
-  payoffs: ((([$(x,y)$], [$(x,y)$])), (([$(x,y)$], [$(x,y)$]))),
-  columns: (2.8cm, 1.2cm, 2.6cm, 2.6cm),
+  payoffs: (([$(x,y)$], [$(x,y)$]), ([$(x,y)$], [$(x,y)$])),
+  columns: (2.6cm, 1.8cm, 2.6cm, 2.6cm),
   inset: 6pt,
-  stroke: 0.6pt,
+  stroke: 0.5pt,
 ) = text(font: heading-font, weight: "light")[
   #table(
     columns: columns,
@@ -162,6 +172,7 @@
     first-line-indent: 2em,
   )
   set heading(numbering: "1.1")
+  show heading.where(level: 4): set heading(numbering: none)
   set math.equation(numbering: "(1)", supplement: [式])
   show heading.where(level: 1): it => {
     counter(math.equation).update(0)
@@ -189,6 +200,9 @@
   show heading.where(level: 1): it => thesis-heading(it, 1em, 1em)
   show heading.where(level: 2): it => thesis-heading(it, 1em, 1em)
   show heading.where(level: 3): it => thesis-heading(it, 1em, 1em)
+  show heading.where(level: 4): it => block(above: 0.8em, below: 0.6em)[
+    #text(font: heading-font, size: 12pt, weight: "light")[#it.body]
+  ]
 
   align(center)[
     #text(font: title-font, size: 18pt, weight: "light")[#title]

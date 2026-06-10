@@ -12,19 +12,19 @@
 
 = 文獻回顧 <sec-literature>
 
-#include "chapters/02_literatures.typ"
+#include "chapters/02_literature.typ"
 
 = 問題意識與基準模型 <sec-model>
 
-#include "chapters/03_motivation_benchmark.typ"
+#include "chapters/03_benchmark.typ"
 
 = 核心模型 <sec-analysis>
 
 #include "chapters/04_main_model.typ"
 
-= 延伸討論 <sec-extension>
+= 福利分析 <sec-welfare>
 
-#include "chapters/05_extension_placeholder.typ"
+#include "chapters/05_welfare.typ"
 
 #pagebreak()
 
@@ -34,5 +34,5 @@
 
   = 附錄：證明 <sec-appendix>
 
-  #include "chapters/08_appendix_placeholder.typ"
+  #include "chapters/08_appendix.typ"
 ]
