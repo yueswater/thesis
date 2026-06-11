@@ -1,4 +1,5 @@
 {
+  "latex-workshop.latex.autoBuild.run": "never",
   "tinymist.rootPath": "/home/anthony/thesis/draft",
   "tinymist.fontPaths": [
     "/home/anthony/thesis/draft/fonts"

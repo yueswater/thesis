@@ -30,7 +30,7 @@ watch:
 	$(TYPST) watch $(DRAFT_FLAGS) docs/main.typ docs/main.pdf
 
 watch-presentation:
-	cd presentation && latexmk -xelatex -pvc thesis-bm
+	cd presentation && latexmk -xelatex -synctex=1 -interaction=nonstopmode -pvc thesis-bm
 
 webwatch:
 	$(PYTHON) python/pdf_webwatch.py --host $(HOST) --port $(PORT) --pdf docs/main.pdf --open -- \

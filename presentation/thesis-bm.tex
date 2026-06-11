@@ -7,6 +7,24 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{tikz}
+\usepackage{natbib}
+\usepackage{bibentry}
+\bibliographystyle{apalike}
+% beamer loads hyperref before natbib, leaving hyperref's argument-gobbling
+% \hyper@natlinkbreak stub active, which eats the ", " / " (" between author
+% and year; restore the real definition (beamerbasecompatibility patches the
+% other \hyper@nat* macros but misses this one)
+\makeatletter
+\def\hyper@natlinkbreak#1#2{\hyper@linkend#1\hyper@linkstart{cite}{cite.#2}}
+\makeatother
+\definecolor{citeblue}{rgb}{0.2,0.2,0.7}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=citeblue,
+  citecolor=citeblue,
+  urlcolor=citeblue
+}
 
 \setmainfont{Roboto}[
   Path=fonts/,
@@ -48,7 +66,8 @@
 \institute[NCCU IB]{Department of International Business\\National Chengchi University}
 \date{Master's Thesis Defense}
 
-\newcommand{\vhat}{\hat V_U}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\VU}{\widetilde V_U}
 \newcommand{\rhosep}{\rho^{*}}
 \newcommand{\rhopool}{\rho_{P}}
 \newcommand{\rhodag}{\rho^{\dagger}}
@@ -59,7 +78,7 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Roadmap}
+\begin{frame}{Table of Contents}
   \tableofcontents
 \end{frame}
 
@@ -67,43 +86,90 @@
 
 \begin{frame}{Research Question}
   \begin{itemize}
-    \item How does prize-value correlation affect equilibrium revelation?
-    \item How does it reshape the informed player's timing incentive?
-    \item Can the benchmark and the fully correlated case be unified in one model?
+    \item \textbf{\citet{fu2006}}: in a Tullock contest with private information,
+      the informed player prefers to move \emph{second} ---
+      revealing type early is costly.
+    \item But this rests on $\rho = 1$: prize values are
+      \emph{perfectly correlated}.
+    \item \textbf{Gap}: does the late-mover preference survive at $\rho < 1$,
+      or is it an artifact of full correlation?
+    \item \textbf{This paper}: introduce $\rho \in [0,1]$ ---
+      at $\rho = 0$ the signal channel is closed;
+      at $\rho = 1$ Fu's result is recovered as the limiting case.
   \end{itemize}
 
-  \vspace{0.8em}
-  \textbf{Main message}
-
-  \begin{itemize}
-    \item Correlation is the single force that moves the game from separation to pooling.
-    \item The fully correlated case is the endpoint \(\rho = 1\), not a separate model.
-  \end{itemize}
+  \vfill
+  \begin{center}
+    \begin{tikzpicture}[scale=0.85, font=\footnotesize]
+      \draw[->, thick] (0,0) -- (7.2,0) node[right] {$\rho$};
+      \foreach \x/\lab in {0/{$0$}, 2.4/{$\rhodag$}, 4.8/{$\rhosep$}, 6.8/{$1$}}{
+        \draw[thick] (\x,0.08) -- (\x,-0.08) node[below] {\lab};
+      }
+      \node[below=0.45cm, font=\scriptsize] at (6.8,0) {\citet{fu2006}};
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
-\begin{frame}{What This Thesis Does}
+\begin{frame}{What This Paper Does}
   \begin{itemize}
-    \item Replaces the old benchmark with an \textbf{iid benchmark}.
-    \item Promotes \textbf{partial correlation} to the main model.
-    \item Characterizes separation, pooling, and coexistence.
-    \item Links subgame equilibrium to \textbf{endogenous timing}.
+    \setlength{\itemsep}{1.2em}
+    \item \textbf{\textit{i.i.d.} benchmark} ($\rho = 0$) ---
+      isolates timing from information spillover.
+    \item \textbf{Partial correlation} ($0 < \rho < 1$) as the main model
+      --- $\rho = 1$ is the endpoint, not a separate model.
+    \item Characterizes undistorted vs.\ Riley distorted separation,
+      and their transition as $\rho$ rises.
+    \item Links subgame equilibria to \textbf{endogenous timing}:
+      a structural asymmetry between $I$ and $U$.
   \end{itemize}
 \end{frame}
 
 \section{Literature Review}
 
-\begin{frame}{Literature and Gap}
-  \small
+\begin{frame}{Related Literature}
+  \footnotesize
   \begin{center}
-    \begin{tabular}{>{\bfseries}m{3.2cm} m{7.6cm}}
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabular}{@{}llp{5.2cm}@{}}
       \toprule
-      Strand & What it contributes \\
+      Strand & Key reference & Main takeaway \\
       \midrule
-      Tullock contests & effort-based competition with probabilistic winning \\
-      Endogenous timing & strategic value of moving early or late \\
-      Signaling & effort can transmit private information \\
+      Contest success function & \citet{tullock1980}
+        & Ratio-form CSF; unique equilibrium at $r = 1$ \\
+      Exogenous timing & \citet{dixit1987}
+        & Stronger player overcommits first (top-dog) \\
+      Endogenous timing & \citet{baikshogren1992}
+        & Weaker player moves first \\
+      Timing framework & \citet{hamilton1990}
+        & SS / UI / IU timing architecture \\
+      Asymmetric info (SS) & \citet{hurley1998}
+        & Type uncertainty suppresses $U$'s effort \\
+      Information advantage & \citet{warneryd2003}
+        & Informed player can win less \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Gap and Contribution}
+  \footnotesize
+  \begin{center}
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabular}{@{}llp{5.2cm}@{}}
+      \toprule
+      Strand & Key reference & Main takeaway \\
       \midrule
-      Gap & the transition from iid values to the fully correlated case is not fully characterized \\
+      Signaling in contests & \citet{fu2006}
+        & $\rho = 1$; late mover avoids revelation cost \\
+      Least-cost separation & \citet{riley1979}
+        & Least-cost separation under binding IC \\
+      Timing reversal
+        & \citeauthor{protopappas2023} (\citeyear{protopappas2023}, \citeyear{protopappas2025})
+        & Early-mover equilibrium under cost asymmetry \\
+      \textbf{Gap} & ---
+        & \textit{i.i.d.} $\to$ fully correlated transition uncharacterized \\
+      \textbf{This paper} & ---
+        & One $\rho$ spans the spectrum; reopens the signal channel \\
       \bottomrule
     \end{tabular}
   \end{center}
@@ -111,201 +177,515 @@
 
 \section{Motivation and Benchmark}
 
-\begin{frame}{Why an iid Benchmark?}
-  \small
+\begin{frame}{Model Setup}
+  \begin{itemize}
+    \item Two players: informed ($I$) and uninformed ($U$)
+    \item Types: $V_I, V_U \in \{v_H, v_L\}$,
+      $\Pr(V_k = v_H) = q \in (0,1)$
+    \item \textbf{Benchmark assumption}: $V_I \perp V_U$
+      (\textit{i.i.d.}, $\rho = 0$)
+  \end{itemize}
+
   \begin{center}
-    \begin{tabular}{>{\bfseries}m{2.6cm} m{3.7cm} m{3.7cm}}
+    \small
+    \begin{tabular}{@{}lcc@{}}
       \toprule
-      Issue & Old benchmark & iid benchmark \\
+      & $V_U = v_H$ & $V_U = v_L$ \\
       \midrule
-      \(V_U\) & public constant & random variable \\
-      Architecture & disconnected from main model & same structure as main model \\
-      Belief channel & weak & still weak at \(\rho=0\) \\
-      Role & isolated special case & natural left endpoint \\
+      $V_I = v_H$ & $q^2$ & $q(1-q)$ \\
+      $V_I = v_L$ & $q(1-q)$ & $(1-q)^2$ \\
       \bottomrule
     \end{tabular}
   \end{center}
 
-  \vspace{0.7em}
   \begin{itemize}
-    \item \(\rho=0\): iid benchmark; \(\rho=1\): fully correlated endpoint.
-    \item The benchmark is a reference point, not the main contribution.
+    \item Three-stage timing: Stage 0 (choose timing) $\to$
+      Nature draws types $\to$ effort subgame
+    \item Three regimes: SS (simultaneous), UI ($U$ moves first),
+      IU ($I$ moves first)
   \end{itemize}
+\end{frame}
+
+\begin{frame}{The Closed Signal Channel}
+  \begin{block}{Lemma (Conditional Expectation Invariance)}
+    If $V_I \perp V_U$, then
+    \[
+      \E[V_U \mid x_I] = \E[V_U],\; \forall x_I.
+    \]
+  \end{block}
+  $\to$ \textbf{Signal channel closed}: beliefs update via Bayes,
+  but $U$'s best response is unchanged ---
+  \emph{updating happens, but it doesn't bite}.
+
+  \vspace{0.6em}
+  \begin{block}{Proposition (Unique Separating Equilibrium)}
+    The IU subgame admits a \emph{unique separating equilibrium}, with IC slack
+    \[
+      \frac{(v_H - v_L)^2}{4\bar v} > 0,
+      \qquad \bar v \equiv \E[V_k].
+    \]
+  \end{block}
+  $\to$ $I$'s lead reveals her type at \emph{no cost}:
+  the IC constraint never binds.
+\end{frame}
+
+\begin{frame}{Equilibrium Payoffs across Regimes}
+  Composite coefficients:
+  $\hat A \equiv \bar v\,\E\bigl[V_I^{-1/2}\bigr]$,
+  $\hat B \equiv \bar v\,\E\bigl[V_I^{-1}\bigr] \ge 1$ (Jensen).
+
+  \begin{center}
+    \small
+    \renewcommand{\arraystretch}{2.1}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      Regime & $x_U^*$ & $\widetilde\pi_I$ & $\widetilde\pi_U$ \\
+      \midrule
+      SS
+        & $\dfrac{\hat A^2}{(1+\hat B)^2}$
+        & $\E\Bigl[\bigl(\sqrt{V_I} - \tfrac{\hat A}{1+\hat B}\bigr)^2\Bigr]$
+        & $\dfrac{\hat A^2 \hat B}{(1+\hat B)^2}$ \\
+      UI
+        & $\dfrac{\hat A^2}{4}$
+        & $\E\Bigl[\bigl(\sqrt{V_I} - \tfrac{\hat A}{2}\bigr)^2\Bigr]$
+        & $\dfrac{\hat A^2}{4}$ \\
+      IU (sep.)
+        & $\dfrac{v(2\bar v - v)}{4\bar v}$
+        & $\dfrac{\E[V_I^2]}{4\bar v}$
+        & $\dfrac{\E\bigl[(2\bar v - V_I)^2\bigr]}{4\bar v}$ \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  $\to$ \textbf{First-mover advantage for $U$}:
+  $\widetilde\pi_U^{UI} - \widetilde\pi_U^{SS}
+    = \dfrac{\hat A^2 (1-\hat B)^2}{4(1+\hat B)^2} \ge 0$.
+\end{frame}
+
+\begin{frame}{Stage-0 Timing Game}
+  Four unilateral deviation gaps:
+  \[
+    \Delta_I^{UI} \equiv \widetilde\pi_I^{UI} - \widetilde\pi_I^{SS},
+    \quad
+    \Delta_I^{IU} \equiv \widetilde\pi_I^{IU} - \widetilde\pi_I^{SS},
+    \quad
+    \Delta_U^{UI} \equiv \widetilde\pi_U^{UI} - \widetilde\pi_U^{SS},
+    \quad
+    \Delta_U^{SS} \equiv \widetilde\pi_U^{SS} - \widetilde\pi_U^{IU}
+  \]
+
+  \begin{block}{Proposition (Stage-0 Pure-strategy Equilibria)}
+    Pure-strategy Nash equilibria are fully characterized
+    by the signs of the four gaps:
+    \begin{itemize}
+      \item UI \; iff \; $\Delta_I^{UI} \ge 0$
+      \item SS \; iff \; $\Delta_I^{UI} \le 0$ and $\Delta_U^{SS} \ge 0$
+      \item IU \; iff \; $\Delta_I^{IU} \ge 0$ and $\Delta_U^{SS} \le 0$
+    \end{itemize}
+  \end{block}
+
+  $\to$ \textbf{Takeaway}: timing is driven purely by gap signs ---
+  no signaling distortion.
+
+  $\to$ Any effect at $\rho > 0$ must come from the reopened channel ---
+  not from asymmetric information per se.
 \end{frame}
 
 \section{Main Model}
 
-\begin{frame}{Environment and Timing Regimes}
-  \small
+\begin{frame}{Correlated Type Structure}
+  \begin{itemize}
+    \item Pearson correlation:
+      $\rho \equiv \operatorname{corr}(H_I, H_U)$,
+      where $H_k = \mathbf{1}\{V_k = v_H\}$, $\rho \in [0,1]$
+    \item Marginals fixed at $(q, 1-q)$ --- $\rho$ is the single
+      free parameter of the joint distribution
+  \end{itemize}
+
   \begin{center}
-    \begin{tabular}{>{\bfseries}m{2.8cm} m{7.6cm}}
+    \small
+    \begin{tabular}{@{}lcc@{}}
       \toprule
-      Component & Specification \\
+      & $V_U = v_H$ & $V_U = v_L$ \\
       \midrule
-      Players & one informed player \(I\), one uninformed player \(U\) \\
-      Values & \(V_I, V_U \in \{v_L,v_H\}\), with \(v_H > v_L > 0\) \\
-      Marginals & \(\Pr(V_I=v_H)=\Pr(V_U=v_H)=q\) \\
-      Contest & Tullock success function \\
+      $V_I = v_H$ & $q^2 + \rho q(1-q)$ & $q(1-q)(1-\rho)$ \\
+      $V_I = v_L$ & $q(1-q)(1-\rho)$ & $(1-q)^2 + \rho q(1-q)$ \\
       \bottomrule
     \end{tabular}
   \end{center}
 
-  \vspace{0.8em}
   \begin{center}
-    \begin{tabular}{>{\bfseries}m{2.4cm} m{8.0cm}}
+    \small
+    \begin{tabular}{@{}lll@{}}
       \toprule
-      Regime & Interpretation \\
+      $\rho$ & Structure & Key property \\
       \midrule
-      \(SS\) & simultaneous effort choices \\
-      \(UI\) & uninformed player moves first; informed player responds \\
-      \(IU\) & informed player moves first; uninformed player responds \\
+      $\rho = 0$ & \textit{i.i.d.} benchmark & signal has no spillover \\
+      $0 < \rho < 1$ & partial correlation & belief enters $U$'s best response \\
+      $\rho = 1$ & fully correlated & \citet{fu2006} endpoint \\
       \bottomrule
     \end{tabular}
   \end{center}
 \end{frame}
 
-\begin{frame}{Correlation and the Main Mechanism}
-  \small
-  \begin{itemize}
-    \item A single parameter \(\rho \in [0,1]\) indexes correlation:
-    \[
-      \Pr(V_I = v_H, V_U = v_H)=q^2+\rho q(1-q).
-    \]
-  \end{itemize}
-
-  \begin{center}
-    \begin{tabular}{>{\bfseries}m{2.2cm} m{7.8cm}}
-      \toprule
-      Case & Interpretation \\
-      \midrule
-      \(\rho=0\) & iid benchmark \\
-      \(0<\rho<1\) & partial correlation \\
-      \(\rho=1\) & fully correlated endpoint \\
-      \bottomrule
-    \end{tabular}
-  \end{center}
-
-  \vspace{0.6em}
-  \begin{itemize}
-    \item With posterior \(m(x_I)=\Pr(V_I=v_H\mid x_I)\), the effective prize is
-    \[
-      \hat V_U(m)=v_L+[q+\rho(m-q)](v_H-v_L),
-    \]
-    \item and the best response is
-    \[
-      x_U^*(x_I,m) = \sqrt{x_I \hat V_U(m)} - x_I.
-    \]
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Threshold Results}
-  \small
-  \begin{center}
-    \begin{tabular}{>{\bfseries}m{2.8cm} m{3.1cm} m{4.3cm}}
-      \toprule
-      Result & Threshold & Meaning \\
-      \midrule
-      Undistorted separation & \(\rho \le \rhosep\) & survives only below a finite cutoff \\
-      Pooling & \(\rho \ge \rhopool\) & appears before separation fully disappears \\
-      Coexistence & \(\rho \in [\rhopool,\rhosep]\) & separation and pooling coexist \\
-      \bottomrule
-    \end{tabular}
-  \end{center}
-
-  \vspace{0.8em}
+\begin{frame}{Posterior Expected Valuation}
+  Conditional probabilities of $U$'s high state, given $I$'s type:
   \[
-    \text{Benchmark calibration } (v_H,v_L,q)=(2,1,0.5):
+    \theta_H = q + \rho(1-q),
     \qquad
-    \rhopool=0.375,\quad \rhosep \approx 0.43.
+    \theta_L = q(1-\rho).
   \]
-\end{frame}
 
-\begin{frame}{Equilibrium Regions in the \(IU\) Subgame}
-  \small
+  \begin{block}{Lemma (Posterior Expected Valuation)}
+    Given posterior belief $\mu = \Pr(V_I = v_H \mid x_I)$,
+    \[
+      \VU(\mu) = v_L + \bigl[q + \rho(\mu - q)\bigr]\Delta V,
+      \qquad
+      \frac{d\VU(\mu)}{d\mu} = \rho\,\Delta V > 0.
+    \]
+  \end{block}
+
   \begin{center}
-    \includegraphics[width=0.88\linewidth]{../figures/fig6_pooling_regions.pdf}
+    \footnotesize
+    \begin{tabular}{@{}llc@{}}
+      \toprule
+      Posterior $\mu$ & Interpretation & $\VU(\mu)$ \\
+      \midrule
+      $\mu = 1$ & $I$ is high type & $v_L + [q+\rho(1-q)]\Delta V$ \\
+      $\mu = q$ & beliefs unchanged & $v_L + q\,\Delta V = \E[V_U]$ \\
+      $\mu = 0$ & $I$ is low type & $v_L + q(1-\rho)\Delta V$ \\
+      \bottomrule
+    \end{tabular}
   \end{center}
 
-  \vspace{-0.3em}
+  $\to$ \textbf{When $\rho > 0$, $I$'s type is a signal about $U$'s own prize
+  --- the channel is live.}
+\end{frame}
+
+\begin{frame}{SS and UI under Partial Correlation}
+  Composite coefficients --- replace $\bar v$ with $\VU(1)$, $\VU(0)$:
+  \[
+    \tilde A \equiv q\,\frac{\VU(1)}{\sqrt{v_H}}
+      + (1-q)\,\frac{\VU(0)}{\sqrt{v_L}},
+    \qquad
+    \tilde B \equiv q\,\frac{\VU(1)}{v_H}
+      + (1-q)\,\frac{\VU(0)}{v_L}.
+  \]
+
   \begin{itemize}
-    \item Region I: unique undistorted separation.
-    \item Region C: separation and pooling coexist.
-    \item Region C': Riley separation and pooling coexist.
-    \item In the benchmark calibration, the pure-pooling-only region disappears.
+    \item Equilibrium structure identical in form to the benchmark:
+      $\hat A, \hat B \to \tilde A, \tilde B$
+      (at $\rho = 0$: $\tilde A = \hat A$, $\tilde B = \hat B$)
+  \end{itemize}
+
+  \begin{block}{Proposition (First-mover Advantage Robust)}
+    $\widetilde\pi_U^{UI} \ge \widetilde\pi_U^{SS}$ for all $\rho \in [0,1)$.
+  \end{block}
+
+  \begin{itemize}
+    \item \textbf{Monotone coefficients}: $\tilde A$, $\tilde B$ strictly
+      decreasing in $\rho$, with $\tilde B \to 1$ as $\rho \to 1$ ---
+      rising $\rho$ erases the Jensen excess burden $\hat B > 1$
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Refinement and Timing}
-  \small
-  \begin{center}
-    \begin{tabular}{>{\bfseries}m{2.8cm} m{7.2cm}}
-      \toprule
-      Question & Result \\
-      \midrule
-      Refinement & pooling survives the Intuitive Criterion and D1; D1 selects Riley on the separating side \\
-      Timing & \(\Delta_I^{IU}(\rho)=\widetilde{\pi}_I^{IU}(\rho)-\widetilde{\pi}_I^{SS}\) decreases with \(\rho\) in the separating region \\
-      Implication & there is a unique threshold \(\rho^\dagger\): low correlation can support informed leadership; high correlation cannot \\
-      \bottomrule
-    \end{tabular}
-  \end{center}
-\end{frame}
+\begin{frame}{When Does Separation Hold?}
+  Undistorted separating candidate in the IU subgame, and its IC condition:
+  \[
+    x_H = \frac{v_H^2}{4\VU(1)},
+    \quad
+    x_L = \frac{v_L^2}{4\VU(0)};
+    \qquad
+    \frac{\VU(1)}{\VU(0)} \le R
+    \equiv \frac{v_H^2}{v_L(2v_H - v_L)}.
+  \]
 
-\begin{frame}{From Benchmark to Endpoint}
-  \begin{center}
-    \includegraphics[width=0.80\linewidth]{../figures/fig6_spectrum.pdf}
-  \end{center}
+  \begin{block}{Proposition (Separation Threshold)}
+    Undistorted separation holds iff $\rho \le \rhosep$, where
+    \[
+      \rhosep = \frac{(R-1)\,\VU(q)}{(1-q+Rq)\,\Delta V}.
+    \]
+  \end{block}
 
-  \vspace{-0.3em}
   \begin{itemize}
-    \item \(\rho = 0\): the iid benchmark.
-    \item \(\rho = 1\): the fully correlated endpoint.
-    \item The contribution is the continuous spectrum in between.
+    \item At $\rho = 0$: strictly satisfied; at $\rho = 1$: violated
+    \item IC slack $S(\rho) \equiv R - \VU(1)/\VU(0)$ decreases
+      monotonically and hits $0$ exactly at $\rhosep$
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Welfare and Policy Implication}
-  \small
+\begin{frame}{Riley Distortion}
+  When $\rho > \rhosep$, define
+  \[
+    \alpha \equiv 1 - \frac{\VU(0)}{\VU(1)} \in (0,1),
+    \qquad
+    z_H^- \equiv \frac{v_H}{2\sqrt{\VU(0)}}\bigl(1 - \sqrt{\alpha}\bigr).
+  \]
+
+  \begin{itemize}
+    \item High type keeps undistorted effort $x_H$;
+      low type distorts \emph{down} to $x_L^{R} = (z_H^-)^2$
+  \end{itemize}
+
+  \begin{block}{Corollary (Two-region Structure)}
+    \begin{itemize}
+      \item $\rho \le \rhosep$: undistorted separation --- no signaling cost
+      \item $\rho > \rhosep$: Riley distorted separation ---
+        separation cost borne by the low type alone
+    \end{itemize}
+  \end{block}
+
+  $\to$ High type's mimicry gain grows with $\rho$;
+  the low type must undercut to deter it.
+\end{frame}
+
+\begin{frame}{Stage-0 Payoff Matrix}
+  \textbf{Key point}: at stage 0, types are unrealized ---
+  players compare \emph{ex ante} expected payoffs.
+
   \begin{center}
-    \begin{tabular}{>{\bfseries}m{3.0cm} m{7.0cm}}
+    \small
+    \begin{tabular}{@{}lcc@{}}
       \toprule
-      Policy question & Should regulators force simultaneous action? \\
+      & $U$: Early & $U$: Late \\
       \midrule
-      Comparison object & total effort and rent dissipation across \(SS\), \(UI\), and \(IU\) \\
-      Why correlation matters & it changes both revelation incentives and timing incentives \\
-      Main implication & simultaneity is not automatically welfare-dominant \\
+      $I$: Early
+        & $\bigl(\widetilde\pi_I^{SS},\, \widetilde\pi_U^{SS}\bigr)$
+        & $\bigl(\widetilde\pi_I^{IU},\, \widetilde\pi_U^{IU}\bigr)$ \\
+      $I$: Late
+        & $\bigl(\widetilde\pi_I^{UI},\, \widetilde\pi_U^{UI}\bigr)$
+        & $\bigl(\widetilde\pi_I^{SS},\, \widetilde\pi_U^{SS}\bigr)$ \\
       \bottomrule
     \end{tabular}
   \end{center}
+
+  \begin{block}{Proposition (Stage-0 Pure-strategy Equilibria)}
+    Same sign characterization as the benchmark
+    ($\Delta_I^{UI}$, $\Delta_I^{IU}$, $\Delta_U^{UI}$, $\Delta_U^{SS}$)
+    --- but now \emph{every entry depends on $\rho$}.
+  \end{block}
+
+  $\to$ The question becomes: \textbf{how do the gap signs move with $\rho$?}
 \end{frame}
 
-\section{Extension}
+\begin{frame}{The Structural Asymmetry}
+  \begin{itemize}
+    \item \textbf{$U$'s side}: $\Delta_U^{UI} \ge 0$ for all $\rho < 1$
+      --- $U$ always wants to lead against a late-moving $I$ (robust)
+    \item \textbf{$I$'s side}: $\widetilde\pi_I^{IU}$ strictly decreasing
+      in $\rho$ --- revelation cost rises with correlation
+  \end{itemize}
 
-\begin{frame}{Extension}
-  \small
+  \begin{block}{Proposition (Timing Reversal)}
+    If $\Delta_I^{IU}(0) > 0$ and $\Delta_I^{IU}(\rhosep) < 0$,
+    there exists $\rhodag \in (0, \rhosep)$ where $I$'s timing
+    preference flips from early to late.
+  \end{block}
+
   \begin{center}
-    \begin{tabular}{>{\bfseries}m{2.8cm} m{7.2cm}}
+    \begin{tikzpicture}[scale=0.8, font=\footnotesize]
+      \draw[->] (0,-1.1) -- (0,1.2) node[above] {$\Delta_I^{IU}(\rho)$};
+      \draw[->] (0,0) -- (6.6,0) node[right] {$\rho$};
+      \draw[thick] (0,0.8) .. controls (2.2,0.55) and (3.6,-0.25) .. (5.6,-0.85);
+      \draw[thick] (3.1,0.07) -- (3.1,-0.07) node[below] {$\rhodag$};
+      \draw[thick] (5.6,0.07) -- (5.6,-0.07) node[below] {$\rhosep$};
+      \node[left, font=\scriptsize] at (0,0.8) {$>0$};
+    \end{tikzpicture}
+  \end{center}
+
+  $\to$ \textbf{The reversal is driven entirely by $I$, not $U$.}
+\end{frame}
+
+\begin{frame}{Summary --- The Correlation Spectrum}
+  \begin{center}
+    \begin{tikzpicture}[scale=0.85, font=\footnotesize]
+      \draw[->, thick] (0,0) -- (7.2,0) node[right] {$\rho$};
+      \foreach \x/\lab in {0/{$0$}, 2.4/{$\rhodag$}, 4.8/{$\rhosep$}, 6.8/{$1$}}{
+        \draw[thick] (\x,0.08) -- (\x,-0.08) node[below] {\lab};
+      }
+      \node[above, font=\scriptsize] at (1.2,0.12) {IU, undist.\ sep.};
+      \node[above, font=\scriptsize] at (3.6,0.12) {$I$ flips to late};
+      \node[above, font=\scriptsize] at (5.8,0.12) {Riley sep.};
+      \node[below=0.45cm, font=\scriptsize] at (6.8,0) {\citet{fu2006}};
+    \end{tikzpicture}
+  \end{center}
+
+  \begin{center}
+    \small
+    \begin{tabular}{@{}lll@{}}
       \toprule
-      Direction & timing chosen after private information is realized \\
+      $\rho$ range & IU equilibrium type & $I$'s timing preference \\
       \midrule
-      New signal space & a binary timing signal plus a continuous effort signal \\
-      Value & richer signaling structure than the current model \\
-      Status & left as future work rather than included in incomplete form \\
+      $[0, \rhodag)$ & undistorted separation & lead (IU) \\
+      $(\rhodag, \rhosep]$ & undistorted separation & wait \\
+      $(\rhosep, 1)$ & Riley distorted separation & wait \\
+      $\rho = 1$ & \citet{fu2006} endpoint & wait (late mover) \\
       \bottomrule
     \end{tabular}
   \end{center}
+
+  $\to$ \textbf{Bottom line}: \citet{fu2006}'s late-mover result
+  \emph{requires} correlation --- it is the right endpoint,
+  not a general principle.
 \end{frame}
+
+\section{Welfare Analysis}
+
+\begin{frame}{Welfare Framework}
+  Social welfare = allocative value minus effort dissipation:
+  $\widetilde W = \widetilde G - \widetilde T$,
+  where $\widetilde G = \E[p_I V_I + p_U V_U]$
+  and $\widetilde T = \E[x_I + x_U]$.
+
+  \begin{center}
+    \footnotesize
+    \renewcommand{\arraystretch}{1.9}
+    \begin{tabular}{@{}lcl@{}}
+      \toprule
+      Equilibrium type & Expected dissipation $\widetilde T$
+        & Sensitivity to $\rho$ \\
+      \midrule
+      SS
+        & $\dfrac{\tilde A}{1+\tilde B}\,\E\bigl[\sqrt{V_I}\bigr]$
+        & varies via $\tilde A$, $\tilde B$ \\
+      UI
+        & $\dfrac{\tilde A}{2}\,\E\bigl[\sqrt{V_I}\bigr]$
+        & varies via $\tilde A$ \\
+      IU undistorted sep.
+        & $\dfrac{\E[V_I]}{2}$
+        & \textbf{immune to $\rho$} \\
+      IU Riley distorted
+        & $\dfrac{v_H}{2}\bigl[1-(1-q)\sqrt{\alpha}\bigr]$
+        & varies via $\alpha$ \\
+      IU pooling
+        & $\sqrt{x_P\,\bar v}$
+        & unaffected by $\rho$ \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  $\to$ \textbf{IU undistorted separation's dissipation is insulated
+  from $\rho$} --- the key structural difference.
+\end{frame}
+
+\begin{frame}{Three Effects of $\rho$ on Welfare}
+  \begin{itemize}
+    \item \textbf{Allocative effect}: $\rho\uparrow$ $\to$
+      $\VU(1)$ and $\VU(0)$ diverge $\to$ type-specific competition
+      in IU matches true values better $\to$ allocation improves
+    \item \textbf{Dissipation effect}: $\rho\uparrow$ $\to$
+      SS dissipation keeps rising, while IU undistorted dissipation
+      stays fixed at $\E[V_I]/2$ $\to$ IU's cost advantage widens
+    \item \textbf{Threshold effect}: $\rho$ crosses $\rhosep$ $\to$
+      Riley distortion begins $\to$ low-type allocation deteriorates
+      --- a \emph{discontinuous} welfare drop
+  \end{itemize}
+
+  \vspace{0.4em}
+  \begin{block}{$W(\rho)$ is generally non-monotone}
+    \begin{itemize}
+      \item Increasing for $\rho \le \min(\rhodag, \rhosep)$:
+        dissipation is insulated, only the allocative effect operates
+      \item Once the equilibrium shifts to SS at $\rhodag$,
+        the increase stops
+      \item Riley distortion beyond $\rhosep$ further reduces welfare
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Equilibrium vs. Social Optimum}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+    \item \textbf{Direction 1} ($\rho$ large): equilibrium is SS,
+      yet $\widetilde W^{\mathrm{sep}} > \widetilde W^{SS}$ ---
+      \emph{$I$'s retreat sustains the high-dissipation regime}
+    \item \textbf{Direction 2} ($\rho$ small): equilibrium is IU,
+      yet $\widetilde W^{SS} > \widetilde W^{IU}$ ---
+      \emph{Riley distortion degrades the low-type allocation}
+  \end{itemize}
+
+  \vspace{0.4em}
+  \begin{block}{Root cause}
+    $I$ does not internalize $U$'s payoff; private timing incentives
+    ignore the global dissipation--allocation trade-off.
+    Efficiency of equilibrium timing is \emph{not} a general result ---
+    it depends on the parameter configuration.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Welfare across Regimes}
+  \begin{center}
+    \begin{tikzpicture}[scale=0.9, font=\footnotesize]
+      \draw[->] (0,0) -- (7.4,0) node[right] {$\rho$};
+      \draw[->] (0,0) -- (0,2.6) node[above] {$\widetilde W$};
+      \fill[gray!25]
+        (2.4,1.60) -- (4.8,2.20) -- (4.8,0.98) -- (2.4,1.44) -- cycle;
+      \draw[dashed] (2.4,0) -- (2.4,1.9);
+      \draw[dashed] (4.8,0) -- (4.8,2.35);
+      \foreach \x/\lab in {2.4/{$\rhodag$}, 4.8/{$\rhosep$}, 6.8/{$1$}}{
+        \draw (\x,0.06) -- (\x,-0.06) node[below] {\lab};
+      }
+      \draw[thick] (0,1.0) -- (4.8,2.2)
+        node[pos=0.25, below, sloped] {$\widetilde W^{\mathrm{sep}}$};
+      \draw[thick] (4.8,1.5) -- (6.8,1.25)
+        node[pos=0.55, above] {Riley};
+      \draw[->, thin] (4.8,2.08) -- (4.8,1.62);
+      \filldraw[fill=white] (4.8,2.2) circle (1.6pt);
+      \filldraw (4.8,1.5) circle (1.4pt);
+      \draw[thick, densely dotted] (0,1.9) -- (6.8,0.6)
+        node[pos=0.88, below, sloped] {$\widetilde W^{SS}$};
+      \node[font=\scriptsize, align=center] (ann) at (2.0,2.5)
+        {$\widetilde W^{\mathrm{sep}} > \widetilde W^{SS}$,\\
+         but equilibrium is SS};
+      \draw[->, thin, gray!70!black] (ann.south east) -- (4.0,1.75);
+    \end{tikzpicture}
+  \end{center}
+
+  \begin{itemize}
+    \footnotesize
+    \item $\widetilde W^{\mathrm{sep}}$ rises in $\rho$
+      (fixed dissipation, improving allocation);
+      $\widetilde W^{SS}$ declines (rising dissipation)
+    \item Shaded region: socially IU is better, but $I$ has already
+      abandoned the lead at $\rhodag$
+    \item Discontinuous welfare drop at $\rhosep$ (Riley distortion)
+  \end{itemize}
+\end{frame}
+
+\section{Conclusion}
 
 \begin{frame}{Conclusion}
-  \begin{itemize}
-    \item The iid benchmark and the fully correlated case belong to one unified model.
-    \item Correlation is the key parameter behind:
-    \begin{itemize}
-      \item separation \(\rightarrow\) pooling,
-      \item multiplicity and refinement,
-      \item the informed player's timing preference.
-    \end{itemize}
-    \item The endpoint result is the limiting case of a broader equilibrium spectrum.
-  \end{itemize}
+  \small
+  \begin{enumerate}
+    \setlength{\itemsep}{0.9em}
+    \item \textbf{$\rho = 0$}: unique undistorted separation ---
+      $I$ leads at \emph{no revelation cost}.
+    \item \textbf{$\rho > 0$} reopens the signal--belief--response
+      channel: beliefs enter $U$'s best response.
+    \item \textbf{Separation threshold}: undistorted iff
+      $\rho \le \rhosep$; beyond, Riley distortion ---
+      cost borne by the low type alone.
+    \item \textbf{Timing asymmetry}: $U$'s lead preference is robust;
+      $I$ flips to late at $\rhodag < \rhosep$.
+    \item \textbf{\citet{fu2006}} is the $\rho = 1$ endpoint ---
+      not a general principle.
+    \item \textbf{Welfare}: equilibrium timing departs from the
+      social optimum; $W(\rho)$ is non-monotone.
+  \end{enumerate}
 \end{frame}
+
+\begin{frame}{Future Directions}
+  \begin{enumerate}
+    \setlength{\itemsep}{1.4em}
+    \item \textbf{Continuous type space} --- beyond the closed-form
+      threshold: richer distortion patterns.
+    \item \textbf{Negative correlation} ($\rho < 0$) ---
+      reverse information spillover.
+    \item \textbf{$N$-player contests} --- timing symmetry-breaking;
+      the role of correlation remains open.
+  \end{enumerate}
+\end{frame}
+
+\nobibliography{refs}
 
 \end{document}
