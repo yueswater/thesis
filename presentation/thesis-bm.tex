@@ -435,8 +435,9 @@
     \end{itemize}
   \end{block}
 
-  $\to$ High type's mimicry gain grows with $\rho$;
-  the low type must undercut to deter it.
+  $\to$ As $\rho$ rises, posterior prize-value dispersion widens;
+  the original low-type effort no longer supports separation,
+  so the low type must distort downward to keep deviations unprofitable.
 \end{frame}
 
 \begin{frame}{Stage-0 Payoff Matrix}
@@ -445,6 +446,7 @@
 
   \begin{center}
     \small
+    \renewcommand{\arraystretch}{1.15}
     \begin{tabular}{@{}lcc@{}}
       \toprule
       & $U$: Early & $U$: Late \\
@@ -547,10 +549,10 @@
       \midrule
       SS
         & $\dfrac{\tilde A}{1+\tilde B}\,\E\bigl[\sqrt{V_I}\bigr]$
-        & varies via $\tilde A$, $\tilde B$ \\
+        & ambiguous ($\tilde A$, $\tilde B$ both fall) \\
       UI
         & $\dfrac{\tilde A}{2}\,\E\bigl[\sqrt{V_I}\bigr]$
-        & varies via $\tilde A$ \\
+        & strictly decreasing (via $\tilde A$) \\
       IU undistorted sep.
         & $\dfrac{\E[V_I]}{2}$
         & \textbf{immune to $\rho$} \\
@@ -559,7 +561,7 @@
         & varies via $\alpha$ \\
       IU pooling
         & $\sqrt{x_P\,\bar v}$
-        & unaffected by $\rho$ \\
+        & no direct $\rho$ term for fixed $x_P$ \\
       \bottomrule
     \end{tabular}
   \end{center}
@@ -571,24 +573,24 @@
 \begin{frame}{Three Effects of $\rho$ on Welfare}
   \begin{itemize}
     \item \textbf{Allocative effect}: $\rho\uparrow$ $\to$
-      $\VU(1)$ and $\VU(0)$ diverge $\to$ type-specific competition
-      in IU matches true values better $\to$ allocation improves
-    \item \textbf{Dissipation effect}: $\rho\uparrow$ $\to$
-      SS dissipation keeps rising, while IU undistorted dissipation
-      stays fixed at $\E[V_I]/2$ $\to$ IU's cost advantage widens
+      $\VU(1)$ and $\VU(0)$ diverge $\to$ win probabilities and prize
+      allocation shift across paths; the welfare effect is not
+      sign-definite a priori
+    \item \textbf{Dissipation effect}: regime-dependent ---
+      UI dissipation falls with $\rho$ (via $\tilde A$), SS is
+      ambiguous; only IU undistorted is \emph{insulated} at $\E[V_I]/2$
     \item \textbf{Threshold effect}: $\rho$ crosses $\rhosep$ $\to$
-      Riley distortion begins $\to$ low-type allocation deteriorates
-      --- a \emph{discontinuous} welfare drop
+      Riley distortion begins $\to$ the low-type path is distorted,
+      but welfare need not jump discontinuously at $\rhosep$
   \end{itemize}
 
-  \vspace{0.4em}
-  \begin{block}{$W(\rho)$ is generally non-monotone}
+  \begin{block}{Key implication}
     \begin{itemize}
-      \item Increasing for $\rho \le \min(\rhodag, \rhosep)$:
-        dissipation is insulated, only the allocative effect operates
-      \item Once the equilibrium shifts to SS at $\rhodag$,
-        the increase stops
-      \item Riley distortion beyond $\rhosep$ further reduces welfare
+      \item In IU undistorted separation, $\widetilde W^{\mathrm{sep}}$
+        decreases with $\rho$ even though dissipation stays fixed
+      \item Across regimes, welfare rankings remain parameter-dependent:
+        SS and UI react through $\tilde A$, $\tilde B$,
+        while Riley welfare must be judged from the full formula
     \end{itemize}
   \end{block}
 \end{frame}
@@ -596,12 +598,13 @@
 \begin{frame}{Equilibrium vs. Social Optimum}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-    \item \textbf{Direction 1} ($\rho$ large): equilibrium is SS,
+    \item \textbf{Direction 1} ($\rho > \rhodag$): equilibrium is SS,
       yet $\widetilde W^{\mathrm{sep}} > \widetilde W^{SS}$ ---
-      \emph{$I$'s retreat sustains the high-dissipation regime}
-    \item \textbf{Direction 2} ($\rho$ small): equilibrium is IU,
-      yet $\widetilde W^{SS} > \widetilde W^{IU}$ ---
-      \emph{Riley distortion degrades the low-type allocation}
+      \emph{$I$'s retreat sustains the welfare-inferior regime}
+    \item \textbf{Direction 2} (IU remains privately sustainable):
+      equilibrium may stay in IU Riley or pooling,
+      yet $\widetilde W^{SS}$ or $\widetilde W^{UI}$ can still be higher ---
+      \emph{private timing incentives and social welfare need not align}
   \end{itemize}
 
   \vspace{0.4em}
@@ -614,42 +617,23 @@
 \end{frame}
 
 \begin{frame}{Welfare across Regimes}
-  \begin{center}
-    \begin{tikzpicture}[scale=0.9, font=\footnotesize]
-      \draw[->] (0,0) -- (7.4,0) node[right] {$\rho$};
-      \draw[->] (0,0) -- (0,2.6) node[above] {$\widetilde W$};
-      \fill[gray!25]
-        (2.4,1.60) -- (4.8,2.20) -- (4.8,0.98) -- (2.4,1.44) -- cycle;
-      \draw[dashed] (2.4,0) -- (2.4,1.9);
-      \draw[dashed] (4.8,0) -- (4.8,2.35);
-      \foreach \x/\lab in {2.4/{$\rhodag$}, 4.8/{$\rhosep$}, 6.8/{$1$}}{
-        \draw (\x,0.06) -- (\x,-0.06) node[below] {\lab};
-      }
-      \draw[thick] (0,1.0) -- (4.8,2.2)
-        node[pos=0.25, below, sloped] {$\widetilde W^{\mathrm{sep}}$};
-      \draw[thick] (4.8,1.5) -- (6.8,1.25)
-        node[pos=0.55, above] {Riley};
-      \draw[->, thin] (4.8,2.08) -- (4.8,1.62);
-      \filldraw[fill=white] (4.8,2.2) circle (1.6pt);
-      \filldraw (4.8,1.5) circle (1.4pt);
-      \draw[thick, densely dotted] (0,1.9) -- (6.8,0.6)
-        node[pos=0.88, below, sloped] {$\widetilde W^{SS}$};
-      \node[font=\scriptsize, align=center] (ann) at (2.0,2.5)
-        {$\widetilde W^{\mathrm{sep}} > \widetilde W^{SS}$,\\
-         but equilibrium is SS};
-      \draw[->, thin, gray!70!black] (ann.south east) -- (4.0,1.75);
-    \end{tikzpicture}
-  \end{center}
-
   \begin{itemize}
-    \footnotesize
-    \item $\widetilde W^{\mathrm{sep}}$ rises in $\rho$
-      (fixed dissipation, improving allocation);
-      $\widetilde W^{SS}$ declines (rising dissipation)
-    \item Shaded region: socially IU is better, but $I$ has already
-      abandoned the lead at $\rhodag$
-    \item Discontinuous welfare drop at $\rhosep$ (Riley distortion)
+    \setlength{\itemsep}{1em}
+    \item \textbf{IU undistorted separation}:
+      $\widetilde T^{\mathrm{sep}} = \E[V_I]/2$, while
+      $\widetilde W^{\mathrm{sep}}$ decreases with $\rho$
+    \item \textbf{SS and UI}: both move with $\tilde A$, $\tilde B$;
+      neither ordering is sign-definite
+    \item \textbf{Riley region}: both dissipation and allocation change,
+      so welfare must be read from the full formula
+    \item \textbf{At $\rho = \rhosep$}: the two expressions meet;
+      regime change need not imply a welfare jump
   \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{Takeaway}
+    Welfare rankings are regime- and parameter-dependent.
+  \end{block}
 \end{frame}
 
 \section{Conclusion}
@@ -669,8 +653,8 @@
       $I$ flips to late at $\rhodag < \rhosep$.
     \item \textbf{\citet{fu2006}} is the $\rho = 1$ endpoint ---
       not a general principle.
-    \item \textbf{Welfare}: equilibrium timing departs from the
-      social optimum; $W(\rho)$ is non-monotone.
+    \item \textbf{Welfare}: equilibrium timing can depart from the
+      social optimum; welfare responses to $\rho$ are regime-dependent.
   \end{enumerate}
 \end{frame}
 
