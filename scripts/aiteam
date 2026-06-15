@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ "$#" -eq 0 ]; then
+  echo 'Usage: scripts/aiteam "你的任務"'
+  exit 1
+fi
+
+python .ai-team/team.py "$@"

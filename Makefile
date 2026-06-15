@@ -18,9 +18,7 @@ presentation:
 	cd presentation && latexmk -xelatex thesis-bm
 
 figures:
-	$(PYTHON) -m python.render.chapter5
-	$(PYTHON) -m python.render.ch6_pooling
-	$(PYTHON) -m python.render.ch6_spectrum
+	$(PYTHON) -m python.render.docs_figures
 
 verify:
 	$(PYTHON) -m python.verify.binary

@@ -173,7 +173,7 @@
   )
   set heading(numbering: "1.1")
   show heading.where(level: 4): set heading(numbering: none)
-  set math.equation(numbering: "(1)", supplement: [式])
+  set math.equation(numbering: none, supplement: [式])
   show heading.where(level: 1): it => {
     counter(math.equation).update(0)
     it

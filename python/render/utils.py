@@ -15,9 +15,11 @@ def style_axes(ax: plt.Axes, xlabel: str, ylabel: str) -> None:
 def add_axis_arrows(ax: plt.Axes) -> None:
     x0, x1 = ax.get_xlim()
     y0, y1 = ax.get_ylim()
-    arrow = dict(arrowstyle="-|>", lw=0.9, color="black")
-    ax.annotate("", xy=(x1 * 1.01, y0), xytext=(x0, y0), arrowprops=arrow, annotation_clip=False)
-    ax.annotate("", xy=(x0, y1 * 1.01), xytext=(x0, y0), arrowprops=arrow, annotation_clip=False)
+    for sp in ax.spines.values():
+        sp.set_visible(False)
+    arrow = dict(arrowstyle="-|>", lw=0.5, color="black", mutation_scale=5, shrinkA=0, shrinkB=0)
+    ax.annotate("", xy=(x1, y0), xytext=(x0, y0), arrowprops=arrow, annotation_clip=False)
+    ax.annotate("", xy=(x0, y1), xytext=(x0, y0), arrowprops=arrow, annotation_clip=False)
 
 
 def s_star_h(q: np.ndarray, v_h: float, v_l: float) -> np.ndarray:
