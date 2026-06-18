@@ -1,9 +1,9 @@
 #import "thesis.typ": thesis
 
 #show: thesis.with(
-  title: "雙重不對稱下的分離、混同與內生時序",
+  title: "雙重不對稱下的分離、扭曲與內生時序",
   author: "宋品岳",
-  bib: "refs.bib",
+  bib: ("refs.bib", "refs_extra.yml"),
 )
 
 = 緒論 <sec-intro>
@@ -14,7 +14,7 @@
 
 #include "chapters/02_literature.typ"
 
-= 問題意識與基準模型 <sec-model>
+= 獨立同分配基準模型 <sec-model>
 
 #include "chapters/03_benchmark.typ"
 
@@ -25,14 +25,3 @@
 = 福利分析 <sec-welfare>
 
 #include "chapters/05_welfare.typ"
-
-#pagebreak()
-
-#[
-  #set heading(numbering: "A.1", supplement: [附錄])
-  #counter(heading).update(0)
-
-  = 附錄：證明 <sec-appendix>
-
-  #include "chapters/08_appendix.typ"
-]

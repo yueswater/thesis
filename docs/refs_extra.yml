@@ -1,0 +1,14 @@
+tullock1980:
+  type: chapter
+  title: Efficient Rent Seeking
+  author: Tullock, Gordon
+  page-range: 97-112
+  date: 1980
+  parent:
+    type: book
+    title: Toward a Theory of the Rent-Seeking Society
+    editor:
+      - Buchanan, James M.
+      - Tollison, Robert D.
+      - Tullock, Gordon
+    publisher: Texas A&M University Press
