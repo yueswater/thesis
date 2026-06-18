@@ -1,26 +1,22 @@
 #import "../thesis.typ": (
-  SS, bern, c, ca, corollary, corr, cp, definition, example, headingref, impt, lemma, payoff-matrix-2x2, proof,
-  proposition, stmtref, term, theorem, widetilde,
+  SS, bern, c, ca, corr, cp, definition, example, headingref, impt, lemma, payoff-matrix-2x2, proof, proposition,
+  stmtref, term, theorem, widetilde,
 )
 
-#headingref(<sec-model>)已在 $rho = 0$ 的 benchmark 下固定比較基準。本章直接轉入 $0 < rho < 1$ 的部分相關情形，並以 $rho = 1$ 對應 #c("fu2006") 的完全相關端點。當 $V_I$ 與 $V_U$ 呈現正相關時，知情者型別會同時影響不知情者對自身獎酬的判斷，後驗信念遂進入其後驗期望獎酬與最佳反應。以下依序建構部分相關型別結構、推導後驗期望獎酬，並分析各子賽局與第 0 階段的內生時序均衡。
+#headingref(<sec-model>)已在 $rho = 0$ 的基準下固定比較起點。本章轉入 $0 < rho < 1$ 的部分相關情形，分析當 $V_I$ 與 $V_U$ 呈現正相關時，知情者型別如何同時影響不知情者對自身獎酬的判斷，並進一步進入其後驗期望獎酬與最佳反應。完全相關情形則作為 $rho = 1$ 的端點比較。
 
 == 部分相關型別結構 <subsec-main-setup>
 
-本節建構本章所採用之部分相關型別結構。延續 #headingref(<sec-model>) 之設定，本文維持相同邊際分配，僅放寬統計獨立之要求；一旦 $V_I$ 與 $V_U$ 呈現正相關，知情者型別便會同時攜帶關於不知情者自身獎酬的資訊。
+本節建構本章所採用之部分相關型別結構。延續#headingref(<sec-model>)之設定，本文維持相同邊際分配，僅放寬統計獨立之要求；一旦 $V_I$ 與 $V_U$ 呈現正相關，知情者型別便會同時攜帶關於不知情者自身獎酬的資訊。
 
 === 邊際分配與相關參數 <subsubsec-main-marginal-rho>
 
-本節沿用 #headingref(<sec-model>) 之符號設定，並維持邊際機率為 $q in (0,1)$ 之假設；獎酬間的關聯程度則由相關參數 $rho$ 刻畫。
+本節沿用#headingref(<sec-model>)之符號設定，並維持邊際機率為 $q in (0,1)$ 之假設；獎酬間的關聯程度則由相關參數 $rho$ 刻畫。
 
 #definition(title: [部分相關型別結構])[
-  定義高型別指示變數
+  定義相關係數為#term("皮爾森相關係數", english: "Pearson correlation coefficient")，即：
   $
-    H_I equiv bb(1){V_I = v_H}, quad H_U equiv bb(1){V_U = v_H},
-  $
-  並以其#term("皮爾森相關係數", english: "Pearson correlation coefficient")定義相關參數
-  $
-    rho equiv corr(H_I, H_U).
+    rho equiv corr(V_I, V_U).
   $
   本文限制 $rho in [0,1]$ 以聚焦於正相關情形。#footnote[皮爾森相關係數之一般值域為 $[-1,1]$；本文僅討論 $rho >= 0$。正相關獎酬可理解為雙方 valuation 受同一外部狀態影響之情形。] 若知情者與不知情者之獎酬具有相同邊際分配，則稱 $(V_I, V_U)$ 服從參數為 $(q, rho) in (0,1) times [0,1]$ 之部分相關型別結構。
 ] <def-main-correlated-types>
@@ -29,7 +25,7 @@
 
 === 聯合分配
 
-在邊際分配固定為 $(q,1-q)$ 的情況下，型別結構的差異完全來自聯合分配所反映的依存關係。由於兩個邊際機率已事先給定，$(V_I,V_U)$ 的聯合分配僅剩一個自由度，而該自由度恰可由相關參數 $rho$ 唯一決定。因此，一旦指定 $(q,rho)$，整個型別結構便被完全刻畫，各狀態出現機率如@tbl-main-joint-corr 所示。相較於@tbl-benchmark-joint 之獨立基準，本章以引入 $rho$ 的方式放寬獎酬間的統計獨立假設；令 $rho = 0$ 即退化回基準情形。
+在邊際分配固定為 $(q,1-q)$ 的情況下，型別結構的差異完全來自聯合分配所反映的依存關係。由於兩個邊際機率已事先給定，$(V_I,V_U)$ 的聯合分配僅剩一個自由度，而該自由度恰可由相關參數 $rho$ 唯一決定。因此，一旦指定 $(q,rho)$，整個型別結構便被完全刻畫，各狀態出現機率如@tbl-main-joint-corr 所示。相較於第 3 章的獨立基準，本章以引入 $rho$ 的方式放寬獎酬間的統計獨立假設；令 $rho = 0$ 即退化回基準情形。
 
 #figure(
   table(
@@ -59,7 +55,7 @@
 
 == 後驗期望獎酬與最佳反應 <subsec-main-belief-payoff>
 
-本節推導部分相關結構下不知情者的後驗期望獎酬。當 $0 < rho < 1$ 時，知情者的投入若揭示 $V_I$，亦會改變不知情者對自身 valuation 的條件判斷；因此，其 payoff-relevant valuation 不再是固定的 $overline(v)$，而是隨後驗信念 $mu$ 變動的 $widetilde(V)_U (mu)$。
+本節推導部分相關結構下不知情者的後驗期望獎酬與最佳反應。當 $0 < rho < 1$ 時，知情者的投入若揭示 $V_I$，亦會改變不知情者對自身 valuation 的條件判斷；因此，其 payoff-relevant valuation 不再是固定的 $overline(v)$，而是隨後驗信念 $mu$ 變動的 $widetilde(V)_U (mu)$。
 
 === 後驗信念 <subsubsec-main-posterior>
 
@@ -69,65 +65,14 @@ $
   mu(x_I) equiv Pr(V_I = v_H | x_I).
 $
 
-其中 $mu(x_I)$ 表示由觀察投入 $x_I$ 所誘導之後驗信念函數；在討論給定觀察下的最佳反應或報酬時，為簡化記號，以下逕以 $mu$ 表示其對應之信念值。其中，$mu=1$ 表示不知情者確信知情者為高型別，$mu=0$ 表示其確信知情者為低型別，而 $mu=q$ 則表示其信念仍停留於#term("先驗水準", english: "prior level")。
+其中 $mu(x_I)$ 表示由觀察投入 $x_I$ 所誘導之後驗信念函數；在討論給定觀察下的最佳反應或報酬時，為簡化記號，以下逕以 $mu$ 表示其對應之信念值。$mu=1$、$mu=0$ 與 $mu=q$ 分別對應高型別訊號、低型別訊號與信念停留於#term("先驗水準", english: "prior level")。
 
-由@tbl-main-joint-corr 可得兩個關鍵的條件機率。
-
-#lemma(
-  title: [相關型別下之條件高型別機率],
-)[
-  在#stmtref(<def-main-correlated-types>, "定義", "definition-counter") 所給定之部分相關型別結構下，若知情者為高型別，則不知情者為高型別的條件機率為
-  $
-    theta_H equiv Pr(V_U = v_H|V_I = v_H) = q + rho(1-q).
-  $
-
-  若知情者為低型別，則不知情者為高型別的條件機率為
-
-  $
-    theta_L equiv Pr(V_U = v_H|V_I = v_L) = q(1-rho).
-  $
-] <lem-main-conditional-high-prob>
-
-#proof[
-  由@tbl-main-joint-corr 與邊際分配 $Pr(V_I=v_H)=q$ 可知
-  $
-    Pr(V_U = v_H|V_I = v_H) & = frac(Pr(V_I = v_H, V_U = v_H), Pr(V_I = v_H)) \
-                            & = frac(q^2 + rho q(1-q), q) \
-                            & = q + rho(1-q).
-  $
-
-  同理，由 $Pr(V_I=v_L)=1-q$ 可得
-  $
-    Pr(V_U = v_H|V_I = v_L) & = frac(Pr(V_I = v_L, V_U = v_H), Pr(V_I = v_L)) \
-                            & = frac(q(1-q)(1-rho), 1-q) \
-                            & = q(1-rho).
-  $
-]
-
-其中，$theta_H$ 與 $theta_L$ 並非報酬或型別本身，而是以知情者型別為條件時，不知情者處於高獎酬狀態的條件機率。上述條件機率刻畫了獎酬相關所造成的資訊外溢效果。當 $rho=0$ 時，$theta_H$ 與 $theta_L$ 皆等於先驗機率 $q$，表示知情者型別資訊不會外溢至不知情者對自身獎酬狀態的判斷；此時，即使不知情者辨識出知情者之型別，其對自身為高型別的評估仍維持不變。當 $rho>0$ 時，則有 $theta_L < q < theta_H$：知情者為高型別會使不知情者上修自身處於高獎酬狀態的機率，知情者為低型別則會使其下修此一機率。
-
-=== 後驗期望獎酬 <subsubsec-main-effective-payoff>
-
-給定後驗信念 $mu$，不知情者對自身獎酬的評估必須同時考量兩種可能情況：知情者為高型別的機率為 $mu$，而為低型別的機率則為 $1-mu$。由於知情者型別會透過獎酬相關外溢至不知情者對自身狀態的判斷，不知情者的後驗期望獎酬不再只是先驗期望，而是由後驗信念加權後的條件期望。
-
-#definition(title: [後驗期望獎酬])[
-  不知情者觀察知情者投入 $x_I$ 並形成後驗信念 $mu=Pr(V_I=v_H|x_I)$ 後，其後驗期望獎酬定義為
-  $
-    widetilde(V)_U (mu) equiv EE[V_U|x_I].
-  $
-] <def-main-posterior-expected-valuation>
-
-#stmtref(<def-main-posterior-expected-valuation>, "定義", "definition-counter") 之區別實益在於區分真實獎酬與決策時所依據的獎酬評估。$V_U$ 為不知情者尚未觀察的實現值；$widetilde(V)_U (mu)$ 則是其觀察 $x_I$ 後，根據後驗信念形成的條件期望。由於不知情者無法直接依據 $V_U$ 選擇投入，後續目標函數與最佳反應所採用的獎酬項，均為後驗期望獎酬 $widetilde(V)_U (mu)$，而非尚未觀察的實現值 $V_U$。
+給定後驗信念 $mu$，不知情者的決策所依據者不是尚未實現的 $V_U$，而是條件於該信念的期望獎酬。以下將此一 quantity 記為 $widetilde(V)_U (mu) equiv EE[V_U|x_I]$。
 
 #lemma(
   title: [後驗期望獎酬之閉式表示],
 )[
-  令 $Delta V equiv v_H - v_L$。根據#stmtref(<lem-main-conditional-high-prob>, "引理", "lemma-counter")，若不知情者觀察 $x_I$ 後形成後驗信念 $mu=Pr(V_I=v_H|x_I)$，則其對自身為高型別之條件機率為
-  $
-    Pr(V_U=v_H|x_I) = q + rho(mu-q).
-  $
-
-  因此，根據#stmtref(<def-main-posterior-expected-valuation>, "定義", "definition-counter")，不知情者的後驗期望獎酬可寫為
+  令 $Delta V equiv v_H - v_L$。在部分相關型別結構下，不知情者觀察知情者投入並形成後驗信念 $mu=Pr(V_I=v_H|x_I)$ 後，其後驗期望獎酬可寫為
   $
     widetilde(V)_U (mu)
     = v_L + [q + rho(mu-q)] Delta V.
@@ -135,22 +80,25 @@ $
 ] <lem-main-posterior-expected-valuation>
 
 #proof[
-  由後驗信念定義，知情者為高型別與低型別的條件機率分別為 $mu$ 與 $1-mu$。依全機率律與#stmtref(<lem-main-conditional-high-prob>, "引理", "lemma-counter")，
+  由@tbl-main-joint-corr 可得
   $
-    Pr(V_U=v_H|x_I) & = mu theta_H + (1-mu) theta_L \
-                    & = mu [q + rho(1-q)] + (1-mu) q(1-rho) \
+    Pr(V_U=v_H|V_I=v_H) &= q + rho(1-q)\
+    Pr(V_U=v_H|V_I=v_L) &= q(1-rho).
+  $
+  故由全機率律，
+  $
+    Pr(V_U=v_H|x_I) & = mu [q + rho(1-q)] + (1-mu) q(1-rho) \
                     & = q + rho(mu-q).
   $
-
-  令 $p(mu) equiv Pr(V_U=v_H|x_I)$，則
+  因而
   $
-    EE[V_U|x_I] & = p(mu) v_H + (1-p(mu)) v_L \
-                & = v_L + p(mu) (v_H-v_L) \
+    EE[V_U|x_I] & = Pr(V_U=v_H|x_I) v_H + Pr(V_U=v_L|x_I) v_L \
+                & = v_L + Pr(V_U=v_H|x_I) (v_H-v_L) \
                 & = v_L + [q + rho(mu-q)] Delta V.
   $
 ]
 
-#stmtref(<lem-main-posterior-expected-valuation>, "引理", "lemma-counter") 將資訊外溢轉化為不知情者報酬中的獎酬。其意義在於，知情者投入所引發的後驗信念，只有在獎酬相關存在時，才會改變不知情者對自身獎酬的評估。若 $rho=0$，則
+#stmtref(<lem-main-posterior-expected-valuation>, "引理", "lemma-counter") 顯示，只有在獎酬相關存在時，知情者投入所引發的後驗信念才會改變不知情者對自身獎酬的評估。若 $rho=0$，則
 
 #[
   #set math.equation(numbering: none)
@@ -159,7 +107,7 @@ $
   $
 ]
 
-與後驗信念 $mu$ 無關。此時，知情者投入至多揭示知情者自身型別，卻不提供任何關於不知情者獎酬狀態的額外資訊。因此，即使不知情者能辨識知情者為高型別或低型別，其對自身獎酬的條件期望仍停留在先驗水準。訊號在此只具有辨識對手型別的作用，尚未轉化為影響自身投入決策的獎酬訊息。
+與後驗信念 $mu$ 無關。此時，知情者投入至多揭示其自身型別，卻不提供任何關於不知情者獎酬狀態的額外資訊。
 
 相對地，若 $rho>0$，則
 
@@ -170,29 +118,9 @@ $
   $
 ]
 
-此時，知情者型別不再只是對手的私人資訊，而同時是關於不知情者自身獎酬狀態的間接訊號。當 $mu$ 上升時，不知情者認為知情者較可能為高型別；在正相關結構下，這也意味著自身較可能處於高獎酬狀態，故後驗期望獎酬隨之上升。換言之，後驗信念之所以進入不知情者的決策問題，並非因為其在乎知情者型別本身，而是因為該型別透過獎酬相關提供了關於自身獎酬狀態的資訊，凸顯本章與獨立基準模型之間的核心差異。
+此時，知情者型別不再只是對手的私人資訊，而同時是關於不知情者自身獎酬狀態的間接訊號。當 $mu$ 上升時，不知情者也會上修自身處於高獎酬狀態的機率，故後驗期望獎酬隨之上升。
 
-三個特殊後驗信念可進一步說明上述關係。$mu=1$ 與 $mu=0$ 分別表示不知情者確信知情者為高型別與低型別；$mu=q$ 則表示觀察投入後的信念仍停留在先驗水準，亦即投入未提供足以修正信念的新資訊。三種情形下的後驗期望獎酬整理如@tbl-main-posterior-expected-values 所示。
-
-#figure(
-  table(
-    columns: (2.2cm, 4cm, 7cm),
-    inset: 8pt,
-    align: (col, row) => if col == 1 { left + horizon } else { center + horizon },
-    stroke: none,
-    table.hline(y: 0, stroke: 0.6pt),
-    table.hline(y: 1, stroke: 0.4pt),
-    table.hline(y: 4, stroke: 0.6pt),
-    [後驗信念], [資訊意涵], [後驗期望獎酬],
-    [$mu=1$], [確信知情者為高型別], [$widetilde(V)_U (1)=v_L+[q+rho(1-q)]Delta V$],
-    [$mu=q$], [信念維持於先驗水準], [$widetilde(V)_U (q)=v_L+q Delta V=EE[V_U]$],
-    [$mu=0$], [確信知情者為低型別], [$widetilde(V)_U (0)=v_L+q(1-rho)Delta V$],
-  ),
-  caption: [特殊後驗信念下之後驗期望獎酬],
-  supplement: [表],
-) <tbl-main-posterior-expected-values>
-
-當 $rho>0$ 時，高型別訊號使不知情者上修自身獎酬評估，低型別訊號則使其下修；若信念維持於先驗水準，後驗期望獎酬即等於無條件期望獎酬。特別地，$widetilde(V)_U (q)$ 對應於 #headingref(<sec-model>) 基準模型中的 $overline(v)=EE[V_U]$，差別僅在於此處將其置於 $widetilde(V)_U (mu)$ 的統一函數記號之下。因此，
+特別地，$widetilde(V)_U (q)=EE[V_U]$，故
 
 #[
   #set math.equation(numbering: none)
@@ -203,9 +131,7 @@ $
 
 === 最佳反應與延續報酬 <subsubsec-main-br-ic>
 
-本節將前述後驗期望獎酬帶入 IU 子賽局的行為方程。由於 IU 時序下知情者先動、不知情者後動，分析須使用#term("反向演繹法", english: "backward induction")：首先刻畫不知情者在觀察 $x_I$ 並形成後驗信念後的最佳反應；其次，將此反應代回知情者的報酬函數，以描述不同型別在先動時面對的延續報酬。如此處理的目的，是將#impt[投入作為競賽行動]與#impt[投入作為型別訊號]兩種角色放在同一架構中。前者透過 Tullock 成功函數影響勝率，後者則透過後驗信念改變不知情者的後驗期望獎酬，進而影響其後續投入。
-
-在 IU 子賽局中，知情者先行投入後，不知情者觀察 $x_I$ 並形成後驗信念 $mu$，再選擇自身投入 $x_U >= 0$。給定 $x_I>0$ 與 $mu$，根據#stmtref(<def-main-posterior-expected-valuation>, "定義", "definition-counter")，不知情者的條件期望報酬為
+本節將前述後驗期望獎酬帶入 IU 子賽局的行為方程。由於 IU 時序下知情者先動、不知情者後動，分析先刻畫不知情者在觀察 $x_I$ 並形成後驗信念後的最佳反應，再將此反應代回知情者的報酬函數。給定 $x_I>0$ 與 $mu$，不知情者的條件期望報酬為
 
 $
   pi_U (x_I,x_U;mu)
@@ -226,15 +152,15 @@ $ <eq-main-u-payoff>
 ] <lem-main-br>
 
 #proof[
-  將不知情者之報酬函數對 $x_U$ 取一階條件。若最適解位於內點，則
+  對不知情者之報酬函數對於 $x_U$ 取一階條件，得
   $
     x_I widetilde(V)_U (mu) / (x_I+x_U)^2 = 1.
   $
-  解此方程可得
+  解得
   $
     x_U=sqrt(x_I widetilde(V)_U (mu))-x_I.
   $
-  此解為正若且唯若 $widetilde(V)_U (mu)>x_I$。若此條件不成立，則非負限制綁住，最適投入位於邊界 $x_U=0$。
+  此解為正若且唯若 $widetilde(V)_U (mu)>x_I$；否則非負限制綁住，最適投入位於邊界 $x_U=0$。
 ]
 
 為了刻畫後驗信念如何影響不知情者的反應，以下比較靜態限於內點解存在的區域，亦即 $widetilde(V)_U (mu)>x_I$，使得最佳反應可由前述一階條件表示。
@@ -318,8 +244,6 @@ $ <eq-main-ss-ab>
 
 #stmtref(<prop-main-ss-equilibrium>, "命題", "proposition-counter") 的經濟直覺如下。SS 時序下雙方同時投入，不知情者無法在行動前從知情者的投入中汲取額外資訊；然而，這並不表示相關性在 SS 子賽局中全然消失。知情者的投入仍依其型別而異，而在部分相關結構下，知情者為高型別或低型別也分別對應到不知情者不同的條件期望獎酬。因此，不知情者雖然不能進行路徑上的後驗更新，仍必須在事前同時考量兩種型別狀態下的競爭強度與自身獎酬評估。$tilde(A)$ 與 $tilde(B)$ 正是將這兩項效果彙整為一階條件中的型別加權邊際效果。
 
-值得注意的是，#stmtref(<prop-main-ss-equilibrium>, "命題", "proposition-counter")顯示本文與 #c("fu2006") 之 SS 子賽局的差異。在 #c("fu2006") 中，競爭標的的價值為共同價值；一旦狀態為高或低，知情者與不知情者面對的是同一個獎酬值。因此，SS 子賽局雖無訊號傳遞，不知情者的事前問題仍是以先驗機率加權高、低兩種共同價值狀態。本文則將兩方獎酬拆分為 $(V_I,V_U)$，並允許其僅部分相關，故不知情者在 SS 中加權的並非同一共同價值，而是條件期望獎酬 $widetilde(V)_U (1)$ 與 $widetilde(V)_U (0)$。換言之，#c("fu2006") 的 SS 可視為完全相關端點下的共同價值基準；本文的 SS 則保留同時行動下#impt[無訊號更新]的特徵，同時允許獎酬相關透過事前條件期望進入均衡投入。
-
 === UI 子賽局 <subsubsec-main-ui>
 
 給定 $x_U > 0$，型別 $v$ 知情者面對以下極大化問題：
@@ -371,31 +295,23 @@ $ <eq-main-ui-objective>
 ] <prop-main-ui-equilibrium>
 
 #proof[
-  由前述目標函數之一階條件 $tilde(A) \/ (2 sqrt(x_U)) = 1$ 可得 $x_U^(U I) = tilde(A)^2 \/ 4$。推導與#stmtref(<prop-bench-ui-equilibrium>, "命題", "proposition-counter")類同，以 $tilde(A)$ 取代 $hat(A)$ 即得其餘結果。
+  給定 $x_U$，型別 $v$ 知情者之最佳反應為 $x_I^*(v;x_U)=sqrt(v x_U)-x_U$。將此反應代入不知情者之事前目標函數，可得
+  $
+    widetilde(pi)_U^(U I)(x_U) = tilde(A) sqrt(x_U) - x_U.
+  $
+  一階條件 $tilde(A) \/ (2 sqrt(x_U)) = 1$ 給出 $x_U^(U I) = tilde(A)^2 \/ 4$；其餘投入與報酬由代回最佳反應與報酬函數即得。
 ]
 
-比較#stmtref(<prop-main-ui-equilibrium>, "命題", "proposition-counter") 與#stmtref(<prop-main-ss-equilibrium>, "命題", "proposition-counter")，兩個子賽局在均衡結構上具有相同的參數骨架，差異僅在分母：SS 的一階條件為 $tilde(A) \/ sqrt(x_U) = 1 + tilde(B)$，UI 的對應條件為 $tilde(A) \/ (2 sqrt(x_U)) = 1$。此一差異直接反映決策架構之不同。在 SS 中，不知情者在均衡中與知情者同時最佳化，$tilde(B)$ 項衡量在當前均衡投入組合下型別加權的贏率成本——是雙方互相為對手之約束時才浮現的邊際效應。在 UI 中，不知情者先行鎖定 $x_U$，知情者的最佳反應 $x_I (v) = sqrt(v x_U) - x_U$ 已被代入目標函數，雙方相互依賴之迴圈不再存在，邊際均等條件因而只含 $sqrt(x_U)$ 微分所帶來的係數 $2$。
+比較#stmtref(<prop-main-ui-equilibrium>, "命題", "proposition-counter") 與#stmtref(<prop-main-ss-equilibrium>, "命題", "proposition-counter")，兩個子賽局在均衡結構上具有相同的參數骨架，差異僅在分母：SS 的一階條件為 $tilde(A) \/ sqrt(x_U) = 1 + tilde(B)$，UI 的對應條件為 $tilde(A) \/ (2 sqrt(x_U)) = 1$。此一差異直接反映決策架構之不同。在 SS 中，不知情者在均衡中與知情者同時最佳化，$tilde(B)$ 項衡量在當前均衡投入組合下型別加權的勝率成本——是雙方互相為對手之約束時才浮現的邊際效應。在 UI 中，不知情者先行鎖定 $x_U$，知情者的最佳反應 $x_I (v) = sqrt(v x_U) - x_U$ 已被代入目標函數，雙方相互依賴之迴圈不再存在，邊際均等條件因而只含 $sqrt(x_U)$ 微分所帶來的係數 $2$。
 
-#proposition(
-  title: [UI 相對於 SS 之先行者優勢],
-)[
-  在內點均衡下，不知情者在 UI 時序下的事前期望報酬不低於 SS 時序：
-  $
-    widetilde(pi)_U^(U I) >= widetilde(pi)_U^(SS),
-  $
-  等號成立若且唯若 $tilde(B) = 1$。
-] <prop-main-ui-first-mover>
+由#stmtref(<prop-main-ui-equilibrium>, "命題", "proposition-counter") 與#stmtref(<prop-main-ss-equilibrium>, "命題", "proposition-counter") 之不知情者報酬直接相減，得
+$
+  widetilde(pi)_U^(U I) - widetilde(pi)_U^(SS)
+  = tilde(A)^2 (1 - tilde(B))^2 / (4(1+tilde(B))^2)
+  >= 0.
+$ <eq-main-ui-first-mover>
 
-#proof[
-  論證與#headingref(<subsubsec-bench-ui>)中 UI 與 SS 的比較完全類同，以 $tilde(A)$、$tilde(B)$ 取代 $hat(A)$、$hat(B)$ 即得
-  $
-    widetilde(pi)_U^(U I) - widetilde(pi)_U^(SS)
-    = tilde(A)^2 (1 - tilde(B))^2 / (4(1+tilde(B))^2)
-    >= 0.
-  $
-]
-
-#stmtref(<prop-main-ui-first-mover>, "命題", "proposition-counter") 揭示不知情者在先行承諾的 UI 時序下具有先行者優勢。其直覺在於：在 SS 均衡中，不知情者與知情者之投入相互制約，雙方同時反應形成競爭壓力；UI 時序下不知情者先行鎖定投入，迫使知情者就此承諾水準作出反應，從而消除了 SS 中雙向制約的邊際效應，使不知情者得以選擇對自身最有利的承諾投入。
+故在內點均衡下，不知情者在 UI 時序下的事前期望報酬不低於 SS 時序，且等號成立若且唯若 $tilde(B)=1$。其直覺在於：在 SS 均衡中，不知情者與知情者之投入相互制約，雙方同時反應形成競爭壓力；UI 時序下不知情者先行鎖定投入，迫使知情者就此承諾水準作出反應，從而消除了 SS 中雙向制約的邊際效應，使不知情者得以選擇對自身最有利的承諾投入。
 
 === IU 子賽局 <subsubsec-main-iu>
 
@@ -484,13 +400,13 @@ $
   $
   其中 $R$ 表示高型別不向下模仿低型別之臨界比值。前述未扭曲分離配置構成 IU 子賽局之純策略完美貝氏均衡，若且唯若
   $
-    widetilde(V)_U (1) / widetilde(V)_U (0) <= R.
+    (widetilde(V)_U (1)) / (widetilde(V)_U (0)) <= R.
   $ <eq-main-iu-undistorted-ic>
   若在均衡路徑上令 $mu(x_H)=1$、$mu(x_L)=0$，並對所有 $x in.not {x_H,x_L}$ 的投入指定為均衡路徑外信念 $mu(x)=1$，則此一均衡成立；且不知情者於各資訊集合皆依#stmtref(<lem-main-br>, "引理", "lemma-counter") 作出最佳反應。
 ] <prop-main-iu-separating-candidate>
 
 #proof[
-  在分離配置下，高型別與低型別分別以機率一選擇 $x_H$ 與 $x_L$；亦即，觀察到 $x_H$ 時僅可能來自高型別，觀察到 $x_L$ 時僅可能來自低型別。由於兩者皆為均衡路徑上以正機率到達之投入，貝氏法則必然要求相應後驗信念滿足 $mu(x_H)=1$ 與 $mu(x_L)=0$。在此信念下，前述延續報酬關於 $x_I$ 為嚴格凹函數，其一階條件分別唯一決定前述 $x_H$ 與 $x_L$。因此，命題所列投入即為未扭曲分離配置在均衡路徑上唯一可能的投入水準。
+  在分離配置下，高型別與低型別分別以機率一選擇 $x_H$ 與 $x_L$；亦即，觀察到 $x_H$ 時僅可能來自高型別，觀察到 $x_L$ 時僅可能來自低型別。由於兩者皆為均衡路徑上以正機率到達之投入，貝氏法則必然要求相應後驗信念滿足 $mu(x_H)=1$ 與 $mu(x_L)=0$。在此信念下，前述延續報酬對於 $x_I$ 為嚴格凹函數，其一階條件分別唯一決定前述 $x_H$ 與 $x_L$。因此，命題所列投入即為未扭曲分離配置在均衡路徑上唯一可能的投入水準。
 
   #set enum(numbering: "(1)")
 
@@ -531,17 +447,15 @@ $
   綜上，只要前述分離條件成立，前述策略與信念即構成完美貝氏均衡；反之，若該條件不成立，高型別將直接模仿路徑上的 $x_L$，而任何均衡路徑外信念均不足以排除此一偏離，故未扭曲分離配置不可能成為均衡。
 ]
 
-#stmtref(<prop-main-iu-separating-candidate>, "命題", "proposition-counter") 與 #c("fu2006") 之差異，在完全相關之設定下昭然若揭。當 $rho=1$ 時，$widetilde(V)_U (1)=v_H$、$widetilde(V)_U (0)=v_L$，故前述分離條件化為
+#stmtref(<prop-main-iu-separating-candidate>, "命題", "proposition-counter") 的端點含意可由 $rho=1$ 看得最清楚。當 $rho=1$ 時，$widetilde(V)_U (1)=v_H$、$widetilde(V)_U (0)=v_L$，故前述分離條件化為
 
 $
   v_H/v_L <= v_H^2 / (v_L (2v_H-v_L)),
 $
 
-此式在 $v_H>v_L$ 下不成立。因此，#c("fu2006") 的完全相關模型無法成立兩型別皆採各自完整資訊最適投入的未扭曲分離配置。相對地，#c("fu2006") 之命題 3 所得到的為扭曲分離均衡：高型別維持其完整資訊投入，低型別則必須向下扭曲投入，以防止高型別模仿，並由低型別單獨負擔分離所需的成本。
+此式在 $v_H>v_L$ 下不成立。因此，當相關性足夠高時，未扭曲分離無法維持，均衡轉為低型別向下扭曲的 Riley 式分離。由此可見，扭曲分離並非資訊不對稱本身的必然結果，而是獎酬相關性夠高時才會出現的均衡型態。
 
-本文結果顯示，此一扭曲並非僅由資訊不對稱本身所造成；當 $rho$ 較低且前述分離條件成立時，信念所引致的競爭反應仍然有限，兩型別無須扭曲投入即可達成分離。隨著 $rho$ 上升，$widetilde(V)_U (1) \/ widetilde(V)_U (0)$ 之比率擴大，高型別藉由模仿低型別所能取得的競爭鬆弛效果亦隨之提高，最終使未扭曲分離失去可維持性，並逐步趨近於 #c("fu2006") 所呈現的低型別向下扭曲結果。
-
-相較於 SS 與 UI 可由 $tilde(A)$、$tilde(B)$ 對基準模型中 $hat(A)$、$hat(B)$ 的替換加以表達，IU 子賽局無法僅透過此種係數替換概括其均衡結構。其原因在於，知情者的投入同時具有競賽行動與型別訊號的雙重性質，而不知情者的最佳反應強度又會隨後驗信念而調整。據此，SS 與 UI 可視為不存在訊號更新時的對照基準；IU 則承載了獎酬相關性所帶出的信念反應機制，從而使均衡型態隨 $rho$ 的變化而連續調整。
+相較於 SS 與 UI 可由係數替換概括，IU 子賽局的特殊性在於：知情者的投入同時是競賽行動與型別訊號，而不知情者的最佳反應又會隨後驗信念調整。因此，相關性不僅改變報酬水準，也會改變 IU 子賽局本身可支持的均衡型態。
 
 前述分離條件係以後驗期望獎酬比值 $widetilde(V)_U (1) \/ widetilde(V)_U (0)$ 表達。由於此比值為 $rho$ 之嚴格遞增函數，分離均衡的存在性等價於 $rho$ 不超過某一唯一臨界值，其封閉式可由比值的單調性直接解出。
 
@@ -644,25 +558,13 @@ $
 
 #stmtref(<prop-main-iu-riley>, "命題", "proposition-counter") 顯示，當相關程度超過臨界值後，分離失效的原因並非高型別無法維持其完整資訊投入，而是低型別原先的投入已不足以阻止高型別向下模仿。Riley 均衡的經濟意涵，在於將分離成本完全配置給低型別：其必須進一步壓低投入，以降低高型別模仿後所能獲得的競爭鬆弛利益；高型別則維持未扭曲投入，不承擔額外訊號成本。故隨 $rho$ 上升，均衡扭曲將首先表現在低型別行為，而非高型別行為。
 
-#corollary(title: [IU 子賽局分離均衡之區域結構])[
-  IU 子賽局之分離均衡區域依相關程度 $rho$ 刻畫如下：
+綜合#stmtref(<prop-main-iu-separating-candidate>, "命題", "proposition-counter")、#stmtref(<prop-main-iu-rho-star>, "定理", "theorem-counter") 與#stmtref(<prop-main-iu-riley>, "命題", "proposition-counter")，IU 子賽局的分離結構可依相關程度整理如下：若 $0 <= rho <= rho^*$，至少存在一組未扭曲分離均衡；若 $rho > rho^*$，則未扭曲分離失效，而後續時序比較即以 Riley 扭曲分離作為 IU 子賽局的分離均衡配置。換言之，低相關區間由未扭曲分離主導；當相關程度超過臨界值後，分離若仍存在，其形式便不再可能維持兩型別各自的完整資訊最適投入，而必須轉為由低型別承擔額外訊號成本的 Riley 扭曲分離。
 
-  #set enum(numbering: "(1)")
-
-  + 若 $0 <= rho <= rho^*$，則未扭曲分離配置由#stmtref(<prop-main-iu-separating-candidate>, "命題", "proposition-counter") 與#stmtref(<prop-main-iu-rho-star>, "定理", "theorem-counter") 所刻畫，且至少存在一組未扭曲分離均衡；
-  + 若 $rho > rho^*$，則未扭曲分離配置失效，而 Riley 扭曲分離配置由#stmtref(<prop-main-iu-riley>, "命題", "proposition-counter") 提供一組新的分離均衡候選；
-  + 故在 $rho > rho^*$ 的區域內，未扭曲分離已不再可支持；本文後續時序比較即以#stmtref(<prop-main-iu-riley>, "命題", "proposition-counter")所刻畫之 Riley 扭曲分離作為 IU 子賽局的分離均衡配置。
-] <cor-main-iu-region-summary>
-
-#stmtref(<cor-main-iu-region-summary>, "推論", "corollary-counter")將 IU 子賽局之分離結構整理為一條清楚的區域圖像：低相關區間由未扭曲分離主導；當相關程度超過臨界值後，分離若仍存在，其形式便不再可能維持兩型別各自的完整資訊最適投入，而必須轉為由低型別承擔額外訊號成本的 Riley 扭曲分離。故相較於 SS 與 UI，IU 子賽局的特殊性不僅在於投入兼具競賽行動與訊號功能，更在於其均衡型態隨相關程度由未扭曲分離轉為 Riley 扭曲分離。
-
-有鑑於後續第 0 階段的內生時序比較，必須為每一時序指派明確的事前報酬，故進入時序比較前尚須就 IU 子賽局之均衡配置作進一步整理。換言之，SS 與 UI 的時序報酬可直接由其唯一均衡決定；而 IU 的時序報酬則必須以本節所刻畫之均衡型態為基礎，於後續分析中明確指明所採用之均衡配置。
+有鑑於後續第 0 階段的內生時序比較，必須為每一時序指派明確的事前報酬。SS 與 UI 的時序報酬可由其唯一均衡直接決定；IU 的時序報酬則須依所支持的分離型態而定。
 
 == 內生時序均衡 <subsec-main-endogenous-timing>
 
-以上已分別求得 SS、UI 與 IU 三個投入子賽局在部分相關結構下的均衡配置，並說明相關性如何透過後驗信念改變 IU 子賽局之揭露型態。據此，下一步即是回到第 0 階段的時序選擇問題：當參與者可自行決定先動或後動時，最終均衡將支持何種行動順序？
-
-本節的分析重點，已不再是個別子賽局中的投入選擇，而是不同時序之間的事前比較。具體而言，第 0 階段的時序選擇須以三個時序所誘導之事前期望報酬為基礎，判斷參與者在給定對手時點選擇下是否具有#term("單邊偏離", english: "unilateral deviation")誘因。由於 SS 與 UI 的時序報酬可直接由唯一均衡決定，而 IU 則可能因均衡型態隨 $rho$ 改變而呈現不同報酬結構，故內生時序均衡的關鍵，正在於相關性如何透過 IU 時序報酬牽動第 0 階段的時序排序。
+以上已分別求得 SS、UI 與 IU 三個投入子賽局在部分相關結構下的均衡配置。下一步回到第 0 階段的時序選擇：當參與者可自行決定先動或後動時，最終均衡將支持何種行動順序？本節的重點不再是個別子賽局中的投入選擇，而是不同時序之間的事前比較。
 
 === 第 0 階段之時序選擇與時序報酬
 
@@ -689,7 +591,7 @@ $
   supplement: [表],
 ) <tbl-main-timing-payoff-matrix>
 
-@tbl-main-timing-payoff-matrix 中，每一格所列者皆為對應時序下的事前期望報酬。以下沿用#stmtref(<def-bench-ex-ante-payoff>, "定義", "definition-counter")之記號：知情者以各型別報酬的先驗加權平均比較時序，不知情者則以均衡報酬直接比較。表中之 SS 與 UI 由#stmtref(<prop-main-ss-equilibrium>, "命題", "proposition-counter")與#stmtref(<prop-main-ui-equilibrium>, "命題", "proposition-counter")給定；IU 則依給定參數下所對應之分離或扭曲分離均衡計算。
+@tbl-main-timing-payoff-matrix 中，每一格所列者皆為對應時序下的事前期望報酬。知情者以各型別報酬的先驗加權平均比較時序，不知情者則以均衡報酬直接比較。表中之 SS 與 UI 由#stmtref(<prop-main-ss-equilibrium>, "命題", "proposition-counter")與#stmtref(<prop-main-ui-equilibrium>, "命題", "proposition-counter")給定；IU 則依給定參數下所對應之分離或扭曲分離均衡計算。
 
 === 三種時序下的事前期望報酬
 
@@ -754,10 +656,6 @@ $
   + IU 構成純策略均衡若且唯若 $Delta_I^(I U) >= 0$ 且 $Delta_U^(SS) <= 0$。
 ] <prop-main-endogenous-timing-pure>
 
-#proof[
-  由@tbl-main-timing-payoff-matrix 直接檢查各格之單邊偏離誘因可得。若策略組合為 (知情者後動、不知情者先動)，則所誘導時序為 UI，兩方分別不偏離之條件為 $Delta_I^(U I) >= 0$ 與 $Delta_U^(U I) >= 0$。若策略組合為 (知情者先動、不知情者先動)，則所誘導時序為 SS，對應條件為 $Delta_I^(U I) <= 0$ 與 $Delta_U^(SS) >= 0$。若策略組合為 (知情者先動、不知情者後動)，則所誘導時序為 IU，對應條件為 $Delta_I^(I U) >= 0$ 與 $Delta_U^(SS) <= 0$。
-]
-
 #stmtref(<prop-main-endogenous-timing-pure>, "定理", "theorem-counter") 顯示，第 0 階段的純策略時序選擇可完全化約為四個單邊偏離差額的正負比較。內生時序均衡並非直接由先動或後動本身決定，而是取決於某一方在固定對手時點選擇下，是否能藉由改變自身行動時序提升該時序下的事前報酬。故時序均衡的核心，不在於個別時序的絕對報酬高低，而在於不同時序之間的局部偏離誘因如何排序；此亦構成後續分析相關性如何牽動時序翻轉的出發點。
 
 === 相關性與時序偏好之翻轉
@@ -768,25 +666,11 @@ $
 
 準此，後續比較靜態的邏輯可概分為兩步。首先，檢視 $rho$ 如何透過 $widetilde(V)_U (1)$、$widetilde(V)_U (0)$ 與 $widetilde(V)_U (q)$ 進入三種時序的事前報酬；其次，再將此一報酬變動映射為四個單邊偏離差額的符號變化。若某一偏離差額隨 $rho$ 單調上升或下降，則對應的時序穩定性亦將隨之改變；而當差額跨越零點時，即代表參賽者於第 0 階段的最佳反應發生翻轉，內生時序均衡也因而改變。
 
-#lemma(
-  title: [不知情者對後動知情者之先動偏好],
-)[
-  在本文分析的內點區域內，對任意給定之 $rho$，皆有
-  $
-    Delta_U^(U I) = widetilde(pi)_U^(U I) - widetilde(pi)_U^(SS) >= 0.
-  $
-  等號成立若且唯若 $tilde(B)=1$。
-] <prop-main-timing-u-prefers-ui>
-
-#proof[
-  此即#stmtref(<prop-main-ui-first-mover>, "命題", "proposition-counter") 的直接推論。由
-  $
-    widetilde(pi)_U^(U I) >= widetilde(pi)_U^(SS)
-  $
-  可知，當知情者選擇後動時，不知情者由後動改為先動、使時序由 SS 轉為 UI，永不致使其報酬下降。故 $Delta_U^(U I) >= 0$；等號成立若且唯若#stmtref(<prop-main-ui-first-mover>, "命題", "proposition-counter") 之等號條件 $tilde(B)=1$ 成立。
-]
-
-#stmtref(<prop-main-timing-u-prefers-ui>, "引理", "lemma-counter") 的意義在於，不知情者面對後動的知情者時，始終弱偏好以先動承諾將時序推向 UI。換言之，相關性雖會改變三種時序下的事前報酬水準，但不會推翻 UI 相對於 SS 的這一方向性比較。故第 0 階段時序翻轉的主要來源，並不在於不知情者是否放棄先動，而在於知情者對先動揭露效果的評價如何隨 $rho$ 改變。
+由 @eq-main-ui-first-mover 可知，對任意給定之 $rho$，皆有
+$
+  Delta_U^(U I) = widetilde(pi)_U^(U I) - widetilde(pi)_U^(SS) >= 0.
+$
+換言之，不知情者面對後動的知情者時，始終弱偏好以先動承諾將時序推向 UI。故第 0 階段時序翻轉的主要來源，不在於不知情者是否放棄先動，而在於知情者對先動揭露效果的評價如何隨 $rho$ 改變。
 
 在此基礎上，真正關鍵的比較靜態問題，轉而落在知情者自身的先動誘因。特別是，當 IU 子賽局仍位於未扭曲分離區間時，知情者在 IU 時序下的事前報酬可寫為兩條分離路徑報酬的加權平均，故可直接檢視其對 $rho$ 的變動方向。
 
@@ -872,18 +756,16 @@ $
 ] <prop-main-timing-rho-dagger-existence>
 
 #proof[
-  在區間 $[0,rho^*]$ 內，IU 子賽局採用未扭曲分離報酬，故由#stmtref(<prop-main-timing-iu-rho>, "命題", "proposition-counter") 可知 $widetilde(pi)_I^(I U)(rho)$ 為 $rho$ 的連續函數；另一方面，SS 時序下的事前報酬由#stmtref(<prop-main-ss-equilibrium>, "命題", "proposition-counter") 所給之閉式表示構成，亦為 $rho$ 的連續函數。故 $Delta_I^(I U)(rho)$ 作為兩個連續函數之差，必為連續函數。
-
-  若進一步滿足
+  在區間 $[0,rho^*]$ 內，$widetilde(pi)_I^(I U)(rho)$ 與 $widetilde(pi)_I^(SS)(rho)$ 皆由連續函數組成，故 $Delta_I^(I U)(rho)$ 連續。若
   $
     Delta_I^(I U)(0) > 0,
     quad
     Delta_I^(I U)(rho^*) < 0,
   $
-  則由介值定理，存在至少一個 $rho^dagger in (0,rho^*)$ 使 $Delta_I^(I U)(rho^dagger)=0$。由第 0 階段時序矩陣可知，$Delta_I^(I U)$ 的符號即決定在給定不知情者後動時，知情者是否偏好先動；故一旦該差額由正轉負，即表示知情者對 IU 時序的先動偏好至少發生一次翻轉。
+  則由介值定理，存在至少一個 $rho^dagger in (0,rho^*)$ 使 $Delta_I^(I U)(rho^dagger)=0$。由第 0 階段時序矩陣可知，這正對應於給定不知情者後動時，知情者對 IU 先動偏好的翻轉。
 ]
 
-綜合#stmtref(<prop-main-timing-u-prefers-ui>, "引理", "lemma-counter")、#stmtref(<prop-main-timing-iu-rho>, "命題", "proposition-counter") 與#stmtref(<prop-main-timing-rho-dagger-existence>, "定理", "theorem-counter")，可據此歸納出一個更具體的比較靜態結論：當相關性上升時，不知情者在面對後動知情者時對先動的偏好不會消失，而知情者在 IU 時序下的先動報酬則系統性下降。故只要 IU 與 SS 的相對報酬在未扭曲分離區間兩端發生符號逆轉，便必然存在至少一個翻轉臨界值，使知情者由偏好先動轉為偏好後動。換言之，相關性愈高，由 IU 轉向其他時序配置的壓力愈強；前述結果並揭示翻轉的根本機制：相關性使先動所伴隨的揭露成本逐步上升，從而削弱知情者對先動時序的偏好。
+綜合前述結果可知：當相關性上升時，不知情者面對後動知情者時對先動的偏好不會消失，而知情者在 IU 時序下的先動報酬則系統性下降。故只要 IU 與 SS 的相對報酬在未扭曲分離區間兩端發生符號逆轉，便必然存在至少一個翻轉臨界值，使知情者由偏好先動轉為偏好後動。
 
 為了補充前述命題的經濟直覺，@fig-main-timing-preference 以 $v_H = 2$、$v_L = 1$ 為例，呈現相關性參數 $rho$ 與高型別機率 $q$ 變動時的數值結果。圖中實線表示未扭曲分離均衡存在之臨界值 $rho^*(q)$；其上方為未扭曲分離失效區域。虛線則表示由 $Delta_I^(I U)(rho, q) = 0$ 數值求得之報酬翻轉臨界值 $rho^dagger(q)$。虛線下方表示知情者偏好 IU，虛線與實線之間表示知情者偏好 SS，惟未扭曲分離仍可維持。
 
@@ -895,14 +777,4 @@ $
   supplement: [圖],
 ) <fig-main-timing-preference>
 
-綜上，本節已完成第 0 階段內生時序均衡的基本刻畫。首先，時序選擇可化約為四個單邊偏離差額的正負比較；其次，在時序報酬層次上，不知情者對 UI 的先動偏好具有穩健性，而知情者於 IU 時序下的先動報酬則隨相關性上升而下降。故部分相關結構不僅改變投入子賽局中的揭露型態，亦會透過時序報酬的重新排序，牽動第 0 階段的時序選擇。此一結果說明，#c("fu2006") 所揭示的後動傾向，並非僅是行動順序的產物，而與資訊相關性所強化之揭露成本密切相關。
-
-== 本章小結 <sec-main-summary>
-
-本章在第三章獨立同分配基準之上，引入獎酬的部分相關結構，系統性地分析相關性對均衡投入、分離型態與時序選擇的影響。
-
-就均衡投入而言，相關性透過後驗期望獎酬 $widetilde(V)_U (1)$ 與 $widetilde(V)_U (0)$ 的對立移動，改變 SS 與 UI 子賽局的複合係數 $tilde(A)$、$tilde(B)$，並在 $rho=1$ 時收斂至完全相關的極限值。IU 子賽局的均衡結構則呈現出不連續的兩段式特徵：在低相關區間 ($rho <= rho^*$)，未扭曲分離均衡存在，兩型別各選完整資訊最適投入；一旦 $rho$ 超過臨界值 $rho^*$，高型別的模仿誘因使未扭曲分離失效，均衡轉為 Riley 扭曲型態，分離代價由低型別單獨承擔。
-
-就時序選擇而言，本章的核心發現是兩位參與者對相關性的反應存在結構性不對稱。不知情者對 UI 時序的先動偏好對相關性穩健，在 $rho < 1$ 的全部區間均嚴格為正。知情者對 IU 時序的先動偏好則隨 $rho$ 上升而單調下降——相關性提高訊號的資訊含量，同時加重知情者先動所需付出的揭露代價，使 IU 時序的吸引力持續縮減。當此偏好在某個中間值 $rho^dagger in (0, rho^*)$ 由正轉負，時序排序便發生翻轉，均衡時序從 IU 轉向 SS 或 UI。
-
-上述結果說明，部分相關性並非對獨立同分配基準的局部修正，而是從均衡結構到時序誘因全面重塑競賽的運作方式。然而，均衡能否被支持是一回事，均衡的福利後果是另一回事。相關性提高一方面使資訊更充分揭露，可能改善配置效率；另一方面也強化競爭反應，可能加劇投入耗散，此一權衡構成下一章的分析主軸。
+綜上，本章說明了相關性如何同時改變 IU 子賽局中的分離型態與第 0 階段的時序排序。低相關區域下可支持未扭曲分離；相關性提高後，知情者在 IU 時序下的先動報酬持續下降，時序偏好因而可能翻轉。下一章將轉向福利面，檢視此一結構變化究竟改善了配置，或只是提高了耗散。

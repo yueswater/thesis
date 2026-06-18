@@ -427,17 +427,17 @@
       low type distorts \emph{down} to $x_L^{R} = (z_H^-)^2$
   \end{itemize}
 
-  \begin{block}{Corollary (Two-region Structure)}
-    \begin{itemize}
+  \begin{block}{Corollary (Region Structure of the IU Subgame)}
+    \begin{itemize}\setlength{\itemsep}{0.2em}
       \item $\rho \le \rhosep$: undistorted separation --- no signaling cost
-      \item $\rho > \rhosep$: Riley distorted separation ---
-        separation cost borne by the low type alone
+      \item $\rho > \rhosep$: Riley distortion --- cost borne by the low type alone
+      \item $\rho > \rhosep$ may also admit \emph{pooling}:
+        $\mu = q$, the signal is lost
     \end{itemize}
   \end{block}
 
-  $\to$ As $\rho$ rises, posterior prize-value dispersion widens;
-  the original low-type effort no longer supports separation,
-  so the low type must distort downward to keep deviations unprofitable.
+  $\to$ As $\rho$ rises, the low type's effort no longer supports
+  separation, so it must distort downward.
 \end{frame}
 
 \begin{frame}{Stage-0 Payoff Matrix}
@@ -616,32 +616,12 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{Welfare across Regimes}
-  \begin{itemize}
-    \setlength{\itemsep}{1em}
-    \item \textbf{IU undistorted separation}:
-      $\widetilde T^{\mathrm{sep}} = \E[V_I]/2$, while
-      $\widetilde W^{\mathrm{sep}}$ decreases with $\rho$
-    \item \textbf{SS and UI}: both move with $\tilde A$, $\tilde B$;
-      neither ordering is sign-definite
-    \item \textbf{Riley region}: both dissipation and allocation change,
-      so welfare must be read from the full formula
-    \item \textbf{At $\rho = \rhosep$}: the two expressions meet;
-      regime change need not imply a welfare jump
-  \end{itemize}
-
-  \vspace{0.5em}
-  \begin{block}{Takeaway}
-    Welfare rankings are regime- and parameter-dependent.
-  \end{block}
-\end{frame}
-
 \section{Conclusion}
 
 \begin{frame}{Conclusion}
   \small
   \begin{enumerate}
-    \setlength{\itemsep}{0.9em}
+    \setlength{\itemsep}{0.45em}
     \item \textbf{$\rho = 0$}: unique undistorted separation ---
       $I$ leads at \emph{no revelation cost}.
     \item \textbf{$\rho > 0$} reopens the signal--belief--response
@@ -653,8 +633,10 @@
       $I$ flips to late at $\rhodag < \rhosep$.
     \item \textbf{\citet{fu2006}} is the $\rho = 1$ endpoint ---
       not a general principle.
-    \item \textbf{Welfare}: equilibrium timing can depart from the
-      social optimum; welfare responses to $\rho$ are regime-dependent.
+    \item \textbf{Welfare}: equilibrium timing can depart from the social
+      optimum; responses to $\rho$ are regime-dependent.
+    \item \textbf{Policy}: under correlated stakes (lobbying / rent-seeking),
+      staged disclosure helps \emph{iff} IU welfare is higher --- else seal it.
   \end{enumerate}
 \end{frame}
 

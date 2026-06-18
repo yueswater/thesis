@@ -1,38 +1,34 @@
 #import "../thesis.typ": (
-  SS, c, corollary, definition, headingref, impt, lemma, proof, proposition, stmtref, term, widetilde,
+  SS, c, corollary, headingref, impt, lemma, proof, proposition, stmtref, term, widetilde,
 )
 
 #headingref(<sec-analysis>)處理的是均衡存在與均衡時序形成；本章則轉向福利排序。某一時序配置能由個別理性支持，並不意味著其同時具有社會最適性，因此仍須分別比較各時序所導致的配置價值與投入#term("耗散", english: "dissipation")。
 
 == 衡量架構 <subsec-welfare-framework>
 
-#definition(title: [總投入耗散])[
-  給定投入組合 $(x_I, x_U)$，總投入耗散定義為
-  $
-    T(x_I, x_U) = x_I + x_U.
-  $
-  在均衡 $e$ 下，事前期望總投入為
-  $
-    widetilde(T)^e = EE[x_I^e + x_U^e].
-  $
-] <def-welfare-effort>
+給定投入組合 $(x_I, x_U)$，記總投入耗散為
+$
+  T(x_I, x_U) = x_I + x_U,
+$
+並記均衡 $e$ 下的事前期望總投入為
+$
+  widetilde(T)^e = EE[x_I^e + x_U^e].
+$
 
-#definition(title: [社會福利])[
-  給定型別實現 $(V_I, V_U)$ 與投入組合 $(x_I, x_U)$，令勝率為
-  $
-    p_I = frac(x_I, x_I + x_U),
-    quad
-    p_U = frac(x_U, x_I + x_U).
-  $
-  社會福利定義為
-  $
-    W(x_I, x_U; V_I, V_U) = p_I V_I + p_U V_U - x_I - x_U.
-  $
-  均衡 $e$ 下的事前期望社會福利為
-  $
-    widetilde(W)^e = EE[p_I^e V_I + p_U^e V_U - x_I^e - x_U^e].
-  $ <eq-welfare-expected-welfare>
-] <def-welfare-social>
+另令勝率為
+$
+  p_I = frac(x_I, x_I + x_U),
+  quad
+  p_U = frac(x_U, x_I + x_U).
+$
+則社會福利定義為
+$
+  W(x_I, x_U; V_I, V_U) = p_I V_I + p_U V_U - x_I - x_U,
+$
+其在均衡 $e$ 下的事前期望值為
+$
+  widetilde(W)^e = EE[p_I^e V_I + p_U^e V_U - x_I^e - x_U^e].
+$ <eq-welfare-expected-welfare>
 
 將前述期望福利定義改寫，可得下列福利分解式：
 
@@ -302,16 +298,4 @@ Riley 扭曲分離進一步凸顯私人誘因與社會福利之間的落差。�
 
 == 政策意涵 <subsec-welfare-policy>
 
-時序管制是否值得作為政策工具，在傳統競賽理論中並非不證自明；但本文顯示，一旦引入單邊私人資訊與獎酬相關性，時序配置便會同時改變資訊揭露、競爭反應與投入耗散。
-
-因此，本文不支持任何一刀切的時序規範。若完整福利比較顯示 IU 的社會福利高於 SS 與 UI，管制者可能有理由採取分階段程序，使資訊較早進入競爭過程；反之，若序列行動導致過高耗散或較低的配置價值，則統一時點、密封提交或同步揭露等安排可能較為合宜（例如，密封投標與統一截止期限可降低行動先後所造成的資訊揭露；分階段審查、公開遊說登記或即時揭露安排，則可能使先行投入者之行動成為後續參與者的觀察對象）。
-
-較合理的程序設計，仍須依獎酬相關程度、型別差距、事前機率與可支持均衡型態加以判斷。
-
-== 本章小結 <subsec-welfare-summary>
-
-本章以福利分解式 $widetilde(W)^e = widetilde(G)^e - widetilde(T)^e$ 比較各時序。SS 與 UI 的耗散隨 $tilde(A)$、$tilde(B)$ 而動；IU 未扭曲分離則具有耗散中立性，但其福利仍可能隨 $rho$ 上升而下降。
-
-因此，資訊揭露與福利改善之間不存在必然的正向關係。IU 的分離均衡與 Riley 扭曲分別透過不同機制改變配置價值與投入耗散，時序福利排序仍須回到完整公式判斷。
-
-最後，內生時序選擇未必與社會最適時序一致。私人誘因決定的是個別報酬比較，社會福利則同時考量配置與耗散；兩者不必同向，故時序優劣仍須置於具體參數與資訊結構下評估。
+本文不支持任何一刀切的時序規範。由於時序配置會同時改變資訊揭露、競爭反應與投入耗散，較合理的程序設計仍須回到具體的獎酬相關程度、型別差距、事前機率與可支持均衡型態加以判斷。

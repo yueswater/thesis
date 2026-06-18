@@ -1,61 +1,54 @@
 # =========================
-# Quarto
+# Local scratch / private notes
 # =========================
-.quarto/
-**/*.quarto_ipynb
-
+temp/
+prompt/
 
 # =========================
-# macOS / Python cache
+# Generated figures / plotting cache
+# =========================
+figures/
+.matplotlib/
+
+# =========================
+# AI assistant config / outputs
+# =========================
+CLAUDE.md
+AGENTS.md
+.ai-team/
+.claude/
+.agent/
+
+# =========================
+# Editor
+# =========================
+.vscode/
+
+# =========================
+# macOS
 # =========================
 .DS_Store
+
+# =========================
+# Python (Poetry venv + caches)
+# =========================
+.venv/
+python/.venv/
 **/__pycache__/
-**/*.pyc
-
-
-# =========================
-# Local prompts / private notes
-# =========================
-/prompt/
-
-
-# =========================
-# Literature PDFs
-# =========================
-/literatures/Endogenous Timing of Contest with Asymmetric Information.pdf
-
-
-# =========================
-# Generated figures / local plotting cache
-# =========================
-/figures/
-/.matplotlib/
-
-
-# =========================
-# Python virtual environment
-# =========================
-/python/.venv/
-
+**/*.py[cod]
 
 # =========================
 # LaTeX / Beamer build artifacts
 # =========================
-presentation/*.aux
-presentation/*.fdb_latexmk
-presentation/*.fls
-presentation/*.log
-presentation/*.nav
-presentation/*.out
-presentation/*.snm
-presentation/*.toc
-presentation/*.xdv
-
-
-# =========================
-# AI assistant generated outputs
-# =========================
-.ai-team/transcripts/
-.ai-team/final.md
-.ai-team/last-discussion.md
-CLAUDE.md
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.xdv
+*.synctex.gz
+*.bbl
+*.blg
