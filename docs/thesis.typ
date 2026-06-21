@@ -17,7 +17,7 @@
 )[#body]
 
 #let term(chinese, english: none) = {
-  text(font: title-font)[#chinese]
+  text(font: title-font, size: 11pt)[#chinese]
   if english != none {
     [ (]
     text(font: latin-main)[#english]
@@ -46,6 +46,8 @@
 #let ca(key) = cite(label(key), form: "author")
 #let cy(key) = cite(label(key), form: "year")
 #let SS = math.upright("SS")
+#let UI = math.upright("UI")
+#let IU = math.upright("IU")
 #let widetilde(body) = math.accent(body, "\u{0303}", size: 140%)
 #let corr = math.op("corr")
 #let bern = math.op("Bernoulli")

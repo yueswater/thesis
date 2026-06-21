@@ -25,3 +25,10 @@
 = 福利分析 <sec-welfare>
 
 #include "chapters/05_welfare.typ"
+
+#set heading(numbering: "A.1")
+#counter(heading).update(0)
+
+= 附錄 <sec-appendix>
+
+#include "chapters/08_appendix.typ"
