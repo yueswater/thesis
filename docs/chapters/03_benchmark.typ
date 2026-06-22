@@ -1,4 +1,6 @@
-#import "../thesis.typ": IU, SS, UI, c, headingref, impt, proof, proposition, stmtref, term, widetilde
+#import "../thesis.typ": (
+  IU, SS, UI, c, headingref, impt, payoff-matrix-2x2, proof, proposition, stmtref, term, widetilde,
+)
 
 == 基準模型：獎酬型別之獨立同分配 <subsec-iid-benchmark>
 
@@ -60,7 +62,7 @@ $ <eq-bench-a0b0>
   $
     x_U^(SS) = hat(A)^2 / (1 + hat(B))^2.
   $
-  型別 $v in {v_H, v_L}$ 之知情者均衡投入為
+  型別 $v$ 之知情者均衡投入為
   $
     x_I^(SS)(v) = sqrt(v) hat(A) / (1 + hat(B)) - hat(A)^2 / (1 + hat(B))^2.
   $
@@ -76,7 +78,7 @@ $ <eq-bench-a0b0>
 
 接著考慮不知情者先行投入的 UI 時序。此為標準 Stackelberg 賽局：不知情者先承諾投入 $x_U$，知情者觀察後依其型別最佳反應；UI 時序不涉及訊號傳遞，先行者優勢純粹反映行動次序。
 
-作為領導者，不知情者將知情者的最佳反應@eq-bench-br-I 視為既定並代入，其事前報酬為
+作為領導者，不知情者將知情者的最佳反應@eq-bench-br-I 視為給定並代入，其事前報酬為
 #set math.equation(numbering: "(1)")
 $
   widetilde(pi)_U^UI (x_U) = hat(A) sqrt(x_U) - x_U.
@@ -90,7 +92,7 @@ $ <eq-bench-ui-leader>
   $
     x_U^UI = hat(A)^2 / 4.
   $
-  型別 $v in {v_H, v_L}$ 之知情者均衡投入為
+  型別 $v$ 之知情者均衡投入為
   $
     x_I^UI (v) = sqrt(v) hat(A) / 2 - hat(A)^2 / 4.
   $
@@ -112,9 +114,7 @@ $
 $ <eq-bench-ui-vs-ss>
 #set math.equation(numbering: none)
 
-由@eq-bench-ui-vs-ss 非負可知不知情者弱偏好 UI。關鍵在於：在 SS 與 UI 兩時序中，知情者終究對 $x_U$ 作最佳反應 @eq-bench-br-I，使不知情者之勝率恆為 $sqrt(x_U \/ V_I)$，其事前報酬皆呈@eq-bench-ui-leader 之形式，差別僅在 $x_U$ 之取值。在 UI 時序下，不知情者投入為 $x_U^UI = hat(A)^2 \/ 4$；而在 SS 時序下，$x_U^SS = hat(A)^2 \/ (1 + hat(B))^2$，二者相等若且唯若 $hat(B) = 1$。
-
-而由 Jensen 不等式可知，在 $V_I$ 無不確定性下有 $hat(B) = 1$，此時 $x_U^SS = x_U^UI$，@eq-bench-ui-vs-ss 之差額亦為零，不知情者於兩時序無異。反之，只要 $V_I$ 帶有不確定性，$hat(B) > 1$，則 $x_U^SS < x_U^UI$；因不知情者在 UI 時序下恰使其報酬極大，在 SS 時序下之報酬嚴格較低，@eq-bench-ui-vs-ss 之差額為正，不知情者遂嚴格偏好先動。是以，即便知情者與不知情者獎酬間呈現獨立且同分配，不知情者之先動利得仍純由不確定性而生。此與 #c("fu2006") 恰成對照：在其完全相關設定下，不知情者之獎酬即知情者所握之不確定價值，先動係為調低承諾、避免在低值狀態過度投入；而本文獎酬獨立，不知情者對自身獎酬之期望評價恆為 $overline(v)$，先動反而承諾較高投入。
+由@eq-bench-ui-vs-ss 非負可知不知情者弱偏好 UI，且等號成立若且唯若 $hat(B)=1$。由 Jensen 不等式可知，在 $V_I$ 無不確定性下有 $hat(B) = 1$，此時 $x_U^SS = x_U^UI$，不知情者於兩時序無異。反之，只要 $V_I$ 帶有不確定性，$hat(B) > 1$，則 $x_U^SS < x_U^UI$；因不知情者在 UI 時序下恰使其報酬極大，在 SS 時序下之報酬嚴格較低，故其嚴格偏好先動。是以，即便知情者與不知情者獎酬間呈現獨立且同分配，不知情者之先動利得仍純由不確定性而生。此與 #c("fu2006") 恰成對照：在其完全相關設定下，不知情者之獎酬即知情者所握之不確定價值，先動係為調低承諾、避免在低值狀態過度投入；而本文獎酬獨立，不知情者對自身獎酬之期望評價恆為 $overline(v)$，先動反而承諾較高投入。
 
 然而在 $hat(B) > 1$ 下，知情者卻偏好 SS：不知情者承諾較高投入，排擠後動的知情者，故 $widetilde(pi)_I^(SS) > widetilde(pi)_I^(U I)$。是以 U 欲先、I 不願後，UI 無法構成純策略均衡，第 0 階段的實質比較則落在 IU 與 SS 兩時序。
 
@@ -127,7 +127,7 @@ $ <eq-bench-ui-vs-ss>
 #proposition(
   title: [IU 子賽局之唯一分離均衡: 基準模型],
 )[
-  在獨立同分配基準模型的 IU 子賽局中，存在唯一之完美貝氏均衡，即以下分離均衡：型別 $v in {v_H, v_L}$ 之知情者均衡投入為
+  在獨立同分配基準模型的 IU 子賽局中，存在唯一之完美貝氏均衡，即以下分離均衡：型別 $v$ 之知情者均衡投入為
 
   $
     x_I^(I U)(v) = v^2 / (4 overline(v)).
@@ -163,37 +163,30 @@ $ <eq-bench-iu-vs-ss>
 
 == 內生時序均衡 <subsec-bench-endogenous-timing>
 
-第 0 階段的時序選擇構成一 $2 times 2$ 賽局，四種期別組合對應之子賽局及其事前期望報酬如@tbl-bench-timing。
+第 0 階段的時序選擇構成一 $2 times 2$ 賽局，四種先後組合對應之子賽局及其事前期望報酬如@tbl-bench-timing。
 
 #figure(
-  table(
-    columns: 3,
-    inset: 8pt,
-    align: center + horizon,
-    stroke: none,
-    table.hline(y: 1, stroke: 0.4pt),
-    table.vline(x: 1, stroke: 0.4pt),
-    table.cell(
-      inset: 0pt,
-      box(width: 80pt, height: 30pt)[
-        #place(top + right, dx: -6pt, dy: 0pt)[不知情者]
-        #place(bottom + left, dx: 0pt, dy: -6pt)[知情者]
-        #place(top + left, line(start: (0pt, 0pt), end: (80pt, 30pt), stroke: 0.4pt))
-      ],
+  payoff-matrix-2x2(
+    [知情者],
+    [不知情者],
+    row_actions: ([先動], [後動]),
+    col_actions: ([先動], [後動]),
+    payoffs: (
+      (
+        [$(widetilde(pi)_I^(SS), widetilde(pi)_U^(SS))$],
+        [$(widetilde(pi)_I^(I U), widetilde(pi)_U^(I U))$],
+      ),
+      (
+        [$(widetilde(pi)_I^(U I), widetilde(pi)_U^(U I))$],
+        [$(widetilde(pi)_I^(SS), widetilde(pi)_U^(SS))$],
+      ),
     ),
-    [第一期], [第二期],
-    [第一期],
-    [$(widetilde(pi)_I^(SS), widetilde(pi)_U^(SS))$],
-    [$(widetilde(pi)_I^(I U), widetilde(pi)_U^(I U))$],
-    [第二期],
-    [$(widetilde(pi)_I^(U I), widetilde(pi)_U^(U I))$],
-    [$(widetilde(pi)_I^(SS), widetilde(pi)_U^(SS))$],
   ),
-  caption: [第 0 階段時序賽局之報酬矩陣],
+  caption: [第 0 階段時序賽報酬矩陣：基準模型],
   supplement: [表],
 ) <tbl-bench-timing>
 
-綜合#headingref(<subsec-bench-subgame-equilibria>)之討論，UI 恆非純策略均衡。值得注意的是，SS 時序有兩種情況，分別為兩位參賽者同時選擇第一期 (報酬矩陣左上角)，以及同時選擇第二期 (報酬矩陣右下角)。若同時選擇第二期時，任一方改為第一期即成為領導者，而不知情者恆不吃虧，故此格必遭破壞；故 SS 時序僅能維繫於雙方皆選擇第一期之情況。故穩定者僅有兩位參與者均選擇第一期與 IU 時序。定義
+綜合#headingref(<subsec-bench-subgame-equilibria>)之討論，UI 恆非純策略均衡。值得注意的是，SS 時序有兩種情況，分別為兩位參賽者同時選擇先動 (報酬矩陣左上角)，以及同時選擇後動 (報酬矩陣右下角)。若同時選擇後動時，任一方改為先動即成為領導者，而不知情者恆不吃虧，故此格必遭破壞；故 SS 時序僅能維繫於雙方皆選擇先動之情況。故穩定者僅有兩位參與者均選擇先動與 IU 時序。定義
 $
   D_I equiv widetilde(pi)_I^(I U) - widetilde(pi)_I^(SS),
   quad
@@ -226,7 +219,3 @@ $ <eq-bench-iu-variance>
 @eq-bench-iu-variance 將知情者領先之報酬拆為兩部份：前項為型別無不確定性 ($v_H = v_L$) 時之基準報酬，後項則為隨獎酬型別變異數遞增之先動溢酬；獎酬差距越大，先動承諾愈值錢。惟此溢酬能否勝出，尚須與 SS 時序下之 $widetilde(pi)_I^(SS)$ 相比，其分界即臨界條件 $D_I (q) = 0$。
 
 結合 $D_U >= D_I$ 之條件，當獎酬差距足夠小時 ($D_I >= 0$)，IU 為唯一純策略均衡；差距足夠大時 $D_U <= 0$，SS 時序為唯一純策略均衡；區間 $D_I < 0 < D_U$ 則無純策略均衡——不知情者意欲偏離 SS 時序以謀時序之利，知情者卻寧願選擇 SS 時序，雙方時序預期無法相容。因 $V_I$ 之揭露不改變不知情者對自身獎酬的條件期望，最終時序並非由資訊揭露之懲罰決定，而取決於先動承諾之溢酬能否勝過 SS 時序下之報酬。
-
-// 本章局部開啟方程式編號（式 1–4）。模板的每章計數器歸零未生效，故於章末手動歸零，
-// 避免本章計數值溢出影響後續章節的 @eq 交叉引用。
-#counter(math.equation).update(0)
