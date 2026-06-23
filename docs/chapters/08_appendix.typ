@@ -105,7 +105,11 @@
   $
   在 $rho > rho^*$ 下 $widetilde(V)_U (1) > widetilde(V)_U (0)$，上式有兩實根，較小根即命題所定義之 $z_H^-$；二次式開口向上且僅考慮向下扭曲分支 $x' <= x_L^*$，故不模仿之可行集合為 $z <= z_H^-$。為以最小扭曲維持分離，低型別取使該條件恰為等號之最大可行投入，即 $x_L^"Riley" = (z_H^-)^2$。
 
-  其餘偏離：在路徑外信念 $mu = 1$ 下，高型別延續報酬 $v_H sqrt(x \/ widetilde(V)_U (1)) - x$ 於 $x_H$ 處唯一最大，故不另行偏離；低型別向上模仿之情形同#stmtref(<prop-main-iu-separating-candidate>, "命題", "proposition-counter")之證明第 (2) 點，$pi_L > pi_L (x_H; mu = 1)$，亦不偏離。高型別之誘因相容由 $x_L^"Riley"$ 之構造保證，故上述策略與信念構成 Riley 扭曲分離均衡。
+  其餘偏離：在路徑外信念 $mu = 1$ 下，高型別延續報酬 $v_H sqrt(x \/ widetilde(V)_U (1)) - x$ 於 $x_H$ 處唯一最大，故不另行偏離。低型別之檢驗須留意其均衡投入 $x_L^"Riley"$ 已低於自身最適 $x_L^* equiv v_L^2 \/ (4 widetilde(V)_U (0))$，均衡報酬 $pi_L^"Riley" = v_L sqrt(x_L^"Riley" \/ widetilde(V)_U (0)) - x_L^"Riley"$ 因而低於未扭曲之 $pi_L$，故不能逕由#stmtref(<prop-main-iu-separating-candidate>, "命題", "proposition-counter")之證明第 (2) 點繼承。低型別任何被解讀為高型別之偏離 (含 $x_H$ 與一切路徑外投入) 至多取得 $v_L^2 \/ (4 widetilde(V)_U (1))$，故僅需驗證
+  $
+    pi_L^"Riley" >= v_L^2 \/ (4 widetilde(V)_U (1)).
+  $
+  將此不等式以 $z = sqrt(x)$ 表為二次式，其結構與高型別之不模仿條件全同、僅以 $v_L$ 代 $v_H$，較小根因而為 $w_L^- = (v_L \/ v_H) z_H^- < z_H^- = sqrt(x_L^"Riley")$。又因 $rho > rho^*$ 對應向下扭曲，$x_L^"Riley" < x_L^*$，故 $x_L^"Riley"$ 落於下方交點 $(w_L^-)^2$ 與峰值 $x_L^*$ 之間；於此區間凹函數 $v_L sqrt(x \/ widetilde(V)_U (0)) - x$ 恆不低於 $v_L^2 \/ (4 widetilde(V)_U (1))$，上述不等式成立，低型別亦不偏離。高型別之誘因相容由 $x_L^"Riley"$ 之構造保證，故上述策略與信念構成 Riley 扭曲分離均衡。
 ]
 
 ==== #stmtref(<prop-main-timing-iu-rho>, "命題", "proposition-counter") 之證明 <app-proof-main-timing-iu-rho>

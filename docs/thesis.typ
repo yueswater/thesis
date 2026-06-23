@@ -69,6 +69,7 @@
   let no = counter(key).at(loc).at(0) + 1
   link(loc)[#text(fill: cite-blue)[#kind #no]]
 }
+#let is-blank(t) = t == none or t == [] or t == ""
 #let statement(kind, key, body, title: none, above: 1.2em, below: 1em) = context {
   let ctr = counter(key)
   ctr.step()
@@ -77,7 +78,7 @@
     #set math.equation(numbering: none)
     #set par(first-line-indent: 0em)
     #text(font: theorem-font, weight: "light")[
-      #kind #no#if title != none [
+      #kind #no#if not is-blank(title) [
         #h(0.1em)
         #text(font: theorem-font, weight: "light")[(]#title#text(font: theorem-font, weight: "light")[)]
       ]
