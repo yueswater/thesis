@@ -112,7 +112,51 @@
   將此不等式以 $z = sqrt(x)$ 表為二次式，其結構與高型別之不模仿條件全同、僅以 $v_L$ 代 $v_H$，較小根因而為 $w_L^- = (v_L \/ v_H) z_H^- < z_H^- = sqrt(x_L^"Riley")$。又因 $rho > rho^*$ 對應向下扭曲，$x_L^"Riley" < x_L^*$，故 $x_L^"Riley"$ 落於下方交點 $(w_L^-)^2$ 與峰值 $x_L^*$ 之間；於此區間凹函數 $v_L sqrt(x \/ widetilde(V)_U (0)) - x$ 恆不低於 $v_L^2 \/ (4 widetilde(V)_U (1))$，上述不等式成立，低型別亦不偏離。高型別之誘因相容由 $x_L^"Riley"$ 之構造保證，故上述策略與信念構成 Riley 扭曲分離均衡。
 ]
 
-==== #stmtref(<prop-main-timing-iu-rho>, "命題", "proposition-counter") 之證明 <app-proof-main-timing-iu-rho>
+==== #stmtref(<prop-main-iu-pooling>, "命題", "proposition-counter") 之證明 <app-proof-main-iu-pooling>
+
+#proof[
+  令兩型皆選共同投入 $x_P$。路徑上信念 $mu(x_P) = q$，型別 $v$ 之延續報酬為 $v sqrt(x_P \/ widetilde(V)_U (q)) - x_P$；於路徑外信念 $mu = 1$ 下，任意偏離至多取得 $v^2 \/ (4 widetilde(V)_U (1))$。故型別 $v$ 不偏離之誘因相容條件為
+  $
+    v sqrt(x_P \/ widetilde(V)_U (q)) - x_P >= v^2 \/ (4 widetilde(V)_U (1)).
+  $
+  令 $z = sqrt(x_P)$，上式為開口向上之二次不等式 $z^2 - (v \/ sqrt(widetilde(V)_U (q))) z + v^2 \/ (4 widetilde(V)_U (1)) <= 0$，其解為
+  $
+    z in [ frac(v, 2 sqrt(widetilde(V)_U (q))) (1 - theta), frac(v, 2 sqrt(widetilde(V)_U (q))) (1 + theta) ],
+    quad theta equiv sqrt(1 - widetilde(V)_U (q) \/ widetilde(V)_U (1)).
+  $
+  混同須兩型別同時滿足。因 $v_H > v_L$，高型別之可行區間整體偏右、低型別偏左，交集非空若且唯若高型別下界不超過低型別上界，即 $v_H (1 - theta) <= v_L (1 + theta)$，亦即
+  $
+    theta >= (v_H - v_L) \/ (v_H + v_L).
+  $
+  兩邊平方，代入 $theta^2 = 1 - widetilde(V)_U (q) \/ widetilde(V)_U (1)$ 與 $1 - ((v_H - v_L) \/ (v_H + v_L))^2 = 4 v_H v_L \/ (v_H + v_L)^2$，整理得 $widetilde(V)_U (1) - widetilde(V)_U (q) >= widetilde(V)_U (q) Delta V^2 \/ (4 v_H v_L)$。再由#stmtref(<lem-main-posterior-expected-valuation>, "引理", "lemma-counter")，$widetilde(V)_U (1) - widetilde(V)_U (q) = rho (1-q) Delta V$，兩邊除以 $(1-q) Delta V$ 即得 $rho >= rho_P$。
+]
+
+==== #stmtref(<lem-main-timing-DIUI>, "引理", "lemma-counter") 之證明 <app-proof-main-timing-DIUI>
+
+#proof[
+  在 SS 與 UI 子賽局中，知情者皆對固定之不知情者投入 $x_U$ 作最佳反應，型別 $v$ 之報酬為 $(sqrt(v) - sqrt(x_U))^2$。故兩時序之知情者事前報酬同具形式
+  $
+    widetilde(pi)_I^J = g(c_J), quad
+    g(c) equiv q (sqrt(v_H) - c)^2 + (1-q)(sqrt(v_L) - c)^2
+    = c^2 - 2 overline(s) c + (q v_H + (1-q) v_L),
+  $
+  其中 $c_J equiv sqrt(x_U^J)$、$overline(s) equiv q sqrt(v_H) + (1-q) sqrt(v_L)$。由#stmtref(<prop-main-ss-equilibrium>, "命題", "proposition-counter")與#stmtref(<prop-main-ui-equilibrium>, "命題", "proposition-counter")，$c_(SS) = tilde(A) \/ (1 + tilde(B))$、$c_(U I) = tilde(A) \/ 2$。$g$ 為開口向上之拋物線、頂點於 $c = overline(s)$，故
+  $
+    D_I^(U I) = g(c_(U I)) - g(c_(SS)) = (c_(U I) - c_(SS))(c_(U I) + c_(SS) - 2 overline(s)).
+  $
+
+  #impt[因子一] $c_(U I) - c_(SS) = tilde(A) (tilde(B) - 1) \/ (2(1 + tilde(B)))$，符號同 $tilde(B) - 1$。由#stmtref(<lem-main-posterior-expected-valuation>, "引理", "lemma-counter")之分解 $widetilde(V)_U (1) = widetilde(V)_U (q) + rho(1-q) Delta V$、$widetilde(V)_U (0) = widetilde(V)_U (q) - rho q Delta V$ 代入 $tilde(B)$ 定義，得
+  $
+    tilde(B)(rho) = hat(B) - rho frac(q(1-q) Delta V^2, v_H v_L),
+  $
+  對 $rho$ 線性遞減，且 $tilde(B)(1) = q^2 + (1-q)^2 + 2 q(1-q) = 1$。故 $tilde(B) >= 1$ 於 $[0,1]$，等號當且唯當 $rho = 1$，因子一非負。
+
+  #impt[因子二] UI 內點要求低型別投入為正，$x_I^(U I)(v_L) = c_(U I) (sqrt(v_L) - c_(U I)) > 0$，即 $c_(U I) < sqrt(v_L)$；SS 同理得 $c_(SS) < sqrt(v_L)$。又 $overline(s) >= sqrt(v_L)$，故 $c_(U I) + c_(SS) < 2 sqrt(v_L) <= 2 overline(s)$，因子二為負。
+
+  二因子相乘得 $D_I^(U I) <= 0$，等號當且唯當因子一為零，即 $rho = 1$。
+]
+
+==== 知情者 IU 時序事前報酬之相關性單調性之證明 <app-proof-main-timing-iu-rho>
 
 #proof[
   由#stmtref(<lem-main-posterior-expected-valuation>, "引理", "lemma-counter")，$d widetilde(V)_U (1) \/ d rho = (1-q) Delta V > 0$、$d widetilde(V)_U (0) \/ d rho = -q Delta V < 0$。據此對 $widetilde(pi)_I^(I U)$ 微分，
@@ -122,5 +166,11 @@
     [ frac(v_L^2, widetilde(V)_U (0)^2) - frac(v_H^2, widetilde(V)_U (1)^2) ].
   $
   又 $v_H widetilde(V)_U (0) - v_L widetilde(V)_U (1) = (1-rho) Delta V [v_L + q Delta V] > 0$ 對 $rho < 1$ 成立，故 $v_H \/ widetilde(V)_U (1) > v_L \/ widetilde(V)_U (0)$，中括號為負；由 $q(1-q) Delta V \/ 4 > 0$ 遂得 $d widetilde(pi)_I^(I U) \/ d rho < 0$。
+]
+
+==== #stmtref(<thm-main-endogenous-timing>, "定理", "theorem-counter") 之證明 <app-proof-main-timing-theorem>
+
+#proof[
+  由#stmtref(<lem-main-timing-characterization>, "引理", "lemma-counter")逐格檢驗。UI 須 $D_I^(U I) >= 0$ 且 $D_U^(U I) >= 0$：後者由@eq-main-ui-first-mover 恆成立，前者由#stmtref(<lem-main-timing-DIUI>, "引理", "lemma-counter")僅於 $rho = 1$ 成立，故 UI 唯於 $rho = 1$ 構成均衡。IU 須 $D_I^(I U) >= 0$ 且 $D_U^(I U) >= 0$：由#stmtref(<lem-main-timing-rho-dagger>, "引理", "lemma-counter")，$D_I^(I U) >= 0$ 當 $rho <= rho^dagger$；該區間內 $D_U^(I U) > 0$，IU 遂構成唯一均衡。SS 須 $D_I^(U I) <= 0$ 且 $D_U^(I U) <= 0$：前者恆成立，故 SS 繫於 $D_U^(I U) <= 0$。當 $rho^dagger < rho < 1$ 且 $D_U^(I U) > 0$ 時三者皆不成立，故無純策略均衡。
 ]
 

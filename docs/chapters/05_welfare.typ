@@ -137,7 +137,7 @@ $
   ].
 $
 
-由#stmtref(<prop-main-timing-iu-rho>, "命題", "proposition-counter")之證明，$rho < 1$ 時 $v_H \/ widetilde(V)_U (1) > v_L \/ widetilde(V)_U (0)$，故中括號內之值為負，推得 $d widetilde(W)^("sep") \/ d rho < 0$。因此未扭曲分離區間內 $widetilde(W)^("sep")$ 隨相關性上升而遞減：耗散固定並不保證福利上升。
+因 $rho < 1$ 時 $v_H widetilde(V)_U (0) - v_L widetilde(V)_U (1) = (1-rho) Delta V [v_L + q Delta V] > 0$，即 $v_H \/ widetilde(V)_U (1) > v_L \/ widetilde(V)_U (0)$，故中括號內之值為負，推得 $d widetilde(W)^("sep") \/ d rho < 0$。因此未扭曲分離區間內 $widetilde(W)^("sep")$ 隨相關性上升而遞減：耗散固定並不保證福利上升。
 
 ==== Riley 扭曲均衡 <subsubsec-welfare-iu-riley>
 

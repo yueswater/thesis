@@ -1,6 +1,6 @@
 #import "../thesis.typ": (
-  SS, bern, c, ca, corr, cp, definition, example, headingref, impt, lemma, payoff-matrix-2x2, proof, proposition,
-  stmtref, term, theorem, widetilde,
+  IU, SS, UI, bern, c, ca, corr, cp, definition, example, headingref, impt, lemma, payoff-matrix-2x2, proof,
+  proposition, stmtref, term, theorem, widetilde,
 )
 
 == 部分相關型別結構 <subsec-main-setup>
@@ -45,9 +45,7 @@ $rho$ 衡量兩位參與者獎酬之共同變動程度，$rho = 0$ 對應完全�
 
 部分相關下，不知情者對自身獎酬的評價取決於其對知情者型別的信念。沿用#headingref(<subsubsec-bench-iu>)之記號，$mu in [0,1]$ 為不知情者賦予對手高型別之後驗權重，條件期望獎酬記為 $widetilde(V)_U (mu) equiv EE[V_U | mu]$；基準模型中獎酬獨立使其恆為 $overline(v)$，本章則須求出其在部分相關下的封閉解，其中 $mu = q$ 對應僅憑先驗的事前評價，$mu = 1$ 與 $mu = 0$ 則分別對應不知情者確信對手為高、低型別時的#term("型別條件期望", english: "type-contingent expectation")。此一封閉解為三個子賽局所共用，僅取決於純量信念 $mu$，差別只在 $mu$ 如何由觀察決定。
 
-#lemma(
-  title: [條件期望獎酬之封閉解表示],
-)[
+#lemma[
   在部分相關型別結構下，給定不知情者賦予高型別之權重 $mu in [0,1]$，其條件期望獎酬可寫為
   $
     widetilde(V)_U (mu)
@@ -107,7 +105,7 @@ $
   = v sqrt(x_I / (widetilde(V)_U (mu))) - x_I.
 $ <eq-main-i-reduced-payoff>
 
-與基準模型之差異取決於分母 $widetilde(V)_U (mu)$：基準下 $rho = 0$ 使其恆為 $overline(v)$，延續報酬僅隨 $x_I$ 直接變動，知情者投入不具訊號作用；而當 $rho > 0$ 時，$x_I$ 經由信念 $mu$ 改變 $widetilde(V)_U (mu)$，同時透過勝率與後驗評價兩條管道影響報酬，基準模型中被切斷的訊號—信念—反應傳遞機制因而重現。
+與基準模型之差異取決於分母 $widetilde(V)_U (mu)$：基準下 $rho = 0$ 使其恆為 $overline(v)$，延續報酬僅隨 $x_I$ 直接變動，知情者投入不具訊號作用；而當 $rho > 0$ 時，$x_I$ 經由信念 $mu$ 改變 $widetilde(V)_U (mu)$，同時透過勝率與後驗期望報酬兩條管道影響報酬，基準模型中被切斷的訊號—信念—反應傳遞機制因而重現。
 
 == 子賽局均衡 <subsec-main-subgame-equilibria>
 
@@ -261,6 +259,27 @@ $
 ] <prop-main-iu-riley>
 
 綜上，IU 子賽局的分離型態依相關程度而定：$0 <= rho <= rho^*$ 時為未扭曲分離，$rho > rho^*$ 時則轉為由低型別承擔訊號成本的 Riley 扭曲分離。
+
+在 #c("fu2006") 之完全相關框架下，當高型別先驗機率夠低時，IU 子賽局存在一連續區間的混同均衡——由@eq-main-posterior-ordering 與@eq-main-br 可知，高型別一旦被揭露，將面對後驗期望報酬更高、因而投入更積極的對手，隱藏型別正可規避此一被揭露後加劇的競爭，兩型便可能集中於單一共同投入而不被區辨。
+
+#proposition(
+  title: [IU 子賽局混同均衡],
+)[
+  當 $rho >= rho_P$ 時，存在一連續區間的混同均衡，使知情者無論型別均選擇同一共同投入 $x_P$，其中 $rho_P$ 為：
+  $
+    rho_P equiv frac(widetilde(V)_U (q) Delta V, 4 v_H v_L (1-q))
+  $ <eq-main-rho-pool>
+
+  $x_P$ 之區間為
+  $
+    x_P in [ (frac(v_H, 2 sqrt(widetilde(V)_U (q))) (1 - theta))^2, (frac(v_L, 2 sqrt(widetilde(V)_U (q))) (1 + theta))^2 ]
+  $ <eq-main-pool-interval>
+
+  其中 $theta equiv sqrt(1 - widetilde(V)_U (q) \/ widetilde(V)_U (1))$。
+] <prop-main-iu-pooling>
+
+$rho_P$ 與分離臨界 $rho^*$ 孰高孰低係由 $q$ 所決定：當 $q <= v_L (2 v_H + v_L) \/ (v_H + v_L)^2$ 時，$rho_P <= rho^*$，此時混同均衡與未扭曲分離並存；當 $q$ 超過該條件時，則與 Riley 扭曲分離並存。注意到混同均衡僅在 $rho_P$ 才成立#footnote[$rho_P$ 之分子分母各因子 $widetilde(V)_U (q)$、$Delta V$、$v_H v_L$、$1 - q$ 皆嚴格為正，故 $rho_P > 0$ 立得。等價地，$rho = 0$ 時 $widetilde(V)_U (q) = widetilde(V)_U (1) = overline(v)$，故 $theta = 0$，混同區間退化為相異單點 $v_H^2 \/ (4 overline(v))$ 與 $v_L^2 \/ (4 overline(v))$，交集為空，與混同存在所需之條件 $theta >= Delta V \/ (v_H + v_L) > 0$ 矛盾。]，故在基準模型下無混同均衡。
+
 == 內生時序均衡 <subsec-main-endogenous-timing>
 #set math.equation(numbering: none)
 
@@ -275,7 +294,7 @@ $
     payoffs: (
       (
         [$(widetilde(pi)_I^(SS), widetilde(pi)_U^(SS))$],
-        [$(widetilde(pi)_I^(I U), widetilde(pi)_U^(I U))$#footnote[此格報酬依 $rho$ 取值：$rho <= rho^*$ 時為未扭曲分離、$rho > rho^*$ 時為 Riley 扭曲分離。]],
+        [$(widetilde(pi)_I^(I U), widetilde(pi)_U^(I U))$],
       ),
       (
         [$(widetilde(pi)_I^(U I), widetilde(pi)_U^(U I))$],
@@ -311,30 +330,46 @@ $
   D_U^(I U) & equiv widetilde(pi)_U^(I U) - widetilde(pi)_U^(SS).
 $
 
-#theorem(
-  title: [第 0 階段之純策略內生時序均衡: 部分相關],
-)[
-  第 0 階段的純策略 Nash 均衡可由四個單邊偏離差額完全刻畫：
+#lemma[
+  第 0 階段的純策略 Nash 均衡可由四個單邊偏離差額刻畫：
 
   #set enum(numbering: "(1)")
 
   + UI 構成純策略均衡若且唯若 $D_I^(U I) >= 0$ 且 $D_U^(U I) >= 0$；
   + SS 構成純策略均衡若且唯若 $D_I^(U I) <= 0$ 且 $D_U^(I U) <= 0$；
   + IU 構成純策略均衡若且唯若 $D_I^(I U) >= 0$ 且 $D_U^(I U) >= 0$。
-] <prop-main-endogenous-timing-pure>
+] <lem-main-timing-characterization>
 
-由@eq-main-ui-first-mover 可知，對任意給定之 $rho$，皆有
-$
-  D_U^(U I) = widetilde(pi)_U^(U I) - widetilde(pi)_U^(SS) >= 0.
-$
-換言之，不知情者面對後動的知情者時，始終弱偏好以先動承諾將時序推向 UI。故第 0 階段時序翻轉的主要來源，不在於不知情者是否放棄先動，而在於知情者對先動揭露效果的評價如何隨 $rho$ 改變。
+由@eq-main-ui-first-mover，$D_U^(U I) >= 0$ 恆成立——當知情者面對後動的知情者時恆弱偏好先動承諾，因此時序翻轉的關鍵不在不知情者是否放棄先動，而在知情者對先動之評價如何隨 $rho$ 改變。
 
-#proposition(
-  title: [],
-)[
-  在未扭曲分離區間 $rho in [0, rho^*]$ 內，知情者 IU 時序之事前報酬對相關性嚴格遞減。
-] <prop-main-timing-iu-rho>
+#lemma[
+  在部份相關結構下，給定不知情者先動，知情者弱偏好 SS 時序；當 $rho < 1$ 時則嚴格偏好 SS 時序，僅 $rho = 1$ 時對兩時序無異。
+] <lem-main-timing-DIUI>
 
-此一遞減源於兩股相反力量：$rho$ 上升，一方面推高高型別路徑上不知情者的後驗期望獎酬，使高型別先動後遭遇更強的競爭；另一方面壓低低型別路徑上的後驗期望獎酬，使低型別面對較寬鬆的競爭。由於前者的揭露成本主導後者的紓解，知情者先動所得之事前資訊租金遂隨相關性上升而遭侵蝕。
+// 引理 4 暫先註解 (定理陳述未直接引用；單調性仍於附錄證明，並供第五章福利分析使用)
+// #lemma[
+//   在未扭曲分離區間 $rho in [0, rho^*]$ 內，知情者 IU 時序之事前報酬對相關性嚴格遞減。
+// ] <prop-main-timing-iu-rho>
 
-給定不知情者後動，知情者於 IU 與 SS 間的取捨取決於連續函數 $D_I^(I U)(rho)$ 之符號。在獎酬差距較小的參數下，獨立端點 $D_I^(I U)(0) > 0$ (偏好先動)、未扭曲邊界 $D_I^(I U)(rho^*) < 0$ (偏好後動)，由介值定理必存在 $rho^dagger in (0, rho^*)$ 使 $D_I^(I U)(rho^dagger) = 0$，知情者於此由偏好先動翻為偏好後動。又因 $D_U^(U I) >= 0$，不知情者恆偏好先動，故相關性一旦跨過 $rho^dagger$，第 0 階段均衡時序即由 IU 翻向 SS。
+// 在未扭曲分離區間 $rho in [0, rho^*]$ 內，知情者 IU 時序之事前報酬對 $rho$ 嚴格遞減。此一遞減源於兩股相反力量：$rho$ 上升，一方面抬升高型別路徑上不知情者的後驗期望獎酬，使高型別先動後遭遇更強的競爭；另一方面壓低低型別路徑上的後驗期望獎酬，使低型別面對較寬鬆的競爭。
+
+#lemma[
+  設 $D_I^(I U)(0) > 0$ 且 $D_I^(I U)(rho^*) < 0$。由 $D_I^(I U)$ 之連續性與介值定理，存在 $rho^dagger in (0, rho^*)$ 使 $D_I^(I U)(rho^dagger) = 0$，且 $D_I^(I U)(rho) > 0$ 於 $rho in [0, rho^dagger)$、$D_I^(I U)(rho) < 0$ 於 $rho in (rho^dagger, 1)$。
+] <lem-main-timing-rho-dagger>
+
+$rho^dagger$ 為知情者先動誘因由正轉負的臨界點。當 $rho <= rho^dagger$ 時，IU 時序下型別條件化投入與先動承諾所帶來的利得，仍足以抵銷型別揭露後所引致的競爭加劇，因此知情者願意選擇先動。反之，當 $rho > rho^dagger$ 時，相關性提高使高型別路徑上的揭露成本逐漸主導；此時知情者在 IU 中率先投入，反而使不知情者更準確地調整其後續反應，故知情者不再偏好先動。
+
+換言之，知情者於 IU 與 SS 之間的取捨，正由 $D_I^IU (rho)$ 的符號決定。若在基準模型時，$D_I^IU (0)>0$，則知情者原本偏好 IU；然而隨 $rho$ 上升，型別揭露對高型別所造成的競爭壓力持續侵吞此一先動利得。當 $rho$ 達到 $rho^dagger$ 時，兩種時序對知情者而言恰好無異；若 $D_I^IU (rho)<0$，此時知情者即轉而偏好 SS。
+
+
+#theorem[
+  設 SS 與 UI 子賽局之均衡均位於內點，IU 子賽局取分離均衡。第 0 階段之純策略 Nash 均衡視相關係數 $rho$ 而定：
+
+  #set enum(numbering: "(1)")
+
+  + 若 $rho <= rho^dagger$，唯一純策略均衡為 IU；
+  + 若 $rho^dagger < rho < 1$，IU 與 UI 均非純策略均衡；SS 為純策略均衡，若且唯若 $D_U^(I U)(rho) <= 0$，否則不存在純策略均衡；
+  + 若 $rho = 1$，唯一純策略均衡為 UI，與 #cp("fu2006") 之完全相關情形一致。
+] <thm-main-endogenous-timing>
+
+此結果將 #cp("fu2006") 視為本模型於 $rho = 1$ 之特例。$rho = 0$ 時知情者投入不具訊號作用，先動僅發揮 Stackelberg 領導之效果，知情者偏好先動，均衡為 IU；$rho$ 上升使先動之訊號揭露成本漸增，逾 $rho^dagger$ 後知情者不再偏好先動。不知情者恆偏好先動 (@eq-main-ui-first-mover)，故 UI 僅於 $rho = 1$ 知情者於兩時序間無嚴格偏好時成立。當 $rho^dagger < rho < 1$，均衡型態繫於不知情者於 IU 與 SS 間之取捨，即 $D_U^(I U)$ 之符號，未必存在純策略均衡。
