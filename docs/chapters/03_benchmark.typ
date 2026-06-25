@@ -57,9 +57,7 @@ $
   equiv overline(v) (q / v_H + (1-q) / v_L).
 $ <eq-bench-a0b0>
 
-#proposition(
-  title: [SS 子賽局之均衡: 基準模型],
-)[
+#proposition()[
   在獨立同分配基準模型的 SS 子賽局中，若均衡位於內點，則不知情者之均衡投入為
   $
     x_U^(SS) = hat(A)^2 / (1 + hat(B))^2.
@@ -87,9 +85,7 @@ $
 $ <eq-bench-ui-leader>
 #set math.equation(numbering: none)
 
-#proposition(
-  title: [UI 子賽局之均衡: 基準模型],
-)[
+#proposition()[
   在獨立同分配基準模型的 UI 子賽局中，若均衡位於內點，則不知情者之均衡投入為
   $
     x_U^UI = hat(A)^2 / 4.
@@ -126,9 +122,7 @@ $ <eq-bench-ui-vs-ss>
 
 先動是否付出訊號成本，端視揭露型別能否改變對手行為。在 #c("fu2006") 獎酬完全相關的設定下，知情者揭露自身獎酬高，同時讓不知情者推斷自身獎酬亦高，後者因而更積極投入、壓低知情者的勝率與報酬，此即 #c("fu2006") 下知情者偏好後動之因；在本文獨立同分配之框架下，$widetilde(V)_U (mu) = overline(v)$ 對所有後驗信念 $mu$ 恆成立，不知情者之最佳反應@eq-bench-br-U 不受 $mu$ 影響，致使訊號—信念—反應之傳遞機制就此被切斷，先動的訊號成本歸零，IU 遂在獎酬獨立下，退化為以知情者為領導者的基本 Stackelberg 賽局，分離嚴格成立且未受訊號扭曲。
 
-#proposition(
-  title: [IU 子賽局之唯一分離均衡: 基準模型],
-)[
+#proposition()[
   在獨立同分配基準模型的 IU 子賽局中，存在唯一之完美貝氏均衡，即以下分離均衡：型別 $v$ 之知情者均衡投入為
 
   $
@@ -196,9 +190,7 @@ $
 $ <eq-bench-DI-DU>
 根據#stmtref(<prop-bench-iu-equilibrium>, "命題", "proposition-counter") 可得先動者與其後動對手所得相同 ($widetilde(pi)_I^(I U) = widetilde(pi)_U^(I U)$)，又因知情者能依型別條件投入，存在資訊優勢，故事前報酬不低於不知情者，即 $widetilde(pi)_I^(SS) >= widetilde(pi)_U^(SS)$。兩者合得 $D_U >= D_I$。
 
-#proposition(
-  title: [第 0 階段純策略均衡: 基準模型],
-)[
+#proposition()[
   在非退化的獨立同分配基準模型中：
 
   #set enum(numbering: "(1)")

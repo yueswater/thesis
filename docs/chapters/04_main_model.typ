@@ -5,7 +5,7 @@
 
 == 部分相關型別結構 <subsec-main-setup>
 
-#definition(title: [部分相關型別結構])[
+#definition()[
   給定知情者與不知情者獎酬分別為 $V_I$ 與 $V_U$，定義獎酬之相關係數為 $rho equiv corr(V_I, V_U)$，且 $rho in [0,1]$。
 ] <def-main-correlated-types>
 
@@ -123,9 +123,7 @@ $ <eq-main-ss-ab>
 
 其中 $widetilde(V)_U (1)$ 與 $widetilde(V)_U (0)$ 由#stmtref(<lem-main-posterior-expected-valuation>, "引理", "lemma-counter")給定。當 $rho=0$ 時，$widetilde(V)_U (mu) equiv overline(v)$ 對所有 $mu$ 成立，此時 $tilde(A) = hat(A)$、$tilde(B) = hat(B)$。
 
-#proposition(
-  title: [SS 子賽局之內點均衡: 部分相關],
-)[
+#proposition()[
   在 SS 子賽局中，若均衡位於內點，則不知情者之均衡投入為
   $
     x_U^(SS)
@@ -158,9 +156,7 @@ $
 $ <eq-main-ui-objective>
 #set math.equation(numbering: none)
 
-#proposition(
-  title: [UI 子賽局之內點均衡: 部分相關],
-)[
+#proposition()[
   在 UI 子賽局中，若均衡位於內點 (即兩種型別知情者均選擇正投入)，則不知情者之均衡投入為
   $
     x_U^(U I) = tilde(A)^2 / 4.
@@ -211,9 +207,7 @@ $
 
 #set math.equation(numbering: "(1)", supplement: [式])
 
-#proposition(
-  title: [IU 子賽局未扭曲分離均衡條件],
-)[
+#proposition()[
   定義高型別不向下模仿低型別之臨界比值為
   $
     R equiv v_H^2 / (v_L (2v_H-v_L)).
@@ -226,9 +220,7 @@ $
 
 前述分離條件以比值 $widetilde(V)_U (1) \/ widetilde(V)_U (0)$ 表達。由於該比值為 $rho$ 之嚴格遞增函數，故分離均衡存在性等價於 $rho$ 不超過單一臨界值。
 
-#proposition(
-  title: [分離臨界相關度],
-)[
+#proposition()[
   IU 子賽局之未扭曲分離均衡存在若且唯若 $rho <= rho^*$，其中唯一臨界相關度為#footnote[此一臨界相關度可分解為兩項：第一項表示模仿誘因的容忍度，即高型別不向下模仿低型別的容忍空間；第二項表示不知情者在先驗信念下之評價，相對於型別差距的大小，用以衡量訊號衝擊的相對強度。]
   $
     rho^* = frac((R-1), 1 + q(R-1)) dot frac(widetilde(V)_U (q), Delta V)
@@ -238,9 +230,7 @@ $
 
 當 $rho$ 超過 $rho^*$ 後，未扭曲分離均衡不再成立，但並不表示分離均衡全面崩潰。#c("riley1979") 指出，訊號賽局中存在最低成本的分離均衡——低型別向下壓低投入，使高型別喪失模仿誘因，此時高型別無須偏離其完整資訊最適投入。此一結果即 Riley 均衡，構成 $rho > rho^*$ 時 IU 子賽局的分離均衡候選。
 
-#proposition(
-  title: [Riley 扭曲分離均衡],
-)[
+#proposition()[
   當 $rho > rho^*$ 時，定義
 
   $
@@ -262,9 +252,7 @@ $
 
 在 #c("fu2006") 之完全相關框架下，當高型別先驗機率夠低時，IU 子賽局存在一連續區間的混同均衡——由@eq-main-posterior-ordering 與@eq-main-br 可知，高型別一旦被揭露，將面對後驗期望報酬更高、因而投入更積極的對手，隱藏型別正可規避此一被揭露後加劇的競爭，兩型便可能集中於單一共同投入而不被區辨。
 
-#proposition(
-  title: [IU 子賽局混同均衡],
-)[
+#proposition()[
   當 $rho >= rho_P$ 時，存在一連續區間的混同均衡，使知情者無論型別均選擇同一共同投入 $x_P$，其中 $rho_P$ 為：
   $
     rho_P equiv frac(widetilde(V)_U (q) Delta V, 4 v_H v_L (1-q))
