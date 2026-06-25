@@ -100,7 +100,7 @@ $ <eq-welfare-ui-welfare>
 
 === IU 子賽局 <subsubsec-welfare-iu>
 
-IU 子賽局中，知情者的投入同時影響勝率與不知情者的後驗判斷，故福利比較須區分未扭曲分離與 Riley 扭曲分離兩種情形。
+IU 子賽局中，知情者的投入同時影響勝率與不知情者的後驗判斷，故福利比較須區分未扭曲分離與 Riley 扭曲分離兩種情形。由#stmtref(<lem-main-timing-DIUI-pool>, "引理", "lemma-counter")可知，當 $rho >= rho_P$ 與混同均衡並存時，知情者在混同均衡下之事前報酬恆不高於 SS 時序，故知情者不會因混同均衡而改採先動。因此，以下福利比較沿用#headingref(<sec-analysis>)之選擇，僅討論分離之情況。
 
 ==== 未扭曲分離均衡 <subsubsec-welfare-iu-sep>
 

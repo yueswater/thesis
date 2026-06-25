@@ -1,4 +1,4 @@
-#import "../thesis.typ": SS, UI, c, headingref, impt, proof, stmtref, theorem-font, widetilde
+#import "../thesis.typ": SS, UI, c, cp, headingref, impt, proof, stmtref, theorem-font, widetilde
 
 ==== #stmtref(<prop-bench-ss-equilibrium>, "命題", "proposition-counter") 之證明 <app-proof-ss>
 
@@ -156,6 +156,53 @@
   二因子相乘得 $D_I^(U I) <= 0$，等號當且唯當因子一為零，即 $rho = 1$。
 ]
 
+==== #stmtref(<lem-main-timing-DIUI-pool>, "引理", "lemma-counter") 之證明 <app-proof-main-timing-DIUI-pool>
+
+#proof[
+  *混同報酬之上界。* 由#stmtref(<prop-main-iu-pooling>, "命題", "proposition-counter")之證明，型別 $v$ 於混同投入 $x_P$ 之延續報酬為 $v sqrt(x_P \/ widetilde(V)_U (q)) - x_P$。由#stmtref(<lem-main-posterior-expected-valuation>, "引理", "lemma-counter")之分解，$widetilde(V)_U (q) = overline(v)$ 對所有 $rho$ 成立 (信念權重恰為先驗時，後驗期望獎酬與相關係數無關)，故依 $q$ 加權之事前混同報酬化簡為
+  $
+    widetilde(pi)_I^(I U,"pool")(x_P) = overline(v) sqrt(x_P \/ overline(v)) - x_P = sqrt(overline(v) x_P) - x_P,
+  $
+  與個別型別無關。此式於 $x_P >= 0$ 之最大值在 $x_P = overline(v)\/4$ 處取得，值為 $overline(v)\/4$；故對混同區間內任一 $x_P$ 恆有 $widetilde(pi)_I^(I U,"pool")(x_P) <= overline(v)\/4$。
+
+  *SS 報酬之下界。* 沿用#stmtref(<lem-main-timing-DIUI>, "引理", "lemma-counter")證明中之記號：$g(c) = c^2 - 2 overline(s) c + overline(v)$、$overline(s) equiv q sqrt(v_H) + (1-q) sqrt(v_L)$、$c_(SS)(rho) = tilde(A)(rho) \/ (1 + tilde(B)(rho))$。由 $overline(s)^2 = overline(v) - q(1-q)(sqrt(v_H) - sqrt(v_L))^2$ (型別加權變異數之 Jensen 恆等式)，配方可得
+  $
+    widetilde(pi)_I^(SS)(rho) - overline(v) / 4
+    = (c_(SS)(rho) - overline(s))^2 + K, quad
+    K equiv q(1-q)(sqrt(v_H) - sqrt(v_L))^2 - overline(v) / 4,
+  $
+  其中 $K$ 僅為 $v_H, v_L, q$ 之函數，不含 $rho$。欲證右式對所有 $rho in [0,1]$ 恆非負，分兩步：
+
+  #impt[第一步：$c_(SS)(rho)$ 與 $overline(s)$ 不相交。] 由#stmtref(<lem-main-timing-DIUI>, "引理", "lemma-counter")證明中因子一之分解 $tilde(B)(rho) = hat(B) - rho q(1-q) Delta V^2 \/ (v_H v_L)$，同法可得 $tilde(A)(rho) = hat(A) - rho q(1-q) Delta V (1\/sqrt(v_L) - 1\/sqrt(v_H))$。代入並化簡，
+  $
+    tilde(A)(rho) - overline(s) tilde(B)(rho)
+    = q(1-q)(sqrt(v_H) - sqrt(v_L)) [ widetilde(V)_U (1)\/v_H - widetilde(V)_U (0)\/v_L ]
+    = -q(1-q)(sqrt(v_H)-sqrt(v_L)) Delta V (1-rho) [ (1-q)\/v_H + q\/v_L ],
+  $
+  其中第二個等號由 $widetilde(V)_U (1) = overline(v) + rho(1-q) Delta V$、$widetilde(V)_U (0) = overline(v) - rho q Delta V$ 代入整理而得。右式對 $rho in [0,1]$ 恆 $<= 0$ (等號僅於 $rho=1$)，故
+  $
+    tilde(A)(rho) - overline(s)(1 + tilde(B)(rho)) = [tilde(A)(rho) - overline(s) tilde(B)(rho)] - overline(s) <= -overline(s) < 0
+  $
+  對所有 $rho in [0,1]$ 嚴格成立 ($overline(s) > 0$)。因 $1 + tilde(B)(rho) > 0$，上式即 $c_(SS)(rho) < overline(s)$ 對所有 $rho in [0,1]$ 成立：兩者永不相交。
+
+  #impt[第二步：化約至端點。] $tilde(A)(rho)$ 與 $1+tilde(B)(rho)$ 均為 $rho$ 之一次式，故其比值 $c_(SS)(rho)$ 之導數
+  $
+    c_(SS)'(rho) = (tilde(A)'(1+tilde(B)) - tilde(A) tilde(B)') / (1+tilde(B))^2
+  $
+  之分子 $tilde(A)'(1+tilde(B)) - tilde(A) tilde(B)'$ 因 $rho$ 項相消而為常數，故 $c_(SS)(rho)$ 之導數符號於 $[0,1]$ 上不變，即 $c_(SS)$ 在該區間單調。結合第一步，$overline(s) - c_(SS)(rho) > 0$ 亦單調，故 $(c_(SS)(rho) - overline(s))^2$ 在 $[0,1]$ 上之極小值僅可能落於端點 $rho=0$ 或 $rho=1$，從而
+  $
+    widetilde(pi)_I^(SS)(rho) - overline(v)/4 >= min{ widetilde(pi)_I^(SS)(0), widetilde(pi)_I^(SS)(1) } - overline(v)/4.
+  $
+
+  #impt[端點檢驗。] 於 $rho=1$，$tilde(B)(1) = 1$ (#stmtref(<lem-main-timing-DIUI>, "引理", "lemma-counter")證明)，故 $c_(SS)(1) = tilde(A)(1)\/2$；代入化簡得
+  $
+    widetilde(pi)_I^(SS)(1) - overline(v)/4 = 3 / 4 q(1-q) (sqrt(v_H) - sqrt(v_L))^2 >= 0,
+  $
+  此即 #cp("fu2006") Corollary 1 ($pi_I^(SS) > Psi$) 之推廣，等號僅於退化情形 $v_H = v_L$。於 $rho=0$，$widetilde(V)_U (mu) equiv overline(v)$ 對所有 $mu$ 成立 (即基準模型之 SS 子賽局)，代入 $tilde(A)(0)=hat(A)$、$tilde(B)(0)=hat(B)$ 後同樣可驗證 $widetilde(pi)_I^(SS)(0) - overline(v)\/4 >= 0$，等號亦僅於 $v_H = v_L$。#footnote[此式於一般 $v_H, v_L, q$ 下展開後不具有如 $rho=1$ 端點之簡潔封閉形式，但其非負性可由符號運算 (sympy) 直接驗證：對所有容許之 $v_H > v_L > 0$、$q in (0,1)$，化簡所得之有理函數分子恆非負，僅於 $v_H = v_L$ 之退化極限趨於零。]
+
+  兩端點皆滿足 $widetilde(pi)_I^(SS) >= overline(v)\/4$，故對所有 $rho in [0,1]$ 恆有 $widetilde(pi)_I^(SS)(rho) >= overline(v)\/4$。與混同報酬之上界 $widetilde(pi)_I^(I U,"pool")(x_P) <= overline(v)\/4$ 合併，即得 $D_I^(I U,"pool")(x_P) = widetilde(pi)_I^(I U,"pool")(x_P) - widetilde(pi)_I^(SS)(rho) <= 0$ 對任一 $rho in [0,1]$、任一混同投入 $x_P$ 成立。
+]
+
 ==== 知情者 IU 時序事前報酬之相關性單調性之證明 <app-proof-main-timing-iu-rho>
 
 #proof[
@@ -171,6 +218,6 @@
 ==== #stmtref(<thm-main-endogenous-timing>, "定理", "theorem-counter") 之證明 <app-proof-main-timing-theorem>
 
 #proof[
-  由#stmtref(<lem-main-timing-characterization>, "引理", "lemma-counter")逐格檢驗。UI 須 $D_I^(U I) >= 0$ 且 $D_U^(U I) >= 0$：後者由@eq-main-ui-first-mover 恆成立，前者由#stmtref(<lem-main-timing-DIUI>, "引理", "lemma-counter")僅於 $rho = 1$ 成立，故 UI 唯於 $rho = 1$ 構成均衡。IU 須 $D_I^(I U) >= 0$ 且 $D_U^(I U) >= 0$：由#stmtref(<lem-main-timing-rho-dagger>, "引理", "lemma-counter")，$D_I^(I U) >= 0$ 當 $rho <= rho^dagger$；該區間內 $D_U^(I U) > 0$，IU 遂構成唯一均衡。SS 須 $D_I^(U I) <= 0$ 且 $D_U^(I U) <= 0$：前者恆成立，故 SS 繫於 $D_U^(I U) <= 0$。當 $rho^dagger < rho < 1$ 且 $D_U^(I U) > 0$ 時三者皆不成立，故無純策略均衡。
+  由#stmtref(<lem-main-timing-characterization>, "引理", "lemma-counter")逐格檢驗。UI 須 $D_I^(U I) >= 0$ 且 $D_U^(U I) >= 0$：後者由@eq-main-ui-first-mover 恆成立，前者由#stmtref(<lem-main-timing-DIUI>, "引理", "lemma-counter")僅於 $rho = 1$ 成立，故 UI 唯於 $rho = 1$ 構成均衡。IU 須 $D_I^(I U) >= 0$ 且 $D_U^(I U) >= 0$：由#stmtref(<lem-main-timing-rho-dagger>, "引理", "lemma-counter")，$D_I^(I U) >= 0$ 當 $rho <= rho^dagger$；該區間內 $D_U^(I U) > 0$，IU 遂構成唯一均衡。SS 須 $D_I^(U I) <= 0$ 且 $D_U^(I U) <= 0$：前者恆成立，故 SS 取決於 $D_U^(I U) <= 0$。當 $rho^dagger < rho < 1$ 且 $D_U^(I U) > 0$ 時三者皆不成立，故無純策略均衡。
 ]
 

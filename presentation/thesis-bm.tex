@@ -60,7 +60,7 @@
   \fi
 }
 
-\title[Two-sided Asymmetry]{Separation, Pooling, and Endogenous Timing}
+\title[Two-sided Asymmetry]{Separation, Distortion, and Endogenous Timing}
 \subtitle{A Tullock Contest under Two-sided Asymmetry}
 \author{Pin Yue Sung}
 \institute[NCCU IB]{Department of International Business\\National Chengchi University}
@@ -86,7 +86,7 @@
 
 \begin{frame}{Research Question}
   \begin{itemize}
-    \item \textbf{\citet{fu2006}}: in a Tullock contest with private information,
+    \item \citet{fu2006}: in a Tullock contest with private information,
       the informed player prefers to move \emph{second} ---
       revealing type early is costly.
     \item But this rests on $\rho = 1$: prize values are
@@ -119,7 +119,7 @@
       --- $\rho = 1$ is the endpoint, not a separate model.
     \item Characterizes undistorted vs.\ Riley distorted separation,
       and their transition as $\rho$ rises.
-    \item Links subgame equilibria to \textbf{endogenous timing}:
+    \item Links subgame equilibria to endogenous timing:
       a structural asymmetry between $I$ and $U$.
   \end{itemize}
 \end{frame}
@@ -184,6 +184,7 @@
       $\Pr(V_k = v_H) = q \in (0,1)$
     \item \textbf{Benchmark assumption}: $V_I \perp V_U$
       (\textit{i.i.d.}, $\rho = 0$)
+    \item Define $\bar v \equiv q v_H + (1-q) v_L = \E[V_k]$
   \end{itemize}
 
   \begin{center}
@@ -204,29 +205,6 @@
     \item Three regimes: SS (simultaneous), UI ($U$ moves first),
       IU ($I$ moves first)
   \end{itemize}
-\end{frame}
-
-\begin{frame}{The Closed Signal Channel}
-  \begin{block}{Lemma (Conditional Expectation Invariance)}
-    If $V_I \perp V_U$, then
-    \[
-      \E[V_U \mid x_I] = \E[V_U],\; \forall x_I.
-    \]
-  \end{block}
-  $\to$ \textbf{Signal channel closed}: beliefs update via Bayes,
-  but $U$'s best response is unchanged ---
-  \emph{updating happens, but it doesn't bite}.
-
-  \vspace{0.6em}
-  \begin{block}{Proposition (Unique Separating Equilibrium)}
-    The IU subgame admits a \emph{unique separating equilibrium}, with IC slack
-    \[
-      \frac{(v_H - v_L)^2}{4\bar v} > 0,
-      \qquad \bar v \equiv \E[V_k].
-    \]
-  \end{block}
-  $\to$ $I$'s lead reveals her type at \emph{no cost}:
-  the IC constraint never binds.
 \end{frame}
 
 \begin{frame}{Equilibrium Payoffs across Regimes}
@@ -263,41 +241,36 @@
 \end{frame}
 
 \begin{frame}{Stage-0 Timing Game}
-  Four unilateral deviation gaps:
+  $\widetilde\pi_U^{UI} \ge \widetilde\pi_U^{SS}$ always, yet
+  $\widetilde\pi_I^{SS} > \widetilde\pi_I^{UI}$ whenever $\hat B > 1$ ---
+  $U$ wants to lead, but $I$ refuses to follow: UI is never a
+  pure-strategy equilibrium. The real choice is between IU and SS.
+  Define the informed player's unilateral deviation gaps:
   \[
-    \Delta_I^{UI} \equiv \widetilde\pi_I^{UI} - \widetilde\pi_I^{SS},
-    \quad
-    \Delta_I^{IU} \equiv \widetilde\pi_I^{IU} - \widetilde\pi_I^{SS},
-    \quad
-    \Delta_U^{UI} \equiv \widetilde\pi_U^{UI} - \widetilde\pi_U^{SS},
-    \quad
-    \Delta_U^{SS} \equiv \widetilde\pi_U^{SS} - \widetilde\pi_U^{IU}
+    D_I \equiv \widetilde\pi_I^{IU} - \widetilde\pi_I^{SS},
+    \qquad
+    D_U \equiv \widetilde\pi_U^{IU} - \widetilde\pi_U^{SS}.
   \]
 
-  \begin{block}{Proposition (Stage-0 Pure-strategy Equilibria)}
-    Pure-strategy Nash equilibria are fully characterized
-    by the signs of the four gaps:
-    \begin{itemize}
-      \item UI \; iff \; $\Delta_I^{UI} \ge 0$
-      \item SS \; iff \; $\Delta_I^{UI} \le 0$ and $\Delta_U^{SS} \ge 0$
-      \item IU \; iff \; $\Delta_I^{IU} \ge 0$ and $\Delta_U^{SS} \le 0$
+  \begin{block}{Proposition (Stage-0 Pure-strategy Equilibria, Benchmark)}
+    \begin{itemize}\setlength{\itemsep}{0.2em}
+      \item UI is never a pure-strategy equilibrium
+      \item IU \; iff \; $D_I \ge 0$
+      \item SS \; iff \; $D_U \le 0$
+      \item if $D_I < 0 < D_U$: \emph{no} pure-strategy equilibrium exists
     \end{itemize}
   \end{block}
 
-  $\to$ \textbf{Takeaway}: timing is driven purely by gap signs ---
-  no signaling distortion.
-
-  $\to$ Any effect at $\rho > 0$ must come from the reopened channel ---
-  not from asymmetric information per se.
+  $\to$ Since $\rho = 0$ closes the signal channel, this split is driven
+  purely by who benefits from committing first --- no signaling distortion.
 \end{frame}
 
 \section{Main Model}
 
 \begin{frame}{Correlated Type Structure}
   \begin{itemize}
-    \item Pearson correlation:
-      $\rho \equiv \operatorname{corr}(H_I, H_U)$,
-      where $H_k = \mathbf{1}\{V_k = v_H\}$, $\rho \in [0,1]$
+    \item Correlation of payoffs:
+      $\rho \equiv \operatorname{corr}(V_I, V_U) \in [0,1]$
     \item Marginals fixed at $(q, 1-q)$ --- $\rho$ is the single
       free parameter of the joint distribution
   \end{itemize}
@@ -329,13 +302,6 @@
 \end{frame}
 
 \begin{frame}{Posterior Expected Valuation}
-  Conditional probabilities of $U$'s high state, given $I$'s type:
-  \[
-    \theta_H = q + \rho(1-q),
-    \qquad
-    \theta_L = q(1-\rho).
-  \]
-
   \begin{block}{Lemma (Posterior Expected Valuation)}
     Given posterior belief $\mu = \Pr(V_I = v_H \mid x_I)$,
     \[
@@ -358,8 +324,8 @@
     \end{tabular}
   \end{center}
 
-  $\to$ \textbf{When $\rho > 0$, $I$'s type is a signal about $U$'s own prize
-  --- the channel is live.}
+  $\to$ When $\rho > 0$, $I$'s type is a signal about $U$'s own prize
+  --- the channel is live.
 \end{frame}
 
 \begin{frame}{SS and UI under Partial Correlation}
@@ -372,21 +338,9 @@
       + (1-q)\,\frac{\VU(0)}{v_L}.
   \]
 
-  \begin{itemize}
-    \item Equilibrium structure identical in form to the benchmark:
-      $\hat A, \hat B \to \tilde A, \tilde B$
-      (at $\rho = 0$: $\tilde A = \hat A$, $\tilde B = \hat B$)
-  \end{itemize}
-
   \begin{block}{Proposition (First-mover Advantage Robust)}
-    $\widetilde\pi_U^{UI} \ge \widetilde\pi_U^{SS}$ for all $\rho \in [0,1)$.
+    $\widetilde\pi_U^{UI} \ge \widetilde\pi_U^{SS}$ for all $\rho \in [0,1]$.
   \end{block}
-
-  \begin{itemize}
-    \item \textbf{Monotone coefficients}: $\tilde A$, $\tilde B$ strictly
-      decreasing in $\rho$, with $\tilde B \to 1$ as $\rho \to 1$ ---
-      rising $\rho$ erases the Jensen excess burden $\hat B > 1$
-  \end{itemize}
 \end{frame}
 
 \begin{frame}{When Does Separation Hold?}
@@ -409,8 +363,8 @@
 
   \begin{itemize}
     \item At $\rho = 0$: strictly satisfied; at $\rho = 1$: violated
-    \item IC slack $S(\rho) \equiv R - \VU(1)/\VU(0)$ decreases
-      monotonically and hits $0$ exactly at $\rhosep$
+    \item $\VU(1)/\VU(0)$ is strictly increasing in $\rho$, so the IC
+      condition reduces to a single threshold $\rhosep$
   \end{itemize}
 \end{frame}
 
@@ -431,8 +385,9 @@
     \begin{itemize}\setlength{\itemsep}{0.2em}
       \item $\rho \le \rhosep$: undistorted separation --- no signaling cost
       \item $\rho > \rhosep$: Riley distortion --- cost borne by the low type alone
-      \item $\rho > \rhosep$ may also admit \emph{pooling}:
-        $\mu = q$, the signal is lost
+      \item $\rho \ge \rhopool$ may also admit \emph{pooling}:
+        $\mu = q$, the signal is lost ---
+        coexists with whichever separating type applies at that $\rho$
     \end{itemize}
   \end{block}
 
@@ -444,58 +399,82 @@
   \textbf{Key point}: at stage 0, types are unrealized ---
   players compare \emph{ex ante} expected payoffs.
 
-  \begin{center}
-    \small
-    \renewcommand{\arraystretch}{1.15}
-    \begin{tabular}{@{}lcc@{}}
-      \toprule
-      & $U$: Early & $U$: Late \\
-      \midrule
-      $I$: Early
-        & $\bigl(\widetilde\pi_I^{SS},\, \widetilde\pi_U^{SS}\bigr)$
-        & $\bigl(\widetilde\pi_I^{IU},\, \widetilde\pi_U^{IU}\bigr)$ \\
-      $I$: Late
-        & $\bigl(\widetilde\pi_I^{UI},\, \widetilde\pi_U^{UI}\bigr)$
-        & $\bigl(\widetilde\pi_I^{SS},\, \widetilde\pi_U^{SS}\bigr)$ \\
-      \bottomrule
-    \end{tabular}
-  \end{center}
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \begin{center}
+        \renewcommand{\arraystretch}{1.0}
+        \begin{tabular}{@{}lcc@{}}
+          \toprule
+          & $U$: Early & $U$: Late \\
+          \midrule
+          $I$: Early
+            & $\bigl(\widetilde\pi_I^{SS},\, \widetilde\pi_U^{SS}\bigr)$
+            & $\bigl(\widetilde\pi_I^{IU},\, \widetilde\pi_U^{IU}\bigr)$ \\
+          $I$: Late
+            & $\bigl(\widetilde\pi_I^{UI},\, \widetilde\pi_U^{UI}\bigr)$
+            & $\bigl(\widetilde\pi_I^{SS},\, \widetilde\pi_U^{SS}\bigr)$ \\
+          \bottomrule
+        \end{tabular}
+      \end{center}
+    \end{column}
 
-  \begin{block}{Proposition (Stage-0 Pure-strategy Equilibria)}
-    Same sign characterization as the benchmark
-    ($\Delta_I^{UI}$, $\Delta_I^{IU}$, $\Delta_U^{UI}$, $\Delta_U^{SS}$)
-    --- but now \emph{every entry depends on $\rho$}.
+    \begin{column}{.5\textwidth}
+        \footnotesize
+        \begin{align*}
+          D_I^{UI} &\equiv \widetilde\pi_I^{UI} - \widetilde\pi_I^{SS}, \quad
+          D_I^{IU} \equiv \widetilde\pi_I^{IU} - \widetilde\pi_I^{SS}, \\
+          D_U^{UI} &\equiv \widetilde\pi_U^{UI} - \widetilde\pi_U^{SS}, \quad
+          D_U^{IU} \equiv \widetilde\pi_U^{IU} - \widetilde\pi_U^{SS}.
+        \end{align*}
+    \end{column}
+  \end{columns}
+
+  \begin{block}{Lemma (Stage-0 Pure-strategy Equilibria)}
+    \begin{itemize}\setlength{\itemsep}{0.1em}
+      \item UI \; iff \; $D_I^{UI} \ge 0$ \emph{and} $D_U^{UI} \ge 0$
+      \item SS \; iff \; $D_I^{UI} \le 0$ \emph{and} $D_U^{IU} \le 0$
+      \item IU \; iff \; $D_I^{IU} \ge 0$ \emph{and} $D_U^{IU} \ge 0$
+    \end{itemize}
   \end{block}
-
-  $\to$ The question becomes: \textbf{how do the gap signs move with $\rho$?}
 \end{frame}
 
-\begin{frame}{The Structural Asymmetry}
-  \begin{itemize}
-    \item \textbf{$U$'s side}: $\Delta_U^{UI} \ge 0$ for all $\rho < 1$
-      --- $U$ always wants to lead against a late-moving $I$ (robust)
-    \item \textbf{$I$'s side}: $\widetilde\pi_I^{IU}$ strictly decreasing
-      in $\rho$ --- revelation cost rises with correlation
+\begin{frame}{Endogenous Timing under Correlated Type Structure}
+  \small
+  \begin{itemize}\setlength{\itemsep}{0.2em}
+    \item $U$'s side (recap): $D_U^{UI} \ge 0$ for all
+      $\rho \in [0,1]$ --- $U$ always wants to lead against a late-moving $I$.
+    \item $I$'s side, new: $D_I^{UI} \le 0$ throughout
+      the interior, with equality \emph{only} at $\rho = 1$ ---
+      $I$ (almost) never wants to lead via UI.
   \end{itemize}
 
-  \begin{block}{Proposition (Timing Reversal)}
-    If $\Delta_I^{IU}(0) > 0$ and $\Delta_I^{IU}(\rhosep) < 0$,
-    there exists $\rhodag \in (0, \rhosep)$ where $I$'s timing
-    preference flips from early to late.
+  \begin{block}{Theorem (Stage-0 Timing Equilibrium)}
+    \begin{itemize}\setlength{\itemsep}{0.1em}
+      \item $\rho \le \rhodag$: IU is the unique equilibrium
+        ($D_I^{IU} \ge 0$, $D_U^{IU} \ge 0$)
+      \item $\rhodag < \rho < 1$: IU and UI are both ruled out;
+        SS iff $D_U^{IU}(\rho) \le 0$;
+        \emph{otherwise no pure-strategy equilibrium exists}
+      \item $\rho = 1$: UI is the unique equilibrium
+        --- \citet{fu2006}'s endpoint
+    \end{itemize}
   \end{block}
 
-  \begin{center}
-    \begin{tikzpicture}[scale=0.8, font=\footnotesize]
-      \draw[->] (0,-1.1) -- (0,1.2) node[above] {$\Delta_I^{IU}(\rho)$};
-      \draw[->] (0,0) -- (6.6,0) node[right] {$\rho$};
-      \draw[thick] (0,0.8) .. controls (2.2,0.55) and (3.6,-0.25) .. (5.6,-0.85);
-      \draw[thick] (3.1,0.07) -- (3.1,-0.07) node[below] {$\rhodag$};
-      \draw[thick] (5.6,0.07) -- (5.6,-0.07) node[below] {$\rhosep$};
-      \node[left, font=\scriptsize] at (0,0.8) {$>0$};
-    \end{tikzpicture}
-  \end{center}
+  $\to$ The gap beyond $\rhodag$ is not a clean flip to SS ---
+  a band with \emph{no} pure-strategy timing equilibrium can open up
+  (numerical confirmation next).
+\end{frame}
 
-  $\to$ \textbf{The reversal is driven entirely by $I$, not $U$.}
+\begin{frame}{}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{../docs/figures/main_timing_region-en.pdf}
+    \caption{$(q,\rho)$ Phase Diagram}
+  \end{figure}
+  \footnotesize
+  $\to$ The no-equilibrium band widens, and the IU region's
+  $q$-range shrinks, as $v_H/v_L$ grows --- consistent with
+  $\rhodag$ falling as the value gap widens.
 \end{frame}
 
 \begin{frame}{Summary --- The Correlation Spectrum}
@@ -505,9 +484,8 @@
       \foreach \x/\lab in {0/{$0$}, 2.4/{$\rhodag$}, 4.8/{$\rhosep$}, 6.8/{$1$}}{
         \draw[thick] (\x,0.08) -- (\x,-0.08) node[below] {\lab};
       }
-      \node[above, font=\scriptsize] at (1.2,0.12) {IU, undist.\ sep.};
-      \node[above, font=\scriptsize] at (3.6,0.12) {$I$ flips to late};
-      \node[above, font=\scriptsize] at (5.8,0.12) {Riley sep.};
+      \node[above, font=\scriptsize] at (1.2,0.12) {IU (unique)};
+      \node[above, font=\scriptsize] at (4.6,0.12) {SS, or no PSNE};
       \node[below=0.45cm, font=\scriptsize] at (6.8,0) {\citet{fu2006}};
     \end{tikzpicture}
   \end{center}
@@ -516,19 +494,19 @@
     \small
     \begin{tabular}{@{}lll@{}}
       \toprule
-      $\rho$ range & IU equilibrium type & $I$'s timing preference \\
+      $\rho$ range & IU subgame (if reached) & Stage-0 outcome \\
       \midrule
-      $[0, \rhodag)$ & undistorted separation & lead (IU) \\
-      $(\rhodag, \rhosep]$ & undistorted separation & wait \\
-      $(\rhosep, 1)$ & Riley distorted separation & wait \\
-      $\rho = 1$ & \citet{fu2006} endpoint & wait (late mover) \\
+      $[0, \rhodag)$ & undistorted separation & IU (unique) \\
+      $(\rhodag, \rhosep]$ & undistorted separation & SS, or no PSNE \\
+      $(\rhosep, 1)$ & Riley distorted separation & SS, or no PSNE \\
+      $\rho = 1$ & \citet{fu2006} endpoint & UI (unique) \\
       \bottomrule
     \end{tabular}
   \end{center}
 
   $\to$ \textbf{Bottom line}: \citet{fu2006}'s late-mover result
   \emph{requires} correlation --- it is the right endpoint,
-  not a general principle.
+  not a general principle, and the path there is not monotone.
 \end{frame}
 
 \section{Welfare Analysis}
@@ -541,7 +519,7 @@
 
   \begin{center}
     \footnotesize
-    \renewcommand{\arraystretch}{1.9}
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{@{}lcl@{}}
       \toprule
       Equilibrium type & Expected dissipation $\widetilde T$
@@ -555,19 +533,19 @@
         & strictly decreasing (via $\tilde A$) \\
       IU undistorted sep.
         & $\dfrac{\E[V_I]}{2}$
-        & \textbf{immune to $\rho$} \\
+        & immune to $\rho$ \\
       IU Riley distorted
         & $\dfrac{v_H}{2}\bigl[1-(1-q)\sqrt{\alpha}\bigr]$
         & varies via $\alpha$ \\
-      IU pooling
-        & $\sqrt{x_P\,\bar v}$
-        & no direct $\rho$ term for fixed $x_P$ \\
       \bottomrule
     \end{tabular}
   \end{center}
 
-  $\to$ \textbf{IU undistorted separation's dissipation is insulated
-  from $\rho$} --- the key structural difference.
+  {\small $\to$ Pooling ($\rho\ge\rhopool$) is excluded from the welfare
+  comparison: $D_I^{IU,\mathrm{pool}}\le 0$ means $I$ never prefers IU
+  under pooling, so it cannot sustain endogenous timing and no separate
+  pooling welfare formula is derived --- only IU undistorted
+  separation's dissipation is insulated from $\rho$.}
 \end{frame}
 
 \begin{frame}{Three Effects of $\rho$ on Welfare}
@@ -598,21 +576,24 @@
 \begin{frame}{Equilibrium vs. Social Optimum}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-    \item \textbf{Direction 1} ($\rho > \rhodag$): equilibrium is SS,
-      yet $\widetilde W^{\mathrm{sep}} > \widetilde W^{SS}$ ---
-      \emph{$I$'s retreat sustains the welfare-inferior regime}
-    \item \textbf{Direction 2} (IU remains privately sustainable):
-      equilibrium may stay in IU Riley or pooling,
-      yet $\widetilde W^{SS}$ or $\widetilde W^{UI}$ can still be higher ---
-      \emph{private timing incentives and social welfare need not align}
+    \item \textbf{SS vs.\ UI}: welfare ranking is \emph{ambiguous} ---
+      sign of $(1-\tilde B)\bigl(\E[\sqrt{V_I}] - \tilde A/2\bigr)$;
+      equal when $\tilde B = 1$
+    \item \textbf{Undistorted sep.\ vs.\ Riley}: opposite responses to
+      $\rho$ --- $\widetilde W^{\mathrm{sep}}$ falls while
+      $\widetilde W^{\mathrm{Riley}}$ rises in $\rho$ ---
+      \emph{signal revelation and welfare improvement need not move
+      together}
   \end{itemize}
 
   \vspace{0.4em}
   \begin{block}{Root cause}
-    $I$ does not internalize $U$'s payoff; private timing incentives
-    ignore the global dissipation--allocation trade-off.
-    Efficiency of equilibrium timing is \emph{not} a general result ---
-    it depends on the parameter configuration.
+    Equilibrium timing is pinned down purely by private payoff
+    incentives; social welfare depends jointly on prize allocation
+    \emph{and} effort dissipation --- different criteria.
+    Equilibrium timing is therefore \emph{not} guaranteed to be socially
+    optimal --- each regime's ranking must be checked from the full
+    welfare formula.
   \end{block}
 \end{frame}
 
@@ -630,8 +611,9 @@
       $\rho \le \rhosep$; beyond, Riley distortion ---
       cost borne by the low type alone.
     \item \textbf{Timing asymmetry}: $U$'s lead preference is robust;
-      $I$ flips to late at $\rhodag < \rhosep$.
-    \item \textbf{\citet{fu2006}} is the $\rho = 1$ endpoint ---
+      $I$ retreats from leading beyond $\rhodag$, opening a band where
+      \emph{no} pure-strategy timing equilibrium survives.
+    \item \citet{fu2006} is the $\rho = 1$ endpoint ---
       not a general principle.
     \item \textbf{Welfare}: equilibrium timing can depart from the social
       optimum; responses to $\rho$ are regime-dependent.
@@ -640,17 +622,17 @@
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{Future Directions}
-  \begin{enumerate}
-    \setlength{\itemsep}{1.4em}
-    \item \textbf{Continuous type space} --- beyond the closed-form
-      threshold: richer distortion patterns.
-    \item \textbf{Negative correlation} ($\rho < 0$) ---
-      reverse information spillover.
-    \item \textbf{$N$-player contests} --- timing symmetry-breaking;
-      the role of correlation remains open.
-  \end{enumerate}
-\end{frame}
+% \begin{frame}{Future Directions}
+%   \begin{enumerate}
+%     \setlength{\itemsep}{1.4em}
+%     \item \textbf{Continuous type space} --- beyond the closed-form
+%       threshold: richer distortion patterns.
+%     \item \textbf{Negative correlation} ($\rho < 0$) ---
+%       reverse information spillover.
+%     \item \textbf{$N$-player contests} --- timing symmetry-breaking;
+%       the role of correlation remains open.
+%   \end{enumerate}
+% \end{frame}
 
 \nobibliography{refs}
 

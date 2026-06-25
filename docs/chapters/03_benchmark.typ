@@ -188,7 +188,7 @@ $ <eq-bench-iu-vs-ss>
   supplement: [表],
 ) <tbl-bench-timing>
 
-綜合#headingref(<subsec-bench-subgame-equilibria>)之討論，UI 恆非純策略均衡。再者，SS 時序分為兩種情況，即兩位參賽者同時選擇先動，以及同時選擇後動。若同時選擇後動時，任一方改為先動即成為領導者，而不知情者恆不吃虧，此情況必不為均衡；故 SS 時序僅能維繫於雙方皆選擇先動之情況。故穩定者僅有兩位參與者均選擇先動與 IU 時序。定義兩參與者之單邊偏離差額分別為：
+綜合#headingref(<subsec-bench-subgame-equilibria>)之討論，UI 恆非純策略均衡。再者，SS 時序分為兩種情況，即兩位參賽者同時選擇先動，以及同時選擇後動。若同時選擇後動時，任一方改為先動即成為領導者，而不知情者恆不吃虧，此情況必不為均衡；故 SS 時序僅能維取決於雙方皆選擇先動之情況。故穩定者僅有兩位參與者均選擇先動與 IU 時序。定義兩參與者之單邊偏離差額分別為：
 $
   D_I equiv widetilde(pi)_I^(I U) - widetilde(pi)_I^(SS),
   quad

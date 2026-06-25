@@ -308,7 +308,19 @@ $rho_P$ 與分離臨界 $rho^*$ 孰高孰低係由 $q$ 所決定：當 $q <= v_L
 
 SS 與 UI 之事前報酬已分別由#stmtref(<prop-main-ss-equilibrium>, "命題", "proposition-counter")與#stmtref(<prop-main-ui-equilibrium>, "命題", "proposition-counter")給出。知情者於第 0 階段尚未實現型別，其事前報酬為各型別報酬之先驗加權平均 $widetilde(pi)_I^J = q pi_I^J (v_H) + (1-q) pi_I^J (v_L)$，其中 $J in {text("SS"), text("UI"), text("IU")}$，不知情者則直接以其均衡報酬計。
 
-IU 時序須將兩條分離路徑加權。未扭曲分離下，知情者之事前報酬為
+誠如前述所言，IU 子賽局之均衡型態並非唯一：當 $rho >= rho_P$ 時，分離均衡與混同均衡並存。欲界定第 0 階段之時序報酬，須先確定以哪一均衡計算，而此一選擇並非無關緊要：
+
+#lemma[
+  在混同均衡下，知情者依 $q$ 加權之事前報酬恆以 $overline(v)\/4$ 為上界，且不低於 SS 時序之事前報酬。對任一 $rho in [0,1]$ 及混同區間內任一共同投入 $x_P$，
+  $
+    widetilde(pi)_I^(I U,"Pool")(x_P) <= overline(v) / 4 <= widetilde(pi)_I^(SS)(rho, q).
+  $
+  即在混同均衡下恆有 $D_I^(I U,"Pool") <= 0$；知情者不因混同均衡而偏好先動。
+] <lem-main-timing-DIUI-pool>
+
+換言之，知情者偏好先動的可能性，僅源自分離均衡——在混同均衡下，無論落於 $x_P$ 區間之何處，均不足以使知情者放棄 SS 時序。以下定理一律以分離均衡計算，唯有此一均衡方可能支持#impt[知情者偏好先動]之結論；於 $rho = 1$ 時，此一選擇亦恰好回到 #c("fu2006") 之完全相關情形#footnote[此一單向性結果僅及於知情者一方。不知情者於 SS 與 IU 間之取捨，即 $D_U^(I U)$ 之符號，並無#stmtref(<lem-main-timing-DIUI-pool>, "引理", "lemma-counter")式的保證：在混同均衡下，不知情者之後動評價回到先驗 $widetilde(V)_U (q) = overline(v)$，其報酬隨之改變，故 $D_U^(I U)$ 之符號可能因均衡而異 (#c("fu2006") 對回應者誘因亦持相同保留)，本文不假設其定號。]。
+
+未扭曲分離下，須將高、低型別兩條路徑加權，知情者之事前報酬為
 $
   widetilde(pi)_I^(I U)
   = q frac(v_H^2, 4 widetilde(V)_U (1))
@@ -320,7 +332,7 @@ $
   = q (sqrt(widetilde(V)_U (1)) - sqrt(x_H))^2
   + (1-q) (sqrt(widetilde(V)_U (0)) - sqrt(x_L))^2.
 $
-若 $rho > rho^*$、IU 時序落於 Riley 扭曲分離區間，高型別路徑維持不變，僅低型別改投扭曲水準 $x_L^"Riley"$，並據此重算低型別路徑上兩位參與者之報酬：不知情者部分即將上式中的 $x_L$ 代換為 $x_L^"Riley"$；知情者低型別則因偏離自身最適，報酬為 $v_L sqrt(x_L^"Riley" \/ widetilde(V)_U (0)) - x_L^"Riley"$，不再等於其投入額。
+若 $rho > rho^*$、IU 時序落於 Riley 扭曲分離區間，高型別路徑維持不變，僅低型別改投扭曲水準 $x_L^"Riley"$，並據此重算低型別路徑上兩位參與者之報酬：不知情者部分即將上式中的 $x_L$ 代換為 $x_L^"Riley"$；知情者低型別則因偏離自身最適，報酬為 $v_L sqrt(x_L^"Riley" \/ widetilde(V)_U (0)) - x_L^"Riley"$，不再等於其投入。
 
 在部份相關結構下之第 0 階段中，沿用#headingref(<sec-model>)之單邊偏離差額記號，令
 $
@@ -340,7 +352,7 @@ $
   + IU 構成純策略均衡若且唯若 $D_I^(I U) >= 0$ 且 $D_U^(I U) >= 0$。
 ] <lem-main-timing-characterization>
 
-由@eq-main-ui-first-mover，$D_U^(U I) >= 0$ 恆成立——當知情者面對後動的知情者時恆弱偏好先動承諾，因此時序翻轉的關鍵不在不知情者是否放棄先動，而在知情者對先動之評價如何隨 $rho$ 改變。
+由@eq-main-ui-first-mover 可知，$D_U^(U I) >= 0$ 恆成立——不知情者面對後動的知情者時恆弱偏好先動承諾，因此時序翻轉的關鍵不在不知情者是否放棄先動，而在知情者對先動之評價如何隨 $rho$ 改變。
 
 #lemma[
   在部份相關結構下，給定不知情者先動，知情者弱偏好 SS 時序；當 $rho < 1$ 時則嚴格偏好 SS 時序，僅 $rho = 1$ 時對兩時序無異。
@@ -363,13 +375,21 @@ $rho^dagger$ 為知情者先動誘因由正轉負的臨界點。當 $rho <= rho^
 
 
 #theorem[
-  設 SS 與 UI 子賽局之均衡均位於內點，IU 子賽局取分離均衡。第 0 階段之純策略 Nash 均衡視相關係數 $rho$ 而定：
+  第 0 階段賽局之純策略 Nash 均衡依相關係數 $rho$ 分為以下三種情形：
 
   #set enum(numbering: "(1)")
 
   + 若 $rho <= rho^dagger$，唯一純策略均衡為 IU；
   + 若 $rho^dagger < rho < 1$，IU 與 UI 均非純策略均衡；SS 為純策略均衡，若且唯若 $D_U^(I U)(rho) <= 0$，否則不存在純策略均衡；
-  + 若 $rho = 1$，唯一純策略均衡為 UI，與 #cp("fu2006") 之完全相關情形一致。
+  + 若 $rho = 1$，唯一純策略均衡為 UI。
 ] <thm-main-endogenous-timing>
 
-此結果將 #cp("fu2006") 視為本模型於 $rho = 1$ 之特例。$rho = 0$ 時知情者投入不具訊號作用，先動僅發揮 Stackelberg 領導之效果，知情者偏好先動，均衡為 IU；$rho$ 上升使先動之訊號揭露成本漸增，逾 $rho^dagger$ 後知情者不再偏好先動。不知情者恆偏好先動 (@eq-main-ui-first-mover)，故 UI 僅於 $rho = 1$ 知情者於兩時序間無嚴格偏好時成立。當 $rho^dagger < rho < 1$，均衡型態繫於不知情者於 IU 與 SS 間之取捨，即 $D_U^(I U)$ 之符號，未必存在純策略均衡。
+給定前述假設 (即 $D_I^IU > 0$)，$rho = 0$ 時知情者投入不具訊號作用，先動僅發揮 Stackelberg 領導之效果，知情者偏好先動，均衡為 IU；$rho$ 上升使先動之訊號揭露成本漸增，超過 $rho^dagger$ 後知情者不再偏好先動。不知情者恆偏好先動，故 UI 僅於 $rho = 1$ 知情者於兩時序間無嚴格偏好時成立。當 $rho^dagger < rho < 1$，均衡型態取決於不知情者於 IU 與 SS 兩時序間之取捨，未必存在純策略均衡。
+
+#figure(
+  image("../figures/main_timing_region.pdf", width: 100%),
+  caption: [第 0 階段時序均衡區域],
+  supplement: [圖],
+) <fig-main-timing-region>
+
+@fig-main-timing-region 顯示，令 $v_L$ 單位化為 1 並在不同獎酬比例下，IU 與 SS 時序間存在一段不存在純策略均衡的範圍，對應 $rho^dagger < rho < 1$ 且 $D_U^(I U) > 0$ 之情形，UI 則僅在 $rho=1$ 邊界成立，故在圖上不另描繪。IU 與 SS 之邊界在跨越圖中之 $rho^*(q)$ 曲線前後出現明顯轉折，反映 IU 分離均衡由未扭曲轉為 Riley 扭曲時，雙方事前報酬對 $rho$ 之變化率並不連續。此外，IU 區域並非沿整段 $q$ 軸延伸，而是在某一臨界 $q$ 之後，$rho=0$ 處即轉為無均衡或 SS——亦即#stmtref(<lem-main-timing-rho-dagger>, "引理", "lemma-counter") 所需之 $D_I^(I U)(0) > 0$ 僅在較小的 $q$ 範圍內成立，且此範圍隨 $v_H \/ v_L$ 增大而明顯縮小。同時可見，型別價值差距越大，存在純策略均衡的參數範圍反而越窄。
